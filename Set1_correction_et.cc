@@ -425,22 +425,22 @@ int main(int argc, char** argv) {
         float signalRegion=(byTightIsolationMVArun2v2DBoldDMwLT_2);
         float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);*/
 
-        // Deep Tight
+        /*// Deep Tight
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byTightDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byTightDeepVSjet_2);
+        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byTightDeepVSjet_2);*/
 
         /*// Deep Medium
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byMediumDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
+        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);*/
 
         // Deep VTight
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byVTightDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byVTightDeepVSjet_2);
 
-        // Deep Loose
+        /*// Deep Loose
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byLooseDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byLooseDeepVSjet_2);*/
@@ -479,9 +479,9 @@ int main(int argc, char** argv) {
 
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-	if (byTightIsolationMVArun2v2DBoldDMwLT_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;
+	if (byTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.83;
         if (sample=="embedded") aweight=aweight*0.97;
-	if (gen_match_2==2 or gen_match_2==4){
+	/*if (gen_match_2==2 or gen_match_2==4){
 	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.06;
            else if (fabs(mytau.Eta())<0.8) aweight=aweight*1.02;
            else if (fabs(mytau.Eta())<1.2) aweight=aweight*1.10;
@@ -491,7 +491,7 @@ int main(int argc, char** argv) {
         if (gen_match_2==1 or gen_match_2==3){
            if (fabs(mytau.Eta())<1.460) aweight=aweight*1.80;
            else if (fabs(mytau.Eta())>1.558) aweight=aweight*1.53;
-	}
+	}*/
 
 	TLorentzVector mymet;
 	mymet.SetPtEtaPhiM(met,0,metphi,0);
