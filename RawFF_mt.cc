@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 
     TFile *f_Double = new TFile(input.c_str());
     cout<<"XXXXXXXXXXXXX "<<input.c_str()<<" XXXXXXXXXXXX"<<endl;
-    TTree *arbre = (TTree*) f_Double->Get("etau_tree");
+    TTree *arbre = (TTree*) f_Double->Get("mutau_tree");
     TH1F* nbevt = (TH1F*) f_Double->Get("nevents");
     float ngen = nbevt->GetBinContent(2);
 
