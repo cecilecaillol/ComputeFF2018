@@ -170,7 +170,7 @@ void Fit_FFclosure_et() {
     m13->SetName("closure_mvis_et_w"); m13->Write();
     m15->SetName("closure_mvis_et_tt"); m15->Write();
     m17->SetName("closure_mvis_et_wmc"); m17->Write();
-    m18->SetName("closure_mvis_et_ttmc"); m17->Write();
+    m18->SetName("closure_mvis_et_ttmc"); m18->Write();
     FR_File->Close();
 }
 
