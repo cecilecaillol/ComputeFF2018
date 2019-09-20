@@ -144,7 +144,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     return theFit;
 }
 
-void Fit_FFclosure_et() {
+void Fit_FFclosure_mt() {
 
     gStyle->SetOptFit(1111);
 

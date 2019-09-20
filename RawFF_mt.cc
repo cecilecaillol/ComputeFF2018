@@ -116,11 +116,13 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("matchMu20Tau27_2", &matchMu20Tau27_2);
     arbre->SetBranchAddress("matchMu20HPSTau27_1",&matchMu20HPSTau27_1);
     arbre->SetBranchAddress("matchMu20HPSTau27_2", &matchMu20HPSTau27_2);
+    /*
     arbre->SetBranchAddress("matchEmbFilter_Mu20Tau27_1", &matchEmbFilter_Mu20Tau27_1);
     arbre->SetBranchAddress("matchEmbFilter_Mu24_1",&matchEmbFilter_Mu24_1);
     arbre->SetBranchAddress("matchEmbFilter_Mu27_1",&matchEmbFilter_Mu27_1);
     arbre->SetBranchAddress("matchEmbFilter_Mu20Tau27_2", &matchEmbFilter_Mu20Tau27_2);
     arbre->SetBranchAddress("matchEmbFilter_Mu20HPSTau27_2", &matchEmbFilter_Mu20HPSTau27_2);
+    */
     
     arbre->SetBranchAddress("filterMu24_1", &filterMu24_1);
     arbre->SetBranchAddress("filterMu27_1", &filterMu27_1);
@@ -385,7 +387,7 @@ int main(int argc, char** argv) {
    ScaleFactor * myScaleFactor_IdIso = new ScaleFactor();
    myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IdIso.root");
 
-   TauTriggerSFs2017* mtsf=new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","mtau", "2018", "tight", "MVAv2");
+   TauTriggerSFs2017* mtsf=new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","mutau", "2018", "tight", "MVAv2");
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {

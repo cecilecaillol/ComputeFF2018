@@ -22,7 +22,7 @@ float matchMu24_1, matchMu27_1, matchMu20Tau27_1, matchMu20Tau27_2, matchMu20HPS
 float filterMu24_1, filterMu27_1, filterMu20Tau27_1, filterMu20Tau27_2, filterMu20HPSTau27_1, filterMu20HPSTau27_2;
 float byVVLooseIsolationMVArun2v2DBoldDMwLT_2, byVLooseIsolationMVArun2v2DBoldDMwLT_2, byLooseIsolationMVArun2v2DBoldDMwLT_2, byMediumIsolationMVArun2v2DBoldDMwLT_2, byTightIsolationMVArun2v2DBoldDMwLT_2, byVTightIsolationMVArun2v2DBoldDMwLT_2, byVVTightIsolationMVArun2v2DBoldDMwLT_2, byIsolationMVArun2v2DBoldDMwLTraw_2, byIsolationMVA3oldDMwLTraw_2;
 float Rivet_VEta,Rivet_VPt,Rivet_errorCode,Rivet_higgsEta,Rivet_higgsPt,Rivet_nJets25,Rivet_nJets30,Rivet_p4decay_VEta,Rivet_p4decay_VPt,Rivet_prodMode,Rivet_stage0_cat,Rivet_stage1_cat_pTjet25GeV,Rivet_stage1_cat_pTjet30GeV, Rivet_stage1p1_cat;
-unsigned int run, lumi, evt, NUP = -10;
+int run, lumi, evt, NUP;
 int gen_match_1, gen_match_2=0;
 float npu, rho, npv=-1, puweight, weight, numGenJets,jetPt_2;
 float e_1, px_1, py_1, pz_1, pt_1, phi_1, eta_1, m_1, q_1, d0_1, dZ_1, mt_1, iso_1, l1_decayMode, isoDB_1;
