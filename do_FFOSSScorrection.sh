@@ -26,6 +26,7 @@ hadd -f files_corrOSSSFF_et/TT.root files_corrOSSSFF_et/TTToHadronic.root files_
 hadd -f files_corrOSSSFF_et/VV.root files_corrOSSSFF_et/WW.root files_corrOSSSFF_et/WZ.root files_corrOSSSFF_et/ZZ.root files_corrOSSSFF_et/ST_t_antitop.root files_corrOSSSFF_et/ST_t_top.root files_corrOSSSFF_et/ST_tW_antitop.root files_corrOSSSFF_et/ST_tW_top.root
 
 python Subtract_prompt_et.py --directory files_corrOSSSFF_et
+rm -f FF_QCDcorrectionOSSS.root
 root -l -b -q Fit_FFOSSS_et.cc
 
 hadd -f OSSScorr_et.root files_corrOSSSFF_et/Data.root files_corrOSSSFF_et/DY.root files_corrOSSSFF_et/W.root files_corrOSSSFF_et/TT.root files_corrOSSSFF_et/VV.root 
