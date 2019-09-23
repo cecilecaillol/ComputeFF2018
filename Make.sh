@@ -11,7 +11,7 @@ echo "================================================================"
 filename=`echo $1 | awk -F"." '{print $1}'`
 exefilename=${filename}.exe
 rm -f $exefilename
-g++ $1 -o $exefilename `root-config --cflags --glibs` -lRooFit -lRooFitCore /afs/cern.ch/work/c/ccaillol/ComputeFF2018/CMSSW_9_4_0/lib/slc7_amd64_gcc630/libTauAnalysisToolsTauTriggerSFs.so
+g++ $1 -o $exefilename `root-config --cflags --glibs` -lRooFit -lRooFitCore /afs/cern.ch/work/c/ccaillol/MeasureFF/CMSSW_9_4_0/lib/slc7_amd64_gcc630/libTauAnalysisToolsTauTriggerSFs.so
 echo ""
 if [ -e $exefilename ]; then 
     echo "====> Created exe file : "

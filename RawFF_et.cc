@@ -417,20 +417,20 @@ int main(int argc, char** argv) {
         float signalRegion=(byTightIsolationMVArun2v2DBoldDMwLT_2);
         float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);*/
 
-	/*// Deep Tight
-	if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
+	// Deep Tight
+	/*if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byTightDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byTightDeepVSjet_2);*/
 
-	/*// Deep Medium
+	// Deep Medium
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byMediumDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);*/
+        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
 
 	// Deep VTight
-        if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
+        /*if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byVTightDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byVTightDeepVSjet_2);
+        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byVTightDeepVSjet_2);*/
 
 	/*// Deep Loose
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
@@ -471,7 +471,10 @@ int main(int argc, char** argv) {
 
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-	if (byTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.83;
+	//if (byTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.83; // deep tight
+        if (byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86; // deep M
+        //if (byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
+        //if (byVTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.80; // deep tight
         if (sample=="embedded") aweight=aweight*0.97;
 	/*if (gen_match_2==2 or gen_match_2==4){
 	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.06;

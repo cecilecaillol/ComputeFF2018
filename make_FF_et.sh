@@ -5,6 +5,10 @@ mkdir -p files_corrOSSSFF_et
 mkdir -p files_rawFF_et
 mkdir -p files_corr1FF_et
 
+rm files_corrOSSSFF_et/*.root
+rm files_rawFF_et/*.root
+rm files_corr1FF_et/*.root
+
 # Compute raw fake factors in several regions: QCD, W, TT, W MC, SS loose electron iso
 sh do_rawFF_et.sh
 

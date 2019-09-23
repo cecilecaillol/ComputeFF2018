@@ -9,7 +9,6 @@
 #include "TH1.h"
 #include "TH2.h"
 #include "TRandom.h"
-//#include "iostream.h"
 #include "TCanvas.h"
 #include "math.h"
 #include "TGaxis.h"
@@ -27,7 +26,6 @@
 #include "TInterpreter.h"
 #include "TMatrixD.h"
 #include "TMinuit.h"
-//#include "HttStyles.h"
 
 double square(double x)
 {
@@ -68,7 +66,7 @@ Double_t fitFunc_Exp3Par(Double_t *x, Double_t *par) {
 }
 
 Double_t fitFunc_Line2Par(Double_t *x, Double_t *par) {
-    return par[0] + par[1] * x[0] ;//+ par[2] * x[0]* x[0] + par[3] * x[0]* x[0] *x[0];
+    return par[0] + par[1] * (x[0]-40) ;//+ par[2] * x[0]* x[0] + par[3] * x[0]* x[0] *x[0];
     //return par[0] + par[1]*(TMath::Exp(par[2] * x[0]-par[3]));
     //return par[0] + par[1]*(TMath::Landau((x[0]-30),par[2],par[3],0));
 }
@@ -78,7 +76,6 @@ Double_t fitFunc_Landau(Double_t *x, Double_t *par) {
 }
 
 TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::string denum, std::string name, TH2F * hist2D_lep, Double_t fMin, Double_t fMax) {
-    //SetStyle();
     TFile *inputFile = new TFile(files.c_str());
 
     TH1D *Numerator = (TH1D*) inputFile->Get(num.c_str());
@@ -105,8 +102,8 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 8);
     theFit->SetParameter(3, 5);
 
-    theFit2->SetParameter(0, 0.05);
-    theFit2->SetParameter(1, 0.0);
+    theFit2->SetParameter(0, 0.08);
+    theFit2->SetParameter(1, 0.0001);
 
     float xAxisMax = 500;
     if (type.find("Line2P") < 140)
@@ -117,8 +114,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     TCanvas* canvas = new TCanvas("canvas", "", 800, 800);
     canvas->SetTitle("");
     canvas->SetGrid();
-    //TGraph_FR->GetYaxis()->SetRangeUser(0.00,1.5*yg[0]);
-    TGraph_FR->GetYaxis()->SetRangeUser(0.00,0.30);
+    TGraph_FR->GetYaxis()->SetRangeUser(0.00,0.20);
     TGraph_FR->GetYaxis()->SetTitle("f_{#tau}");
     TGraph_FR->GetXaxis()->SetRangeUser(30, 80);
     TGraph_FR->GetXaxis()->SetTitle("#tau_{h} p_{T} [GeV]");
@@ -132,7 +128,6 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     t.SetTextAlign(12);
     t.SetTextSize(0.04);
     t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
-    float aup; float adown; float bup; float bdown;
     if (type.find("Line2P") < 140){
        theFit2->Draw("SAME");
        theFit2->SetLineColor(2);
@@ -142,44 +137,82 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
        theFit->SetLineColor(2);
     }
 
- /*      std::string lepName="";
-       TLatex t3 = TLatex();
-       t3.SetNDC();
-       t3.SetTextFont(42);
-       t3.SetTextAlign(12);
-       t3.SetTextSize(0.040);
-       std::string region;
+    // Up and down fits
+    Double_t TauLegParameters[2];
+    theFit2->GetParameters(TauLegParameters);
 
-       Double_t TauLegParameters[nPar];
-       theFit->GetParameters(TauLegParameters);
+    Double_t matrix[2][2];
+    gMinuit->mnemat(&matrix[0][0],2);
+    TMatrixD mat_D(2,2);
+     for (int i=0; i<2; ++i){
+        for (int j=0; j<2; ++j){
+             mat_D[i][j]=matrix[i][j];
+        }
+    }
+    float aup; float adown; float bup; float bdown;
 
-       for (int i = 0; i < nPar; i++) {
-           hist2D_lep->SetBinContent(WP, (2 * i + 1), TauLegParameters[i]);
-           hist2D_lep->SetBinContent(WP, (2 * i + 2), theFit->GetParError(i));
-       }
+    TMatrixDEigen mat_sym=TMatrixDEigen (mat_D);
+    TMatrixD eigenValues=mat_sym.GetEigenValues();
+    TMatrixD eigenVectors=mat_sym.GetEigenVectors();
+    TMatrixD eigenVectorsInverted=mat_sym.GetEigenVectors();
+    aup = TauLegParameters[0]+eigenVectorsInverted[0][0]*sqrt(eigenValues[0][0])+eigenVectorsInverted[0][1]*sqrt(eigenValues[1][1]);
+    bup = TauLegParameters[1]+eigenVectorsInverted[0][1]*sqrt(eigenValues[0][0])+eigenVectorsInverted[1][1]*sqrt(eigenValues[1][1]);
+    adown = TauLegParameters[0]-eigenVectorsInverted[0][0]*sqrt(eigenValues[0][0])-eigenVectorsInverted[0][1]*sqrt(eigenValues[1][1]);
+    bdown = TauLegParameters[1]-eigenVectorsInverted[0][1]*sqrt(eigenValues[0][0])-eigenVectorsInverted[1][1]*sqrt(eigenValues[1][1]);
 
-       Double_t matrix[2][2];
-       gMinuit->mnemat(&matrix[0][0],2);
-       TMatrixD mat_D(2,2);
-        for (int i=0; i<2; ++i){
-           for (int j=0; j<2; ++j){
-           	mat_D[i][j]=matrix[i][j];
-           }
-       }*/
+    float au1=TauLegParameters[0]+eigenVectorsInverted[0][0]*sqrt(eigenValues[0][0]);
+    float bu1=TauLegParameters[1]+eigenVectorsInverted[0][1]*sqrt(eigenValues[0][0]);
+    float ad1=TauLegParameters[0]-eigenVectorsInverted[0][0]*sqrt(eigenValues[0][0]);
+    float bd1=TauLegParameters[1]-eigenVectorsInverted[0][1]*sqrt(eigenValues[0][0]);
+    float au2=TauLegParameters[0]+eigenVectorsInverted[0][1]*sqrt(eigenValues[1][1]);
+    float bu2=TauLegParameters[1]+eigenVectorsInverted[1][1]*sqrt(eigenValues[1][1]);
+    float ad2=TauLegParameters[0]-eigenVectorsInverted[0][1]*sqrt(eigenValues[1][1]);
+    float bd2=TauLegParameters[1]-eigenVectorsInverted[1][1]*sqrt(eigenValues[1][1]);
+
+    TF1 * theFitup1 = new TF1("theFit2", fitFunc_Line2Par, fMin, fMax, 2);
+    theFitup1->SetParameter(0, au1);
+    theFitup1->SetParameter(1, bu1);
+    theFitup1->SetLineColor(kViolet+1);
+    theFitup1->Draw("same");
+    TF1 * theFitup2 = new TF1("theFit2", fitFunc_Line2Par, fMin, fMax, 2);
+    theFitup2->SetParameter(0, au2);
+    theFitup2->SetParameter(1, bu2);
+    theFitup2->SetLineColor(kGreen-3);
+    theFitup2->Draw("same");
+    TF1 * theFitdown1 = new TF1("theFit2", fitFunc_Line2Par, fMin, fMax, 2);
+    theFitdown1->SetParameter(0, ad1);
+    theFitdown1->SetParameter(1, bd1);
+    theFitdown1->SetLineColor(kViolet+1);
+    theFitdown1->Draw("same");
+    TF1 * theFitdown2 = new TF1("theFit2", fitFunc_Line2Par, fMin, fMax, 2);
+    theFitdown2->SetParameter(0, ad2);
+    theFitdown2->SetParameter(1, bd2);
+    theFitdown2->SetLineColor(kGreen-3);
+    theFitdown2->Draw("same");
+    TLegend *l = new TLegend(0.15, 0.74, 0.5, 0.89, NULL, "brNDC");
+    l->SetBorderSize(0);
+    l->SetFillColor(0);
+    l->SetTextSize(.03);
+    l->SetFillColor(0);
+    l->AddEntry(theFit2, "Best fit", "l");
+    l->AddEntry(theFitup1, "1st uncertainty #pm 1#sigma", "l");
+    l->AddEntry(theFitup2, "2nd uncertainty #pm 1#sigma", "l");
+    l->Draw("same");
 
     canvas->SaveAs(outNaming.c_str());
 
-    if (denum.find("Eta") < 140 or denum.find("Pt") < 140){
-       hist2D_lep->SetBinContent(WP, 5, aup);
-       hist2D_lep->SetBinContent(WP, 7, bup);
-       hist2D_lep->SetBinContent(WP, 9, adown);
-       hist2D_lep->SetBinContent(WP, 11, bdown);
-    }
-
-    TFile *FR_H = new TFile("FitHistograms_FR.root", "UPDATE");
+    TFile *FR_H = new TFile("uncorrected_fakefactors_et.root", "UPDATE");
     FR_H->cd();
-    TGraph_FR->SetName(TString(num) + "_" + TString(denum));
-    TGraph_FR->Write();
+    theFit2->SetName(TString(name));
+    theFit2->Write();
+    theFitup1->SetName(TString(name)+"_unc1_up");
+    theFitup1->Write();
+    theFitdown1->SetName(TString(name)+"_unc1_down");
+    theFitdown1->Write();
+    theFitup2->SetName(TString(name)+"_unc2_up");
+    theFitup2->Write();
+    theFitdown2->SetName(TString(name)+"_unc2_down");
+    theFitdown2->Write();
     FR_H->Close();
 
    if (type.find("Line2P") < 140)  return theFit2;
@@ -190,40 +223,25 @@ void Fit_FF_et() {
 
     gStyle->SetOptFit(1111);
 
-    TFile *FR_File = new TFile("uncorrected_fakefactors_et.root", "RECREATE");
-
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 30;
     Double_t fMax = 80;
 
-    TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "et_0jet_qcd_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_qcd_iso", "et_1jet_qcd_anti", "et_1jet_qcd_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "et_0jet_w_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "et_1jet_w_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "et_0jet_tt_iso", Fit_Value_tau, fMin, fMax);
+    TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "rawFF_et_qcd_0jet", Fit_Value_tau, fMin, fMax);
+    TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_qcd_iso", "et_1jet_qcd_anti", "rawFF_et_qcd_1jet", Fit_Value_tau, fMin, fMax);
+    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax);
+    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax);
+    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "rawFF_et_tt", Fit_Value_tau, fMin, fMax);
 
-    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "W_mc_et_0jet_w_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "W_mc_et_1jet_w_iso", Fit_Value_tau, fMin, fMax);
+    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "mc_rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax);
+    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "mc_rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax);
 
 
-    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "et_0jetSSloose_qcd_iso", Fit_Value_tau, fMin, fMax);
-    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "et_1jetSSloose_qcd_iso", Fit_Value_tau, fMin, fMax);
+    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "rawFF_et_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax);
+    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "rawFF_et_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax);
 
-    TF1* m20 = M_FR(11, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "TT_mc_et_0jet_tt_iso", Fit_Value_tau, fMin, fMax);
+    TF1* m20 = M_FR(11, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "mc_rawFF_et_tt", Fit_Value_tau, fMin, fMax);
     
-    FR_File->Write();
-    FR_File->cd();
-    m11->SetName("rawFF_et_qcd_0jet"); m11->Write();
-    m12->SetName("rawFF_et_qcd_1jet"); m12->Write();
-    m13->SetName("rawFF_et_w_0jet"); m13->Write();
-    m14->SetName("rawFF_et_w_1jet"); m14->Write();
-    m15->SetName("rawFF_et_tt"); m15->Write();
-    m16->SetName("mc_rawFF_et_w_0jet"); m16->Write();
-    m17->SetName("mc_rawFF_et_w_1jet"); m17->Write();
-    m18->SetName("rawFF_et_qcd_0jetSSloose"); m18->Write();
-    m19->SetName("rawFF_et_qcd_1jetSSloose"); m19->Write();
-    m20->SetName("mc_rawFF_et_tt"); m20->Write();
-    FR_File->Close();
 }
 

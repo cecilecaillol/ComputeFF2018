@@ -25,6 +25,7 @@ hadd -f files_rawFF_et/TT.root files_rawFF_et/TTToHadronic.root files_rawFF_et/T
 hadd -f files_rawFF_et/VV.root files_rawFF_et/WW.root files_rawFF_et/WZ.root files_rawFF_et/ZZ.root files_rawFF_et/ST_t_antitop.root files_rawFF_et/ST_t_top.root files_rawFF_et/ST_tW_antitop.root files_rawFF_et/ST_tW_top.root
 
 python Subtract_prompt_et.py --directory files_rawFF_et
+rm uncorrected_fakefactors_et.root
 root -l -b -q Fit_FF_et.cc 
 
 hadd -f raw_FF_et.root files_rawFF_et/Data.root files_rawFF_et/DY.root files_rawFF_et/W.root files_rawFF_et/TT.root files_rawFF_et/VV.root 

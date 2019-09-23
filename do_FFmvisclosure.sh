@@ -30,6 +30,7 @@ hadd -f files_corr1FF_et/TTMC.root files_corr1FF_et/TTToHadronicMC.root files_co
 hadd -f files_corr1FF_et/VV.root files_corr1FF_et/WW.root files_corr1FF_et/WZ.root files_corr1FF_et/ZZ.root files_corr1FF_et/ST_t_antitop.root files_corr1FF_et/ST_t_top.root files_corr1FF_et/ST_tW_antitop.root files_corr1FF_et/ST_tW_top.root
 
 python Subtract_prompt_et.py --directory files_corr1FF_et
+rm -f FF_corrections_1.root
 root -l -b -q Fit_FFclosure_et.cc
 
 # Prepare mT histograms, fit the ratio later with the OS/SS correction
