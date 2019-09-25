@@ -26,7 +26,7 @@ hadd -f files_rawFF_et/VV.root files_rawFF_et/WW.root files_rawFF_et/WZ.root fil
 
 python Subtract_prompt_et.py --directory files_rawFF_et
 rm uncorrected_fakefactors_et.root
-root -l -b -q Fit_FF_et.cc 
+root -l -b -q 'Fit_FF_et.cc(2018)' 
 
 hadd -f raw_FF_et.root files_rawFF_et/Data.root files_rawFF_et/DY.root files_rawFF_et/W.root files_rawFF_et/TT.root files_rawFF_et/VV.root 
 

@@ -32,7 +32,7 @@ hadd -f files_corr1FF_et/VV.root files_corr1FF_et/WW.root files_corr1FF_et/WZ.ro
 
 python Subtract_prompt_et.py --directory files_corr1FF_et
 rm -f FF_corrections_1.root
-root -l -b -q Fit_FFclosure_et.cc
+root -l -b -q 'Fit_FFclosure_et.cc(2017)'
 
 # Prepare mT histograms, fit the ratio later with the OS/SS correction
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/Wall.root files_corr1FF_et/WMC2.root W WMC2 2017
