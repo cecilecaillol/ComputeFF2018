@@ -6,11 +6,12 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--step', default="raw", help="Which TES?")
+parser.add_argument('--step', default="raw", help="")
+parser.add_argument('--year', default="2018", help="")
 options = parser.parse_args()
 
 
-def add_lumi():
+def add_lumi(datayear):
     lowX=0.58
     lowY=0.835
     lumi  = ROOT.TPaveText(lowX, lowY+0.06, lowX+0.30, lowY+0.16, "NDC")
@@ -20,7 +21,12 @@ def add_lumi():
     lumi.SetTextColor(    1 )
     lumi.SetTextSize(0.06)
     lumi.SetTextFont (   42 )
-    lumi.AddText("2018, 59.5 fb^{-1} (13 TeV)")
+    if datayear=="2018":
+       lumi.AddText("2018, 59.5 fb^{-1} (13 TeV)")
+    elif datayear=="2017":
+       lumi.AddText("2017, 41.5 fb^{-1} (13 TeV)")
+    elif datayear=="2016":
+       lumi.AddText("2016, 35.9 fb^{-1} (13 TeV)")
     return lumi
 
 def add_CMS():
@@ -188,7 +194,7 @@ for i in range (0,ncat):
    legende.AddEntry(errorBand,"Stat. unc.","f")
    legende.Draw()
 
-   l1=add_lumi()
+   l1=add_lumi(options.year)
    l1.Draw("same")
    l2=add_CMS()
    l2.Draw("same")
@@ -252,9 +258,9 @@ for i in range (0,ncat):
 
    c.Modified()
    if (options.step=="raw"): 
-     c.SaveAs("plots/raw_"+categories[i]+".pdf")
+     c.SaveAs("raw_"+categories[i]+".pdf")
    if (options.step=="mvisclosure"):
-     c.SaveAs("plots/mvisclosure_"+categories[i]+".pdf")
+     c.SaveAs("mvisclosure_"+categories[i]+".pdf")
    if (options.step=="osss"): 
-     c.SaveAs("plots/osss_"+categories[i]+".pdf")
+     c.SaveAs("osss_"+categories[i]+".pdf")
 
