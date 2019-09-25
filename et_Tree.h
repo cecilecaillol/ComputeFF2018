@@ -5,7 +5,7 @@ float byVVVLooseDeepVSmu_2,byVVLooseDeepVSmu_2,byVLooseDeepVSmu_2,byLooseDeepVSm
 float byVVVLooseDeepVSe_2,byVVLooseDeepVSe_2,byVLooseDeepVSe_2,byLooseDeepVSe_2,byMediumDeepVSe_2,byTightDeepVSe_2,byVTightDeepVSe_2,byVVTightDeepVSe_2;
 
   float matchEmbFilter_Ele24Tau30_1,matchEmbFilter_Ele27_1,matchEmbFilter_Ele32DoubleL1v1_1,matchEmbFilter_Ele32DoubleL1v2_1,matchEmbFilter_Ele32_1,matchEmbFilter_Ele35_1,matchEmbFilter_Ele24Tau30_2;
-  float passEle27, passEle32, passEle35, passEle24Tau30, passEle24HPSTau30;
+  float passEle27, passEle32, passEle35, passEle24Tau30, passEle24HPSTau30, passEle25, matchEle25_1, filterEle25_1;
   float matchEle27_1, matchEle32_1, matchEle35_1, matchEle24Tau30_1, matchEle24Tau30_2, matchEle24HPSTau30_1, matchEle24HPSTau30_2;
   float filterEle27_1, filterEle32_1, filterEle35_1, filterEle24Tau30_1, filterEle24Tau30_2, filterEle24HPSTau30_1, filterEle24HPSTau30_2;
   float photonIso_2, puIso_2, chargedIso_2, neutralIso_2,metcor,metcorphi;
