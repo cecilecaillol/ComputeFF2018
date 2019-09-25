@@ -102,8 +102,8 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 8);
     theFit->SetParameter(3, 5);
 
-    theFit2->SetParameter(0, 0.08);
-    theFit2->SetParameter(1, 0.0001);
+    theFit2->SetParameter(0, 0.1);
+    theFit2->SetParameter(1, 0.00001);
 
     float xAxisMax = 500;
     if (type.find("Line2P") < 140)

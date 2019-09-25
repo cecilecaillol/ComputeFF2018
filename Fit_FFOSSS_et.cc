@@ -222,7 +222,7 @@ void Fit_FFOSSS_et() {
     Double_t fMin = 0;
     Double_t fMax = 300;
 
-    TF1* m11 = M_FR(1, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_mvis_et_qcd", Fit_Value_tau, fMin, fMax);
+    TF1* m11 = M_FR(1, "Line2Par", "files_corrOSSSFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_OSSS_mvis_et_qcd", Fit_Value_tau, fMin, fMax);
     TF1* m19 = M_FR(9, "Line2Par2", "files_corr1FF_et/WMC2.root", "et_mt_w_iso/WMC2", "et_mt_w_anti/WMC2", "closure_mt_et_w", Fit_Value_tau, 0, 120);
 
 }

@@ -12,10 +12,15 @@ hadd -f files_corr1FF_et/Data.root files_corr1FF_et/DataB.root files_corr1FF_et/
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/DY4.root files_corr1FF_et/DY4.root DY DY 2017
 hadd -f files_corr1FF_et/DY.root files_corr1FF_et/DYincl.root files_corr1FF_et/DY1.root files_corr1FF_et/DY2.root files_corr1FF_et/DY3.root files_corr1FF_et/DY4.root
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/Wall.root files_corr1FF_et/W.root W W 2017
+./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/Wall.root files_corr1FF_et/WMC.root W WMC 2017
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTToHadronic.root files_corr1FF_et/TTToHadronic.root TTToHadronic TT 2017
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTTo2L2Nu.root files_corr1FF_et/TTTo2L2Nu.root TTTo2L2Nu TT 2017
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTToSemiLeptonic.root files_corr1FF_et/TTToSemiLeptonic.root TTToSemiLeptonic TT 2017
 hadd -f files_corr1FF_et/TT.root files_corr1FF_et/TTToHadronic.root files_corr1FF_et/TTTo2L2Nu.root files_corr1FF_et/TTToSemiLeptonic.root
+./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTToHadronic.root files_corr1FF_et/TTToHadronicMC.root TTToHadronic TTMC 2017
+./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTTo2L2Nu.root files_corr1FF_et/TTTo2L2NuMC.root TTTo2L2Nu TTMC 2017
+./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/TTToSemiLeptonic.root files_corr1FF_et/TTToSemiLeptonicMC.root TTToSemiLeptonic TTMC 2017
+hadd -f files_corr1FF_et/TTMC.root files_corr1FF_et/TTToHadronicMC.root files_corr1FF_et/TTTo2L2NuMC.root files_corr1FF_et/TTToSemiLeptonicMC.root
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/WW.root files_corr1FF_et/WW.root WW VV 2017
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/WZ.root files_corr1FF_et/WZ.root WZ VV 2017
 ./Set1_correction_et.exe /data/ccaillol/smhet2017_svfitted_8jul/ZZ.root files_corr1FF_et/ZZ.root ZZ VV 2017

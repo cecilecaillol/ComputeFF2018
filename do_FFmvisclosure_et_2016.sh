@@ -19,7 +19,9 @@ hadd -f files_corr1FF_et/DY.root files_corr1FF_et/DYincl.root files_corr1FF_et/D
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/W3.root files_corr1FF_et/W3.root W W 2016
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/W4.root files_corr1FF_et/W4.root W W 2016
 hadd -f files_corr1FF_et/W.root files_corr1FF_et/Wincl.root files_corr1FF_et/W1.root files_corr1FF_et/W2.root files_corr1FF_et/W3.root files_corr1FF_et/W4.root
+./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/Wall.root files_corr1FF_et/WMC.root W WMC 2016
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/TT.root files_corr1FF_et/TT.root TT TT 2016
+./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/TT.root files_corr1FF_et/TTMC.root TT TTMC 2016
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/WW.root files_corr1FF_et/WW.root WW VV 2016
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/WZ.root files_corr1FF_et/WZ.root WZ VV 2016
 ./Set1_correction_et.exe /data/ccaillol/smhet2016_svfitted_16aug/ZZ.root files_corr1FF_et/ZZ.root ZZ VV 2016
