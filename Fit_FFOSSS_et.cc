@@ -112,7 +112,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     //TGraph_FR->GetYaxis()->SetRangeUser(0.00,1.5*yg[0]);
     TGraph_FR->GetYaxis()->SetRangeUser(0.0,2.00);
     TGraph_FR->GetYaxis()->SetTitle("Correction");
-    TGraph_FR->GetXaxis()->SetRangeUser(0, 300);
+    TGraph_FR->GetXaxis()->SetRangeUser(0,350);
     TGraph_FR->GetXaxis()->SetTitle("m_{vis}(e,#tau_{h}) (GeV)");
     if (name.find("closure_mt") < 140) TGraph_FR->GetXaxis()->SetTitle("m_{T}(e,MET) (GeV)");
     TGraph_FR->SetTitle("");
@@ -222,7 +222,7 @@ void Fit_FFOSSS_et(int year) {
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 0;
-    Double_t fMax = 300;
+    Double_t fMax = 350;
 
     TF1* m11 = M_FR(1, "Line2Par", "files_corrOSSSFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_OSSS_mvis_et_qcd", Fit_Value_tau, fMin, fMax, year);
     TF1* m19 = M_FR(9, "Line2Par2", "files_corr1FF_et/WMC2.root", "et_mt_w_iso/WMC2", "et_mt_w_anti/WMC2", "closure_mt_et_w", Fit_Value_tau, 0, 120, year);

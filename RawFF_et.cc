@@ -322,7 +322,7 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {30,35,40,45,50,55,60,80};
+   float bins_mtt0[] = {30,35,40,45,50,55,60,70,80,100};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
@@ -643,7 +643,7 @@ int main(int argc, char** argv) {
            if (mytau.Pt()<30) continue;
 	   float weight2=1.0;
 	   float myvar=mytau.Pt();
-	   if (myvar>80) myvar=79;
+	   //if (myvar>80) myvar=79;
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){

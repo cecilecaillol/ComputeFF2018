@@ -3,7 +3,7 @@
 float get_raw_FF(float pt, TF1* fct){
   float ff=1.0;
   ff=fct->Eval(pt);
-  if (pt>80) ff=fct->Eval(80);
+  //if (pt>80) ff=fct->Eval(80);
   return ff;
 }
 
@@ -18,7 +18,7 @@ float get_mvis_closure(float mvis, TF1* fct){
 float get_mt_closure(float mt, TF1* fct){
   float corr=1.0;
   corr=fct->Eval(mt);
-  if (mt>120) corr=fct->Eval(120);
+  //if (mt>120) corr=fct->Eval(120);
   return corr;
 }
 
