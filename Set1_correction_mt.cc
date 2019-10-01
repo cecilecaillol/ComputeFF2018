@@ -336,7 +336,7 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300};
+   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300.350};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
    float bins_mt[] = {0,10,20,30,40,50,60,70,80,90,100,110,120};
    int  binnum_mt = sizeof(bins_mt)/sizeof(Float_t) - 1;
@@ -435,11 +435,13 @@ int main(int argc, char** argv) {
         if (sample!="data_obs" && !trigger24 && !trigger27 && !trigger2027HPS) continue;
 
         // Change here to change the ID!!
-        /*// MVA Tight
+        // MVA Tight
+	/*
         if (l2_decayMode!=0 && l2_decayMode!=1 && l2_decayMode!=10) continue;
         if (!againstElectronTightMVA6_2 or !againstMuonLoose3_2) continue;
         float signalRegion=(byTightIsolationMVArun2v2DBoldDMwLT_2);
-        float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);*/
+        float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);
+	*/
 
         // Deep Tight
 	/*
@@ -449,6 +451,7 @@ int main(int argc, char** argv) {
 	*/
 
         // Deep Medium
+
         if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byMediumDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
@@ -472,6 +475,7 @@ int main(int argc, char** argv) {
 	if (mymu.DeltaR(mytau)<0.5) continue;
 	
 	//I have slightly different set of weights, but they're close?
+        /*
         if (sample=="W"){
             weight=51.60;
             if (numGenJets==1) weight=9.0558;
@@ -490,6 +494,26 @@ int main(int argc, char** argv) {
                 weight=0.612;
             else if (numGenJets==4)
                 weight=1.11;
+        }
+	*/
+	if (sample=="W"){
+            weight=51.749;
+            if (numGenJets==1) weight=10.8788;
+            else if (numGenJets==2) weight=5.2527;
+            else if (numGenJets==3) weight=3.10898;
+            else if (numGenJets==4) weight=3.0223;
+        }
+
+        if (sample=="DY"){
+            weight=3.7118;
+            if (numGenJets==1)
+                weight=0.64516;
+            else if (numGenJets==2)
+                weight=0.56494;
+            else if (numGenJets==3)
+                weight=0.61413;
+            else if (numGenJets==4)
+                weight=1.11472;
         }
 
         bool is_includedInEmbedded=false;
@@ -583,7 +607,7 @@ int main(int argc, char** argv) {
            if (mytau.Pt()<30) continue;
 	   float weight2=1.0;
 	   float myvar=(mymu+mytau).M();
-	   if (myvar>300) myvar=299;
+	   //if (myvar>300) myvar=299;
 
 	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet);
 	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet);

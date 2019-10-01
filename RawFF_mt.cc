@@ -335,7 +335,7 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {30,35,40,45,50,55,60,80};
+   float bins_mtt0[] = {30,35,40,45,50,55,60,70,80,100};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
@@ -429,13 +429,15 @@ int main(int argc, char** argv) {
 
 
 	// Change here to change the ID!!
-	/*// MVA Tight
+	// MVA Tight
+	/*
 	if (l2_decayMode!=0 && l2_decayMode!=1 && l2_decayMode!=10) continue;
 	if (!againstElectronTightMVA6_2 or !againstMuonLoose3_2) continue;
         float signalRegion=(byTightIsolationMVArun2v2DBoldDMwLT_2);
-        float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);*/
+        float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);
+	*/
 
-	// Deep Tight
+	// Deep Tight 
 	/*
 	if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
         float signalRegion=(byTightDeepVSjet_2);
@@ -466,6 +468,7 @@ int main(int argc, char** argv) {
 	if (mymu.DeltaR(mytau)<0.5) continue;
 	
 	//I have slightly different set of weights, but they're close?
+	/*
         if (sample=="W"){
             weight=51.60;
             if (numGenJets==1) weight=9.0558;
@@ -484,6 +487,26 @@ int main(int argc, char** argv) {
                 weight=0.612;
             else if (numGenJets==4)
                 weight=1.11;
+        }
+	*/
+	if (sample=="W"){
+            weight=51.749;
+            if (numGenJets==1) weight=10.8788;
+            else if (numGenJets==2) weight=5.2527;
+            else if (numGenJets==3) weight=3.10898;
+            else if (numGenJets==4) weight=3.0223;
+        }
+
+        if (sample=="DY"){
+            weight=3.7118;
+            if (numGenJets==1)
+                weight=0.64516;
+            else if (numGenJets==2)
+                weight=0.56494;
+            else if (numGenJets==3)
+                weight=0.61413;
+            else if (numGenJets==4)
+                weight=1.11472;
         }
 
         bool is_includedInEmbedded=false;
@@ -577,7 +600,7 @@ int main(int argc, char** argv) {
            if (mytau.Pt()<30) continue;
 	   float weight2=1.0;
 	   float myvar=mytau.Pt();
-	   if (myvar>80) myvar=79;
+	   //if (myvar>80) myvar=79;
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){
