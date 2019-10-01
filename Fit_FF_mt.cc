@@ -105,7 +105,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 8);
     theFit->SetParameter(3, 5);
 
-    theFit2->SetParameter(0, 0.05);
+    theFit2->SetParameter(0, 0.09);
     theFit2->SetParameter(1, 0.0);
 
     float xAxisMax = 500;
@@ -120,7 +120,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     //TGraph_FR->GetYaxis()->SetRangeUser(0.00,1.5*yg[0]);
     TGraph_FR->GetYaxis()->SetRangeUser(0.00,0.30);
     TGraph_FR->GetYaxis()->SetTitle("f_{#tau}");
-    TGraph_FR->GetXaxis()->SetRangeUser(30, 80);
+    TGraph_FR->GetXaxis()->SetRangeUser(30, 100);
     TGraph_FR->GetXaxis()->SetTitle("#tau_{h} p_{T} [GeV]");
     TGraph_FR->SetTitle("");
     TGraph_FR->Draw("PAE");
@@ -194,8 +194,8 @@ void Fit_FF_mt() {
 
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
-    Double_t fMin = 30;
-    Double_t fMax = 80;
+    Double_t fMin = 0;
+    Double_t fMax = 300;
 
     TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_mt/DataSub.root", "mt_0jet_qcd_iso", "mt_0jet_qcd_anti", "mt_0jet_qcd_iso", Fit_Value_tau, fMin, fMax);
     TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_mt/DataSub.root", "mt_1jet_qcd_iso", "mt_1jet_qcd_anti", "mt_1jet_qcd_iso", Fit_Value_tau, fMin, fMax);

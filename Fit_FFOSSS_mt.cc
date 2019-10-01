@@ -123,7 +123,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     //TGraph_FR->GetYaxis()->SetRangeUser(0.00,1.5*yg[0]);
     TGraph_FR->GetYaxis()->SetRangeUser(0.0,2.00);
     TGraph_FR->GetYaxis()->SetTitle("Correction");
-    TGraph_FR->GetXaxis()->SetRangeUser(0, 300);
+    TGraph_FR->GetXaxis()->SetRangeUser(0, 350);
     TGraph_FR->GetXaxis()->SetTitle("m_{vis}(#mu,#tau_{h}) (GeV)");
     TGraph_FR->SetTitle("");
     TGraph_FR->Draw("PAE");
@@ -166,7 +166,7 @@ void Fit_FFOSSS_mt() {
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 0;
-    Double_t fMax = 300;
+    Double_t fMax = 500;
 
     TF1* m11 = M_FR(1, "Line2Par", "files_corrOSSSFF_mt/DataSub.root", "mt_0jet_qcd_iso", "mt_0jet_qcd_anti", "correctionOSSS_mvis_mt_qcd", Fit_Value_tau, fMin, fMax);
     TF1* m19 = M_FR(9, "Line2Par", "files_corr1FF_mt/WMC2.root", "mt_mt_w_iso/WMC2", "mt_mt_w_anti/WMC2", "closure_mt_mt_w", Fit_Value_tau, 0, 120);
