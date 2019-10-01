@@ -75,7 +75,7 @@ Double_t fitFunc_Landau(Double_t *x, Double_t *par) {
     return par[0] + par[1]*(TMath::Landau((x[0]-30),par[2],par[3],0));
 }
 
-TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::string denum, std::string name, TH2F * hist2D_lep, Double_t fMin, Double_t fMax) {
+TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::string denum, std::string name, TH2F * hist2D_lep, Double_t fMin, Double_t fMax, int year) {
     TFile *inputFile = new TFile(files.c_str());
 
     TH1D *Numerator = (TH1D*) inputFile->Get(num.c_str());
@@ -102,8 +102,8 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 8);
     theFit->SetParameter(3, 5);
 
-    theFit2->SetParameter(0, 0.08);
-    theFit2->SetParameter(1, 0.0001);
+    theFit2->SetParameter(0, 0.09);
+    theFit2->SetParameter(1, 0.00001);
 
     float xAxisMax = 500;
     if (type.find("Line2P") < 140)
@@ -116,7 +116,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     canvas->SetGrid();
     TGraph_FR->GetYaxis()->SetRangeUser(0.00,0.20);
     TGraph_FR->GetYaxis()->SetTitle("f_{#tau}");
-    TGraph_FR->GetXaxis()->SetRangeUser(30, 80);
+    TGraph_FR->GetXaxis()->SetRangeUser(30, 100);
     TGraph_FR->GetXaxis()->SetTitle("#tau_{h} p_{T} [GeV]");
     TGraph_FR->SetTitle("");
     TGraph_FR->Draw("PAE");
@@ -127,7 +127,9 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     t.SetTextFont(42);
     t.SetTextAlign(12);
     t.SetTextSize(0.04);
-    t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
+    if (year==2016) t.DrawLatex(0.55, .96, "35.9 fb^{-1} (2016, 13 TeV)");
+    else if (year==2017) t.DrawLatex(0.55, .96, "41.5 fb^{-1} (2017, 13 TeV)");
+    else if (year==2018) t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
     if (type.find("Line2P") < 140){
        theFit2->Draw("SAME");
        theFit2->SetLineColor(2);
@@ -219,29 +221,29 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
    else return theFit;
 }
 
-void Fit_FF_et() {
+void Fit_FF_et(int year) {
 
     gStyle->SetOptFit(1111);
 
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 30;
-    Double_t fMax = 80;
+    Double_t fMax = 100;
 
-    TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "rawFF_et_qcd_0jet", Fit_Value_tau, fMin, fMax);
-    TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_qcd_iso", "et_1jet_qcd_anti", "rawFF_et_qcd_1jet", Fit_Value_tau, fMin, fMax);
-    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax);
-    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax);
-    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "rawFF_et_tt", Fit_Value_tau, fMin, fMax);
+    TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "rawFF_et_qcd_0jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_qcd_iso", "et_1jet_qcd_anti", "rawFF_et_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
 
-    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "mc_rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax);
-    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "mc_rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax);
+    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "mc_rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "mc_rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
 
 
-    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "rawFF_et_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax);
-    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "rawFF_et_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax);
+    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "rawFF_et_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "rawFF_et_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
 
-    TF1* m20 = M_FR(11, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "mc_rawFF_et_tt", Fit_Value_tau, fMin, fMax);
+    TF1* m20 = M_FR(11, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "mc_rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
     
 }
 

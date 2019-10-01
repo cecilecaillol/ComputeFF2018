@@ -77,7 +77,7 @@ Double_t fitFunc_Line2Par2(Double_t *x, Double_t *par) {
     return par[0] + par[1]* (x[0]-25);
 }
 
-TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::string denum, std::string name, TH2F * hist2D_lep, Double_t fMin, Double_t fMax) {
+TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::string denum, std::string name, TH2F * hist2D_lep, Double_t fMin, Double_t fMax, int year) {
     //SetStyle();
     TFile *inputFile = new TFile(files.c_str());
 
@@ -112,7 +112,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     //TGraph_FR->GetYaxis()->SetRangeUser(0.00,1.5*yg[0]);
     TGraph_FR->GetYaxis()->SetRangeUser(0.0,2.00);
     TGraph_FR->GetYaxis()->SetTitle("Correction");
-    TGraph_FR->GetXaxis()->SetRangeUser(0, 300);
+    TGraph_FR->GetXaxis()->SetRangeUser(0,350);
     TGraph_FR->GetXaxis()->SetTitle("m_{vis}(e,#tau_{h}) (GeV)");
     if (name.find("closure_mt") < 140) TGraph_FR->GetXaxis()->SetTitle("m_{T}(e,MET) (GeV)");
     TGraph_FR->SetTitle("");
@@ -124,7 +124,9 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     t.SetTextFont(42);
     t.SetTextAlign(12);
     t.SetTextSize(0.04);
-    t.DrawLatex(0.55, .95, "59.5 fb^{-1} (2018, 13 TeV)");
+    if (year==2016) t.DrawLatex(0.55, .96, "35.9 fb^{-1} (2016, 13 TeV)");
+    else if (year==2017) t.DrawLatex(0.55, .96, "41.5 fb^{-1} (2017, 13 TeV)");
+    else if (year==2018) t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
     theFit->Draw("SAME");
     theFit->SetLineColor(2);
 
@@ -213,17 +215,17 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     return theFit;
 }
 
-void Fit_FFOSSS_et() {
+void Fit_FFOSSS_et(int year) {
 
     gStyle->SetOptFit(1111);
 
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 0;
-    Double_t fMax = 300;
+    Double_t fMax = 350;
 
-    TF1* m11 = M_FR(1, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_mvis_et_qcd", Fit_Value_tau, fMin, fMax);
-    TF1* m19 = M_FR(9, "Line2Par2", "files_corr1FF_et/WMC2.root", "et_mt_w_iso/WMC2", "et_mt_w_anti/WMC2", "closure_mt_et_w", Fit_Value_tau, 0, 120);
+    TF1* m11 = M_FR(1, "Line2Par", "files_corrOSSSFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_OSSS_mvis_et_qcd", Fit_Value_tau, fMin, fMax, year);
+    TF1* m19 = M_FR(9, "Line2Par2", "files_corr1FF_et/WMC2.root", "et_mt_w_iso/WMC2", "et_mt_w_anti/WMC2", "closure_mt_et_w", Fit_Value_tau, 0, 120, year);
 
 }
 
