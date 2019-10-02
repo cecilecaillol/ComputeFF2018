@@ -18,9 +18,9 @@ sh do_FFmvisclosure_mt_2017.sh
 sh do_FFOSSScorrection_mt_2017.sh
 
 # Draw control regions where the FF come from
-python Draw_raw.py --step raw --year 2017
-python Draw_raw.py --step mvisclosure --year 2017
-python Draw_raw.py --step osss --year 2017
+python Draw_raw_mt.py --step raw --year 2017
+python Draw_raw_mt.py --step mvisclosure --year 2017
+python Draw_raw_mt.py --step osss --year 2017
 
 mv *.pdf plots_mt_2017/.
 
