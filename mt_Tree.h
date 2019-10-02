@@ -42,3 +42,8 @@ float decayModeFinding_2, againstElectronTightMVA6_2, againstElectronVTightMVA6_
 float Flag_BadChargedCandidateFilter, Flag_BadPFMuonFilter, Flag_EcalDeadCellTriggerPrimitiveFilter, Flag_HBHENoiseFilter, Flag_HBHENoiseIsoFilter, Flag_badCloneMuon, Flag_badGlobalMuon, Flag_eeBadScFilter, Flag_globalTightHalo2016Filter, Flag_goodVertices, Flag_globalSuperTightHalo2016Filter, Flag_badMuons, Flag_duplicateMuons, Flag_ecalBadCalibFilter, Flag_ecalBadCalibReducedMINIAODFilter;
 float matchEmbFilter_Mu20Tau27_1,matchEmbFilter_Mu24_1,matchEmbFilter_Mu27_1,matchEmbFilter_Mu20Tau27_2,matchEmbFilter_Mu20HPSTau27_2;
 float m_sv;
+
+//add in 2016 triggers
+float passMu22eta2p1, matchMu22eta2p1_1, filterMu22eta2p1_1, passTkMu22eta2p1, matchTkMu22eta2p1_1, filterTkMu22eta2p1_1;
+
+float passMu19Tau20, matchMu19Tau20_1, matchMu19Tau20_2, filterMu19Tau20_1, filterMu19Tau20_2, passMu19Tau20SingleL1, matchMu19Tau20SingleL1_1, matchMu19Tau20SingleL1_2, filterMu19Tau20SingleL1_1, filterMu19Tau20SingleL1_2;
