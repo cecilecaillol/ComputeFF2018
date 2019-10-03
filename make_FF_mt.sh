@@ -21,10 +21,10 @@ python Draw_raw_mt.py --step osss --year 2018
 
 mv *.pdf plots_mt_2018
 
-mkdir -p ff_files
-cp uncorrected_fakefactors_mt.root ff_files/.
-cp FF_corrections_1.root ff_files/.
-cp FF_QCDcorrectionOSSS.root ff_files/.
-cp raw_FF_mt.root ff_files/.
-cp mvisclosure_mt.root ff_files/.
-cp OSSScorr_mt.root ff_files/.
+mkdir -p ff_files_mt_2018
+cp uncorrected_fakefactors_mt.root ff_files_mt_2018/.
+cp FF_corrections_1.root ff_files_mt_2018/.
+cp FF_QCDcorrectionOSSS.root ff_files_mt_2018/.
+cp raw_FF_mt.root ff_files_mt_2018/.
+cp mvisclosure_mt.root ff_files_mt_2018/.
+cp OSSScorr_mt.root ff_files_mt_2018/.
