@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import ROOT
 import re
 from array import array

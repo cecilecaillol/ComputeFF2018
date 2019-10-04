@@ -1,5 +1,5 @@
 #include <TH2.h>
-#include "ApplyFF.h"
+#include "ComputeFF2018/FFcode/interface/ApplyFF.h"
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TGraph.h>
@@ -16,7 +16,7 @@
 #include <TRandom3.h>
 #include "TLorentzVector.h"
 #include "TString.h"
-#include "ScaleFactor.h"
+#include "ComputeFF2018/FFcode/interface/ScaleFactor.h"
 #include "TLegend.h"
 #include "TH1F.h"
 #include "TKey.h"
@@ -24,14 +24,15 @@
 #include "THStack.h"
 #include "TPaveLabel.h"
 #include "TFile.h"
-#include "myHelper.h"
-#include "et_Tree.h"
-#include "LumiReweightingStandAlone.h"
-#include "../TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
+#include "ComputeFF2018/FFcode/interface/myHelper.h"
+#include "ComputeFF2018/FFcode/interface/et_Tree.h"
+#include "ComputeFF2018/FFcode/interface/LumiReweightingStandAlone.h"
+#include "TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
 #include "RooWorkspace.h"
 #include "RooRealVar.h"
 #include "RooFunctor.h"
-#include "SFtautrigger.h"
+#include "ComputeFF2018/FFcode/interface/SFtautrigger.h"
+#include "TauPOG/TauIDSFs/interface/TauIDSFTool.h"
 
 using namespace std;
 
@@ -262,6 +263,13 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("byMediumIsolationMVArun2v2DBoldDMwLT_2",&byMediumIsolationMVArun2v2DBoldDMwLT_2);
     arbre->SetBranchAddress("byTightIsolationMVArun2v2DBoldDMwLT_2",&byTightIsolationMVArun2v2DBoldDMwLT_2);
     arbre->SetBranchAddress("byVTightIsolationMVArun2v2DBoldDMwLT_2",&byVTightIsolationMVArun2v2DBoldDMwLT_2);
+    arbre->SetBranchAddress("byIsolationMVA3oldDMwLTraw_2",&byIsolationMVA3oldDMwLTraw_2);
+    arbre->SetBranchAddress("l2_decayMode",&l2_decayMode);
+    arbre->SetBranchAddress("againstElectronTightMVA6_2",&againstElectronTightMVA6_2);
+    arbre->SetBranchAddress("againstElectronVTightMVA6_2",&againstElectronVTightMVA6_2);
+    arbre->SetBranchAddress("againstElectronTightMVA62018_2",&againstElectronTightMVA62018_2);
+    arbre->SetBranchAddress("againstElectronVTightMVA62018_2",&againstElectronVTightMVA62018_2);
+    arbre->SetBranchAddress("againstMuonLoose3_2",&againstMuonLoose3_2);
 
     arbre->SetBranchAddress("byVVVLooseDeepVSjet_2",&byVVVLooseDeepVSjet_2);
     arbre->SetBranchAddress("byVVLooseDeepVSjet_2",&byVVLooseDeepVSjet_2);
@@ -285,14 +293,6 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("byTightDeepVSe_2",&byTightDeepVSe_2);
     arbre->SetBranchAddress("byVTightDeepVSe_2",&byVTightDeepVSe_2);
 
-
-    arbre->SetBranchAddress("byIsolationMVA3oldDMwLTraw_2",&byIsolationMVA3oldDMwLTraw_2);
-    arbre->SetBranchAddress("l2_decayMode",&l2_decayMode);
-    arbre->SetBranchAddress("againstElectronTightMVA6_2",&againstElectronTightMVA6_2);
-    arbre->SetBranchAddress("againstElectronVTightMVA6_2",&againstElectronVTightMVA6_2);
-    arbre->SetBranchAddress("againstElectronTightMVA62018_2",&againstElectronTightMVA62018_2);
-    arbre->SetBranchAddress("againstElectronVTightMVA62018_2",&againstElectronVTightMVA62018_2);
-    arbre->SetBranchAddress("againstMuonLoose3_2",&againstMuonLoose3_2);
     arbre->SetBranchAddress("gen_match_1",&gen_match_1);
     arbre->SetBranchAddress("gen_match_2",&gen_match_2);
     arbre->SetBranchAddress("npu",&npu);
@@ -326,11 +326,29 @@ int main(int argc, char** argv) {
 
    float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
+   float bins_mt[] = {0,10,20,30,40,50,60,70,80,90,100,110,120};
+   int  binnum_mt = sizeof(bins_mt)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
    TH1F* h0LT_qcd_anti = new TH1F ("h0LT_qcd_anti","h0LT_qcd_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_anti->Sumw2();
+   TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
+   TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
+   TH1F* h0LT_w_iso = new TH1F ("h0LT_w_iso","h0LT_w_iso",binnum_mtt0,bins_mtt0); h0LT_w_iso->Sumw2();
+   TH1F* h0LT_w_anti = new TH1F ("h0LT_w_anti","h0LT_w_anti",binnum_mtt0,bins_mtt0); h0LT_w_anti->Sumw2();
+   TH1F* h0LT_tt_iso = new TH1F ("h0LT_tt_iso","h0LT_tt_iso",binnum_mtt0,bins_mtt0); h0LT_tt_iso->Sumw2();
+   TH1F* h0LT_tt_anti = new TH1F ("h0LT_tt_anti","h0LT_tt_anti",binnum_mtt0,bins_mtt0); h0LT_tt_anti->Sumw2();
+
    TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
    TH1F* h0J_qcd_anti = new TH1F ("h0J_qcd_anti","h0J_qcd_anti",binnum_mtt0,bins_mtt0); h0J_qcd_anti->Sumw2();
+   TH1F* h0SSlooseJ_qcd_iso = new TH1F ("h0SSlooseJ_qcd_iso","h0SSlooseJ_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseJ_qcd_iso->Sumw2();
+   TH1F* h0SSlooseJ_qcd_anti = new TH1F ("h0SSlooseJ_qcd_anti","h0SSlooseJ_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseJ_qcd_anti->Sumw2();
+   TH1F* h0J_w_iso = new TH1F ("h0J_w_iso","h0J_w_iso",binnum_mtt0,bins_mtt0); h0J_w_iso->Sumw2();
+   TH1F* h0J_w_anti = new TH1F ("h0J_w_anti","h0J_w_anti",binnum_mtt0,bins_mtt0); h0J_w_anti->Sumw2();
+   TH1F* h0J_tt_iso = new TH1F ("h0J_tt_iso","h0J_tt_iso",binnum_mtt0,bins_mtt0); h0J_tt_iso->Sumw2();
+   TH1F* h0J_tt_anti = new TH1F ("h0J_tt_anti","h0J_tt_anti",binnum_mtt0,bins_mtt0); h0J_tt_anti->Sumw2();
+
+   TH1F* hmt_w_iso = new TH1F ("hmt_w_iso","hmt_w_iso",binnum_mt,bins_mt); hmt_w_iso->Sumw2();
+   TH1F* hmt_w_anti = new TH1F ("hmt_w_anti","hmt_w_anti",binnum_mt,bins_mt); hmt_w_anti->Sumw2();
 
    reweight::LumiReWeighting* LumiWeights_12;
    LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", "MyDataPileupHistogram.root", "pileup_mc", "pileup");
@@ -364,11 +382,19 @@ int main(int argc, char** argv) {
    fwmc.Close();
 
    TFile frawff("uncorrected_fakefactors_et.root");
-   TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_et_qcd_0jetSSloose");
-   TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_et_qcd_1jetSSloose");
+   TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_et_qcd_0jet");
+   TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_et_qcd_1jet");
+   TF1* ff_looseSSqcd_0jet=(TF1*) frawff.Get("rawFF_et_qcd_0jetSSloose");
+   TF1* ff_looseSSqcd_1jet=(TF1*) frawff.Get("rawFF_et_qcd_1jetSSloose");
+   TF1* ff_w_0jet=(TF1*) frawff.Get("rawFF_et_w_0jet");
+   TF1* ff_w_1jet=(TF1*) frawff.Get("rawFF_et_w_1jet");
+   TF1* ff_wmc_0jet=(TF1*) frawff.Get("mc_rawFF_et_w_0jet");
+   TF1* ff_wmc_1jet=(TF1*) frawff.Get("mc_rawFF_et_w_1jet");
+   TF1* ff_tt_0jet=(TF1*) frawff.Get("rawFF_et_tt");
+   TF1* ff_ttmc_0jet=(TF1*) frawff.Get("mc_rawFF_et_tt");
 
    TFile fmvisclosure ("FF_corrections_1.root");
-   TF1* mvisclosure_qcdloose=(TF1*) fmvisclosure.Get("closure_mvis_et_qcdloose");
+   TF1* mvisclosure_wmc=(TF1*) fmvisclosure.Get("closure_mvis_et_wmc");
 
    ScaleFactor * myScaleFactor_trgEle3235 = new ScaleFactor();
    myScaleFactor_trgEle3235->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele32orEle35.root");
@@ -442,6 +468,7 @@ int main(int argc, char** argv) {
            trigger25=(passEle25 && matchEle25_1 && filterEle25_1 && pt_1>26);
            if (!trigger25) continue;
         }
+
 
 
         // Change here to change the ID!!
@@ -549,12 +576,12 @@ int main(int argc, char** argv) {
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
 	//if (byTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.83;
+	//if (byVTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.80;
         if (year=="2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
         if (year=="2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81; // deep M
         if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90; // deep M
 
-        //if (byVTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.80;
-	//if (byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
+        //if (byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
         if (sample=="embedded") aweight=aweight*0.97;
 	/*if (gen_match_2==2 or gen_match_2==4){
 	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.06;
@@ -575,7 +602,7 @@ int main(int argc, char** argv) {
 
 	// Top pT reweighting
         float topfactor=1.0;
-        if (name=="TT"){
+        if (name=="TT" or name=="TTMC"){
            float pttop1=pt_top1;
            if (pttop1>400) pttop1=400;
            float pttop2=pt_top2;
@@ -623,7 +650,6 @@ int main(int argc, char** argv) {
           aweight=aweight*bweight;
         }
 
-
 	float mt=TMass_F(myele.Pt(),mymet.Pt(),myele.Px(),mymet.Px(),myele.Py(),mymet.Py());
 
 	//************************* Fill histograms **********************
@@ -632,24 +658,77 @@ int main(int argc, char** argv) {
 	   float myvar=(myele+mytau).M();
 	   //if (myvar>300) myvar=299;
 
-	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
-	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet);
+	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet);
+          float ff_looseSSqcd=get_raw_FF(mytau.Pt(),ff_looseSSqcd_0jet);
+          if (njets>0) ff_looseSSqcd=get_raw_FF(mytau.Pt(),ff_looseSSqcd_1jet);
+          float ff_w=get_raw_FF(mytau.Pt(),ff_w_0jet);
+          if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_w_1jet);
+          float ff_tt=get_raw_FF(mytau.Pt(),ff_tt_0jet);
+
+	  if (name=="WMC"){
+	     ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet);
+             if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet);
+	     mt=100;
+	  }
+
+          if (name=="TTMC"){
+             ff_tt=get_raw_FF(mytau.Pt(),ff_ttmc_0jet);
+          }
+
+          if (name=="WMC2"){
+             ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
+             if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
+          }
 
            if (!is_includedInEmbedded){
 
+	     if (signalRegion && iso_1<0.15 && nbtag==0 && q_1*q_2<0)
+                  hmt_w_iso->Fill(mt,aweight*weight2);
+             if (antiisoRegion && iso_1<0.15 && nbtag==0 && q_1*q_2<0)
+                  hmt_w_anti->Fill(mt,aweight*weight2*ff_w);
+
 	     if (isL or isT){
-	       if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+	       if (signalRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (antiisoRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0LT_qcd_anti->Fill(myvar,aweight*weight2*ff_qcd);
 
+               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2*ff_looseSSqcd);
+
+               if (signalRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0LT_w_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0LT_w_anti->Fill(myvar,aweight*weight2*ff_w);
+
+               if (signalRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0LT_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0LT_tt_anti->Fill(myvar,aweight*weight2*ff_tt);
 	    }
 	   else{
-               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (signalRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (antiisoRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0J_qcd_anti->Fill(myvar,aweight*weight2*ff_qcd);
 
+               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2*ff_looseSSqcd);
+
+               if (signalRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0J_w_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0J_w_anti->Fill(myvar,aweight*weight2*ff_w);
+
+               if (signalRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0J_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0J_tt_anti->Fill(myvar,aweight*weight2*ff_tt);
             }
 
            }
@@ -689,6 +768,101 @@ int main(int argc, char** argv) {
       h0J_qcd_anti->SetName(name.c_str()+postfixJ);
       h0J_qcd_anti->Write();
     }
+
+    TDirectory *d0looseSS_qcd_iso =fout->mkdir("et_0SSloose_qcd_iso");
+    d0looseSS_qcd_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0SSlooseLT_qcd_iso->SetName(name.c_str());
+      h0SSlooseLT_qcd_iso->Add(h0SSlooseJ_qcd_iso);
+      h0SSlooseLT_qcd_iso->Write();
+    }
+    else{
+      h0SSlooseLT_qcd_iso->SetName(name.c_str()+postfixLT);
+      h0SSlooseLT_qcd_iso->Write();
+      h0SSlooseJ_qcd_iso->SetName(name.c_str()+postfixJ);
+      h0SSlooseJ_qcd_iso->Write();
+    }
+
+    TDirectory *d0looseSS_qcd_anti =fout->mkdir("et_0SSloose_qcd_anti");
+    d0looseSS_qcd_anti->cd();
+
+    if (sample=="data_obs" or sample=="W"){
+      h0SSlooseLT_qcd_anti->SetName(name.c_str());
+      h0SSlooseLT_qcd_anti->Add(h0SSlooseJ_qcd_anti);
+      h0SSlooseLT_qcd_anti->Write();
+    }
+    else{
+      h0SSlooseLT_qcd_anti->SetName(name.c_str()+postfixLT);
+      h0SSlooseLT_qcd_anti->Write();
+      h0SSlooseJ_qcd_anti->SetName(name.c_str()+postfixJ);
+      h0SSlooseJ_qcd_anti->Write();
+    }
+    TDirectory *d0_w_iso =fout->mkdir("et_0jet_w_iso");
+    d0_w_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_w_iso->SetName(name.c_str());
+      h0LT_w_iso->Add(h0J_w_iso);
+      h0LT_w_iso->Write();
+    }
+    else{
+      h0LT_w_iso->SetName(name.c_str()+postfixLT);
+      h0LT_w_iso->Write();
+      h0J_w_iso->SetName(name.c_str()+postfixJ);
+      h0J_w_iso->Write();
+    }
+
+    TDirectory *d0_w_anti =fout->mkdir("et_0jet_w_anti");
+    d0_w_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_w_anti->SetName(name.c_str());
+      h0LT_w_anti->Add(h0J_w_anti);
+      h0LT_w_anti->Write();
+    }
+    else{
+      h0LT_w_anti->SetName(name.c_str()+postfixLT);
+      h0LT_w_anti->Write();
+      h0J_w_anti->SetName(name.c_str()+postfixJ);
+      h0J_w_anti->Write();
+    }
+
+    TDirectory *dmt_w_iso =fout->mkdir("et_mt_w_iso");
+    dmt_w_iso->cd();
+    hmt_w_iso->SetName(name.c_str());
+    hmt_w_iso->Write();
+
+    TDirectory *dmt_w_anti =fout->mkdir("et_mt_w_anti");
+    dmt_w_anti->cd();
+    hmt_w_anti->SetName(name.c_str());
+    hmt_w_anti->Write();
+
+    TDirectory *d0_tt_iso =fout->mkdir("et_0jet_tt_iso");
+    d0_tt_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_tt_iso->SetName(name.c_str());
+      h0LT_tt_iso->Add(h0J_tt_iso);
+      h0LT_tt_iso->Write();
+    }
+    else{
+      h0LT_tt_iso->SetName(name.c_str()+postfixLT);
+      h0LT_tt_iso->Write();
+      h0J_tt_iso->SetName(name.c_str()+postfixJ);
+      h0J_tt_iso->Write();
+    }
+
+    TDirectory *d0_tt_anti =fout->mkdir("et_0jet_tt_anti");
+    d0_tt_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_tt_anti->SetName(name.c_str());
+      h0LT_tt_anti->Add(h0J_tt_anti);
+      h0LT_tt_anti->Write();
+    }
+    else{
+      h0LT_tt_anti->SetName(name.c_str()+postfixLT);
+      h0LT_tt_anti->Write();
+      h0J_tt_anti->SetName(name.c_str()+postfixJ);
+      h0J_tt_anti->Write();
+    }
+
 
     fout->Close();
     delete wmc;

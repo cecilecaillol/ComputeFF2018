@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 mkdir -p plots_mt_2018
 rm plots_mt_2018/*.pdf
 
@@ -15,9 +16,9 @@ sh do_FFmvisclosure_mt.sh
 
 sh do_FFOSSScorrection_mt.sh 
 
-python Draw_raw_mt.py --step raw --year 2018
-python Draw_raw_mt.py --step mvisclosure --year 2018
-python Draw_raw_mt.py --step osss --year 2018
+Draw_raw_mt.py --step raw --year 2018
+Draw_raw_mt.py --step mvisclosure --year 2018
+Draw_raw_mt.py --step osss --year 2018
 
 mv *.pdf plots_mt_2018
 
