@@ -12,14 +12,17 @@ Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/DY4.root files_corr1F
 hadd -f files_corr1FF_mt/DY.root files_corr1FF_mt/DYincl.root files_corr1FF_mt/DY1.root files_corr1FF_mt/DY2.root files_corr1FF_mt/DY3.root files_corr1FF_mt/DY4.root
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/Wall.root files_corr1FF_mt/W.root W W 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/Wall.root files_corr1FF_mt/WMC.root W WMC 2018
+
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTToHadronic.root files_corr1FF_mt/TTToHadronic.root TTToHadronic TT 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTTo2L2Nu.root files_corr1FF_mt/TTTo2L2Nu.root TTTo2L2Nu TT 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTToSemiLeptonic.root files_corr1FF_mt/TTToSemiLeptonic.root TTToSemiLeptonic TT 2018
 hadd -f files_corr1FF_mt/TT.root files_corr1FF_mt/TTToHadronic.root files_corr1FF_mt/TTTo2L2Nu.root files_corr1FF_mt/TTToSemiLeptonic.root
+
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTToHadronic.root files_corr1FF_mt/TTToHadronicMC.root TTToHadronic TTMC 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTTo2L2Nu.root files_corr1FF_mt/TTTo2L2NuMC.root TTTo2L2Nu TTMC 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/TTToSemiLeptonic.root files_corr1FF_mt/TTToSemiLeptonicMC.root TTToSemiLeptonic TTMC 2018
 hadd -f files_corr1FF_mt/TTMC.root files_corr1FF_mt/TTToHadronicMC.root files_corr1FF_mt/TTTo2L2NuMC.root files_corr1FF_mt/TTToSemiLeptonicMC.root
+
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/WW.root files_corr1FF_mt/WW.root WW VV 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/WZ.root files_corr1FF_mt/WZ.root WZ VV 2018
 Set1_correction_mt /data/ccaillol/smhmt2018_svfitted_30sep/ZZ.root files_corr1FF_mt/ZZ.root ZZ VV 2018
