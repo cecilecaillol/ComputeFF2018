@@ -3,11 +3,12 @@ Set up
 
 ```
 mkdir ComputeFF
-cmsrel CMSSW_9_4_0
-cd CMSSW_9_4_0/src
+cmsrel CMSSW_10_2_15
+cd CMSSW_10_2_15/src
 cmsenv
 git clone https://github.com/cecilecaillol/ComputeFF2018.git
 git clone https://github.com/CMS-HTT/LeptonEfficiencies.git
+git clone https://github.com/cms-tau-pog/TauIDSFs TauPOG/TauIDSFs
 mkdir TauAnalysisTools
 git clone -b run2_SFs https://github.com/cms-tau-pog/TauTriggerSFs $CMSSW_BASE/src/TauAnalysisTools/TauTriggerSFs
 git clone https://github.com/cms-tau-pog/TauTriggerSFs.git 
@@ -19,13 +20,13 @@ To run everything
 -----------------
 
 ```
-sh make_FF_et.sh
+MakeFFs.py --year <year, 2016,2017,2018> --channel <mt or et at the moment>
 ```
 
 To change the ID WP:
 -------------------
 
-Edit Raw\_FF\_et.cc, OSSScorrection\_et.cc, and Set1\_correction\_et.cc (search for "Change here" and uncomment the WP you want)
+Edit FFcode/bin/Raw\_FF\_et(mt).cc, FFcode/bin/OSSScorrection\_et(mt).cc, and FFcode/bin/Set1\_correction\_et(mt).cc (search for "Change here" and uncomment the WP you want)
 
 To apply the FF:
 ----------------
