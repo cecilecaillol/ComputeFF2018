@@ -4,14 +4,6 @@ import argparse
 import os
 import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Master fake factor making script")
-    parser.add_argument('--channel','-c',nargs="?",choices=['mt','et'],help="Which channel?",required=True)
-    parser.add_argument('--year','-y',nargs="?",choices=["2016","2017","2018"],help="Which year?",required=True)
-
-    args=parser.parse_args()
-    RawFF(args)
-
 def RawFF(args):
     #figure out where to find our files
     if args.year == "2016":
@@ -155,3 +147,10 @@ def RawFF(args):
     finalFFCommand+=outputPath+'TT.root '
     finalFFCommand+=outputPath+'VV.root '
     os.system(finalFFCommand)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Master fake factor making script")
+    parser.add_argument('--channel','-c',nargs="?",choices=['mt','et'],help="Which channel?",required=True)
+    parser.add_argument('--year','-y',nargs="?",choices=["2016","2017","2018"],help="Which year?",required=True)
+
+    args=parser.parse_args()
+    RawFF(args)
