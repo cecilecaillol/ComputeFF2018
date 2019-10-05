@@ -5,14 +5,20 @@ import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
 
 def FFOSSScorrection(args):
     if args.year == "2016":
-        pass
+        if args.channel == "mt":
+            path = '/data/ccaillol/smhmt2016_svfitted_16aug/'
+        if args.channel == "et":
+            path = '/data/ccaillol/smhet2016_svfitted_16aug/'
     elif args.year == "2017":
-        pass
+        if args.channel == "mt":
+            path = '/data/ccaillol/smhmt2017_svfitted_13jun/'
+        if args.channel == "et":
+            path = '/data/ccaillol/smhet2017_svfitted_8jul/'
     elif args.year == "2018":
         if args.channel == "mt":
             path = '/data/ccaillol/smhmt2018_svfitted_30sep/'
         if args.channel == "et":
-            pass
+            path = '/data/ccaillol/smhet2018_svfitted_4aug/'
 
     if args.channel == "mt":
         executable = "OSSScorrection_mt"
@@ -45,13 +51,82 @@ def FFOSSScorrection(args):
             [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
             [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
             [executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC',args.year],
-        ]
+        ]        
         haddFiles = {
             "Data.root": [outputPath+"DataA.root",outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root"],
             "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
             "TT.root": [outputPath+"TTToHadronic.root",outputPath+"TTToSemiLeptonic.root",outputPath+"TTTo2L2Nu.root"],            
             "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
         }
+    elif args.year == '2017':
+        commandParams = [
+            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year],
+            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year],
+            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year],
+            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year],
+            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year],
+            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
+            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
+            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
+            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
+            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
+            [executable,path+'Wall.root',outputPath+'W.root','W','W',args.year],
+            #[executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year],
+            [executable,path+'TTToHadronic.root',outputPath+'TTToHadronic.root','TTToHadronic','TT',args.year],
+            [executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2Nu.root',' TTTo2L2Nu','TT',args.year],
+            [executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonic.root','TTToSemiLeptonic','TT',args.year],            
+            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
+            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
+            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
+            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
+            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
+            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
+            #[executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC',args.year],
+            ]
+        haddFiles = {
+            "Data.root": [outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root",outputPath+"DataE.root",outputPath+"DataF.root"],
+            "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
+            "TT.root": [outputPath+"TTToHadronic.root",outputPath+"TTToSemiLeptonic.root",outputPath+"TTTo2L2Nu.root"],            
+            "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
+        }
+    elif args.year == '2016':
+        commandParams = [
+            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year],
+            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year],
+            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year],
+            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year],
+            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year],
+            [executable,path+'DataG.root',outputPath+'DataG.root','data_obs','data_obs',args.year],
+            [executable,path+'DataH.root',outputPath+'DataH.root','data_obs','data_obs',args.year],
+            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
+            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
+            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
+            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
+            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
+            [executable,path+'W.root',outputPath+'Wincl.root','W','W',args.year],
+            #[executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year],
+            [executable,path+'W1.root',outputPath+'W1.root','W','W',args.year],
+            [executable,path+'W2.root',outputPath+'W2.root','W','W',args.year],
+            [executable,path+'W3.root',outputPath+'W3.root','W','W',args.year],
+            [executable,path+'W4.root',outputPath+'W4.root','W','W',args.year],
+            [executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year],
+            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
+            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
+            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
+            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
+            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
+            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
+            #[executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC',args.year],
+            [executable,path+'ggH125.root',outputPath+'ggH_htt125.root','ggH_htt125','ggH_htt125',args.year],
+            ]
+        haddFiles ={
+            'Data.root': [outputPath+'DataB.root',outputPath+'DataC.root',outputPath+'DataD.root',outputPath+'DataE.root',outputPath+'DataF.root',outputPath+'DataG.root',outputPath+'DataH.root'],
+            "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
+            "W.root":[outputPath+'Wincl.root',outputPath+'W1.root',outputPath+'W2.root',outputPath+'W3.root',outputPath+'W4.root'],
+            "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
+            }
     #Run all sets
     for command in commandParams:
         commandString = ''

@@ -16,8 +16,8 @@ args = parser.parse_args()
 if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/plots_"+args.channel+"_"+args.year):
     os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/plots_"+args.channel+"_"+args.year)
 
-if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corrOSSFF_"+args.channel):
-    os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corrOSSFF_"+args.channel)
+if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corrOSSSFF_"+args.channel):
+    os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corrOSSSFF_"+args.channel)
 if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_rawFF_"+args.channel):
     os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_rawFF_"+args.channel)
 if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corr1FF_"+args.channel):
