@@ -429,6 +429,11 @@ int main(int argc, char** argv) {
    myScaleFactor_trgMu19->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2016BtoH/Muon_Mu19leg_2016BtoH_eff.root");
    if(year=="2016") myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2016BtoH/Muon_IdIso_IsoLt0p15_2016BtoH_eff.root");
 
+   TauIDSFTool * theSFTool;
+   if (year == "2016") theSFTool = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","Medium");
+   else if (year == "2017") theSFTool = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium");
+   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");
+
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
         arbre->GetEntry(i);
@@ -623,9 +628,9 @@ int main(int argc, char** argv) {
 
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
+	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
-	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;
+	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;	
         if (sample=="embedded") aweight=aweight*0.97;
 	//Muon rescaling tight
 	if (gen_match_2==2 or gen_match_2==4){

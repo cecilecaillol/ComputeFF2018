@@ -644,12 +644,10 @@ int main(int argc, char** argv) {
 
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-	/*
-	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
+	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
-	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;
-	*/
-	if(sample!="embedded" && sample != "data_obs" && gen_match_2 ==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
+	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;	
+	
         if (sample=="embedded") aweight=aweight*0.97;
 	//Muon rescaling tight
 	if (gen_match_2==2 or gen_match_2==4){
