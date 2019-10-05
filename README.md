@@ -37,7 +37,7 @@ Once the FF have been produced, they can be applied in your code as:
 Include in the headers:
 
 ```
-include "ApplyFF.h"
+include "ComputeFF2018/FFcode/interface/ApplyFF.h"
 ```
 
 Define all the functions:
