@@ -23,6 +23,10 @@ if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_rawFF_"+
 if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corr1FF_"+args.channel):
     os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_corr1FF_"+args.channel)
 
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corrOSSSFF_"+args.channel+"/*.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_rawFF_"+args.channel+"/*.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corr1FF_"+args.channel+"/*.root")
+
 RawFF.RawFF(args)
 FFmvisclosure.FFmvisclosure(args)
 FFOSSScorrection.FFOSSScorrection(args)

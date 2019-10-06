@@ -422,7 +422,7 @@ int main(int argc, char** argv) {
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
-        arbre->GetEntry(i);
+        arbre->GetEntry(i);	
         if (i % 10000 == 0) fprintf(stdout, "\r  Processed events: %8d of %8d ", i, nentries_wtn);
         fflush(stdout);
 
@@ -470,7 +470,7 @@ int main(int argc, char** argv) {
            trigger25=(passEle25 && matchEle25_1 && filterEle25_1 && pt_1>26);
            if (!trigger25) continue;
         }
-
+	
 
 
         // Change here to change the ID!!
@@ -602,6 +602,7 @@ int main(int argc, char** argv) {
 
 	if (sample=="data_obs") aweight=1.0;
 
+
 	// Top pT reweighting
         float topfactor=1.0;
         if (name=="TT" or name=="TTMC"){
@@ -625,7 +626,8 @@ int main(int argc, char** argv) {
 	  if (trigger32 or trigger35) aweight=aweight*myScaleFactor_trgEle3235->get_ScaleFactor(pt_1,eta_1);
 	  else aweight=aweight*myScaleFactor_trgEle24->get_ScaleFactor(pt_1,eta_1)*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), mydm);
           aweight=aweight*bweight;
-	}
+	}	
+
         if (year=="2017" && sample!="embedded" && sample!="data_obs"){
           wmc->var("e_pt")->setVal(myele.Pt());
           wmc->var("e_eta")->setVal(myele.Eta());
@@ -676,12 +678,12 @@ int main(int argc, char** argv) {
 
           if (name=="TTMC"){
              ff_tt=get_raw_FF(mytau.Pt(),ff_ttmc_0jet);
-          }
+          }	  
 
-          if (name=="WMC2"){
+          if (name=="WMC2"){	    	    
              ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
              if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
-          }
+          }	  
 
            if (!is_includedInEmbedded){
 

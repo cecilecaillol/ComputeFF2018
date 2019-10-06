@@ -72,19 +72,19 @@ def Draw_raw(step,year,channel):
     new_idx=ROOT.gROOT.GetListOfColors().GetSize() + 1
     trans=ROOT.TColor(new_idx, adapt.GetRed(), adapt.GetGreen(),adapt.GetBlue(), "",0.5)
 
-    file=ROOT.TFile("raw_FF_mt.root","r")
-    categories=["mt_0jet_qcd_iso","mt_0jet_qcd_anti","mt_1jet_qcd_anti","mt_1jet_qcd_iso","mt_0jet_w_anti","mt_0jet_w_iso","mt_1jet_w_anti","mt_1jet_w_iso","mt_0jet_tt_iso","mt_0jet_tt_anti","mt_0SSloose_qcd_anti","mt_0SSloose_qcd_iso","mt_1SSloose_qcd_anti","mt_1SSloose_qcd_iso"] 
+    file=ROOT.TFile("raw_FF_"+channel+".root","r")
+    categories=[channel+"_0jet_qcd_iso",channel+"_0jet_qcd_anti",channel+"_1jet_qcd_anti",channel+"_1jet_qcd_iso",channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_1jet_w_anti",channel+"_1jet_w_iso",channel+"_0jet_tt_iso",channel+"_0jet_tt_anti",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_1SSloose_qcd_anti",channel+"_1SSloose_qcd_iso"] 
     ncat=14
 
     if step=="mvisclosure":
-        categories=["mt_0jet_qcd_iso","mt_0jet_qcd_anti","mt_0jet_w_anti","mt_0jet_w_iso","mt_0jet_tt_iso","mt_0jet_tt_anti"]
+        categories=[channel+"_0jet_qcd_iso",channel+"_0jet_qcd_anti",channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_0jet_tt_iso",channel+"_0jet_tt_anti"]
         ncat=6
-        file=ROOT.TFile("mvisclosure_mt.root","r")
+        file=ROOT.TFile("mvisclosure_"+channel+".root","r")
 
     if step=="osss":
-        categories=["mt_0jet_qcd_iso","mt_0jet_qcd_anti"]
+        categories=[channel+"_0jet_qcd_iso",channel+"_0jet_qcd_anti"]
         ncat=2
-        file=ROOT.TFile("OSSScorr_mt.root","r")
+        file=ROOT.TFile("OSSScorr_"+channel+".root","r")
 
     for i in range (0,ncat):
         Data=file.Get(categories[i]).Get("data_obs")

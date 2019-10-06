@@ -101,14 +101,11 @@ def RawFF(args):
             [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
             [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
             [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
-            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
-            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
             [executable,path+'W.root',outputPath+'Wincl.root','W','W',args.year],
             [executable,path+'W1.root',outputPath+'W1.root','W','W',args.year],
             [executable,path+'W2.root',outputPath+'W2.root','W','W',args.year],
             [executable,path+'W3.root',outputPath+'W3.root','W','W',args.year],
-            [executable,path+'W4.root',outputPath+'W4.root','W','W',args.year],
-            [executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year],
+            [executable,path+'W4.root',outputPath+'W4.root','W','W',args.year], 
             [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
             [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
             [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
@@ -118,6 +115,14 @@ def RawFF(args):
             [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
             [executable,path+'ggH125.root',outputPath+'ggH_htt125.root','ggH_htt125','ggH_htt125',args.year],
             ]
+        if args.channel == "mt":
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY3.root',outputPath+'DY3.root','DY','DY',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY4.root',outputPath+'DY4.root','DY','DY',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TT.root','TT','TT',args.year])
+        elif args.channel == "et":
+            commandParams.append([executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year])
+            commandParams.append([executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year])
+            commandParams.append([executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year])
         haddFiles ={
             'Data.root': [outputPath+'DataB.root',outputPath+'DataC.root',outputPath+'DataD.root',outputPath+'DataE.root',outputPath+'DataF.root',outputPath+'DataG.root',outputPath+'DataH.root'],
             "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],

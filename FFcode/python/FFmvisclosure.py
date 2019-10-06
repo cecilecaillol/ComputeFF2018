@@ -111,26 +111,31 @@ def FFmvisclosure(args):
             [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
             [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
             [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
-            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
-            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
             [executable,path+'W.root',outputPath+'Wincl.root','W','W',args.year],
             [executable,path+'W1.root',outputPath+'W1.root','W','W',args.year],
             [executable,path+'W2.root',outputPath+'W2.root','W','W',args.year],
             [executable,path+'W3.root',outputPath+'W3.root','W','W',args.year],
             [executable,path+'W4.root',outputPath+'W4.root','W','W',args.year],
-            [executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year],            
-            [executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year],            
-            [executable,path+'TT.root',outputPath+'TTMC.root','TT','TTMC',args.year],            
+            [executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year], 
             [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
             [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
             [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
             [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
             [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
             [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
-            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
-            [executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC2',args.year],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],            
             [executable,path+'ggH125.root',outputPath+'ggH_htt125.root','ggH_htt125','ggH_htt125',args.year],
         ]
+        if args.channel == "mt":
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY3.root',outputPath+'DY3.root','DY','DY',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY4.root',outputPath+'DY4.root','DY','DY',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TT.root','TT','TT',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TT.root','TT','TTMC',args.year])
+        elif args.channel == "et":
+            commandParams.append([executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year])
+            commandParams.append([executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year])
+            commandParams.append([executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year])
+            commandParams.append([executable,path+'TT.root',outputPath+'TTMC.root','TT','TTMC',args.year])
         haddFiles = {
             "Data.root": [outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root",outputPath+"DataE.root",outputPath+"DataF.root"],
             "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
@@ -152,6 +157,10 @@ def FFmvisclosure(args):
     #do our subtractions, and our fitting.
     Subtract_prompt.Subtract_prompt(outputPath,args.channel)
     os.system("root -l -b -q \'Fit_FFclosure_"+args.channel+".cc("+args.year+")\'")
+    
+    #this one has to specifically be done here because the file for weighting doesn't even exist until the fits are done.
+    os.system(executable+" "+path+"Wall.root"+" "+outputPath+"WMC2.root W WMC2 "+args.year)
+    
     #make the final mvisclosure file
     finalMvisClosureCommand = "hadd -f mvisclosure_"+args.channel+".root "
     finalMvisClosureCommand+=outputPath+"Data.root "
