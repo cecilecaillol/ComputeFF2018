@@ -55,7 +55,7 @@ def RawFF(args):
         ]
         haddFiles = {
             "Data.root": [outputPath+"DataA.root",outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root"],
-            "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
+            "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
             "TT.root": [outputPath+"TTToHadronic.root",outputPath+"TTToSemiLeptonic.root",outputPath+"TTTo2L2Nu.root"],
             "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
         }
@@ -85,7 +85,7 @@ def RawFF(args):
             ]
         haddFiles={
             'Data.root': [outputPath+'DataB.root',outputPath+'DataC.root',outputPath+'DataD.root',outputPath+'DataE.root',outputPath+'DataF.root'],
-            "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
+            "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
             "TT.root": [outputPath+"TTToHadronic.root",outputPath+"TTToSemiLeptonic.root",outputPath+"TTTo2L2Nu.root"],
             "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
             }
@@ -125,7 +125,7 @@ def RawFF(args):
             commandParams.append([executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year])
         haddFiles ={
             'Data.root': [outputPath+'DataB.root',outputPath+'DataC.root',outputPath+'DataD.root',outputPath+'DataE.root',outputPath+'DataF.root',outputPath+'DataG.root',outputPath+'DataH.root'],
-            "DY.root": [outputPath+"DY.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
+            "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
             "W.root":[outputPath+'Wincl.root',outputPath+'W1.root',outputPath+'W2.root',outputPath+'W3.root',outputPath+'W4.root'],
             "VV.root": [outputPath+"WW.root",outputPath+"WZ.root",outputPath+"ZZ.root",outputPath+"ST_t_antitop.root",outputPath+"ST_t_top.root",outputPath+"ST_tW_antitop.root",outputPath+"ST_tW_top.root"]
             }
