@@ -33,8 +33,8 @@ float get_ff(float pt, float mt, float mvis, int njets, float frac_tt, float fra
 	ff_w=get_raw_FF(pt,fct_raw_w_0);
    }
    else{
-        ff_qcd=get_raw_FF(pt,fct_raw_qcd_0);
-        ff_w=get_raw_FF(pt,fct_raw_w_0);
+        ff_qcd=get_raw_FF(pt,fct_raw_qcd_1);
+        ff_w=get_raw_FF(pt,fct_raw_w_1);
    }
    ff_tt=get_raw_FF(pt,fct_raw_tt);
 
