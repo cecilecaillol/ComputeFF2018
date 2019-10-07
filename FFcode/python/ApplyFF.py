@@ -7,24 +7,24 @@ class FFApplicationTool():
         self.theRawFile = ROOT.TFile(theFFDirectory+"uncorrected_fakefactors_"+channel+".root")
         if self.theRawFile.IsZombie():            
             raise RuntimeError("Problem loading the files!")
-        self.ff_qcd_0jet = theRawFile.Get("rawFF_"+channel+"_qcd_0jet")
-        self.ff_qcd_1jet = theRawFile.Get("rawFF_"+channel+"_qcd_1jet")
-        self.ff_w_0jet = theRawFile.Get("rawFF_"+channel+"_w_0jet")
-        self.ff_w_1jet = theRawFile.Get("rawFF_"+channel+"_w_1jet")
-        self.ff_tt_0jet = theRawFile.Get("mc_rawFF_"+channel+"_tt")
+        self.ff_qcd_0jet = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet")
+        self.ff_qcd_1jet = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet")
+        self.ff_w_0jet = self.theRawFile.Get("rawFF_"+channel+"_w_0jet")
+        self.ff_w_1jet = self.theRawFile.Get("rawFF_"+channel+"_w_1jet")
+        self.ff_tt_0jet = self.theRawFile.Get("mc_rawFF_"+channel+"_tt")
 
         self.theFMvisFile = ROOT.TFile(theFFDirectory+"FF_corrections_1.root")
         if self.theFMvisFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
-        self.mVisClosure_QCD = theFMvisFile.Get("closure_mvis_"+channel+"_qcd")
-        self.mVisClosure_W = theFMvisFile.Get("closure_mvis_"+channel+"_w")
-        self.mVisClosure_TT = theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")
+        self.mVisClosure_QCD = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd")
+        self.mVisClosure_W = self.theFMvisFile.Get("closure_mvis_"+channel+"_w")
+        self.mVisClosure_TT = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")
 
         self.theFOSSSClosureFile = ROOT.TFile("FF_QCDcorrectionOSSS.root")
         if self.theFOSSSClosureFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
-        self.OSSSClosure_QCD = theFOSSSClosureFile.Get("closure_mvis_"+channel+"_qcd")
-        self.MTClosure_W = theFOSSSClosureFile.Get("closure_mt_"+channel+"_w")
+        self.OSSSClosure_QCD = self.theFOSSSClosureFile.Get("closure_mvis_"+channel+"_qcd")
+        self.MTClosure_W = self.theFOSSSClosureFile.Get("closure_mt_"+channel+"_w")
 
     def get_raw_FF(self,pt,fct):
         ff=1.0
