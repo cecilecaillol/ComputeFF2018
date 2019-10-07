@@ -5,7 +5,7 @@ class FFApplicationTool():
         self.theFFDirectory = theFFDirectory
         
         self.theRawFile = ROOT.TFile(theFFDirectory+"uncorrected_fakefactors_"+channel+".root")
-        if theRawFile.IsZombie():            
+        if self.theRawFile.IsZombie():            
             raise RuntimeError("Problem loading the files!")
         self.ff_qcd_0jet = theRawFile.Get("rawFF_"+channel+"_qcd_0jet")
         self.ff_qcd_1jet = theRawFile.Get("rawFF_"+channel+"_qcd_1jet")
@@ -14,14 +14,14 @@ class FFApplicationTool():
         self.ff_tt_0jet = theRawFile.Get("mc_rawFF_"+channel+"_tt")
 
         self.theFMvisFile = ROOT.TFile(theFFDirectory+"FF_corrections_1.root")
-        if theFMvisFile.IsZombie():
+        if self.theFMvisFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
         self.mVisClosure_QCD = theFMvisFile.Get("closure_mvis_"+channel+"_qcd")
         self.mVisClosure_W = theFMvisFile.Get("closure_mvis_"+channel+"_w")
         self.mVisClosure_TT = theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")
 
         self.theFOSSSClosureFile = ROOT.TFile("FF_QCDcorrectionOSSS.root")
-        if theFOSSSClosureFile.IsZombie():
+        if self.theFOSSSClosureFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
         self.OSSSClosure_QCD = theFOSSSClosureFile.Get("closure_mvis_"+channel+"_qcd")
         self.MTClosure_W = theFOSSSClosureFile.Get("closure_mt_"+channel+"_w")
