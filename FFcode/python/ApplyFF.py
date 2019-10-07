@@ -20,7 +20,7 @@ class FFApplicationTool():
         self.mVisClosure_W = self.theFMvisFile.Get("closure_mvis_"+channel+"_w")
         self.mVisClosure_TT = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")
 
-        self.theFOSSSClosureFile = ROOT.TFile("FF_QCDcorrectionOSSS.root")
+        self.theFOSSSClosureFile = ROOT.TFile(theFFDirectory+"FF_QCDcorrectionOSSS.root")
         if self.theFOSSSClosureFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
         self.OSSSClosure_QCD = self.theFOSSSClosureFile.Get("closure_mvis_"+channel+"_qcd")
