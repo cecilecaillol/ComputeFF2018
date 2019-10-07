@@ -56,21 +56,21 @@ class FFApplicationTool():
     
         #Raw ff
         if(njets==0):
-            ff_qcd=get_raw_FF(pt,self.ff_qcd_0jet)
-            ff_w=get_raw_FF(pt,self.ff_w_0jet)
+            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_0jet)
+            ff_w=self.get_raw_FF(pt,self.ff_w_0jet)
         else:
-            ff_qcd=get_raw_FF(pt,self.ff_qcd_1jet)
-            ff_w=get_raw_FF(pt,self.ff_w_1jet)
-        ff_tt=get_raw_FF(pt,self.ff_tt_0jet)
+            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_1jet)
+            ff_w=self.get_raw_FF(pt,self.ff_w_1jet)
+        ff_tt=self.get_raw_FF(pt,self.ff_tt_0jet)
 
         #mvis closure
-        ff_qcd = ff_qcd*get_mvis_closure(mvis,self.mVisClosure_QCD)
-        ff_w = ff_w*get_mvis_closure(mvis,self.mVisClosure_W)
-        ff_tt = ff_tt*get_mvis_closure(mvis,self.mVisClosure_TT)
+        ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD)
+        ff_w = ff_w*self.get_mvis_closure(mvis,self.mVisClosure_W)
+        ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT)
         
         #MT and OSSS corrections
-        ff_w = ff_w*get_mt_closure(mt,self.MTClosure_W)
-        ff_qcd = ff_qcd*get_mvis_closure(mvis,self.OSSSClosure_QCD)
+        ff_w = ff_w*self.get_mt_closure(mt,self.MTClosure_W)
+        ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.OSSSClosure_QCD)
         
         ff_cmb = frac_tt*ff_tt + frac_qcd*ff_qcd + frac_w*ff_w
         return ff_cmb
