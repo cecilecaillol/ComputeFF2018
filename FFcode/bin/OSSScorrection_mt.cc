@@ -393,9 +393,21 @@ int main(int argc, char** argv) {
    RooWorkspace *w = (RooWorkspace*)fw.Get("w");
    fw.Close();
 
-   TFile fwmc((datapath+"htt_scalefactors_2017_v2.root").c_str());
+   TFile fwmc((datapath+"htt_scalefactors_legacy_2018.root").c_str());
    RooWorkspace *wmc = (RooWorkspace*)fwmc.Get("w");
    fwmc.Close();
+   if (year == "2017")
+     {
+       TFile fwmc ((datapath+"htt_scalefactors_legacy_2017.root").c_str());
+       wmc = (RooWorkspace*)fwmc.Get("w");
+       fwmc.Close();
+     }
+   if(year == "2016")
+     {
+       TFile fwmc((datapath+"htt_scalefactors_legacy_2016.root").c_str());
+       wmc = (RooWorkspace*)fwmc.Get("w");
+       fwmc.Close();
+     }
 
    TFile frawff("uncorrected_fakefactors_mt.root");
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_mt_qcd_0jetSSloose");
@@ -515,7 +527,7 @@ int main(int argc, char** argv) {
 	*/
 
 	// Deep Medium	
-        if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
+        if (!byVLooseDeepVSe_2 or !byTightDeepVSmu_2) continue;
         float signalRegion=(byMediumDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
 	
@@ -563,23 +575,23 @@ int main(int argc, char** argv) {
 	if(year == "2018")
 	  {
 	    if (sample=="W"){
-	      weight=51.749;
-	      if (numGenJets==1) weight=10.8788;
-	      else if (numGenJets==2) weight=5.2527;
-	      else if (numGenJets==3) weight=3.10898;
-	      else if (numGenJets==4) weight=3.0223;
+	      weight=51.8119;
+	      if (numGenJets==1) weight=10.902;
+	      else if (numGenJets==2) weight=5.258;
+	      else if (numGenJets==3) weight=3.12179;
+	      else if (numGenJets==4) weight=3.0367;
 	    }
 
 	    if (sample=="DY"){
-	      weight=3.7118;
+	      weight=3.7185;
 	      if (numGenJets==1)
-                weight=0.64516;
+                weight=0.64580;
 	      else if (numGenJets==2)
-                weight=0.56494;
+                weight=0.56562;
 	      else if (numGenJets==3)
-                weight=0.61413;
+                weight=0.6155;
 	      else if (numGenJets==4)
-                weight=1.11472;
+                weight=0.93957;
 	    }
 	  }
 	else if (year == "2017")
@@ -626,12 +638,13 @@ int main(int argc, char** argv) {
         bool isT=(!is_includedInEmbedded && gen_match_2==5);
         bool isL=(!is_includedInEmbedded && gen_match_2<5);
 
-	float aweight=genweight*weight*LumiWeights_12->weight(npu);
+	float aweight=genweight*weight;//*LumiWeights_12->weight(npu);
+	if(year =="2016" or year == "2017") aweight - aweight*LumiWeights_12->weight(npu); //FIXME...says cecile. something wrong in 2018 pileup weightings?
         if (sample=="embedded") aweight=genweight;
 	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
 	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;	
-        if (sample=="embedded") aweight=aweight*0.97;
+        if (sample=="embedded") aweight=aweight*0.88;
 	//Muon rescaling tight
 	if (gen_match_2==2 or gen_match_2==4){
 	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.17;
@@ -662,8 +675,9 @@ int main(int argc, char** argv) {
            aweight*=topfactor;
         }
 
+	//do zpt reweighting
         float zptweight=1.0;
-	if (year == "2018" && sample!="embedded" && sample!="data_obs"){
+	if (sample!="embedded" && sample!="data_obs"){
           wmc->var("z_gen_mass")->setVal(genM);
           wmc->var("z_gen_pt")->setVal(genpT);
 	  zptweight=wmc->function("zptmass_weight_nom")->getVal();

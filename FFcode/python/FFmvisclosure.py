@@ -130,7 +130,7 @@ def FFmvisclosure(args):
             commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY3.root',outputPath+'DY3.root','DY','DY',args.year])
             commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/DY4.root',outputPath+'DY4.root','DY','DY',args.year])
             commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TT.root','TT','TT',args.year])
-            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TT.root','TT','TTMC',args.year])
+            commandParams.append([executable,'/data/aloeliger/SMHTT/smhmt2016_svfitted_25aug/TT.root',outputPath+'TTMC.root','TT','TTMC',args.year])
         elif args.channel == "et":
             commandParams.append([executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year])
             commandParams.append([executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year])
