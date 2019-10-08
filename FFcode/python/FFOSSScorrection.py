@@ -24,7 +24,7 @@ def FFOSSScorrection(args):
         executable = "OSSScorrection_mt"
         outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_corrOSSSFF_mt/'
     elif args.channel == 'et':
-        executable = "Set1_correction_et"
+        executable = "OSSScorrection_et"
         outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_corrOSSSFF_et/'
 
     if args.year == '2018':
