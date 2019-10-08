@@ -375,13 +375,19 @@ int main(int argc, char** argv) {
      else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
    }
 
-   TFile fw((datapath+"htt_scalefactors_v18_2.root").c_str());
-   RooWorkspace *w = (RooWorkspace*)fw.Get("w");
-   fw.Close();
-
-   TFile fwmc((datapath+"htt_scalefactors_2017_v2.root").c_str());
+   TFile fwmc((datapath+"htt_scalefactors_legacy_2018.root").c_str());
    RooWorkspace *wmc = (RooWorkspace*)fwmc.Get("w");
    fwmc.Close();
+   if (year=="2017"){
+      TFile fwmc((datapath+"htt_scalefactors_legacy_2017.root").c_str());
+      wmc = (RooWorkspace*)fwmc.Get("w");
+      fwmc.Close();
+   }
+   if (year=="2016"){
+      TFile fwmc((datapath+"htt_scalefactors_legacy_2016.root").c_str());
+      wmc = (RooWorkspace*)fwmc.Get("w");
+      fwmc.Close();
+   }
 
    TFile frawff("uncorrected_fakefactors_et.root");
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_et_qcd_0jet");
@@ -419,6 +425,11 @@ int main(int argc, char** argv) {
    ScaleFactor * myScaleFactor_trgEle25 = new ScaleFactor();
    myScaleFactor_trgEle25->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_Ele25.root");
    if (year=="2016") myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_IdIso.root");
+
+   TauIDSFTool * theSFTool;
+   if (year == "2016") theSFTool = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","Medium");
+   else if (year == "2017") theSFTool = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium");
+   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
@@ -509,64 +520,63 @@ int main(int argc, char** argv) {
 
 	if (year=="2018"){
            if (sample=="W"){
-               weight=51.60;
-               if (numGenJets==1) weight=9.0558;
-               else if (numGenJets==2) weight=4.498;
-               else if (numGenJets==3) weight=3.069;
-               else if (numGenJets==4) weight=3.202;
+               weight=51.542;
+               if (numGenJets==1) weight=9.0452;
+               else if (numGenJets==2) weight=4.4927;
+               else if (numGenJets==3) weight=3.0651;
+               else if (numGenJets==4) weight=3.1984;
            }
 
            if (sample=="DY"){
-               weight=3.70;
+               weight=3.697;
                if (numGenJets==1)
-                   weight=0.643;
+                   weight=0.6426;
                else if (numGenJets==2)
-                   weight=0.563;
+                   weight=0.5633;
                else if (numGenJets==3)
-                   weight=0.612;
+                   weight=0.6117;
                else if (numGenJets==4)
-                   weight=1.11;
+                   weight=0.9243;
            }
 	}
         else if (year=="2017"){
            if (sample=="W"){
-               weight=57.3;
-               if (numGenJets==1) weight=3.37;
-               else if (numGenJets==2) weight=3.29;
-               else if (numGenJets==3) weight=2.33;
-               else if (numGenJets==4) weight=2.27;
+               weight=23.8336;
+               if (numGenJets==1) weight=3.1468;
+               else if (numGenJets==2) weight=4.087;
+               else if (numGenJets==3) weight=2.253;
+               else if (numGenJets==4) weight=2.1954;
            }
            if (sample=="DY"){
-               weight=2.63;
+               weight=2.6774;
                if (numGenJets==1)
-                   weight=0.7258;
+                   weight=0.7362;
                else if (numGenJets==2)
-                   weight=0.9387;
+                   weight=0.96091;
                else if (numGenJets==3)
-                   weight=1.683;
+                   weight=1.70488;
                else if (numGenJets==4)
-                   weight=0.4289;
+                   weight=0.243131;
            }
         }
         else if (year=="2016"){
            if (sample=="W"){
-               weight=25.39;
-               if (numGenJets==1) weight=5.766;
-               else if (numGenJets==2) weight=1.791;
-               else if (numGenJets==3) weight=0.679;
-               else if (numGenJets==4) weight=2.260;
+               weight=25.3918;
+               if (numGenJets==1) weight=5.76634;
+               else if (numGenJets==2) weight=1.7906;
+               else if (numGenJets==3) weight=0.67907;
+               else if (numGenJets==4) weight=1.9645;
            }
-
            if (sample=="DY"){
-               weight=1.532;
+               weight=1.52656;
                if (numGenJets==1)
-                   weight=0.480;
+                   weight=0.4180;
                else if (numGenJets==2)
-                   weight=0.463;
+                   weight=0.45093;
                else if (numGenJets==3)
-                   weight=0.524;
+                   weight=0.52897;
                else if (numGenJets==4)
-                   weight=0.484;
+                   weight=0.597;
            }
         }
 
@@ -575,13 +585,10 @@ int main(int argc, char** argv) {
         bool isT=(!is_includedInEmbedded && gen_match_2==5);
         bool isL=(!is_includedInEmbedded && gen_match_2<5);
 
-	float aweight=genweight*weight*LumiWeights_12->weight(npu);
+        float aweight=genweight*weight;//*LumiWeights_12->weight(npu);
+        if (year=="2016" or year=="2017") aweight=aweight*LumiWeights_12->weight(npu); //FIXME
         if (sample=="embedded") aweight=genweight;
-	//if (byTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.83;
-	//if (byVTightDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.80;
-        if (year=="2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
-        if (year=="2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81; // deep M
-        if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90; // deep M
+        if (sample!="embedded" && byMediumDeepVSjet_2 && sample!="data_obs" && gen_match_2==5) aweight=aweight*theSFTool->getSFvsPT(mytau.Pt()); // deep M
 
         //if (byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
         if (sample=="embedded") aweight=aweight*0.97;
@@ -643,14 +650,16 @@ int main(int argc, char** argv) {
           if (dm>10) dm=10;
           if (trigger27 or trigger32 or trigger35) aweight=aweight*wmc->function("e_trg27_trg32_trg35_kit_data")->getVal()/wmc->function("e_trg27_trg32_trg35_kit_mc")->getVal();
           else aweight=aweight*(wmc->function("e_trg_EleTau_Ele24Leg_desy_data")->getVal()/wmc->function("e_trg_EleTau_Ele24Leg_desy_mc")->getVal())*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm);
-          //aweight=aweight*bweight;
+          aweight=aweight*bweight;
         }
 
         if (year=="2016" && sample!="embedded" && sample!="data_obs"){
           aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
           aweight=aweight*myScaleFactor_trgEle25->get_ScaleFactor(pt_1,eta_1);
-          float zpt_corr=histZ->GetBinContent(histZ->GetXaxis()->FindBin(genM),histZ->GetYaxis()->FindBin(genpT));
-          if (sample=="DY") aweight=aweight*zpt_corr;
+          wmc->var("z_gen_mass")->setVal(genM);
+          wmc->var("z_gen_pt")->setVal(genpT);
+          zptweight=wmc->function("zptmass_weight_nom")->getVal();
+          if (sample=="DY") aweight=aweight*zptweight;
           aweight=aweight*bweight;
         }
 
