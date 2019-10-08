@@ -1,5 +1,5 @@
 #include <TH2.h>
-#include "ApplyFF.h"
+#include "ComputeFF2018/FFcode/interface/ApplyFF.h"
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TGraph.h>
@@ -16,7 +16,7 @@
 #include <TRandom3.h>
 #include "TLorentzVector.h"
 #include "TString.h"
-#include "ScaleFactor.h"
+#include "ComputeFF2018/FFcode/interface/ScaleFactor.h"
 #include "TLegend.h"
 #include "TH1F.h"
 #include "TKey.h"
@@ -24,14 +24,15 @@
 #include "THStack.h"
 #include "TPaveLabel.h"
 #include "TFile.h"
-#include "myHelper.h"
-#include "et_Tree.h"
-#include "LumiReweightingStandAlone.h"
-#include "../TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
+#include "ComputeFF2018/FFcode/interface/myHelper.h"
+#include "ComputeFF2018/FFcode/interface/et_Tree.h"
+#include "ComputeFF2018/FFcode/interface/LumiReweightingStandAlone.h"
+#include "TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
 #include "RooWorkspace.h"
 #include "RooRealVar.h"
 #include "RooFunctor.h"
-#include "SFtautrigger.h"
+#include "ComputeFF2018/FFcode/interface/SFtautrigger.h"
+#include "TauPOG/TauIDSFs/interface/TauIDSFTool.h"
 
 using namespace std;
 
@@ -349,34 +350,36 @@ int main(int argc, char** argv) {
    TH1F* hmt_w_iso = new TH1F ("hmt_w_iso","hmt_w_iso",binnum_mt,bins_mt); hmt_w_iso->Sumw2();
    TH1F* hmt_w_anti = new TH1F ("hmt_w_anti","hmt_w_anti",binnum_mt,bins_mt); hmt_w_anti->Sumw2();
 
+   string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
+
    reweight::LumiReWeighting* LumiWeights_12;
-   LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", "MyDataPileupHistogram.root", "pileup_mc", "pileup");
+   LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", (datapath+"MyDataPileupHistogram.root").c_str(), "pileup_mc", "pileup");
    if (year=="2016"){     
-      LumiWeights_12 = new reweight::LumiReWeighting("MC_Moriond17_PU25ns_V1.root", "Data_Pileup_2016_271036-284044_80bins.root", "pileup", "pileup");
+     LumiWeights_12 = new reweight::LumiReWeighting((datapath+"MC_Moriond17_PU25ns_V1.root").c_str(), (datapath+"Data_Pileup_2016_271036-284044_80bins.root").c_str(), "pileup", "pileup");
    }
    else if (year=="2017"){
-      LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#VBFHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      if (sample=="W1") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W1JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
-      else if (sample=="W2") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W2JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v5#MINIAODSIM", "pileup");
-      else if (sample=="ST_t_antitop") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-      else if (sample=="W") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
-      else if (sample=="DY") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="WW") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WW_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="WZ") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WZ_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="ST_tW_top") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-      else if (sample=="WminusH125") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WminusHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="ST_tW_antitop") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-      else if (sample=="W3") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-      else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#VBFHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     if (sample=="W1") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W1JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
+     else if (sample=="W2") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W2JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v5#MINIAODSIM", "pileup");
+     else if (sample=="ST_t_antitop") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+     else if (sample=="W") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
+     else if (sample=="DY") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="WW") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WW_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="WZ") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WZ_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="ST_tW_top") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+     else if (sample=="WminusH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WminusHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="ST_tW_antitop") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+     else if (sample=="W3") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+     else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
    }
 
-   TFile fw("htt_scalefactors_v18_2.root");
+   TFile fw((datapath+"htt_scalefactors_v18_2.root").c_str());
    RooWorkspace *w = (RooWorkspace*)fw.Get("w");
    fw.Close();
 
-   TFile fwmc("htt_scalefactors_2017_v2.root");
+   TFile fwmc((datapath+"htt_scalefactors_2017_v2.root").c_str());
    RooWorkspace *wmc = (RooWorkspace*)fwmc.Get("w");
    fwmc.Close();
 
@@ -396,30 +399,30 @@ int main(int argc, char** argv) {
    TF1* mvisclosure_wmc=(TF1*) fmvisclosure.Get("closure_mvis_et_wmc");
 
    ScaleFactor * myScaleFactor_trgEle3235 = new ScaleFactor();
-   myScaleFactor_trgEle3235->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele32orEle35.root");
+   myScaleFactor_trgEle3235->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele32orEle35.root");
    ScaleFactor * myScaleFactor_trgEle24 = new ScaleFactor();
-   myScaleFactor_trgEle24->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele24.root");
+   myScaleFactor_trgEle24->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele24.root");
    ScaleFactor * myScaleFactor_IdIso = new ScaleFactor();
-   myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2018/Electron_Run2018_IdIso.root");
+   myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_IdIso.root");
 
    if (year=="2017"){
-      myScaleFactor_trgEle3235->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2017/Electron_Ele32orEle35.root");
-      myScaleFactor_trgEle24->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2017/Electron_EleTau_Ele24.root");
-      myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2017/Electron_IdIso_IsoLt0.15_IsoID_eff.root");
+     myScaleFactor_trgEle3235->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_Ele32orEle35.root");
+     myScaleFactor_trgEle24->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_EleTau_Ele24.root");
+     myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_IdIso_IsoLt0.15_IsoID_eff.root");
    }
 
-   TauTriggerSFs2017* etsf=new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","etau", "2018", "tight", "MVAv2");
-   if (year=="2017") etsf=new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","etau", "2017", "tight", "MVAv2");
+   TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","etau", "2018", "tight", "MVAv2");
+   if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","etau", "2017", "tight", "MVAv2");
 
-   TFile *fZ=new TFile("zpt_weights_2016_BtoH.root");
+   TFile *fZ=new TFile((datapath+"zpt_weights_2016_BtoH.root").c_str());
    TH2F *histZ=(TH2F*) fZ->Get("zptmass_histo");
    ScaleFactor * myScaleFactor_trgEle25 = new ScaleFactor();
-   myScaleFactor_trgEle25->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_Ele25.root");
-   if (year=="2016") myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_IdIso.root");
+   myScaleFactor_trgEle25->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_Ele25.root");
+   if (year=="2016") myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_IdIso.root");
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
-        arbre->GetEntry(i);
+        arbre->GetEntry(i);	
         if (i % 10000 == 0) fprintf(stdout, "\r  Processed events: %8d of %8d ", i, nentries_wtn);
         fflush(stdout);
 
@@ -467,7 +470,7 @@ int main(int argc, char** argv) {
            trigger25=(passEle25 && matchEle25_1 && filterEle25_1 && pt_1>26);
            if (!trigger25) continue;
         }
-
+	
 
 
         // Change here to change the ID!!
@@ -599,6 +602,7 @@ int main(int argc, char** argv) {
 
 	if (sample=="data_obs") aweight=1.0;
 
+
 	// Top pT reweighting
         float topfactor=1.0;
         if (name=="TT" or name=="TTMC"){
@@ -622,7 +626,8 @@ int main(int argc, char** argv) {
 	  if (trigger32 or trigger35) aweight=aweight*myScaleFactor_trgEle3235->get_ScaleFactor(pt_1,eta_1);
 	  else aweight=aweight*myScaleFactor_trgEle24->get_ScaleFactor(pt_1,eta_1)*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), mydm);
           aweight=aweight*bweight;
-	}
+	}	
+
         if (year=="2017" && sample!="embedded" && sample!="data_obs"){
           wmc->var("e_pt")->setVal(myele.Pt());
           wmc->var("e_eta")->setVal(myele.Eta());
@@ -673,12 +678,12 @@ int main(int argc, char** argv) {
 
           if (name=="TTMC"){
              ff_tt=get_raw_FF(mytau.Pt(),ff_ttmc_0jet);
-          }
+          }	  
 
-          if (name=="WMC2"){
+          if (name=="WMC2"){	    	    
              ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
              if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_wmc);
-          }
+          }	  
 
            if (!is_includedInEmbedded){
 

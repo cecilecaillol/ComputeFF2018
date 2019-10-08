@@ -1,5 +1,5 @@
 #include <TH2.h>
-#include "ApplyFF.h"
+#include "ComputeFF2018/FFcode/interface/ApplyFF.h"
 #include <TStyle.h>
 #include <TCanvas.h>
 #include <TGraph.h>
@@ -16,7 +16,7 @@
 #include <TRandom3.h>
 #include "TLorentzVector.h"
 #include "TString.h"
-#include "ScaleFactor.h"
+#include "ComputeFF2018/FFcode/interface/ScaleFactor.h"
 #include "TLegend.h"
 #include "TH1F.h"
 #include "TKey.h"
@@ -24,14 +24,15 @@
 #include "THStack.h"
 #include "TPaveLabel.h"
 #include "TFile.h"
-#include "myHelper.h"
-#include "mt_Tree.h"
-#include "LumiReweightingStandAlone.h"
-#include "../TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
+#include "ComputeFF2018/FFcode/interface/myHelper.h"
+#include "ComputeFF2018/FFcode/interface/mt_Tree.h"
+#include "ComputeFF2018/FFcode/interface/LumiReweightingStandAlone.h"
+#include "TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
 #include "RooWorkspace.h"
 #include "RooRealVar.h"
 #include "RooFunctor.h"
-#include "SFtautrigger.h"
+#include "ComputeFF2018/FFcode/interface/SFtautrigger.h"
+#include "TauPOG/TauIDSFs/interface/TauIDSFTool.h"
 
 using namespace std;
 
@@ -353,78 +354,111 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
+   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300.350};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
+   float bins_mt[] = {0,10,20,30,40,50,60,70,80,90,100,110,120};
+   int  binnum_mt = sizeof(bins_mt)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
    TH1F* h0LT_qcd_anti = new TH1F ("h0LT_qcd_anti","h0LT_qcd_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_anti->Sumw2();
+   TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
+   TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
+   TH1F* h0LT_w_iso = new TH1F ("h0LT_w_iso","h0LT_w_iso",binnum_mtt0,bins_mtt0); h0LT_w_iso->Sumw2();
+   TH1F* h0LT_w_anti = new TH1F ("h0LT_w_anti","h0LT_w_anti",binnum_mtt0,bins_mtt0); h0LT_w_anti->Sumw2();
+   TH1F* h0LT_tt_iso = new TH1F ("h0LT_tt_iso","h0LT_tt_iso",binnum_mtt0,bins_mtt0); h0LT_tt_iso->Sumw2();
+   TH1F* h0LT_tt_anti = new TH1F ("h0LT_tt_anti","h0LT_tt_anti",binnum_mtt0,bins_mtt0); h0LT_tt_anti->Sumw2();
+
    TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
    TH1F* h0J_qcd_anti = new TH1F ("h0J_qcd_anti","h0J_qcd_anti",binnum_mtt0,bins_mtt0); h0J_qcd_anti->Sumw2();
+   TH1F* h0SSlooseJ_qcd_iso = new TH1F ("h0SSlooseJ_qcd_iso","h0SSlooseJ_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseJ_qcd_iso->Sumw2();
+   TH1F* h0SSlooseJ_qcd_anti = new TH1F ("h0SSlooseJ_qcd_anti","h0SSlooseJ_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseJ_qcd_anti->Sumw2();
+   TH1F* h0J_w_iso = new TH1F ("h0J_w_iso","h0J_w_iso",binnum_mtt0,bins_mtt0); h0J_w_iso->Sumw2();
+   TH1F* h0J_w_anti = new TH1F ("h0J_w_anti","h0J_w_anti",binnum_mtt0,bins_mtt0); h0J_w_anti->Sumw2();
+   TH1F* h0J_tt_iso = new TH1F ("h0J_tt_iso","h0J_tt_iso",binnum_mtt0,bins_mtt0); h0J_tt_iso->Sumw2();
+   TH1F* h0J_tt_anti = new TH1F ("h0J_tt_anti","h0J_tt_anti",binnum_mtt0,bins_mtt0); h0J_tt_anti->Sumw2();
+
+   TH1F* hmt_w_iso = new TH1F ("hmt_w_iso","hmt_w_iso",binnum_mt,bins_mt); hmt_w_iso->Sumw2();
+   TH1F* hmt_w_anti = new TH1F ("hmt_w_anti","hmt_w_anti",binnum_mt,bins_mt); hmt_w_anti->Sumw2();
+   
+   string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
    reweight::LumiReWeighting* LumiWeights_12;
-   LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", "MyDataPileupHistogram.root", "pileup_mc", "pileup");
+   LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", (datapath+"MyDataPileupHistogram.root").c_str(), "pileup_mc", "pileup");
    if (year=="2016")
      {     
-       LumiWeights_12 = new reweight::LumiReWeighting("MC_Moriond17_PU25ns_V1.root", "Data_Pileup_2016_271036-284044_80bins.root", "pileup", "pileup");
+       LumiWeights_12 = new reweight::LumiReWeighting((datapath+"MC_Moriond17_PU25ns_V1.root").c_str(), (datapath+"Data_Pileup_2016_271036-284044_80bins.root").c_str(), "pileup", "pileup");
      }
    else if (year=="2017")
      {
-       LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#VBFHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       if (sample=="W1") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W1JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
-       else if (sample=="W2") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W2JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v5#MINIAODSIM", "pileup");
-       else if (sample=="ST_t_antitop") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-       else if (sample=="W") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
-       else if (sample=="DY") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="WW") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WW_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="WZ") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WZ_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="ST_tW_top") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-       else if (sample=="WminusH125") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#WminusHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="ST_tW_antitop") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
-       else if (sample=="W3") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
-       else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting("pu_distributions_mc_2017.root", "pu_distributions_data_2017.root", "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#VBFHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       if (sample=="W1") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W1JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
+       else if (sample=="W2") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W2JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v5#MINIAODSIM", "pileup");
+       else if (sample=="ST_t_antitop") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_v2_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+       else if (sample=="W") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v3#MINIAODSIM", "pileup");
+       else if (sample=="DY") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="WW") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WW_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="WZ") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WZ_TuneCP5_13TeV-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="DY4") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="ST_tW_top") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+       else if (sample=="WminusH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#WminusHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="ST_tW_antitop") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2#MINIAODSIM", "pileup");
+       else if (sample=="W3") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
+       else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
      }
 
-   TFile fw("htt_scalefactors_v18_2.root");
+   TFile fw((datapath+"htt_scalefactors_v18_2.root").c_str());
    RooWorkspace *w = (RooWorkspace*)fw.Get("w");
    fw.Close();
 
-   TFile fwmc("htt_scalefactors_2017_v2.root");
+   TFile fwmc((datapath+"htt_scalefactors_2017_v2.root").c_str());
    RooWorkspace *wmc = (RooWorkspace*)fwmc.Get("w");
    fwmc.Close();
 
    TFile frawff("uncorrected_fakefactors_mt.root");
-   TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_mt_qcd_0jetSSloose");
-   TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_mt_qcd_1jetSSloose");
+   TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_mt_qcd_0jet");
+   TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_mt_qcd_1jet");
+   TF1* ff_looseSSqcd_0jet=(TF1*) frawff.Get("rawFF_mt_qcd_0jetSSloose");
+   TF1* ff_looseSSqcd_1jet=(TF1*) frawff.Get("rawFF_mt_qcd_1jetSSloose");
+   TF1* ff_w_0jet=(TF1*) frawff.Get("rawFF_mt_w_0jet");
+   TF1* ff_w_1jet=(TF1*) frawff.Get("rawFF_mt_w_1jet");
+   TF1* ff_wmc_0jet=(TF1*) frawff.Get("mc_rawFF_mt_w_0jet");
+   TF1* ff_wmc_1jet=(TF1*) frawff.Get("mc_rawFF_mt_w_1jet");
+   TF1* ff_tt_0jet=(TF1*) frawff.Get("rawFF_mt_tt");
+   TF1* ff_ttmc_0jet=(TF1*) frawff.Get("mc_rawFF_mt_tt");
 
    TFile fmvisclosure ("FF_corrections_1.root");
-   TF1* mvisclosure_qcdloose=(TF1*) fmvisclosure.Get("closure_mvis_mt_qcdloose");
+   TF1* mvisclosure_wmc=(TF1*) fmvisclosure.Get("closure_mvis_mt_wmc");
 
    ScaleFactor * myScaleFactor_trgMu2427 = new ScaleFactor();
-   myScaleFactor_trgMu2427->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IsoMu24orIsoMu27.root");
+   myScaleFactor_trgMu2427->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IsoMu24orIsoMu27.root");
    ScaleFactor * myScaleFactor_trgMu20 = new ScaleFactor();
-   myScaleFactor_trgMu20->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IsoMu20.root");
+   myScaleFactor_trgMu20->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IsoMu20.root");
    ScaleFactor * myScaleFactor_IdIso = new ScaleFactor();
-   myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IdIso.root");
+   myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2018/Muon_Run2018_IdIso.root");
 
    if (year=="2017")
      {
-       myScaleFactor_trgMu2427->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2017/Muon_IsoMu24orIsoMu27.root");
-       myScaleFactor_trgMu20->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2017/Muon_MuTau_IsoMu20.root");
-       myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2017/Muon_IdIso_IsoLt0.15_eff_RerecoFall17.root");
+       myScaleFactor_trgMu2427->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2017/Muon_IsoMu24orIsoMu27.root");
+       myScaleFactor_trgMu20->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2017/Muon_MuTau_IsoMu20.root");
+       myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2017/Muon_IdIso_IsoLt0.15_eff_RerecoFall17.root");
      }
 
-   TauTriggerSFs2017* mtsf=new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","mutau", "2018", "tight", "MVAv2");
-   if (year=="2017") mtsf = new TauTriggerSFs2017("../TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","mutau", "2017", "tight", "MVAv2");
+   TauTriggerSFs2017* mtsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","mutau", "2018", "tight", "MVAv2");
+   if (year=="2017") mtsf = new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","mutau", "2017", "tight", "MVAv2");
 
-   TFile *fZ = new TFile("zpt_weights_2016_BtoH.root");
+   TFile *fZ = new TFile((datapath+"zpt_weights_2016_BtoH.root").c_str());
    TH2F *histZ = (TH2F*) fZ->Get("zptmass_histo");
    ScaleFactor * myScaleFactor_trgMu22 = new ScaleFactor();
    ScaleFactor * myScaleFactor_trgMu19 = new ScaleFactor();
-   myScaleFactor_trgMu22->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2016BtoH/Muon_Mu22OR_eta2p1_eff.root");
-   myScaleFactor_trgMu19->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2016BtoH/Muon_Mu19leg_2016BtoH_eff.root");
-   if(year=="2016") myScaleFactor_IdIso->init_ScaleFactor("../LeptonEfficiencies/Muon/Run2016BtoH/Muon_IdIso_IsoLt0p15_2016BtoH_eff.root");
+   myScaleFactor_trgMu22->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2016BtoH/Muon_Mu22OR_eta2p1_eff.root");
+   myScaleFactor_trgMu19->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2016BtoH/Muon_Mu19leg_2016BtoH_eff.root");
+   if(year=="2016") myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Muon/Run2016BtoH/Muon_IdIso_IsoLt0p15_2016BtoH_eff.root");
+   
+   TauIDSFTool * theSFTool;
+   if (year == "2016") theSFTool = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","Medium");
+   else if (year == "2017") theSFTool = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium");
+   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
@@ -620,9 +654,9 @@ int main(int argc, char** argv) {
 
 	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.86;
+	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
-	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;
+	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;	
         if (sample=="embedded") aweight=aweight*0.97;
 	//Muon rescaling tight
 	if (gen_match_2==2 or gen_match_2==4){
@@ -675,24 +709,77 @@ int main(int argc, char** argv) {
 	   float myvar=(mymu+mytau).M();
 	   //if (myvar>300) myvar=299;
 
-	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet)*get_mvis_closure((mymu+mytau).M(),mvisclosure_qcdloose);
-	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet)*get_mvis_closure((mymu+mytau).M(),mvisclosure_qcdloose);
+	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet);
+	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet);
+          float ff_looseSSqcd=get_raw_FF(mytau.Pt(),ff_looseSSqcd_0jet);
+          if (njets>0) ff_looseSSqcd=get_raw_FF(mytau.Pt(),ff_looseSSqcd_1jet);
+          float ff_w=get_raw_FF(mytau.Pt(),ff_w_0jet);
+          if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_w_1jet);
+          float ff_tt=get_raw_FF(mytau.Pt(),ff_tt_0jet);
+
+	  if (name=="WMC"){
+	     ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet);
+             if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet);
+	     mt=100;
+	  }
+
+          if (name=="TTMC"){
+             ff_tt=get_raw_FF(mytau.Pt(),ff_ttmc_0jet);
+          }
+
+          if (name=="WMC2"){
+             ff_w=get_raw_FF(mytau.Pt(),ff_wmc_0jet)*get_mvis_closure((mymu+mytau).M(),mvisclosure_wmc);
+             if (njets>0) ff_w=get_raw_FF(mytau.Pt(),ff_wmc_1jet)*get_mvis_closure((mymu+mytau).M(),mvisclosure_wmc);
+          }
 
            if (!is_includedInEmbedded){
 
+	     if (signalRegion && iso_1<0.15 && nbtag==0 && q_1*q_2<0)
+                  hmt_w_iso->Fill(mt,aweight*weight2);
+             if (antiisoRegion && iso_1<0.15 && nbtag==0 && q_1*q_2<0)
+                  hmt_w_anti->Fill(mt,aweight*weight2*ff_w);
+
 	     if (isL or isT){
-	       if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+	       if (signalRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (antiisoRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0LT_qcd_anti->Fill(myvar,aweight*weight2*ff_qcd);
 
+               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2*ff_looseSSqcd);
+
+               if (signalRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0LT_w_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0LT_w_anti->Fill(myvar,aweight*weight2*ff_w);
+
+               if (signalRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0LT_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0LT_tt_anti->Fill(myvar,aweight*weight2*ff_tt);
 	    }
 	   else{
-               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (signalRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2<0)
+               if (antiisoRegion && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
                   h0J_qcd_anti->Fill(myvar,aweight*weight2*ff_qcd);
 
+               if (signalRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+                  h0SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2*ff_looseSSqcd);
+
+               if (signalRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0J_w_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
+                  h0J_w_anti->Fill(myvar,aweight*weight2*ff_w);
+
+               if (signalRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0J_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h0J_tt_anti->Fill(myvar,aweight*weight2*ff_tt);
             }
 
            }
@@ -732,6 +819,101 @@ int main(int argc, char** argv) {
       h0J_qcd_anti->SetName(name.c_str()+postfixJ);
       h0J_qcd_anti->Write();
     }
+
+    TDirectory *d0looseSS_qcd_iso =fout->mkdir("mt_0SSloose_qcd_iso");
+    d0looseSS_qcd_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0SSlooseLT_qcd_iso->SetName(name.c_str());
+      h0SSlooseLT_qcd_iso->Add(h0SSlooseJ_qcd_iso);
+      h0SSlooseLT_qcd_iso->Write();
+    }
+    else{
+      h0SSlooseLT_qcd_iso->SetName(name.c_str()+postfixLT);
+      h0SSlooseLT_qcd_iso->Write();
+      h0SSlooseJ_qcd_iso->SetName(name.c_str()+postfixJ);
+      h0SSlooseJ_qcd_iso->Write();
+    }
+
+    TDirectory *d0looseSS_qcd_anti =fout->mkdir("mt_0SSloose_qcd_anti");
+    d0looseSS_qcd_anti->cd();
+
+    if (sample=="data_obs" or sample=="W"){
+      h0SSlooseLT_qcd_anti->SetName(name.c_str());
+      h0SSlooseLT_qcd_anti->Add(h0SSlooseJ_qcd_anti);
+      h0SSlooseLT_qcd_anti->Write();
+    }
+    else{
+      h0SSlooseLT_qcd_anti->SetName(name.c_str()+postfixLT);
+      h0SSlooseLT_qcd_anti->Write();
+      h0SSlooseJ_qcd_anti->SetName(name.c_str()+postfixJ);
+      h0SSlooseJ_qcd_anti->Write();
+    }
+    TDirectory *d0_w_iso =fout->mkdir("mt_0jet_w_iso");
+    d0_w_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_w_iso->SetName(name.c_str());
+      h0LT_w_iso->Add(h0J_w_iso);
+      h0LT_w_iso->Write();
+    }
+    else{
+      h0LT_w_iso->SetName(name.c_str()+postfixLT);
+      h0LT_w_iso->Write();
+      h0J_w_iso->SetName(name.c_str()+postfixJ);
+      h0J_w_iso->Write();
+    }
+
+    TDirectory *d0_w_anti =fout->mkdir("mt_0jet_w_anti");
+    d0_w_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_w_anti->SetName(name.c_str());
+      h0LT_w_anti->Add(h0J_w_anti);
+      h0LT_w_anti->Write();
+    }
+    else{
+      h0LT_w_anti->SetName(name.c_str()+postfixLT);
+      h0LT_w_anti->Write();
+      h0J_w_anti->SetName(name.c_str()+postfixJ);
+      h0J_w_anti->Write();
+    }
+
+    TDirectory *dmt_w_iso =fout->mkdir("mt_mt_w_iso");
+    dmt_w_iso->cd();
+    hmt_w_iso->SetName(name.c_str());
+    hmt_w_iso->Write();
+
+    TDirectory *dmt_w_anti =fout->mkdir("mt_mt_w_anti");
+    dmt_w_anti->cd();
+    hmt_w_anti->SetName(name.c_str());
+    hmt_w_anti->Write();
+
+    TDirectory *d0_tt_iso =fout->mkdir("mt_0jet_tt_iso");
+    d0_tt_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_tt_iso->SetName(name.c_str());
+      h0LT_tt_iso->Add(h0J_tt_iso);
+      h0LT_tt_iso->Write();
+    }
+    else{
+      h0LT_tt_iso->SetName(name.c_str()+postfixLT);
+      h0LT_tt_iso->Write();
+      h0J_tt_iso->SetName(name.c_str()+postfixJ);
+      h0J_tt_iso->Write();
+    }
+
+    TDirectory *d0_tt_anti =fout->mkdir("mt_0jet_tt_anti");
+    d0_tt_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_tt_anti->SetName(name.c_str());
+      h0LT_tt_anti->Add(h0J_tt_anti);
+      h0LT_tt_anti->Write();
+    }
+    else{
+      h0LT_tt_anti->SetName(name.c_str()+postfixLT);
+      h0LT_tt_anti->Write();
+      h0J_tt_anti->SetName(name.c_str()+postfixJ);
+      h0J_tt_anti->Write();
+    }
+
 
     fout->Close();
     delete wmc;
