@@ -460,22 +460,7 @@ int main(int argc, char** argv) {
    TauIDSFTool * theSFTool;
    if (year == "2016") theSFTool = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","Medium");
    else if (year == "2017") theSFTool = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium");
-   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");
-
-   TFile *ftauid_2018 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2018ReReco.root").c_str());
-   TF1 *fct_tauid_2018= (TF1*) ftauid_2018->Get("Medium_cent");
-   TF1 *fct_tauid_up_2018= (TF1*) ftauid_2018->Get("Medium_up");
-   TF1 *fct_tauid_down_2018= (TF1*) ftauid_2018->Get("Medium_down");
-
-   TFile *ftauid_2017 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2017ReReco.root").c_str());
-   TF1 *fct_tauid_2017= (TF1*) ftauid_2017->Get("Medium_cent");
-   TF1 *fct_tauid_up_2017= (TF1*) ftauid_2017->Get("Medium_up");
-   TF1 *fct_tauid_down_2017= (TF1*) ftauid_2017->Get("Medium_down");
-
-   TFile *ftauid_2016 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2016Legacy.root").c_str());
-   TF1 *fct_tauid_2016= (TF1*) ftauid_2016->Get("Medium_cent");
-   TF1 *fct_tauid_up_2016= (TF1*) ftauid_2016->Get("Medium_up");
-   TF1 *fct_tauid_down_2016= (TF1*) ftauid_2016->Get("Medium_down");
+   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");   
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {

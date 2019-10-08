@@ -23,7 +23,7 @@ class FFApplicationTool():
         self.theFOSSSClosureFile = ROOT.TFile(theFFDirectory+"FF_QCDcorrectionOSSS.root")
         if self.theFOSSSClosureFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
-        self.OSSSClosure_QCD = self.theFOSSSClosureFile.Get("closure_mvis_"+channel+"_qcd")
+        self.OSSSClosure_QCD = self.theFOSSSClosureFile.Get("closure_OSSS_mvis_"+channel+"_qcd")
         self.MTClosure_W = self.theFOSSSClosureFile.Get("closure_mt_"+channel+"_w")
 
     def get_raw_FF(self,pt,fct):

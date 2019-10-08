@@ -639,7 +639,7 @@ int main(int argc, char** argv) {
         bool isL=(!is_includedInEmbedded && gen_match_2<5);
 
 	float aweight=genweight*weight;//*LumiWeights_12->weight(npu);
-	if(year =="2016" or year == "2017") aweight - aweight*LumiWeights_12->weight(npu); //FIXME...says cecile. something wrong in 2018 pileup weightings?
+	if (year=="2016" or year=="2017") aweight=aweight*LumiWeights_12->weight(npu); //FIXME writes cecile.
         if (sample=="embedded") aweight=genweight;
 	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
