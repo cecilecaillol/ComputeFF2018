@@ -221,7 +221,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
    else return theFit;
 }
 
-void Fit_FFmt(int year) {
+void Fit_FF_mt(int year) {
 
     gStyle->SetOptFit(1111);
 
