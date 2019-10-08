@@ -28,11 +28,19 @@ def Subtract_prompt(directory,channel):
     Data=fileData.Get(dir_qcd[i]).Get("data_obs")
     Data.Add(fileVV.Get(dir_qcd[i]).Get("VVLT"),-1.0)
     Data.Add(fileVV.Get(dir_qcd[i]).Get("VVJ"),-1.0)
-    Data.Add(fileW.Get(dir_qcd[i]).Get("W"),-1.0)
+    W=fileW.Get(dir_qcd[i]).Get("W").Clone()
+    for j in range(1,W.GetSize()):
+      W.SetBinError(j,(W.GetBinError(j)*W.GetBinError(j)+0.20*0.20*W.GetBinContent(j)*W.GetBinContent(j))**0.5)
+    Data.Add(W,-1.0)
+    #Data.Add(fileW.Get(dir_qcd[i]).Get("W"),-1.0)
     Data.Add(fileTT.Get(dir_qcd[i]).Get("TTJ"),-1.0)
     Data.Add(fileTT.Get(dir_qcd[i]).Get("TTLT"),-1.0)
     Data.Add(fileDY.Get(dir_qcd[i]).Get("DYJ"),-1.0)
-    Data.Add(fileDY.Get(dir_qcd[i]).Get("DYLT"),-1.0)
+    DYLT=fileDY.Get(dir_qcd[i]).Get("DYLT").Clone()
+    for j in range(1,DYLT.GetSize()):
+      DYLT.SetBinError(j,(DYLT.GetBinError(j)*DYLT.GetBinError(j)+0.10*0.10*DYLT.GetBinContent(j)*DYLT.GetBinContent(j))**0.5)
+    Data.Add(DYLT,-1.0)
+    #Data.Add(fileDY.Get(dir_qcd[i]).Get("DYLT"),-1.0)
     Data.SetName(dir_qcd[i])
     for k in range(1,Data.GetSize()-1):
       if Data.GetBinContent(k)<0:
@@ -55,7 +63,11 @@ def Subtract_prompt(directory,channel):
     Data.Add(fileTT.Get(dir_w[i]).Get("TTJ"),-1.0)
     Data.Add(fileTT.Get(dir_w[i]).Get("TTLT"),-1.0)
     Data.Add(fileDY.Get(dir_w[i]).Get("DYJ"),-1.0)
-    Data.Add(fileDY.Get(dir_w[i]).Get("DYLT"),-1.0)
+    #Data.Add(fileDY.Get(dir_w[i]).Get("DYLT"),-1.0)
+    DYLT=fileDY.Get(dir_w[i]).Get("DYLT").Clone()
+    for j in range(1,DYLT.GetSize()):
+      DYLT.SetBinError(j,(DYLT.GetBinError(j)*DYLT.GetBinError(j)+0.10*0.10*DYLT.GetBinContent(j)*DYLT.GetBinContent(j))**0.5)
+    Data.Add(DYLT,-1.0)
     Data.SetName(dir_w[i])
     for k in range(1,Data.GetSize()-1):
       if Data.GetBinContent(k)<0:
@@ -71,10 +83,18 @@ def Subtract_prompt(directory,channel):
     Data=fileData.Get(dir_tt[i]).Get("data_obs")
     Data.Add(fileVV.Get(dir_tt[i]).Get("VVLT"),-1.0)
     Data.Add(fileVV.Get(dir_tt[i]).Get("VVJ"),-1.0)
-    Data.Add(fileW.Get(dir_tt[i]).Get("W"),-1.0)
+    W=fileW.Get(dir_tt[i]).Get("W").Clone()
+    for j in range(1,W.GetSize()):
+      W.SetBinError(j,(W.GetBinError(j)*W.GetBinError(j)+0.20*0.20*W.GetBinContent(j)*W.GetBinContent(j))**0.5)
+    Data.Add(W,-1.0)
+    #Data.Add(fileW.Get(dir_tt[i]).Get("W"),-1.0)
     Data.Add(fileTT.Get(dir_tt[i]).Get("TTLT"),-1.0)
     Data.Add(fileDY.Get(dir_tt[i]).Get("DYJ"),-1.0)
-    Data.Add(fileDY.Get(dir_tt[i]).Get("DYLT"),-1.0)
+    DYLT=fileDY.Get(dir_tt[i]).Get("DYLT").Clone()
+    for j in range(1,DYLT.GetSize()):
+      DYLT.SetBinError(j,(DYLT.GetBinError(j)*DYLT.GetBinError(j)+0.10*0.10*DYLT.GetBinContent(j)*DYLT.GetBinContent(j))**0.5)
+    Data.Add(DYLT,-1.0)
+    #Data.Add(fileDY.Get(dir_tt[i]).Get("DYLT"),-1.0)
     Data.SetName(dir_tt[i])
     for k in range(1,Data.GetSize()-1):
       if Data.GetBinContent(k)<0:

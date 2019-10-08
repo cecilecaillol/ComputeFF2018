@@ -8,17 +8,17 @@ def FFOSSScorrection(args):
         if args.channel == "mt":
             path = '/data/ccaillol/smhmt2016_svfitted_16aug/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2016_svfitted_16aug/'
+            path = '/data/ccaillol/smhet2016_svfitted_30sep/'
     elif args.year == "2017":
         if args.channel == "mt":
             path = '/data/ccaillol/smhmt2017_svfitted_13jun/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2017_svfitted_8jul/'
+            path = '/data/ccaillol/smhet2017_svfitted_30sep/'
     elif args.year == "2018":
         if args.channel == "mt":
             path = '/data/ccaillol/smhmt2018_svfitted_30sep/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2018_svfitted_4aug/'
+            path = '/data/ccaillol/smhet2018_svfitted_30sep/'
 
     if args.channel == "mt":
         executable = "OSSScorrection_mt"
