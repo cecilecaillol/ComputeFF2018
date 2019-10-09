@@ -70,7 +70,7 @@ float my_fakefactor = get_ff(pt, mt, mvis, njets, frac_tt, frac_qcd, frac_w, ff_
 ```
 
 ## Python Application Module
-A python module is packaged with the repository, adn should be available for use in python scripts applying fake factors. To use it, 
+A python module is packaged with the repository, and should be available for use in python scripts applying fake factors. To use it, 
 at the top of your python import the package with:
 
 ```import ComputeFF2018.FFcode.ApplyFF as ApplyFF``` 
