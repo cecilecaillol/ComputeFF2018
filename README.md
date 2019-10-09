@@ -82,4 +82,4 @@ To create the actual FF application tool, in the main body of your code do:
 where channel is the channel you are creating FFs for, (either "et" or "mt" at the moment).
 To retrieve fake factors, do : 
 
-```theFFApplicationTool.get_ff(TauPt,TransverseMass,m_vis,njets,FracTT,FracQCD,FracW)```
+```event_fakefactor = theFFApplicationTool.get_ff(TauPt,TransverseMass,m_vis,njets,FracTT,FracQCD,FracW)```
