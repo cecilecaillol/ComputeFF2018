@@ -658,8 +658,8 @@ int main(int argc, char** argv) {
 	if (year=="2016" or year=="2017") aweight=aweight*LumiWeights_12->weight(npu); //FIXME writes cecile.
         if (sample=="embedded") aweight=genweight;
 	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
-	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.81;
-	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*0.90;	
+	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*theSFTool->getSFvsPT(pt_2);
+	if (year == "2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*theSFTool->getSFvsPT(pt_2);
 	
         if (sample=="embedded") aweight=aweight*0.97;
 	//Muon rescaling tight

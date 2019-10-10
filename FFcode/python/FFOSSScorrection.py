@@ -6,12 +6,12 @@ import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
 def FFOSSScorrection(args):
     if args.year == "2016":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2016_svfitted_16aug/'
+            path = '/data/ccaillol/smhmt2016_svfitted_30sep/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2016_svfitted_30sep/'
     elif args.year == "2017":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2017_svfitted_13jun/'
+            path = '/data/ccaillol/smhmt2017_svfitted_30sep/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2017_svfitted_30sep/'
     elif args.year == "2018":
