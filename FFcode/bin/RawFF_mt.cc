@@ -380,7 +380,7 @@ int main(int argc, char** argv) {
   string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
   reweight::LumiReWeighting* LumiWeights_12;
-  LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2018.root").c_str(), (datapath+"pu_distribtutions_data_2018.root").c_str(), "pileup", "pileup"); //First parameter hard coded to data disk. Non-portable
+  LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2018.root").c_str(), (datapath+"pu_distributions_data_2018.root").c_str(), "pileup", "pileup"); //First parameter hard coded to data disk. Non-portable
    if (year=="2016")
      {     
        LumiWeights_12 = new reweight::LumiReWeighting((datapath+"MC_Moriond17_PU25ns_V1.root").c_str(), (datapath+"Data_Pileup_2016_271036-284044_80bins.root").c_str(), "pileup", "pileup");
