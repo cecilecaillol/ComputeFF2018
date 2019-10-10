@@ -383,7 +383,7 @@ int main(int argc, char** argv) {
    string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
    reweight::LumiReWeighting* LumiWeights_12;
-   LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", (datapath+"MyDataPileupHistogram.root").c_str(), "pileup_mc", "pileup");
+   LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2018.root"), (datapath+"pu_distributions_data_2018.root").c_str(), "pileup", "pileup");
    if (year=="2016")
      {     
        LumiWeights_12 = new reweight::LumiReWeighting((datapath+"MC_Moriond17_PU25ns_V1.root").c_str(), (datapath+"Data_Pileup_2016_271036-284044_80bins.root").c_str(), "pileup", "pileup");

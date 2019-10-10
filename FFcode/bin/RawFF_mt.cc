@@ -380,7 +380,7 @@ int main(int argc, char** argv) {
   string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
   reweight::LumiReWeighting* LumiWeights_12;
-  LumiWeights_12 = new reweight::LumiReWeighting("/data/ccaillol/smhet2018_svfitted_23may/WW.root", (datapath+"MyDataPileupHistogram.root").c_str(), "pileup_mc", "pileup"); //First parameter hard coded to data disk. Non-portable
+  LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2018.root").c_str(), (datapath+"pu_distribtutions_data_2018.root").c_str(), "pileup", "pileup"); //First parameter hard coded to data disk. Non-portable
    if (year=="2016")
      {     
        LumiWeights_12 = new reweight::LumiReWeighting((datapath+"MC_Moriond17_PU25ns_V1.root").c_str(), (datapath+"Data_Pileup_2016_271036-284044_80bins.root").c_str(), "pileup", "pileup");
@@ -654,8 +654,7 @@ int main(int argc, char** argv) {
         bool isT=(!is_includedInEmbedded && gen_match_2==5);
         bool isL=(!is_includedInEmbedded && gen_match_2<5);
 
-	float aweight=genweight*weight;//*LumiWeights_12->weight(npu);
-	if (year=="2016" or year=="2017") aweight=aweight*LumiWeights_12->weight(npu); //FIXME writes cecile.
+	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
 	if (year == "2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight = aweight*theSFTool->getSFvsPT(pt_2);
 	if (year == "2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*theSFTool->getSFvsPT(pt_2);
