@@ -68,3 +68,18 @@ Then compute the weight per event:
 ```
 float my_fakefactor = get_ff(pt, mt, mvis, njets, frac_tt, frac_qcd, frac_w, ff_qcd_0jet, ff_qcd_1jet, ff_w_0jet, ff_w_1jet, ff_tt_0jet, mvisclosure_qcd, mvisclosure_w, mvisclosure_tt, mtclosure_w, osssclosure_qcd)
 ```
+
+## Python Application Module
+A python module is packaged with the repository, and should be available for use in python scripts applying fake factors. To use it, 
+at the top of your python import the package with:
+
+```import ComputeFF2018.FFcode.ApplyFF as ApplyFF``` 
+
+To create the actual FF application tool, in the main body of your code do: 
+
+```theFFApplicationTool = ApplyFF.FFApplicationTool("path/to/FFsForAYear/",channel)``` 
+
+where channel is the channel you are creating FFs for, (either "et" or "mt" at the moment).
+To retrieve fake factors, do : 
+
+```event_fakefactor = theFFApplicationTool.get_ff(TauPt,TransverseMass,m_vis,njets,FracTT,FracQCD,FracW)```
