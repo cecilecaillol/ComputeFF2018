@@ -102,8 +102,25 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 8);
     theFit->SetParameter(3, 5);
 
-    theFit2->SetParameter(0, 0.09);
-    theFit2->SetParameter(1, 0.00001);
+    //Trying to be clever again.
+    int numberOfGraphPoints = TGraph_FR->GetN();
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+    TGraph_FR->GetPoint(0,x1,y1);
+    TGraph_FR->GetPoint(numberOfGraphPoints-1,x2,y2);
+    double slope = (y2-y1)/(x2-x1);
+    double intercept = y1-slope*x1;
+    std::cout<<"(x1,y1): ("<<x1<<","<<y1<<") (x2,y2): ("<<x2<<","<<y2<<")"<<std::endl;
+    std::cout<<"Trying initial slope: "<<slope<<std::endl;
+    std::cout<<"Trying initial intercept: "<<intercept<<std::endl;
+
+    theFit2->SetParameter(0, intercept);
+    theFit2->SetParameter(1, slope);
+
+    //theFit2->SetParameter(0, 0.09);
+    //theFit2->SetParameter(1, 0.00001);
 
     float xAxisMax = 500;
     if (type.find("Line2P") < 140)

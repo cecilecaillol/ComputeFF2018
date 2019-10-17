@@ -100,8 +100,25 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     TF1 * theFit = new TF1("theFit", fitFunc_Line2Par, fMin, fMax, nPar);
     if (name.find("closure_mt") < 140) theFit = new TF1("theFit", fitFunc_Line2Par2, fMin, fMax, nPar);
 
-    theFit->SetParameter(0, 1.0);
-    theFit->SetParameter(1, 0.01);
+    //Trying to be clever again.
+    int numberOfGraphPoints = TGraph_FR->GetN();
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+    TGraph_FR->GetPoint(0,x1,y1);
+    TGraph_FR->GetPoint(numberOfGraphPoints-1,x2,y2);
+    double slope = (y2-y1)/(x2-x1);
+    double intercept = y1-slope*x1;
+    std::cout<<"(x1,y1): ("<<x1<<","<<y1<<") (x2,y2): ("<<x2<<","<<y2<<")"<<std::endl;
+    std::cout<<"Trying initial slope: "<<slope<<std::endl;
+    std::cout<<"Trying initial intercept: "<<intercept<<std::endl;
+
+    theFit->SetParameter(0, intercept);
+    theFit->SetParameter(1, slope);
+
+    //theFit->SetParameter(0, 1.0);
+    //theFit->SetParameter(1, 0.01);
 
     float xAxisMax = 500;
     TGraph_FR->Fit("theFit", "R0");

@@ -639,15 +639,16 @@ int main(int argc, char** argv) {
 		else if(numGenJets == 4)weight=0.4289;
 	      }
 	  }
-	if(year == "2018")
+	if(year == "2016")
 	  {
-	    if (sample=="W"){
-	      weight=51.8119;
-	      if (numGenJets==1) weight=10.902;
-	      else if (numGenJets==2) weight=5.258;
-	      else if (numGenJets==3) weight=3.12179;
-	      else if (numGenJets==4) weight=3.0367;
-	    }
+	    if (sample=="W")
+	      {
+		weight = 25.42;
+		if(numGenJets == 1) weight = 6.832;
+		else if(numGenJets==2) weight = 2.094;
+		else if(numGenJets==3) weight = 0.6872;
+		else if(numGenJets==4) weight = 1.853;
+	      }
 
 	    if (sample=="DY"){
 	      weight=3.7185;
