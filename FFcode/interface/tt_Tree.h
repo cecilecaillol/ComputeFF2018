@@ -4,6 +4,12 @@ float byTightDPF_2,byVVVLooseDeepVSjet_2,byVVLooseDeepVSjet_2,byVLooseDeepVSjet_
 float byVVVLooseDeepVSmu_2,byVVLooseDeepVSmu_2,byVLooseDeepVSmu_2,byLooseDeepVSmu_2,byMediumDeepVSmu_2,byTightDeepVSmu_2,byVTightDeepVSmu_2,byVVTightDeepVSmu_2;
 float byVVVLooseDeepVSe_2,byVVLooseDeepVSe_2,byVLooseDeepVSe_2,byLooseDeepVSe_2,byMediumDeepVSe_2,byTightDeepVSe_2,byVTightDeepVSe_2,byVVTightDeepVSe_2;
 
+float byTightDPF_1,byVVVLooseDeepVSjet_1,byVVLooseDeepVSjet_1,byVLooseDeepVSjet_1,byLooseDeepVSjet_1,byMediumDeepVSjet_1,byTightDeepVSjet_1,byVTightDeepVSjet_1,byVVTightDeepVSjet_1;
+float byVVVLooseDeepVSmu_1,byVVLooseDeepVSmu_1,byVLooseDeepVSmu_1,byLooseDeepVSmu_1,byMediumDeepVSmu_1,byTightDeepVSmu_1,byVTightDeepVSmu_1,byVVTightDeepVSmu_1;
+float byVVVLooseDeepVSe_1,byVVLooseDeepVSe_1,byVLooseDeepVSe_1,byLooseDeepVSe_1,byMediumDeepVSe_1,byTightDeepVSe_1,byVTightDeepVSe_1,byVVTightDeepVSe_1;
+
+float passDoubleTightTau35TightID, passDoubleMediumTau40TightID, passDoubleTightTau40ID, passDoubleMediumHPSTau35, passDoubleTau35, passDoubleTauCmb35;
+
   float matchEmbFilter_Ele24Tau30_1,matchEmbFilter_Ele27_1,matchEmbFilter_Ele32DoubleL1v1_1,matchEmbFilter_Ele32DoubleL1v2_1,matchEmbFilter_Ele32_1,matchEmbFilter_Ele35_1,matchEmbFilter_Ele24Tau30_2;
   float passEle27, passEle32, passEle35, passEle24Tau30, passEle24HPSTau30, passEle25, matchEle25_1, filterEle25_1;
   float matchEle27_1, matchEle32_1, matchEle35_1, matchEle24Tau30_1, matchEle24Tau30_2, matchEle24HPSTau30_1, matchEle24HPSTau30_2;
@@ -16,7 +22,7 @@ float byVVVLooseDeepVSe_2,byVVLooseDeepVSe_2,byVLooseDeepVSe_2,byLooseDeepVSe_2,
   float Flag_BadChargedCandidateFilter, Flag_BadPFMuonFilter, Flag_EcalDeadCellTriggerPrimitiveFilter, Flag_HBHENoiseFilter, Flag_HBHENoiseIsoFilter, Flag_badCloneMuon, Flag_badGlobalMuon, Flag_eeBadScFilter, Flag_goodVertices, Flag_globalSuperTightHalo2016Filter, Flag_badMuons, Flag_duplicateMuons, Flag_ecalBadCalibFilter, Flag_ecalBadCalibReducedMINIAODFilter;
   int gen_match_1, gen_match_2;
   int nbtag, nbtagL;
-  float bweight, prefiring_weight;
+  float bweight;
   float numGenJets;
   int run, lumi, evt;
   float met_JetEta0to3Up, met_JetEta0to5Up, met_JetRelativeSampleUp, met_JetRelativeBalUp, met_JetEta3to5Up, met_JetEta0to3Down, met_JetEta0to5Down, met_JetRelativeSampleDown, met_JetRelativeBalDown, met_JetEta3to5Down, met_JetEC2Up, met_JetEC2Down;
@@ -35,7 +41,7 @@ float byVVVLooseDeepVSe_2,byVVLooseDeepVSe_2,byVLooseDeepVSe_2,byLooseDeepVSe_2,
   float againstElectronVLooseMVA62018_2,againstElectronLooseMVA62018_2,againstElectronMediumMVA62018_2,againstElectronTightMVA62018_2,againstElectronVTightMVA62018_2;
   float againstMuonLoose3_2,againstMuonTight3_2;
   float byVVLooseIsolationMVArun2v2DBoldDMwLT_2, byVLooseIsolationMVArun2v2DBoldDMwLT_2, byLooseIsolationMVArun2v2DBoldDMwLT_2, byMediumIsolationMVArun2v2DBoldDMwLT_2, byTightIsolationMVArun2v2DBoldDMwLT_2, byVTightIsolationMVArun2v2DBoldDMwLT_2, byVVTightIsolationMVArun2v2DBoldDMwLT_2;
-  float l2_decayMode;
+  float l2_decayMode, l1_decayMode;
   float decayModeFinding_2;
   float puweight;
   float npu;
