@@ -617,11 +617,11 @@ int main(int argc, char** argv) {
 	  {
 	    if (sample=="W")
 	      {
-		weight = 25/39;
-		if(numGenJets == 1) weight = 5.766;
-		else if(numGenJets==2) weight = 1.791;
-		else if(numGenJets==3) weight = 0.679;
-		else if(numGenJets==4) weight = 2.260;
+		weight = 25.42;
+		if(numGenJets == 1) weight = 6.832;
+		else if(numGenJets==2) weight = 2.094;
+		else if(numGenJets==3) weight = 0.6872;
+		else if(numGenJets==4) weight = 1.853;
 	      }
 	    if(sample=="DY")
 	      {
