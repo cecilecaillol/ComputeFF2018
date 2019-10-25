@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
     TH1F* nbevt = (TH1F*) f_Double->Get("nevents");
     float ngen = nbevt->GetBinContent(2);
 
-    float xs=1.0; float weight=1.0; float luminosity=59500.0;
+    float xs=1.0; float weight=1.0; float luminosity=59740.0;
     if (year=="2017") luminosity=41529.0;
     if (year=="2016") luminosity=35922.0;
     if (sample=="DY" or sample=="ZL" or sample=="ZTT" or sample=="ZJ" or sample=="ZLL"){ xs=6225.42; weight=luminosity*xs/ngen;}
@@ -144,6 +144,7 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("nbtag", &nbtag);
     arbre->SetBranchAddress("nbtagL", &nbtagL);
     arbre->SetBranchAddress("bweight", &bweight);
+    arbre->SetBranchAddress("prefiring_weight", &prefiring_weight);
     arbre->SetBranchAddress("q_2", &q_2);
     arbre->SetBranchAddress("pt_2", &pt_2);
     arbre->SetBranchAddress("eta_2", &eta_2);
@@ -528,23 +529,19 @@ int main(int argc, char** argv) {
 
 	if (year=="2018"){
            if (sample=="W"){
-               weight=51.542;
-               if (numGenJets==1) weight=9.0452;
-               else if (numGenJets==2) weight=4.4927;
-               else if (numGenJets==3) weight=3.0651;
-               else if (numGenJets==4) weight=3.1984;
+               weight=51.749;
+               if (numGenJets==1) weight=10.170;
+               else if (numGenJets==2) weight=4.51855;
+               else if (numGenJets==3) weight=3.07747;
+               else if (numGenJets==4) weight=3.2113;
            }
 
            if (sample=="DY"){
-               weight=3.697;
-               if (numGenJets==1)
-                   weight=0.6426;
-               else if (numGenJets==2)
-                   weight=0.5633;
-               else if (numGenJets==3)
-                   weight=0.6117;
-               else if (numGenJets==4)
-                   weight=0.9243;
+               weight=3.6234;
+               if (numGenJets==1) weight=0.6298;
+               else if (numGenJets==2) weight=0.5521;
+               else if (numGenJets==3) weight=0.5995;
+               else if (numGenJets==4) weight=0.8211;
            }
 	}
 	else if (year=="2017"){
@@ -556,15 +553,11 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=2.1954;
            }
            if (sample=="DY"){
-               weight=2.6774;
-               if (numGenJets==1)
-                   weight=0.7362;
-               else if (numGenJets==2)
-                   weight=0.96091;
-               else if (numGenJets==3)
-                   weight=1.70488;
-               else if (numGenJets==4)
-                   weight=0.243131;
+               weight=2.61364;
+               if (numGenJets==1) weight=0.71866;
+               else if (numGenJets==2) weight=0.9380;
+               else if (numGenJets==3) weight=1.6643;
+               else if (numGenJets==4) weight=0.2359;
            }
 	}
 	else if (year=="2016"){
@@ -573,18 +566,14 @@ int main(int argc, char** argv) {
                if (numGenJets==1) weight=5.76634;
                else if (numGenJets==2) weight=1.7906;
                else if (numGenJets==3) weight=0.67907;
-               else if (numGenJets==4) weight=1.9645;
+               else if (numGenJets==4) weight=1.84847;
            }
            if (sample=="DY"){
-               weight=1.52656;
-               if (numGenJets==1)
-                   weight=0.4180;
-               else if (numGenJets==2)
-                   weight=0.45093;
-               else if (numGenJets==3)
-                   weight=0.52897;
-               else if (numGenJets==4)
-                   weight=0.597;
+               weight=1.49021;
+               if (numGenJets==1) weight=0.4308;
+               else if (numGenJets==2) weight=0.463999;
+               else if (numGenJets==3) weight=0.542173;
+               else if (numGenJets==4)weight=0.61000;
            }
 	}
 
@@ -644,11 +633,11 @@ int main(int argc, char** argv) {
         if (year=="2017" && sample!="embedded" && sample!="data_obs"){
           wmc->var("e_pt")->setVal(myele.Pt());
           wmc->var("e_eta")->setVal(myele.Eta());
+          wmc->var("e_iso")->setVal(iso_1);
           wmc->var("z_gen_mass")->setVal(genM);
           wmc->var("z_gen_pt")->setVal(genpT);
           aweight=aweight*wmc->function("e_trk_ratio")->getVal();
-          aweight=aweight*wmc->function("e_iso_kit_ratio")->getVal();
-          aweight=aweight*wmc->function("e_id90_kit_ratio")->getVal();
+          aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
           aweight=aweight*0.991;//z vtx electron HLT
           zptweight=wmc->function("zptmass_weight_nom")->getVal();
           if (sample=="DY") aweight=aweight*zptweight;
@@ -656,7 +645,7 @@ int main(int argc, char** argv) {
           if (dm>10) dm=10;
           if (trigger27 or trigger32 or trigger35) aweight=aweight*wmc->function("e_trg27_trg32_trg35_kit_data")->getVal()/wmc->function("e_trg27_trg32_trg35_kit_mc")->getVal();
           else aweight=aweight*(wmc->function("e_trg_EleTau_Ele24Leg_desy_data")->getVal()/wmc->function("e_trg_EleTau_Ele24Leg_desy_mc")->getVal())*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm);
-          aweight=aweight*bweight;
+          aweight=aweight*bweight*prefiring_weight;
         }
 
         if (year=="2016" && sample!="embedded" && sample!="data_obs"){
@@ -666,7 +655,11 @@ int main(int argc, char** argv) {
           wmc->var("z_gen_pt")->setVal(genpT);
           zptweight=wmc->function("zptmass_weight_nom")->getVal();
           if (sample=="DY") aweight=aweight*zptweight;
-          aweight=aweight*bweight;
+          wmc->var("e_pt")->setVal(myele.Pt());
+          wmc->var("e_eta")->setVal(myele.Eta());
+          wmc->var("e_iso")->setVal(iso_1);
+          aweight=aweight*wmc->function("e_trk_ratio")->getVal();
+          aweight=aweight*bweight*prefiring_weight;
         }
 
 	float mt=TMass_F(myele.Pt(),mymet.Pt(),myele.Px(),mymet.Px(),myele.Py(),mymet.Py());
