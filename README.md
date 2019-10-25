@@ -21,7 +21,7 @@ To run everything
 
 ```
 cd ComputeFF2018/
-MakeFFs.py --year <year, 2016,2017,2018> --channel <mt or et at the moment>
+MakeFFs.py --year <year, 2016,2017,2018> --channel <mt,et,tt>
 ```
 
 To change the ID WP:
