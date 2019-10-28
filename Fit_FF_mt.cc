@@ -145,7 +145,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     t.SetTextSize(0.04);
     if (year==2016) t.DrawLatex(0.55, .96, "35.9 fb^{-1} (2016, 13 TeV)");
     else if (year==2017) t.DrawLatex(0.55, .96, "41.5 fb^{-1} (2017, 13 TeV)");
-    else if (year==2018) t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
+    else if (year==2018) t.DrawLatex(0.55, .96, "59.7 fb^{-1} (2018, 13 TeV)");
     if (type.find("Line2P") < 140){
        theFit2->Draw("SAME");
        theFit2->SetLineColor(2);
