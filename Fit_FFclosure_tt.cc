@@ -69,7 +69,7 @@ Double_t fitFunc_Exp3Par(Double_t *x, Double_t *par) {
 
 Double_t fitFunc_Line2Par(Double_t *x, Double_t *par) {
     //return par[0] + par[1] * x[0] + par[2] * x[0]* x[0];// + par[3] * x[0]* x[0] *x[0];
-    return par[0] + par[1]* (x[0]-150);
+    return par[0] + par[1]* (x[0]-60);
     //    return par[0] + par[1]*x[0] + par[2]*(TMath::Landau(x[0],par[3],par[4],0));
 //return par[0] + par[1]*(TMath::Exp(par[2] * x[0]-par[3]));
 }
@@ -214,7 +214,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
 
     canvas->SaveAs(outNaming.c_str());
 
-    TFile *FR_H = new TFile("FF_corrections_tt.root", "UPDATE");
+    TFile *FR_H = new TFile("FF_corrections_1.root", "UPDATE");
     FR_H->cd();
     theFit->SetName(TString(name));
     theFit->Write();

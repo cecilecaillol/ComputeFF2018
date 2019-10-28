@@ -10,8 +10,8 @@ float get_raw_FF(float pt, TF1* fct){
 float get_mvis_closure(float mvis, TF1* fct){
   float corr=1.0;
   corr=fct->Eval(mvis);
-  if (mvis>300) corr=fct->Eval(300);
-  if (mvis<50) corr=fct->Eval(50);
+  //if (mvis>300) corr=fct->Eval(300);
+  //if (mvis<50) corr=fct->Eval(50);
   return corr;
 }
 

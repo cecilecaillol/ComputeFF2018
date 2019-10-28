@@ -302,12 +302,12 @@ int main(int argc, char** argv) {
    TFile *ftauid_2018 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2018ReReco.root").c_str());
    TFile *ftauid_2017 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2017ReReco.root").c_str());
    TFile *ftauid_2016 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2016Legacy.root").c_str());
-   TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Loose");
+   /*TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Loose");
    TH1F *fct_tauid_2017= (TH1F*) ftauid_2017->Get("Loose");
-   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Loose");
-   /*TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Medium");
+   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Loose");*/
+   TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Medium");
    TH1F *fct_tauid_2017= (TH1F*) ftauid_2017->Get("Medium");
-   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Medium");*/
+   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Medium");
 
 
    TFile fwmc((datapath+"htt_scalefactors_legacy_2018.root").c_str());
@@ -332,8 +332,11 @@ int main(int argc, char** argv) {
    TFile fmvisclosure ("FF_corrections_tt.root");
    TF1* mvisclosure_qcdloose=(TF1*) fmvisclosure.Get("closure_mvis_tt_qcdloose");
 
+   TFile ftau2closure ("FF_corrections_1.root");
+   TF1* tau2closure=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcdloose");
+
    TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","ditau", "2018", "tight", "MVAv2");
-   if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2017", "tight", "MVAv2");
+   if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2017", "loose", "MVAv2");
    else if (year=="2016") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2016", "tight", "MVAv2");
 
 
@@ -360,7 +363,7 @@ int main(int argc, char** argv) {
         TLorentzVector mytau1;
         mytau1.SetPtEtaPhiM(pt_1,eta_1,phi_1,m_1);
         if (!byVVVLooseDeepVSe_2 or !byVLooseDeepVSmu_2 or !byVVVLooseDeepVSe_1 or !byVLooseDeepVSmu_1) continue;
-        /*float signalRegion=(byMediumDeepVSjet_1);
+        float signalRegion=(byMediumDeepVSjet_1);
         float antiisoRegion=(byVVVLooseDeepVSjet_1 && !byMediumDeepVSjet_1);
         float iso2=(byMediumDeepVSjet_2);
 	int mydm1=l1_decayMode;
@@ -378,9 +381,9 @@ int main(int argc, char** argv) {
 	    mydm1=l2_decayMode;
             gen1=gen_match_2;
             gen2=gen_match_1;
-	}*/
+	}
 
-        float signalRegion=(byLooseDeepVSjet_1);
+        /*float signalRegion=(byLooseDeepVSjet_1);
         float antiisoRegion=(byVVVLooseDeepVSjet_1 && !byLooseDeepVSjet_1);
         float iso2=(byLooseDeepVSjet_2);
         int mydm1=l1_decayMode;
@@ -398,11 +401,11 @@ int main(int argc, char** argv) {
             mydm1=l2_decayMode;
             gen1=gen_match_2;
             gen2=gen_match_1;
-        }
+        }*/
 
 	if (mytau1.DeltaR(mytau2)<0.5) continue;
 
-	if (year=="2018"){
+        if (year=="2018"){
            if (sample=="W"){
                weight=51.542;
                if (numGenJets==1) weight=9.0452;
@@ -411,13 +414,13 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=3.1984;
            }
            if (sample=="DY"){
-               weight=3.6089;
-               if (numGenJets==1) weight=0.62727;
-               else if (numGenJets==2) weight=0.54991;
-               else if (numGenJets==3) weight=0.5971;
-               else if (numGenJets==4) weight=0.81783;
+               weight=3.62347;
+               if (numGenJets==1) weight=0.62980;
+               else if (numGenJets==2) weight=0.55213;
+               else if (numGenJets==3) weight=0.5995;
+               else if (numGenJets==4) weight=0.82114;
            }
-	}
+        }
         else if (year=="2017"){
            if (sample=="W"){
                weight=23.8336;
@@ -427,15 +430,11 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=2.1954;
            }
            if (sample=="DY"){
-               weight=2.6774;
-               if (numGenJets==1)
-                   weight=0.7362;
-               else if (numGenJets==2)
-                   weight=0.96091;
-               else if (numGenJets==3)
-                   weight=1.70488;
-               else if (numGenJets==4)
-                   weight=0.243131;
+               weight=2.5805;
+               if (numGenJets==1) weight=0.71000;
+               else if (numGenJets==2) weight=0.921125;
+               else if (numGenJets==3) weight=1.6508;
+               else if (numGenJets==4) weight=0.21935;
            }
         }
         else if (year=="2016"){
@@ -447,15 +446,11 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=1.9645;
            }
            if (sample=="DY"){
-               weight=1.52656;
-               if (numGenJets==1)
-                   weight=0.4180;
-               else if (numGenJets==2)
-                   weight=0.45093;
-               else if (numGenJets==3)
-                   weight=0.52897;
-               else if (numGenJets==4)
-                   weight=0.597;
+               weight=1.49237;
+               if (numGenJets==1) weight=0.47595;
+               else if (numGenJets==2) weight=0.49308;
+               else if (numGenJets==3) weight=0.50555;
+               else if (numGenJets==4) weight=0.41466;
            }
         }
 
@@ -473,19 +468,19 @@ int main(int argc, char** argv) {
         if (dm2>10) dm2=10;
         int bin1=fct_tauid_2018->GetXaxis()->FindBin(dm1);
         int bin2=fct_tauid_2018->GetXaxis()->FindBin(dm2);
-        /*if (year=="2018" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
+        if (year=="2018" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
         if (year=="2017" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin1);
         if (year=="2016" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin1);
         if (year=="2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin2);
         if (year=="2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin2);
-        if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);*/
+        if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);
 
-        if (year=="2018" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
+        /*if (year=="2018" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
         if (year=="2017" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin1);
         if (year=="2016" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin1);
         if (year=="2018" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin2);
         if (year=="2017" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin2);
-        if (year=="2016" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);
+        if (year=="2016" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);*/
 
 
 	TLorentzVector mymet;
@@ -519,8 +514,8 @@ int main(int argc, char** argv) {
 	   float weight2=1.0;
 	   float myvar=(mytau1+mytau2).M();
 
-	  float ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
-	  if (njets>0) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  float ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet);//*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  if (njets>0) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet);//*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
 
            if (!is_includedInEmbedded){
 

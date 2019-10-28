@@ -15,7 +15,7 @@ def add_lumi(datayear):
     lumi.SetTextSize(0.06)
     lumi.SetTextFont (   42 )
     if datayear=="2018":
-       lumi.AddText("2018, 59.5 fb^{-1} (13 TeV)")
+       lumi.AddText("2018, 59.7 fb^{-1} (13 TeV)")
     elif datayear=="2017":
        lumi.AddText("2017, 41.5 fb^{-1} (13 TeV)")
     elif datayear=="2016":
@@ -199,7 +199,14 @@ def Draw_closure_tt(year):
       h1.Divide(hwoE)
       h3.Divide(hwoE)
       h1.GetXaxis().SetTitle("Bin number")
-      h1.GetXaxis().SetTitle("#tau_{h} p_{T} (GeV)")
+      h1.GetXaxis().SetTitle("m_{vis} (GeV)")
+      if i==1 or i==5: 
+        h1.GetXaxis().SetTitle("Leading #tau_{h} p_{T} (GeV)")
+      if i==2 or i==6:
+        h1.GetXaxis().SetTitle("Subleading #tau_{h} p_{T} (GeV)")
+      if i==3 or i==7:
+        h1.GetXaxis().SetTitle("MET (GeV)")
+
       h1.GetXaxis().SetLabelSize(0.08)
       h1.GetYaxis().SetLabelSize(0.08)
       h1.GetYaxis().SetTitle("Obs./Exp.")

@@ -104,6 +104,27 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->SetParameter(2, 70);
     theFit->SetParameter(3, 21);
 
+    if (year==2017 and name.find("0jet")<140){
+      theFit->SetParameter(0, 0.20);
+      theFit->SetParameter(1, 3.0);
+      theFit->SetParameter(2, 11.0);
+      theFit->SetParameter(3, 1.2);
+    }
+
+    if (year==2017 and name.find("1jet")<140){
+      theFit->SetParameter(0, 0.15);
+      theFit->SetParameter(1, 20.0);
+      theFit->SetParameter(2, 10.0);
+      theFit->SetParameter(3, 0.8);
+    }
+
+    if (year==2018 and name.find("1jet")<140){
+      theFit->SetParameter(0, 0.174);
+      theFit->SetParameter(1, 2.0);
+      theFit->SetParameter(2, 10.0);
+      theFit->SetParameter(3, 2.2);
+    }
+
     theFit2->SetParameter(0, 0.09);
     theFit2->SetParameter(1, 0.00001);
 
@@ -138,7 +159,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     t.SetTextSize(0.04);
     if (year==2016) t.DrawLatex(0.55, .96, "35.9 fb^{-1} (2016, 13 TeV)");
     else if (year==2017) t.DrawLatex(0.55, .96, "41.5 fb^{-1} (2017, 13 TeV)");
-    else if (year==2018) t.DrawLatex(0.55, .96, "59.5 fb^{-1} (2018, 13 TeV)");
+    else if (year==2018) t.DrawLatex(0.55, .96, "59.7 fb^{-1} (2018, 13 TeV)");
     if (type.find("Line2P") < 140){
        theFit2->Draw("SAME");
        theFit2->SetLineColor(2);
@@ -246,10 +267,10 @@ void Fit_FF_tt(int year) {
     Double_t fMax = 1000;
 
     TF1* m11 = M_FR(1, "a", "files_rawFF_tt/DataSub.root", "tt_0jet_qcd_iso", "tt_0jet_qcd_anti", "rawFF_tt_qcd_0jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m12 = M_FR(2, "exp", "files_rawFF_tt/DataSub.root", "tt_1jet_qcd_iso", "tt_1jet_qcd_anti", "rawFF_tt_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m12 = M_FR(2, "a", "files_rawFF_tt/DataSub.root", "tt_1jet_qcd_iso", "tt_1jet_qcd_anti", "rawFF_tt_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
 
     TF1* m18 = M_FR(8, "a", "files_rawFF_tt/DataSub.root", "tt_0SSloose_qcd_iso", "tt_0SSloose_qcd_anti", "rawFF_tt_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
-    TF1* m19 = M_FR(9, "exp", "files_rawFF_tt/DataSub.root", "tt_1SSloose_qcd_iso", "tt_1SSloose_qcd_anti", "rawFF_tt_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m19 = M_FR(9, "a", "files_rawFF_tt/DataSub.root", "tt_1SSloose_qcd_iso", "tt_1SSloose_qcd_anti", "rawFF_tt_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
 
     
 }
