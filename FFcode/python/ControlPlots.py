@@ -4,40 +4,41 @@ import argparse
 import os
 import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
 import ComputeFF2018.FFcode.Subtract_prompt_tt as Subtract_prompt_tt
+import ComputeFF2018.FFcode.Create_fake_tt as Create_fake_tt
 
-def RawFF(args):
+def ControlPlots(args):
     #figure out where to find our files
     if args.year == "2016":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2016_svfitted_12oct/'
+            path = '/data/ccaillol/smhmt2016_svfitted_30sep/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2016_svfitted_12oct/'
         if args.channel == "tt":
             path = '/data/ccaillol/smhtt2016_12oct/'
     elif args.year == "2017":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2017_svfitted_12oct/'
+            path = '/data/ccaillol/smhmt2017_svfitted_30sep/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2017_svfitted_12oct/'
         if args.channel == "tt":
             path = '/data/ccaillol/smhtt2017_12oct/'
     elif args.year == "2018":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2018_svfitted_12oct/'
+            path = '/data/ccaillol/smhmt2018_svfitted_30sep/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2018_svfitted_12oct/'
         if args.channel == "tt":
             path = '/data/ccaillol/smhtt2018_12oct/'
     #figure out our executable and our output directory
     if args.channel == 'mt':
-        executable = "RawFF_mt"
-        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_rawFF_mt/'
+        executable = "ControlPlots_mt"
+        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_control_mt/'
     elif args.channel == 'et':
-        executable = "RawFF_et"
-        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_rawFF_et/'
+        executable = "ControlPlots_et"
+        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_control_et/'
     elif args.channel == 'tt':
-        executable = "RawFF_tt"
-        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_rawFF_tt/'
+        executable = "ControlPlots_tt"
+        outputPath = os.environ['CMSSW_BASE']+'/src/ComputeFF2018/files_control_tt/'
 
     #define the commands and arguments to be run.
     if args.year == '2018':
@@ -149,25 +150,26 @@ def RawFF(args):
         for inputFile in haddFiles[haddedFile]:
             haddCommand+=inputFile+' '
         os.system(haddCommand)
-    #do our subtractions, and our fitting.
-    if args.channel=="et" or args.channel=="mt":
-       Subtract_prompt.Subtract_prompt(outputPath,args.channel)
-    elif args.channel=="tt":
-       Subtract_prompt_tt.Subtract_prompt_tt(outputPath)
-    os.system("root -l -b -q \'Fit_FF_"+args.channel+".cc("+args.year+")\'")
-    #make the final raw ff file
-    finalFFCommand = 'hadd -f raw_FF_'+args.channel+'.root '
+
+    ##create the fake file
+    #fakeCommand="Create_fake_tt.py --directory files_control_tt"
+    #os.system(fakeCommand)
+    Create_fake_tt.Create_fake_tt(outputPath)
+
+    #make the final control file
+    finalFFCommand = 'hadd -f control_'+args.channel+'.root '
     finalFFCommand+=outputPath+'Data.root '
     finalFFCommand+=outputPath+'DY.root '    
     if args.channel=="et" or args.channel=="mt":
       finalFFCommand+=outputPath+"W.root "
     finalFFCommand+=outputPath+'TT.root '
     finalFFCommand+=outputPath+'VV.root '
+    finalFFCommand+=outputPath+'Fake.root '
     os.system(finalFFCommand)
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Master fake factor making script")
+    parser = argparse.ArgumentParser(description="Master control plots making script")
     parser.add_argument('--channel','-c',nargs="?",choices=['mt','et','tt'],help="Which channel?",required=True)
     parser.add_argument('--year','-y',nargs="?",choices=["2016","2017","2018"],help="Which year?",required=True)
 
     args=parser.parse_args()
-    RawFF(args)
+    ControlPlots(args)

@@ -1,4 +1,3 @@
-
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -25,14 +24,13 @@
 #include "TPaveLabel.h"
 #include "TFile.h"
 #include "ComputeFF2018/FFcode/interface/myHelper.h"
-#include "ComputeFF2018/FFcode/interface/et_Tree.h"
+#include "ComputeFF2018/FFcode/interface/tt_Tree.h"
 #include "ComputeFF2018/FFcode/interface/LumiReweightingStandAlone.h"
 #include "TauAnalysisTools/TauTriggerSFs/interface/TauTriggerSFs2017.h"
 #include "RooWorkspace.h"
 #include "RooRealVar.h"
 #include "RooFunctor.h"
 #include "ComputeFF2018/FFcode/interface/SFtautrigger.h"
-#include "TauPOG/TauIDSFs/interface/TauIDSFTool.h"
 
 using namespace std;
 
@@ -48,7 +46,7 @@ int main(int argc, char** argv) {
 
     TFile *f_Double = new TFile(input.c_str());
     cout<<"XXXXXXXXXXXXX "<<input.c_str()<<" XXXXXXXXXXXX"<<endl;
-    TTree *arbre = (TTree*) f_Double->Get("etau_tree");
+    TTree *arbre = (TTree*) f_Double->Get("tautau_tree");
     TH1F* nbevt = (TH1F*) f_Double->Get("nevents");
     float ngen = nbevt->GetBinContent(2);
 
@@ -106,29 +104,12 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("Rivet_stage1p1_cat", &Rivet_stage1p1_cat);
     arbre->SetBranchAddress("Rivet_stage1_cat_pTjet30GeV", &Rivet_stage1_cat_pTjet30GeV);
 
-    arbre->SetBranchAddress("passEle27", &passEle27);
-    arbre->SetBranchAddress("passEle32", &passEle32);
-    arbre->SetBranchAddress("passEle35", &passEle35);
-    arbre->SetBranchAddress("passEle24Tau30", &passEle24Tau30);
-    arbre->SetBranchAddress("passEle24HPSTau30", &passEle24HPSTau30);
-    arbre->SetBranchAddress("passEle25", &passEle25);
-
-    arbre->SetBranchAddress("matchEle25_1", &matchEle25_1);
-    arbre->SetBranchAddress("filterEle25_1", &filterEle25_1);
-    arbre->SetBranchAddress("matchEle27_1", &matchEle27_1);
-    arbre->SetBranchAddress("matchEle32_1", &matchEle32_1);
-    arbre->SetBranchAddress("matchEle35_1", &matchEle35_1);
-    arbre->SetBranchAddress("matchEle24Tau30_1", &matchEle24Tau30_1);
-    arbre->SetBranchAddress("matchEle24Tau30_2", &matchEle24Tau30_2);
-    arbre->SetBranchAddress("matchEle24HPSTau30_1", &matchEle24HPSTau30_1);
-    arbre->SetBranchAddress("matchEle24HPSTau30_2", &matchEle24HPSTau30_2);
-    arbre->SetBranchAddress("filterEle27_1", &filterEle27_1);
-    arbre->SetBranchAddress("filterEle32_1", &filterEle32_1);
-    arbre->SetBranchAddress("filterEle35_1", &filterEle35_1);
-    arbre->SetBranchAddress("filterEle24Tau30_1", &filterEle24Tau30_1);
-    arbre->SetBranchAddress("filterEle24Tau30_2", &filterEle24Tau30_2);
-    arbre->SetBranchAddress("filterEle24HPSTau30_1", &filterEle24HPSTau30_1);
-    arbre->SetBranchAddress("filterEle24HPSTau30_2", &filterEle24HPSTau30_2);
+    arbre->SetBranchAddress("passDoubleTightTau35TightID", &passDoubleTightTau35TightID);
+    arbre->SetBranchAddress("passDoubleMediumTau40TightID", &passDoubleMediumTau40TightID);
+    arbre->SetBranchAddress("passDoubleTightTau40ID", &passDoubleTightTau40ID);
+    arbre->SetBranchAddress("passDoubleMediumHPSTau35", &passDoubleMediumHPSTau35);
+    arbre->SetBranchAddress("passDoubleTau35", &passDoubleTau35);
+    arbre->SetBranchAddress("passDoubleTauCmb35", &passDoubleTauCmb35);
 
     arbre->SetBranchAddress("run", &run);
     arbre->SetBranchAddress("lumi", &lumi);
@@ -137,25 +118,15 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("pt_1", &pt_1);
     arbre->SetBranchAddress("phi_1", &phi_1);
     arbre->SetBranchAddress("eta_1", &eta_1);
-    arbre->SetBranchAddress("iso_1", &iso_1);
-    arbre->SetBranchAddress("isoDB_1", &isoDB_1);
     arbre->SetBranchAddress("m_1", &m_1);
     arbre->SetBranchAddress("q_1", &q_1);
     arbre->SetBranchAddress("nbtag", &nbtag);
-    arbre->SetBranchAddress("nbtagL", &nbtagL);
-    arbre->SetBranchAddress("bweight", &bweight);
-    arbre->SetBranchAddress("prefiring_weight", &prefiring_weight);
     arbre->SetBranchAddress("q_2", &q_2);
     arbre->SetBranchAddress("pt_2", &pt_2);
     arbre->SetBranchAddress("eta_2", &eta_2);
     arbre->SetBranchAddress("m_2", &m_2);
     arbre->SetBranchAddress("phi_2", &phi_2);
     arbre->SetBranchAddress("met", &met);
-    arbre->SetBranchAddress("m_sv", &m_sv);
-    arbre->SetBranchAddress("m_sv_DOWN", &m_sv_DOWN);
-    arbre->SetBranchAddress("m_sv_UP", &m_sv_UP);
-    arbre->SetBranchAddress("m_sv_UESUp", &m_sv_UESUp);
-    arbre->SetBranchAddress("m_sv_UESDown", &m_sv_UESDown);
     arbre->SetBranchAddress("met", &met);
     arbre->SetBranchAddress("metphi", &metphi);
     arbre->SetBranchAddress("met_UESUp", &met_UESUp);
@@ -198,30 +169,6 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("njets_JetEC2Up", &njets_JetEC2Up);
     arbre->SetBranchAddress("mjj_JetEC2Down", &mjj_JetEC2Down);
     arbre->SetBranchAddress("mjj_JetEC2Up", &mjj_JetEC2Up);
-    arbre->SetBranchAddress("pt_1_SigmaUp", &pt_1_SigmaUp);
-    arbre->SetBranchAddress("pt_1_SigmaDown", &pt_1_SigmaDown);
-    arbre->SetBranchAddress("pt_1_ScaleUp", &pt_1_ScaleUp);
-    arbre->SetBranchAddress("pt_1_ScaleDown", &pt_1_ScaleDown);
-    arbre->SetBranchAddress("m_sv_ResponseDown", &m_sv_ResponseDown);
-    arbre->SetBranchAddress("m_sv_ResponseUp", &m_sv_ResponseUp);
-    arbre->SetBranchAddress("m_sv_ResolutionDown", &m_sv_ResolutionDown);
-    arbre->SetBranchAddress("m_sv_ResolutionUp", &m_sv_ResolutionUp);
-    arbre->SetBranchAddress("m_sv_JetRelativeSampleUp", &m_sv_JetRelativeSampleUp);
-    arbre->SetBranchAddress("m_sv_JetRelativeSampleDown", &m_sv_JetRelativeSampleDown);
-    arbre->SetBranchAddress("m_sv_JetRelativeBalUp", &m_sv_JetRelativeBalUp);
-    arbre->SetBranchAddress("m_sv_JetRelativeBalDown", &m_sv_JetRelativeBalDown);
-    arbre->SetBranchAddress("m_sv_JetEta3to5Up", &m_sv_JetEta3to5Up);
-    arbre->SetBranchAddress("m_sv_JetEta3to5Down", &m_sv_JetEta3to5Down);
-    arbre->SetBranchAddress("m_sv_JetEta0to3Up", &m_sv_JetEta0to3Up);
-    arbre->SetBranchAddress("m_sv_JetEta0to3Down", &m_sv_JetEta0to3Down);
-    arbre->SetBranchAddress("m_sv_JetEta0to5Up", &m_sv_JetEta0to5Up);
-    arbre->SetBranchAddress("m_sv_JetEta0to5Down", &m_sv_JetEta0to5Down);
-    arbre->SetBranchAddress("m_sv_JetEC2Up", &m_sv_JetEC2Up);
-    arbre->SetBranchAddress("m_sv_JetEC2Down", &m_sv_JetEC2Down);
-    arbre->SetBranchAddress("m_sv_ESMEARUP", &m_sv_ESMEARUP);
-    arbre->SetBranchAddress("m_sv_ESMEARDOWN", &m_sv_ESMEARDOWN);
-    arbre->SetBranchAddress("m_sv_ESCALEUP", &m_sv_ESCALEUP);
-    arbre->SetBranchAddress("m_sv_ESCALEDOWN", &m_sv_ESCALEDOWN);
     arbre->SetBranchAddress("njets", &njets);
     arbre->SetBranchAddress("njets_JetEta0to3Down", &njets_JetEta0to3Down);
     arbre->SetBranchAddress("njets_JetEta0to3Up", &njets_JetEta0to3Up);
@@ -259,11 +206,6 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("mjj_JetRelativeSampleDown", &mjj_JetRelativeSampleDown);
     arbre->SetBranchAddress("mjj_JetRelativeSampleUp", &mjj_JetRelativeSampleUp);
     arbre->SetBranchAddress("genweight", &genweight);
-    arbre->SetBranchAddress("byVLooseIsolationMVArun2v2DBoldDMwLT_2",&byVLooseIsolationMVArun2v2DBoldDMwLT_2);
-    arbre->SetBranchAddress("byLooseIsolationMVArun2v2DBoldDMwLT_2",&byLooseIsolationMVArun2v2DBoldDMwLT_2);
-    arbre->SetBranchAddress("byMediumIsolationMVArun2v2DBoldDMwLT_2",&byMediumIsolationMVArun2v2DBoldDMwLT_2);
-    arbre->SetBranchAddress("byTightIsolationMVArun2v2DBoldDMwLT_2",&byTightIsolationMVArun2v2DBoldDMwLT_2);
-    arbre->SetBranchAddress("byVTightIsolationMVArun2v2DBoldDMwLT_2",&byVTightIsolationMVArun2v2DBoldDMwLT_2);
 
     arbre->SetBranchAddress("byVVVLooseDeepVSjet_2",&byVVVLooseDeepVSjet_2);
     arbre->SetBranchAddress("byVVLooseDeepVSjet_2",&byVVLooseDeepVSjet_2);
@@ -287,13 +229,30 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("byTightDeepVSe_2",&byTightDeepVSe_2);
     arbre->SetBranchAddress("byVTightDeepVSe_2",&byVTightDeepVSe_2);
 
-    arbre->SetBranchAddress("byIsolationMVA3oldDMwLTraw_2",&byIsolationMVA3oldDMwLTraw_2);
+    arbre->SetBranchAddress("byVVVLooseDeepVSjet_1",&byVVVLooseDeepVSjet_1);
+    arbre->SetBranchAddress("byVVLooseDeepVSjet_1",&byVVLooseDeepVSjet_1);
+    arbre->SetBranchAddress("byVLooseDeepVSjet_1",&byVLooseDeepVSjet_1);
+    arbre->SetBranchAddress("byLooseDeepVSjet_1",&byLooseDeepVSjet_1);
+    arbre->SetBranchAddress("byMediumDeepVSjet_1",&byMediumDeepVSjet_1);
+    arbre->SetBranchAddress("byTightDeepVSjet_1",&byTightDeepVSjet_1);
+    arbre->SetBranchAddress("byVTightDeepVSjet_1",&byVTightDeepVSjet_1);
+    arbre->SetBranchAddress("byVVVLooseDeepVSmu_1",&byVVVLooseDeepVSmu_1);
+    arbre->SetBranchAddress("byVVLooseDeepVSmu_1",&byVVLooseDeepVSmu_1);
+    arbre->SetBranchAddress("byVLooseDeepVSmu_1",&byVLooseDeepVSmu_1);
+    arbre->SetBranchAddress("byLooseDeepVSmu_1",&byLooseDeepVSmu_1);
+    arbre->SetBranchAddress("byMediumDeepVSmu_1",&byMediumDeepVSmu_1);
+    arbre->SetBranchAddress("byTightDeepVSmu_1",&byTightDeepVSmu_1);
+    arbre->SetBranchAddress("byVTightDeepVSmu_1",&byVTightDeepVSmu_1);
+    arbre->SetBranchAddress("byVVVLooseDeepVSe_1",&byVVVLooseDeepVSe_1);
+    arbre->SetBranchAddress("byVVLooseDeepVSe_1",&byVVLooseDeepVSe_1);
+    arbre->SetBranchAddress("byVLooseDeepVSe_1",&byVLooseDeepVSe_1);
+    arbre->SetBranchAddress("byLooseDeepVSe_1",&byLooseDeepVSe_1);
+    arbre->SetBranchAddress("byMediumDeepVSe_1",&byMediumDeepVSe_1);
+    arbre->SetBranchAddress("byTightDeepVSe_1",&byTightDeepVSe_1);
+    arbre->SetBranchAddress("byVTightDeepVSe_1",&byVTightDeepVSe_1);
+
     arbre->SetBranchAddress("l2_decayMode",&l2_decayMode);
-    arbre->SetBranchAddress("againstElectronTightMVA6_2",&againstElectronTightMVA6_2);
-    arbre->SetBranchAddress("againstElectronVTightMVA6_2",&againstElectronVTightMVA6_2);
-    arbre->SetBranchAddress("againstElectronTightMVA62018_2",&againstElectronTightMVA62018_2);
-    arbre->SetBranchAddress("againstElectronVTightMVA62018_2",&againstElectronVTightMVA62018_2);
-    arbre->SetBranchAddress("againstMuonLoose3_2",&againstMuonLoose3_2);
+    arbre->SetBranchAddress("l1_decayMode",&l1_decayMode);
     arbre->SetBranchAddress("gen_match_1",&gen_match_1);
     arbre->SetBranchAddress("gen_match_2",&gen_match_2);
     arbre->SetBranchAddress("npu",&npu);
@@ -315,40 +274,20 @@ int main(int argc, char** argv) {
     arbre->SetBranchAddress("Flag_badMuons",&Flag_badMuons);
     arbre->SetBranchAddress("Flag_ecalBadCalibReducedMINIAODFilter",&Flag_ecalBadCalibReducedMINIAODFilter);
 
-    arbre->SetBranchAddress("matchEmbFilter_Ele24Tau30_1",&matchEmbFilter_Ele24Tau30_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele27_1",&matchEmbFilter_Ele27_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele32DoubleL1v1_1",&matchEmbFilter_Ele32DoubleL1v1_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele32DoubleL1v2_1",&matchEmbFilter_Ele32DoubleL1v2_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele32_1",&matchEmbFilter_Ele32_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele35_1",&matchEmbFilter_Ele35_1);
-    arbre->SetBranchAddress("matchEmbFilter_Ele24Tau30_2",&matchEmbFilter_Ele24Tau30_2);
-
    int nbhist=1;
 
-   float bins_mtt0[] = {30,35,40,45,50,55,60,70,80,100};
+   float bins_mtt0[] = {40,45,50,55,60,70,80,90,100,110,120,150};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
    TH1F* h1LT_qcd_iso = new TH1F ("h1LT_qcd_iso","h1LT_qcd_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_iso->Sumw2();
    TH1F* h0LT_qcd_anti = new TH1F ("h0LT_qcd_anti","h0LT_qcd_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_anti->Sumw2();
    TH1F* h1LT_qcd_anti = new TH1F ("h1LT_qcd_anti","h1LT_qcd_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_anti->Sumw2();
-   TH1F* h0LT_w_iso = new TH1F ("h0LT_w_iso","h0LT_w_iso",binnum_mtt0,bins_mtt0); h0LT_w_iso->Sumw2();
-   TH1F* h1LT_w_iso = new TH1F ("h1LT_w_iso","h1LT_w_iso",binnum_mtt0,bins_mtt0); h1LT_w_iso->Sumw2();
-   TH1F* h0LT_w_anti = new TH1F ("h0LT_w_anti","h0LT_w_anti",binnum_mtt0,bins_mtt0); h0LT_w_anti->Sumw2();
-   TH1F* h1LT_w_anti = new TH1F ("h1LT_w_anti","h1LT_w_anti",binnum_mtt0,bins_mtt0); h1LT_w_anti->Sumw2();
-   TH1F* h0LT_tt_iso = new TH1F ("h0LT_tt_iso","h0LT_tt_iso",binnum_mtt0,bins_mtt0); h0LT_tt_iso->Sumw2();
-   TH1F* h0LT_tt_anti = new TH1F ("h0LT_tt_anti","h0LT_tt_anti",binnum_mtt0,bins_mtt0); h0LT_tt_anti->Sumw2();
 
    TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
    TH1F* h1J_qcd_iso = new TH1F ("h1J_qcd_iso","h1J_qcd_iso",binnum_mtt0,bins_mtt0); h1J_qcd_iso->Sumw2();
    TH1F* h0J_qcd_anti = new TH1F ("h0J_qcd_anti","h0J_qcd_anti",binnum_mtt0,bins_mtt0); h0J_qcd_anti->Sumw2();
    TH1F* h1J_qcd_anti = new TH1F ("h1J_qcd_anti","h1J_qcd_anti",binnum_mtt0,bins_mtt0); h1J_qcd_anti->Sumw2();
-   TH1F* h0J_w_iso = new TH1F ("h0J_w_iso","h0J_w_iso",binnum_mtt0,bins_mtt0); h0J_w_iso->Sumw2();
-   TH1F* h1J_w_iso = new TH1F ("h1J_w_iso","h1J_w_iso",binnum_mtt0,bins_mtt0); h1J_w_iso->Sumw2();
-   TH1F* h0J_w_anti = new TH1F ("h0J_w_anti","h0J_w_anti",binnum_mtt0,bins_mtt0); h0J_w_anti->Sumw2();
-   TH1F* h1J_w_anti = new TH1F ("h1J_w_anti","h1J_w_anti",binnum_mtt0,bins_mtt0); h1J_w_anti->Sumw2();
-   TH1F* h0J_tt_iso = new TH1F ("h0J_tt_iso","h0J_tt_iso",binnum_mtt0,bins_mtt0); h0J_tt_iso->Sumw2();
-   TH1F* h0J_tt_anti = new TH1F ("h0J_tt_anti","h0J_tt_anti",binnum_mtt0,bins_mtt0); h0J_tt_anti->Sumw2();
 
    TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
    TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
@@ -359,7 +298,7 @@ int main(int argc, char** argv) {
    TH1F* h1SSlooseJ_qcd_iso = new TH1F ("h1SSlooseJ_qcd_iso","h1SSlooseJ_qcd_iso",binnum_mtt0,bins_mtt0); h1SSlooseJ_qcd_iso->Sumw2();
    TH1F* h1SSlooseJ_qcd_anti = new TH1F ("h1SSlooseJ_qcd_anti","h1SSlooseJ_qcd_anti",binnum_mtt0,bins_mtt0); h1SSlooseJ_qcd_anti->Sumw2();
 
-     string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
+   string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
    reweight::LumiReWeighting* LumiWeights_12;
    LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2018.root").c_str(), (datapath+"pu_distributions_data_2018.root").c_str(), "pileup", "pileup");
@@ -384,6 +323,16 @@ int main(int argc, char** argv) {
      else if (sample=="ZH125") LumiWeights_12 = new reweight::LumiReWeighting((datapath+"pu_distributions_mc_2017.root").c_str(), (datapath+"pu_distributions_data_2017.root").c_str(), "pua/#ZHToTauTau_M125_13TeV_powheg_pythia8#RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1#MINIAODSIM", "pileup");
    }
 
+   TFile *ftauid_2018 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2018ReReco.root").c_str());
+   TFile *ftauid_2017 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2017ReReco.root").c_str());
+   TFile *ftauid_2016 = new TFile((datapath+"TauID_SF_dm_DeepTau2017v2p1VSjet_2016Legacy.root").c_str());
+   /*TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Loose");
+   TH1F *fct_tauid_2017= (TH1F*) ftauid_2017->Get("Loose");
+   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Loose");*/
+   TH1F *fct_tauid_2018= (TH1F*) ftauid_2018->Get("Medium");
+   TH1F *fct_tauid_2017= (TH1F*) ftauid_2017->Get("Medium");
+   TH1F *fct_tauid_2016= (TH1F*) ftauid_2016->Get("Medium");
+
    TFile fwmc((datapath+"htt_scalefactors_legacy_2018.root").c_str());
    RooWorkspace *wmc = (RooWorkspace*)fwmc.Get("w");
    fwmc.Close();
@@ -398,48 +347,9 @@ int main(int argc, char** argv) {
       fwmc.Close();
    }
 
-   ScaleFactor * myScaleFactor_trgEle3235 = new ScaleFactor();
-   myScaleFactor_trgEle3235->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele32orEle35.root");
-   ScaleFactor * myScaleFactor_trgEle24 = new ScaleFactor();
-   myScaleFactor_trgEle24->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_Ele24.root");
-   ScaleFactor * myScaleFactor_IdIso = new ScaleFactor();
-   myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2018/Electron_Run2018_IdIso.root");
-
-   if (year=="2017"){
-     myScaleFactor_trgEle3235->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_Ele32orEle35.root");
-     myScaleFactor_trgEle24->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_EleTau_Ele24.root");
-     myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2017/Electron_IdIso_IsoLt0.15_IsoID_eff.root");
-   }
-
-   TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","etau", "2018", "tight", "MVAv2");
-   if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","etau", "2017", "tight", "MVAv2");
-
-   TFile *fZ=new TFile((datapath+"zpt_weights_2016_BtoH.root").c_str());
-   TH2F *histZ=(TH2F*) fZ->Get("zptmass_histo");
-   ScaleFactor * myScaleFactor_trgEle25 = new ScaleFactor();
-   myScaleFactor_trgEle25->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_Ele25.root");
-   if (year=="2016") myScaleFactor_IdIso->init_ScaleFactor(string(std::getenv("CMSSW_BASE"))+"/src/LeptonEfficiencies/Electron/Run2016_legacy/Electron_Run2016_legacy_IdIso.root");
-
-   TauIDSFTool * theSFTool;
-   if (year == "2016") theSFTool = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","Medium");
-   else if (year == "2017") theSFTool = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium");
-   else theSFTool = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet", "Medium");
-
-   TFile *ftauid_2018 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2018ReReco.root").c_str());
-   TF1 *fct_tauid_2018= (TF1*) ftauid_2018->Get("Medium_cent");
-   TF1 *fct_tauid_up_2018= (TF1*) ftauid_2018->Get("Medium_up");
-   TF1 *fct_tauid_down_2018= (TF1*) ftauid_2018->Get("Medium_down");
-
-   TFile *ftauid_2017 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2017ReReco.root").c_str());
-   TF1 *fct_tauid_2017= (TF1*) ftauid_2017->Get("Medium_cent");
-   TF1 *fct_tauid_up_2017= (TF1*) ftauid_2017->Get("Medium_up");
-   TF1 *fct_tauid_down_2017= (TF1*) ftauid_2017->Get("Medium_down");
-
-   TFile *ftauid_2016 = new TFile((datapath+"TauID_SF_pt_DeepTau2017v2p1VSjet_2016Legacy.root").c_str());
-   TF1 *fct_tauid_2016= (TF1*) ftauid_2016->Get("Medium_cent");
-   TF1 *fct_tauid_up_2016= (TF1*) ftauid_2016->Get("Medium_up");
-   TF1 *fct_tauid_down_2016= (TF1*) ftauid_2016->Get("Medium_down");
-
+   TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","ditau", "2018", "tight", "MVAv2");
+   if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2017", "loose", "MVAv2");
+   else if (year=="2016") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2016", "tight", "MVAv2");
 
    Int_t nentries_wtn = (Int_t) arbre->GetEntries();
    for (Int_t i = 0; i < nentries_wtn; i++) {
@@ -448,100 +358,84 @@ int main(int argc, char** argv) {
         fflush(stdout);
 
 	if (fabs(eta_1)>2.1) continue;
-        if (fabs(eta_2)>2.3) continue;
+        if (fabs(eta_2)>2.1) continue;
 
-        if (Flag_goodVertices) continue;
+        /*if (Flag_goodVertices) continue;
         if (Flag_globalSuperTightHalo2016Filter) continue;
         if (Flag_HBHENoiseFilter) continue;
         if (Flag_HBHENoiseIsoFilter) continue;
         if (Flag_EcalDeadCellTriggerPrimitiveFilter) continue;
         if (Flag_BadPFMuonFilter) continue;
         if ((sample=="data_obs" or sample=="embedded") && Flag_eeBadScFilter) continue;
-        if (Flag_ecalBadCalibReducedMINIAODFilter) continue;
+        if (Flag_ecalBadCalibReducedMINIAODFilter) continue;*/
 
-        bool trigger35=(passEle35 && pt_1>33 && matchEle35_1 && filterEle35_1);
-        bool trigger32=(passEle32 && pt_1>33 && matchEle32_1 && filterEle32_1);
-        bool trigger2430=(passEle24Tau30 && matchEle24Tau30_1 && filterEle24Tau30_1 && matchEle24Tau30_2 && filterEle24Tau30_2 && pt_1>25 && pt_2>35 && fabs(eta_2)<2.1 && pt_1<=33);
-        bool trigger2430HPS=(passEle24HPSTau30 && matchEle24HPSTau30_1 && filterEle24HPSTau30_1 && matchEle24HPSTau30_2 && filterEle24HPSTau30_2 && pt_1>25 && pt_2>35 && fabs(eta_2)<2.1 && pt_1<=33);
-	bool trigger27=false;
-	bool trigger25=false;
-	if (sample=="embedded"){
-	   if (fabs(eta_1)>=1.479){
-		trigger35=(pt_1>33); trigger32=(pt_1>33); trigger2430HPS=(fabs(eta_2)<2.1 && pt_1>25 && pt_2>35 && pt_1<=33);
-	   }
-	   if (fabs(eta_1)<1.479){   
-                trigger35=(pt_1>33 && matchEmbFilter_Ele35_1); trigger32=(pt_1>33 && (matchEmbFilter_Ele32DoubleL1v1_1 or matchEmbFilter_Ele32DoubleL1v2_1 or matchEmbFilter_Ele32_1)); trigger2430HPS=(matchEmbFilter_Ele24Tau30_1 && matchEmbFilter_Ele24Tau30_2 && fabs(eta_2)<2.1 && pt_1>25 && pt_2>35 && pt_1<=33);
-           }
+        bool trigger=((passDoubleTightTau35TightID && pt_1>40 && pt_2>40) or (passDoubleMediumTau40TightID && pt_1>40 && pt_2>40) or (passDoubleTightTau40ID && pt_1>40 && pt_2>40));
+        bool triggerHPS=(passDoubleMediumHPSTau35 && pt_1>40 && pt_2>40);
+	bool trigger2016=((passDoubleTau35 or passDoubleTauCmb35) && pt_1>40 && pt_2>40);
+        if (year=="2018" && sample=="data_obs" && run<317509 && !trigger) continue;
+        if (year=="2018" && sample=="data_obs" && run>=317509 && !triggerHPS) continue;
+        if (year=="2018" && sample!="data_obs" && !triggerHPS) continue;
+	if (year=="2017" && !trigger) continue;
+	if (year=="2016" && !trigger2016) continue;
+
+	TLorentzVector mytau2; 
+	mytau2.SetPtEtaPhiM(pt_2,eta_2,phi_2,m_2);
+        TLorentzVector mytau1;
+        mytau1.SetPtEtaPhiM(pt_1,eta_1,phi_1,m_1);
+        if (!byVVVLooseDeepVSe_2 or !byVLooseDeepVSmu_2 or !byVVVLooseDeepVSe_1 or !byVLooseDeepVSmu_1) continue;
+	int mydm1=l1_decayMode;
+        int mydm2=l2_decayMode;
+        float gen1=gen_match_1;
+        float gen2=gen_match_2;
+
+        float signalRegion=(byMediumDeepVSjet_1);
+        float antiisoRegion=(byVVVLooseDeepVSjet_1 && !byMediumDeepVSjet_1);
+	float iso2=(byMediumDeepVSjet_2);
+
+	if (pt_2>pt_1){
+	    mytau2.SetPtEtaPhiM(pt_1,eta_1,phi_1,m_1);
+	    mytau1.SetPtEtaPhiM(pt_2,eta_2,phi_2,m_2);
+	    signalRegion=(byMediumDeepVSjet_2);
+	    antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
+	    iso2=byMediumDeepVSjet_1;
+            mydm1=l2_decayMode;
+            mydm2=l1_decayMode;
+            gen1=gen_match_2;
+            gen2=gen_match_1;
 	}
-        if (year=="2018" && sample=="data_obs" && run<317509 && !trigger2430 && !trigger32 && !trigger35) continue;
-        if (year=="2018" && sample=="data_obs" && run>=317509 && !trigger2430HPS && !trigger32 && !trigger35) continue;
-        if (year=="2018" && sample!="data_obs" && !trigger32 && !trigger35 && !trigger2430HPS) continue;
 
-	if (year=="2017"){
-           trigger35=(passEle35 && pt_1>28 && matchEle35_1 && filterEle35_1);
-           trigger32=(passEle32 && pt_1>28 && matchEle32_1 && filterEle32_1);
-           trigger27=(passEle27 && pt_1>28 && matchEle27_1 && filterEle27_1);
-           trigger2430=(passEle24Tau30 && matchEle24Tau30_1 && filterEle24Tau30_1 && matchEle24Tau30_2 && filterEle24Tau30_2 && pt_1>25 && pt_2>35 && pt_1<28 && fabs(eta_2)<2.1);
-           if (sample=="embedded" && fabs(eta_1)<1.479) trigger2430=(passEle24Tau30 && pt_1>25 && pt_2>35 && pt_1<28 && fabs(eta_2)<2.1);
-           if (sample=="embedded" && fabs(eta_1)>1.479 && (pt_1>28 or fabs(eta_2)<2.1)){ trigger35=true; trigger32=true; trigger2430=true;}
-           if (sample=="embedded" && fabs(eta_1)>1.479 && pt_1<28 && (pt_2<35 or fabs(eta_2)>2.1)){ trigger35=false; trigger32=false; trigger2430=false;}
-           if (!trigger27 && !trigger32 && !trigger35 && !trigger2430) continue;
-	}
-	else if (year=="2016"){
-	   trigger25=(passEle25 && matchEle25_1 && filterEle25_1 && pt_1>26);
-	   if (!trigger25) continue;
-	}
+	/*float signalRegion=(byLooseDeepVSjet_1);
+        float antiisoRegion=(byVVVLooseDeepVSjet_1 && !byLooseDeepVSjet_1);
+        float iso2=(byLooseDeepVSjet_2);
 
+        if (pt_2>pt_1){
+            mytau2.SetPtEtaPhiM(pt_1,eta_1,phi_1,m_1);
+            mytau1.SetPtEtaPhiM(pt_2,eta_2,phi_2,m_2);
+            signalRegion=(byLooseDeepVSjet_2);
+            antiisoRegion=(byVVVLooseDeepVSjet_2 && !byLooseDeepVSjet_2);
+            iso2=byLooseDeepVSjet_1;
+            mydm1=l2_decayMode;
+            mydm2=l1_decayMode;
+            gen1=gen_match_2;
+            gen2=gen_match_1;
+        }*/
 
-	// Change here to change the ID!!
-	/*// MVA Tight
-	if (l2_decayMode!=0 && l2_decayMode!=1 && l2_decayMode!=10) continue;
-	if (!againstElectronTightMVA6_2 or !againstMuonLoose3_2) continue;
-        float signalRegion=(byTightIsolationMVArun2v2DBoldDMwLT_2);
-        float antiisoRegion=(byVLooseIsolationMVArun2v2DBoldDMwLT_2 && !byTightIsolationMVArun2v2DBoldDMwLT_2);*/
-
-	// Deep Tight
-	/*if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
-        float signalRegion=(byTightDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byTightDeepVSjet_2);*/
-
-	// Deep Medium
-        if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
-        float signalRegion=(byMediumDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
-
-	// Deep VTight
-        /*if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
-        float signalRegion=(byVTightDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byVTightDeepVSjet_2);*/
-
-	/*// Deep Loose
-        if (!byTightDeepVSe_2 or !byVLooseDeepVSmu_2) continue;
-        float signalRegion=(byLooseDeepVSjet_2);
-        float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byLooseDeepVSjet_2);*/
-
-	TLorentzVector mytau; 
-	mytau.SetPtEtaPhiM(pt_2,eta_2,phi_2,m_2);
-        TLorentzVector myele;
-        myele.SetPtEtaPhiM(pt_1,eta_1,phi_1,m_1);
-
-	if (myele.DeltaR(mytau)<0.5) continue;
+	if (mytau1.DeltaR(mytau2)<0.5) continue;
 
 	if (year=="2018"){
            if (sample=="W"){
-               weight=51.749;
-               if (numGenJets==1) weight=10.170;
-               else if (numGenJets==2) weight=4.51855;
-               else if (numGenJets==3) weight=3.07747;
-               else if (numGenJets==4) weight=3.2113;
+               weight=51.542;
+               if (numGenJets==1) weight=9.0452;
+               else if (numGenJets==2) weight=4.4927;
+               else if (numGenJets==3) weight=3.0651;
+               else if (numGenJets==4) weight=3.1984;
            }
-
            if (sample=="DY"){
-               weight=3.6234;
-               if (numGenJets==1) weight=0.6298;
-               else if (numGenJets==2) weight=0.5521;
+               weight=3.62347;
+               if (numGenJets==1) weight=0.62980;
+               else if (numGenJets==2) weight=0.55213;
                else if (numGenJets==3) weight=0.5995;
-               else if (numGenJets==4) weight=0.8211;
+               else if (numGenJets==4) weight=0.82114;
            }
 	}
 	else if (year=="2017"){
@@ -553,11 +447,11 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=2.1954;
            }
            if (sample=="DY"){
-               weight=2.61364;
-               if (numGenJets==1) weight=0.71866;
-               else if (numGenJets==2) weight=0.9380;
-               else if (numGenJets==3) weight=1.6643;
-               else if (numGenJets==4) weight=0.2359;
+               weight=2.5805;
+               if (numGenJets==1) weight=0.71000;
+               else if (numGenJets==2) weight=0.921125;
+               else if (numGenJets==3) weight=1.6508;
+               else if (numGenJets==4) weight=0.21935;
            }
 	}
 	else if (year=="2016"){
@@ -566,39 +460,43 @@ int main(int argc, char** argv) {
                if (numGenJets==1) weight=5.76634;
                else if (numGenJets==2) weight=1.7906;
                else if (numGenJets==3) weight=0.67907;
-               else if (numGenJets==4) weight=1.84847;
+               else if (numGenJets==4) weight=1.9645;
            }
            if (sample=="DY"){
-               weight=1.49021;
-               if (numGenJets==1) weight=0.4308;
-               else if (numGenJets==2) weight=0.463999;
-               else if (numGenJets==3) weight=0.542173;
-               else if (numGenJets==4)weight=0.61000;
+               weight=1.49237;
+               if (numGenJets==1) weight=0.47595;
+               else if (numGenJets==2) weight=0.49308;
+               else if (numGenJets==3) weight=0.50555;
+               else if (numGenJets==4) weight=0.41466;
            }
 	}
 
         bool is_includedInEmbedded=false;
         //if ((name.find("125")>100 && sample!="data_obs" && sample!="embedded") && gen_match_1>2 && gen_match_1<6 && gen_match_2>2 && gen_match_2<6) is_includedInEmbedded=true; // remove overlap with embedded samples
-        bool isT=(!is_includedInEmbedded && gen_match_2==5);
-        bool isL=(!is_includedInEmbedded && gen_match_2<5);
+        bool isT=(!is_includedInEmbedded && gen1==5);
+        bool isL=(!is_includedInEmbedded && gen1<5);
 
-        float aweight=genweight*weight*LumiWeights_12->weight(npu);
+	float aweight=genweight*weight*LumiWeights_12->weight(npu);
         if (sample=="embedded") aweight=genweight;
-        if (year=="2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2018->Eval(mytau.Pt());
-        if (year=="2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2017->Eval(mytau.Pt());
-        if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->Eval(mytau.Pt());
-        if (sample=="embedded") aweight=aweight*0.88;
-	/*if (gen_match_2==2 or gen_match_2==4){
-	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.06;
-           else if (fabs(mytau.Eta())<0.8) aweight=aweight*1.02;
-           else if (fabs(mytau.Eta())<1.2) aweight=aweight*1.10;
-           else if (fabs(mytau.Eta())<1.7) aweight=aweight*1.03;
-           else if (fabs(mytau.Eta())<2.3) aweight=aweight*1.94;
-	}
-        if (gen_match_2==1 or gen_match_2==3){
-           if (fabs(mytau.Eta())<1.460) aweight=aweight*1.80;
-           else if (fabs(mytau.Eta())>1.558) aweight=aweight*1.53;
-	}*/
+
+	float dm1=l1_decayMode;
+        float dm2=l2_decayMode;
+	if (dm1>10) dm1=10;
+        if (dm2>10) dm2=10;
+	int bin1=fct_tauid_2018->GetXaxis()->FindBin(dm1);
+        int bin2=fct_tauid_2018->GetXaxis()->FindBin(dm2);
+        if (year=="2018" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
+        if (year=="2017" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin1);
+        if (year=="2016" && byMediumDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin1);
+        if (year=="2018" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin2);
+        if (year=="2017" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin2);
+        if (year=="2016" && byMediumDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);
+	/*if (year=="2018" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin1);
+        if (year=="2017" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin1);
+        if (year=="2016" && byLooseDeepVSjet_1 && sample!="embedded" && sample!="data_obs" && gen_match_1==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin1);
+        if (year=="2018" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2018->GetBinContent(bin2);
+        if (year=="2017" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2017->GetBinContent(bin2);
+        if (year=="2016" && byLooseDeepVSjet_2 && sample!="embedded" && sample!="data_obs" && gen_match_2==5) aweight=aweight*fct_tauid_2016->GetBinContent(bin2);*/
 
 	TLorentzVector mymet;
 	mymet.SetPtEtaPhiM(met,0,metphi,0);
@@ -617,125 +515,59 @@ int main(int argc, char** argv) {
         }
 
         float zptweight=1.0;
-	if (year=="2018" && sample!="embedded" && sample!="data_obs"){
+	if (sample!="embedded" && sample!="data_obs"){ // same for all years
           wmc->var("z_gen_mass")->setVal(genM);
           wmc->var("z_gen_pt")->setVal(genpT);
 	  zptweight=wmc->function("zptmass_weight_nom")->getVal();
 	  if (sample=="DY") aweight=aweight*zptweight;
-	  aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
-          int mydm=l2_decayMode;
-          if (mydm>10) mydm=10;
-	  if (trigger32 or trigger35) aweight=aweight*myScaleFactor_trgEle3235->get_ScaleFactor(pt_1,eta_1);
-	  else aweight=aweight*myScaleFactor_trgEle24->get_ScaleFactor(pt_1,eta_1)*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), mydm);
-          aweight=aweight*bweight;
+          if (mydm2>10) mydm2=10;
+          if (mydm1>10) mydm1=10;
+ 	  aweight=aweight*etsf->getTriggerScaleFactor(mytau1.Pt(), mytau1.Eta(), mytau1.Phi(), mydm1)*etsf->getTriggerScaleFactor(mytau2.Pt(), mytau2.Eta(), mytau2.Phi(), mydm2);
 	}
 
-        if (year=="2017" && sample!="embedded" && sample!="data_obs"){
-          wmc->var("e_pt")->setVal(myele.Pt());
-          wmc->var("e_eta")->setVal(myele.Eta());
-          wmc->var("e_iso")->setVal(iso_1);
-          wmc->var("z_gen_mass")->setVal(genM);
-          wmc->var("z_gen_pt")->setVal(genpT);
-          aweight=aweight*wmc->function("e_trk_ratio")->getVal();
-          aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
-          aweight=aweight*0.991;//z vtx electron HLT
-          zptweight=wmc->function("zptmass_weight_nom")->getVal();
-          if (sample=="DY") aweight=aweight*zptweight;
-          int dm=l2_decayMode;
-          if (dm>10) dm=10;
-          if (trigger27 or trigger32 or trigger35) aweight=aweight*wmc->function("e_trg27_trg32_trg35_kit_data")->getVal()/wmc->function("e_trg27_trg32_trg35_kit_mc")->getVal();
-          else aweight=aweight*(wmc->function("e_trg_EleTau_Ele24Leg_desy_data")->getVal()/wmc->function("e_trg_EleTau_Ele24Leg_desy_mc")->getVal())*etsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm);
-          aweight=aweight*bweight*prefiring_weight;
-        }
-
-        if (year=="2016" && sample!="embedded" && sample!="data_obs"){
-          aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
-          aweight=aweight*myScaleFactor_trgEle25->get_ScaleFactor(pt_1,eta_1);
-          wmc->var("z_gen_mass")->setVal(genM);
-          wmc->var("z_gen_pt")->setVal(genpT);
-          zptweight=wmc->function("zptmass_weight_nom")->getVal();
-          if (sample=="DY") aweight=aweight*zptweight;
-          wmc->var("e_pt")->setVal(myele.Pt());
-          wmc->var("e_eta")->setVal(myele.Eta());
-          wmc->var("e_iso")->setVal(iso_1);
-          aweight=aweight*wmc->function("e_trk_ratio")->getVal();
-          aweight=aweight*bweight*prefiring_weight;
-        }
-
-	float mt=TMass_F(myele.Pt(),mymet.Pt(),myele.Px(),mymet.Px(),myele.Py(),mymet.Py());
-
 	//************************* Fill histograms **********************
-           if (mytau.Pt()<30) continue;
 	   float weight2=1.0;
-	   float myvar=mytau.Pt();
-	   //if (myvar>80) myvar=79;
+	   float myvar=mytau1.Pt();
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){
-	       if (signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+	       if (signalRegion && njets==0 && iso2 && q_1*q_2>0)
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0LT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets>0 && iso2 && q_1*q_2>0)
                   h1LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets>0 && iso2 && q_1*q_2>0)
                   h1LT_qcd_anti->Fill(myvar,aweight*weight2);
 
-               if (signalRegion && njets==0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets>0 && !iso2 && q_1*q_2>0)
                   h1SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets>0 && !iso2 && q_1*q_2>0)
                   h1SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
-
-               if (signalRegion && njets==0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h0LT_w_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h0LT_w_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h1LT_w_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h1LT_w_anti->Fill(myvar,aweight*weight2);
-
-               if (signalRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
-                  h0LT_tt_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
-                  h0LT_tt_anti->Fill(myvar,aweight*weight2);
 	    }
 	   else{
-               if (signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0J_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets>0 && iso2 && q_1*q_2>0)
                   h1J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets>0 && iso2 && q_1*q_2>0)
                   h1J_qcd_anti->Fill(myvar,aweight*weight2);
 
-               if (signalRegion && njets==0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (signalRegion && njets>0 && !iso2 && q_1*q_2>0)
                   h1SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1>0.15 && iso_1<0.25 && nbtag==0 && mt<50 && q_1*q_2>0)
+               if (antiisoRegion && njets>0 && !iso2 && q_1*q_2>0)
                   h1SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
 
-               if (signalRegion && njets==0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h0J_w_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h0J_w_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h1J_w_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso_1<0.15 && nbtag==0 && mt>70 && q_1*q_2<0)
-                  h1J_w_anti->Fill(myvar,aweight*weight2);
-
-               if (signalRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
-                  h0J_tt_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
-                  h0J_tt_anti->Fill(myvar,aweight*weight2);
             }
 
            }
@@ -747,7 +579,7 @@ int main(int argc, char** argv) {
     TString postfixJ="J";
     TString postfixLT="LT";
 
-    TDirectory *d0_qcd_iso =fout->mkdir("et_0jet_qcd_iso");
+    TDirectory *d0_qcd_iso =fout->mkdir("tt_0jet_qcd_iso");
     d0_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
       h0LT_qcd_iso->SetName(name.c_str());
@@ -761,7 +593,7 @@ int main(int argc, char** argv) {
       h0J_qcd_iso->Write();
     }
 
-    TDirectory *d0_qcd_anti =fout->mkdir("et_0jet_qcd_anti");
+    TDirectory *d0_qcd_anti =fout->mkdir("tt_0jet_qcd_anti");
     d0_qcd_anti->cd();
 
     if (sample=="data_obs" or sample=="W"){
@@ -776,7 +608,7 @@ int main(int argc, char** argv) {
       h0J_qcd_anti->Write();
     }
 
-    TDirectory *d1_qcd_iso =fout->mkdir("et_1jet_qcd_iso");
+    TDirectory *d1_qcd_iso =fout->mkdir("tt_1jet_qcd_iso");
     d1_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
       h1LT_qcd_iso->SetName(name.c_str());
@@ -790,7 +622,7 @@ int main(int argc, char** argv) {
       h1J_qcd_iso->Write();
     }
 
-    TDirectory *d1_qcd_anti =fout->mkdir("et_1jet_qcd_anti");
+    TDirectory *d1_qcd_anti =fout->mkdir("tt_1jet_qcd_anti");
     d1_qcd_anti->cd();
     if (sample=="data_obs" or sample=="W"){
       h1LT_qcd_anti->SetName(name.c_str());
@@ -804,7 +636,7 @@ int main(int argc, char** argv) {
       h1J_qcd_anti->Write();
     }
 
-    TDirectory *d0SSloose_qcd_iso =fout->mkdir("et_0SSloose_qcd_iso");
+    TDirectory *d0SSloose_qcd_iso =fout->mkdir("tt_0SSloose_qcd_iso");
     d0SSloose_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
       h0SSlooseLT_qcd_iso->SetName(name.c_str());
@@ -818,7 +650,7 @@ int main(int argc, char** argv) {
       h0SSlooseJ_qcd_iso->Write();
     }
 
-    TDirectory *d0SSloose_qcd_anti =fout->mkdir("et_0SSloose_qcd_anti");
+    TDirectory *d0SSloose_qcd_anti =fout->mkdir("tt_0SSloose_qcd_anti");
     d0SSloose_qcd_anti->cd();
     if (sample=="data_obs" or sample=="W"){
       h0SSlooseLT_qcd_anti->SetName(name.c_str());
@@ -832,7 +664,7 @@ int main(int argc, char** argv) {
       h0SSlooseJ_qcd_anti->Write();
     }
 
-    TDirectory *d1SSloose_qcd_iso =fout->mkdir("et_1SSloose_qcd_iso");
+    TDirectory *d1SSloose_qcd_iso =fout->mkdir("tt_1SSloose_qcd_iso");
     d1SSloose_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
       h1SSlooseLT_qcd_iso->SetName(name.c_str());
@@ -846,7 +678,7 @@ int main(int argc, char** argv) {
       h1SSlooseJ_qcd_iso->Write();
     }
 
-    TDirectory *d1SSloose_qcd_anti =fout->mkdir("et_1SSloose_qcd_anti");
+    TDirectory *d1SSloose_qcd_anti =fout->mkdir("tt_1SSloose_qcd_anti");
     d1SSloose_qcd_anti->cd();
     if (sample=="data_obs" or sample=="W"){
       h1SSlooseLT_qcd_anti->SetName(name.c_str());
@@ -859,91 +691,6 @@ int main(int argc, char** argv) {
       h1SSlooseJ_qcd_anti->SetName(name.c_str()+postfixJ);
       h1SSlooseJ_qcd_anti->Write();
     }
-
-    TDirectory *d0_w_iso =fout->mkdir("et_0jet_w_iso");
-    d0_w_iso->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h0LT_w_iso->SetName(name.c_str());
-      h0LT_w_iso->Add(h0J_w_iso);
-      h0LT_w_iso->Write();
-    }
-    else{
-      h0LT_w_iso->SetName(name.c_str()+postfixLT);
-      h0LT_w_iso->Write();
-      h0J_w_iso->SetName(name.c_str()+postfixJ);
-      h0J_w_iso->Write();
-    }
-
-    TDirectory *d0_w_anti =fout->mkdir("et_0jet_w_anti");
-    d0_w_anti->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h0LT_w_anti->SetName(name.c_str());
-      h0LT_w_anti->Add(h0J_w_anti);
-      h0LT_w_anti->Write();
-    }
-    else{
-      h0LT_w_anti->SetName(name.c_str()+postfixLT);
-      h0LT_w_anti->Write();
-      h0J_w_anti->SetName(name.c_str()+postfixJ);
-      h0J_w_anti->Write();
-    }
-
-    TDirectory *d1_w_iso =fout->mkdir("et_1jet_w_iso");
-    d1_w_iso->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h1LT_w_iso->SetName(name.c_str());
-      h1LT_w_iso->Add(h1J_w_iso);
-      h1LT_w_iso->Write();
-    }
-    else{
-      h1LT_w_iso->SetName(name.c_str()+postfixLT);
-      h1LT_w_iso->Write();
-      h1J_w_iso->SetName(name.c_str()+postfixJ);
-      h1J_w_iso->Write();
-    }
-
-    TDirectory *d1_w_anti =fout->mkdir("et_1jet_w_anti");
-    d1_w_anti->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h1LT_w_anti->SetName(name.c_str());
-      h1LT_w_anti->Add(h1J_w_anti);
-      h1LT_w_anti->Write();
-    }
-    else{
-      h1LT_w_anti->SetName(name.c_str()+postfixLT);
-      h1LT_w_anti->Write();
-      h1J_w_anti->SetName(name.c_str()+postfixJ);
-      h1J_w_anti->Write();
-    }
-
-    TDirectory *d0_tt_iso =fout->mkdir("et_0jet_tt_iso");
-    d0_tt_iso->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h0LT_tt_iso->SetName(name.c_str());
-      h0LT_tt_iso->Add(h0J_tt_iso);
-      h0LT_tt_iso->Write();
-    }
-    else{
-      h0LT_tt_iso->SetName(name.c_str()+postfixLT);
-      h0LT_tt_iso->Write();
-      h0J_tt_iso->SetName(name.c_str()+postfixJ);
-      h0J_tt_iso->Write();
-    }
-
-    TDirectory *d0_tt_anti =fout->mkdir("et_0jet_tt_anti");
-    d0_tt_anti->cd();
-    if (sample=="data_obs" or sample=="W"){
-      h0LT_tt_anti->SetName(name.c_str());
-      h0LT_tt_anti->Add(h0J_tt_anti);
-      h0LT_tt_anti->Write();
-    }
-    else{
-      h0LT_tt_anti->SetName(name.c_str()+postfixLT);
-      h0LT_tt_anti->Write();
-      h0J_tt_anti->SetName(name.c_str()+postfixJ);
-      h0J_tt_anti->Write();
-    }
-
 
     fout->Close();
     delete wmc;

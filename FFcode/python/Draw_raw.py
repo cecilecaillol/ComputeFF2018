@@ -16,7 +16,7 @@ def add_lumi(datayear):
     lumi.SetTextSize(0.06)
     lumi.SetTextFont (   42 )
     if datayear=="2018":
-       lumi.AddText("2018, 59.5 fb^{-1} (13 TeV)")
+       lumi.AddText("2018, 59.7 fb^{-1} (13 TeV)")
     elif datayear=="2017":
        lumi.AddText("2017, 41.5 fb^{-1} (13 TeV)")
     elif datayear=="2016":
