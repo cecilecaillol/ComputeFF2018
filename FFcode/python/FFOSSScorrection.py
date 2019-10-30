@@ -7,21 +7,21 @@ import ComputeFF2018.FFcode.Subtract_prompt_tt as Subtract_prompt_tt
 def FFOSSScorrection(args):
     if args.year == "2016":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2016_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2016_svfitted_12oct/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2016_svfitted_12oct/'
         if args.channel == "tt":
             path = '/data/ccaillol/smhtt2016_12oct/'
     elif args.year == "2017":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2017_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2017_svfitted_12oct/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2017_svfitted_12oct/'
         if args.channel == "tt":
-            path = '/data/ccaillol/smhtt2017_12oct/'
+            path = '/data/ccaillol/smhtt2017_12oct/'            
     elif args.year == "2018":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2018_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2018_svfitted_12oct/'
         if args.channel == "et":
             path = '/data/ccaillol/smhet2018_svfitted_12oct/'
         if args.channel == "tt":
