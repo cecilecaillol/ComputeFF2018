@@ -535,11 +535,11 @@ int main(int argc, char** argv) {
                else if (numGenJets==4) weight=1.84847;
            }
            if (sample=="DY"){
-               weight=1.49021;
-               if (numGenJets==1) weight=0.4308;
-               else if (numGenJets==2) weight=0.463999;
-               else if (numGenJets==3) weight=0.542173;
-               else if (numGenJets==4)weight=0.61000;
+               weight=1.49237;
+               if (numGenJets==1) weight=0.47595;
+               else if (numGenJets==2) weight=0.4931;
+               else if (numGenJets==3) weight=0.5113;
+               else if (numGenJets==4) weight=0.69041;
            }
         }
 

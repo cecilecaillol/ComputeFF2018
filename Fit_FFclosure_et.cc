@@ -230,7 +230,7 @@ void Fit_FFclosure_et(int year) {
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 0;
-    Double_t fMax = 10000;
+    Double_t fMax = 1000;
 
     TF1* m11 = M_FR(1, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_mvis_et_qcd", Fit_Value_tau, fMin, fMax, year);
     TF1* m12 = M_FR(2, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "closure_mvis_et_qcdloose", Fit_Value_tau, fMin, fMax, year);

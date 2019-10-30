@@ -244,7 +244,7 @@ void Fit_FF_mt(int year) {
     TH2F * Fit_Value_tau = new TH2F("Fit_Value_tau", "Fit_Value_tau", 40, 0, 40, 40, 0, 40);
 
     Double_t fMin = 30;
-    Double_t fMax = 1000;
+    Double_t fMax = 500;
 
     TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_mt/DataSub.root", "mt_0jet_qcd_iso", "mt_0jet_qcd_anti", "rawFF_mt_qcd_0jet", Fit_Value_tau, fMin, fMax, year);
     TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_mt/DataSub.root", "mt_1jet_qcd_iso", "mt_1jet_qcd_anti", "rawFF_mt_qcd_1jet", Fit_Value_tau, fMin, fMax, year);

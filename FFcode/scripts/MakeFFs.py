@@ -33,6 +33,10 @@ if args.channel=="tt":
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corrOSSSFF_"+args.channel+"/*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_rawFF_"+args.channel+"/*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corr1FF_"+args.channel+"/*.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/FF_corrections_1.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/FF_QCDcorrectionOSSS.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/uncorrected_fakefactors_mt.root")
+
 if args.channel=="tt":
    os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_control_"+args.channel+"/*.root")
 

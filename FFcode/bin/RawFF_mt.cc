@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
   TH1F* nbevt = (TH1F*) f_Double->Get("nevents");
   float ngen = nbevt->GetBinContent(2);
 
-  float xs=1.0; float weight=1.0; float luminosity=59500.0;
+  float xs=1.0; float weight=1.0; float luminosity=59740.0;
   if(year=="2017") luminosity=41529.0;
   if(year=="2016") luminosity=35922.0;
   if (sample=="DY" or sample=="ZL" or sample=="ZTT" or sample=="ZJ" or sample=="ZLL"){ xs=6225.42; weight=luminosity*xs/ngen;}
@@ -163,6 +163,7 @@ int main(int argc, char** argv) {
   arbre->SetBranchAddress("nbtag", &nbtag);
   arbre->SetBranchAddress("nbtagL", &nbtagL);
   arbre->SetBranchAddress("bweight", &bweight);
+  arbre->SetBranchAddress("prefiring_weight", &prefiring_weight);
   arbre->SetBranchAddress("q_2", &q_2);
   arbre->SetBranchAddress("pt_2", &pt_2);
   arbre->SetBranchAddress("eta_2", &eta_2);
@@ -448,6 +449,7 @@ int main(int argc, char** argv) {
 
    TauTriggerSFs2017* mtsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","mutau", "2018", "tight", "MVAv2");
    if (year=="2017") mtsf = new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","mutau", "2017", "tight", "MVAv2");
+   if (year=="2016") mtsf = new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2016.root","mutau", "2016", "tight", "MVAv2");
 
    TFile *fZ = new TFile((datapath+"zpt_weights_2016_BtoH.root").c_str());
    TH2F *histZ = (TH2F*) fZ->Get("zptmass_histo");
@@ -482,24 +484,11 @@ int main(int argc, char** argv) {
 
         bool trigger24=(passMu24 && pt_1>25 && matchMu24_1 && filterMu24_1);
 	bool trigger27=(passMu27 && pt_1>25 && matchMu27_1 && filterMu27_1);
-	bool trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 28 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20Tau27_1 && filterMu20Tau27_2);
-	bool trigger2027HPS=(passMu20HPSTau27 && matchMu20HPSTau27_1 && matchMu20HPSTau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 28 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20HPSTau27_1 && filterMu20HPSTau27_2);
+	bool trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 32 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20Tau27_1 && filterMu20Tau27_2);
+	bool trigger2027HPS=(passMu20HPSTau27 && matchMu20HPSTau27_1 && matchMu20HPSTau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 32 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20HPSTau27_1 && filterMu20HPSTau27_2);
 	bool trigger22 = false;
 	bool trigger19 = false;
 
-	
-	
-	//ask cecile about this requirement and check it in mt
-	/*
-	if (sample=="embedded"){
-	   if (fabs(eta_1)>=1.479){
-		trigger35=(pt_1>33); trigger32=(pt_1>33); trigger2430HPS=(fabs(eta_2)<2.1 && pt_1>25 && pt_2>35 && pt_1<=33);
-	   }
-	   if (fabs(eta_1)<1.479){   
-                trigger35=(pt_1>33 && matchEmbFilter_Ele35_1); trigger32=(pt_1>33 && (matchEmbFilter_Ele32DoubleL1v1_1 or matchEmbFilter_Ele32DoubleL1v2_1 or matchEmbFilter_Ele32_1)); trigger2430HPS=(matchEmbFilter_Ele24Tau30_1 && matchEmbFilter_Ele24Tau30_2 && fabs(eta_2)<2.1 && pt_1>25 && pt_2>35 && pt_1<=33);
-           }
-	}
-	*/
         if (year == "2018" && sample=="data_obs" && run<317509 && !trigger2027 && !trigger24 && !trigger27) continue;
         if (year == "2018" && sample=="data_obs" && run>=317509 && !trigger2027HPS && !trigger24 && !trigger27) continue;
         if (year == "2018" && sample!="data_obs" && !trigger24 && !trigger27 && !trigger2027HPS) continue;
@@ -509,7 +498,7 @@ int main(int argc, char** argv) {
 	    trigger24=(pt_1 > 25.0 && passMu24 && matchMu24_1 && filterMu24_1);
 	    trigger27=(pt_1 > 25.0 && passMu27 && matchMu27_1 && filterMu27_1);
 	    trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && 
-			 filterMu20Tau27_1 && filterMu20Tau27_2 && pt_1 > 21.0 && pt_2 > 31.0
+			 filterMu20Tau27_1 && filterMu20Tau27_2 && pt_1 > 21.0 && pt_2 > 32.0
 			 && pt_1 < 25.0 && fabs(eta_1) < 2.1 && fabs(eta_2)<2.1);
 	    if(!trigger24 && !trigger27 && !trigger2027) continue;
 	  }
@@ -518,7 +507,7 @@ int main(int argc, char** argv) {
 	    trigger22 = (pt_1 > 23.0 && fabs(eta_1) < 2.1 &&
 			 ((passMu22eta2p1 && matchMu22eta2p1_1 && filterMu22eta2p1_1) ||
 			  (passTkMu22eta2p1 && matchTkMu22eta2p1_1 && filterTkMu22eta2p1_1)));
-	    trigger19 = (pt_1 > 21.0 && pt_1 < 23.0 && pt_2 > 21.0
+	    trigger19 = (pt_1 > 20.0 && pt_1 < 23.0 && pt_2 > 25.0 && fabs(eta_2)<2.1 && fabs(eta_1)<2.1 
 			 &&((passMu19Tau20 && matchMu19Tau20_1 && matchMu19Tau20_2 && filterMu19Tau20_1 && filterMu19Tau20_2)||
 			    (passMu19Tau20SingleL1 && matchMu19Tau20SingleL1_1 && matchMu19Tau20SingleL1_2 && filterMu19Tau20SingleL1_1 && filterMu19Tau20SingleL1_2)));
 
@@ -543,7 +532,7 @@ int main(int argc, char** argv) {
 	*/
 
 	// Deep Medium	
-        if (!byVLooseDeepVSe_2 or !byTightDeepVSmu_2) continue;
+        if (!byVVVLooseDeepVSe_2 or !byTightDeepVSmu_2) continue;
         float signalRegion=(byMediumDeepVSjet_2);
         float antiisoRegion=(byVVVLooseDeepVSjet_2 && !byMediumDeepVSjet_2);
 	
@@ -566,86 +555,60 @@ int main(int argc, char** argv) {
 
 	if (mymu.DeltaR(mytau)<0.5) continue;
 	
-	//I have slightly different set of weights, but they're close?
-        /*
-        if (sample=="W"){
-            weight=51.60;
-            if (numGenJets==1) weight=9.0558;
-            else if (numGenJets==2) weight=4.498;
-            else if (numGenJets==3) weight=3.069;
-            else if (numGenJets==4) weight=3.202;
-        }
-
-        if (sample=="DY"){
-            weight=3.70;
-            if (numGenJets==1)
-                weight=0.643;
-            else if (numGenJets==2)
-                weight=0.563;
-            else if (numGenJets==3)
-                weight=0.612;
-            else if (numGenJets==4)
-                weight=1.11;
-        }
-	*/
 	if(year == "2018")
 	  {
 	    if (sample=="W"){
-	      weight=51.8119;
-	      if (numGenJets==1) weight=10.902;
-	      else if (numGenJets==2) weight=5.258;
-	      else if (numGenJets==3) weight=3.12179;
-	      else if (numGenJets==4) weight=3.0367;
+	      weight=51.7495;
+	      if (numGenJets==1) weight=9.0816;
+	      else if (numGenJets==2) weight=4.5197;
+	      else if (numGenJets==3) weight=3.0775;
+	      else if (numGenJets==4) weight=3.2113;
 	    }
 
 	    if (sample=="DY"){
-	      weight=3.7185;
-	      if (numGenJets==1)
-                weight=0.64580;
-	      else if (numGenJets==2)
-                weight=0.56562;
-	      else if (numGenJets==3)
-                weight=0.6155;
-	      else if (numGenJets==4)
-                weight=0.93957;
+	      weight=3.6235;
+	      if (numGenJets==1) weight=0.62980;
+	      else if (numGenJets==2) weight=0.55212;
+	      else if (numGenJets==3) weight=0.5995;
+	      else if (numGenJets==4) weight=0.8211;
 	    }
 	  }
 	else if (year == "2017")
 	  {
 	    if(sample=="W")
 	      {
-		weight = 57.3;
-		if(numGenJets==1) weight = 3.37;
-		else if(numGenJets==2) weight = 3.29;
-		else if(numGenJets==3) weight = 2.33;
-		else if(numGenJets==4) weight = 2.27;
+		weight = 23.7227;
+		if(numGenJets==1) weight = 3.1136;
+		else if(numGenJets==2) weight = 3.0206;
+		else if(numGenJets==3) weight = 2.2055;
+		else if(numGenJets==4) weight = 2.1514;
 	      }
 	    if(sample=="DY")
 	      {
-		weight = 2.64;
-		if(numGenJets==1) weight=0.7258;
-		else if(numGenJets == 2)weight=0.9387;
-		else if(numGenJets == 3)weight=1.683;
-		else if(numGenJets == 4)weight=0.4289;
+		weight = 2.5805;
+		if(numGenJets==1) weight=0.71000;
+		else if(numGenJets == 2)weight=0.92113;
+		else if(numGenJets == 3)weight=1.6508;
+		else if(numGenJets == 4)weight=0.21935;
 	      }
 	  }
 	else if(year == "2016")
 	  {
 	    if (sample=="W")
 	      {
-		weight = 25.42;
-		if(numGenJets == 1) weight = 6.832;
-		else if(numGenJets==2) weight = 2.094;
-		else if(numGenJets==3) weight = 0.6872;
-		else if(numGenJets==4) weight = 1.853;
+		weight = 25.4286;
+		if(numGenJets == 1) weight = 5.7747;
+		else if(numGenJets==2) weight = 1.7932;
+		else if(numGenJets==3) weight = 0.68005;
+		else if(numGenJets==4) weight = 1.85115;
 	      }
 	    if(sample=="DY")
 	      {
-		weight = 1.532;
-		if(numGenJets == 1) weight = 0.480;
-		else if(numGenJets == 2) weight = 0.463;
-		else if(numGenJets == 3) weight = 0.524;
-		else if(numGenJets == 4) weight = 0.484;
+		weight = 1.49237;
+		if(numGenJets == 1) weight = 0.47595;
+		else if(numGenJets == 2) weight = 0.49308;
+		else if(numGenJets == 3) weight = 0.51132;
+		else if(numGenJets == 4) weight = 0.42527;
 	      }
 	  }
 
@@ -662,7 +625,7 @@ int main(int argc, char** argv) {
 	
         if (sample=="embedded") aweight=aweight*0.97;
 	//Muon rescaling tight
-	if (gen_match_2==2 or gen_match_2==4){
+	/*if (gen_match_2==2 or gen_match_2==4){
 	   if (fabs(mytau.Eta())<0.4) aweight=aweight*1.17;
            else if (fabs(mytau.Eta())<0.8) aweight=aweight*1.29;
            else if (fabs(mytau.Eta())<1.2) aweight=aweight*1.14;
@@ -673,7 +636,7 @@ int main(int argc, char** argv) {
         if (gen_match_2==1 or gen_match_2==3){
            if (fabs(mytau.Eta())<1.460) aweight=aweight*1.09;
            else if (fabs(mytau.Eta())>1.558) aweight=aweight*1.19;
-	}
+	}*/
 
 	TLorentzVector mymet;
 	mymet.SetPtEtaPhiM(met,0,metphi,0);
@@ -698,9 +661,24 @@ int main(int argc, char** argv) {
 	  zptweight=wmc->function("zptmass_weight_nom")->getVal();
 	  if (sample=="DY") aweight=aweight*zptweight;
 	  aweight=aweight*myScaleFactor_IdIso->get_ScaleFactor(pt_1,eta_1);
-	  if (trigger24 or trigger24) aweight = aweight*myScaleFactor_trgMu2427->get_ScaleFactor(pt_1,eta_1);
-	  else aweight=aweight*myScaleFactor_trgMu20->get_ScaleFactor(pt_1, eta_1);
+          wmc->var("m_pt")->setVal(mymu.Pt());
+          wmc->var("m_eta")->setVal(mymu.Eta());
+          wmc->var("m_iso")->setVal(iso_1);
+          aweight=aweight*wmc->function("m_trk_ratio")->getVal();
+
+          int dm=l2_decayMode;
+          if(dm>10) dm=10;
+	  if (year=="2018" or year=="2017"){
+            if (trigger24 or trigger27) aweight=aweight*myScaleFactor_trgMu2427->get_ScaleFactor(pt_1,eta_1);
+            else aweight=aweight*myScaleFactor_trgMu20->get_ScaleFactor(pt_1,eta_1)*mtsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm);
+	  }
+	  if (year=="2016"){
+             if (trigger22) aweight=aweight*myScaleFactor_trgMu22->get_ScaleFactor(pt_1,eta_1);
+             else if (trigger19) aweight=aweight*(wmc->function("m_trgMu19leg_eta2p1_desy_data")->getVal()/wmc->function("m_trgMu19leg_eta2p1_desy_mc")->getVal())*mtsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm);
+	  }
+
           aweight=aweight*bweight;
+	  if (year=="2016" or year=="2017") aweight=aweight*prefiring_weight;
 	}
 	//TODO Add proper embedded weighting here.
 
@@ -710,10 +688,12 @@ int main(int argc, char** argv) {
            if (mytau.Pt()<30) continue;
 	   float weight2=1.0;
 	   float myvar=mytau.Pt();
-	   //if (myvar>80) myvar=79;
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){
+          /*int dm=l2_decayMode;
+          if(dm>10) dm=10;
+if (trigger19 && signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0) cout<<aweight<<" "<<(wmc->function("m_trgMu19leg_eta2p1_desy_data")->getVal()/wmc->function("m_trgMu19leg_eta2p1_desy_mc")->getVal())<<" "<<mtsf->getTriggerScaleFactor(mytau.Pt(), mytau.Eta(), mytau.Phi(), dm)<<endl;*/
 	       if (signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)

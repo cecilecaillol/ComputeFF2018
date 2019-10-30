@@ -1,4 +1,4 @@
-float L1iso, L1pt, bweight;
+float L1iso, L1pt, bweight, prefiring_weight;
 float jpt_JetRelativeSampleUp_1, jpt_JetRelativeSampleDown_1, jpt_JetRelativeBalUp_1, jpt_JetRelativeBalDown_1, jpt_JetEta0to3Up_1, jpt_JetEta0to3Down_1, jpt_JetEta3to5Up_1, jpt_JetEta3to5Down_1, jpt_JetEta0to5Up_1, jpt_JetEta0to5Down_1, jpt_JetEC2Up_1, jpt_JetEC2Down_1;
 float jpt_JetRelativeSampleUp_2, jpt_JetRelativeSampleDown_2, jpt_JetRelativeBalUp_2, jpt_JetRelativeBalDown_2, jpt_JetEta0to3Up_2, jpt_JetEta0to3Down_2, jpt_JetEta3to5Up_2, jpt_JetEta3to5Down_2, jpt_JetEta0to5Up_2, jpt_JetEta0to5Down_2, jpt_JetEC2Up_2, jpt_JetEC2Down_2;
 float met_responseUp, met_responseDown, met_resolutionUp, met_resolutionDown;

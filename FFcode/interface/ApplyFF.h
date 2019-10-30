@@ -4,7 +4,8 @@ float get_raw_FF(float pt, TF1* fct){
   float ff=1.0;
   ff=fct->Eval(pt);
   //if (pt>80) ff=fct->Eval(80);
-  return ff;
+  if (ff>0) return ff;
+  else return 0.0;
 }
 
 float get_mvis_closure(float mvis, TF1* fct){
@@ -12,14 +13,15 @@ float get_mvis_closure(float mvis, TF1* fct){
   corr=fct->Eval(mvis);
   //if (mvis>300) corr=fct->Eval(300);
   //if (mvis<50) corr=fct->Eval(50);
-  return corr;
+  if (corr>0 && corr<2) return corr;
+  else return 1.0;
 }
 
 float get_mt_closure(float mt, TF1* fct){
   float corr=1.0;
   corr=fct->Eval(mt);
-  //if (mt>120) corr=fct->Eval(120);
-  return corr;
+  if (corr>0 && corr<2) return corr;
+  else return 1.0;
 }
 
 float get_ff(float pt, float mt, float mvis, int njets, float frac_tt, float frac_qcd, float frac_w, TF1* fct_raw_qcd_0, TF1* fct_raw_qcd_1, TF1* fct_raw_w_0, TF1* fct_raw_w_1, TF1* fct_raw_tt, TF1* fct_mvisclosure_qcd, TF1* fct_mvisclosure_w, TF1* fct_mvisclosure_tt, TF1* fct_mtcorrection_w, TF1* fct_OSSScorrection_qcd){
