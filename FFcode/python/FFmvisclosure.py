@@ -6,19 +6,19 @@ import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
 def FFmvisclosure(args):
     if args.year == "2016":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2016_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2016_svfitted_12oct/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2016_svfitted_30sep/'
+            path = '/data/ccaillol/smhet2016_svfitted_12oct/'
     elif args.year == "2017":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2017_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2017_svfitted_12oct/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2017_svfitted_30sep/'
+            path = '/data/ccaillol/smhet2017_svfitted_12oct/'
     elif args.year == "2018":
         if args.channel == "mt":
-            path = '/data/ccaillol/smhmt2018_svfitted_30sep/'
+            path = '/data/ccaillol/smhmt2018_svfitted_12oct/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2018_svfitted_30sep/'
+            path = '/data/ccaillol/smhet2018_svfitted_12oct/'
 
     #figure out our executable and our output directory
     if args.channel == 'mt':
