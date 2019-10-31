@@ -78,7 +78,7 @@ class FFApplicationTool():
         #    ff=fct.Eval(80)
         return ff
 
-    def get_mvis_closure(self,mvis,fct,unc='',upOrDown=''):
+    def get_mvis_closure(self,mvis,fct):
         corr = 1.0
         corr = fct.Eval(mvis)
         if(mvis>350):
@@ -94,7 +94,7 @@ class FFApplicationTool():
         #    corr=fct.Eval(120)
         return corr
 
-    def get_ff(self, pt, mt, mvis, njets, frac_tt, frac_qcd, frac_w):
+    def get_ff(self, pt, mt, mvis, njets, frac_tt, frac_qcd, frac_w, unc='',upOrDown=''):
         ff_qcd = 1.0
         ff_w = 0
         ff_tt = 1.0
