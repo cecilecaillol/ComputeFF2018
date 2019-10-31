@@ -173,7 +173,7 @@ class FFApplicationTool():
             ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD)
         if unc == 'mvisclosure_w_unc1':
             if upOrDown == 'up':
-                ff_w = ff_w*(1+2*(get_mvis_closure(mvis,self.mVisClosure_W)-1))
+                ff_w = ff_w*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_W)-1))
             elif upOrDown == 'down':
                 ff_w = ff_w
         else:
