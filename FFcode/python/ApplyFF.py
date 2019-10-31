@@ -32,10 +32,10 @@ class FFApplicationTool():
         self.ff_w_1jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc2_down")
 
         self.ff_tt_0jet = self.theRawFile.Get("mc_rawFF_"+channel+"_tt")
-        self.ff_tt_0jet_unc1_up = self.theRawFile.get("rawFF_"+channel+"_tt_unc1_up")
-        self.ff_tt_0jet_unc1_down = self.theRawFile.get("rawFF_"+channel+"_tt_unc1_down")
-        self.ff_tt_0jet_unc2_up = self.theRawFile.get("rawFF_"+channel+"_tt_unc2_up")
-        self.ff_tt_0jet_unc2_down = self.theRawFile.get("rawFF_"+channel+"_tt_unc2_down")
+        self.ff_tt_0jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_tt_unc1_up")
+        self.ff_tt_0jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_tt_unc1_down")
+        self.ff_tt_0jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_tt_unc2_up")
+        self.ff_tt_0jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_tt_unc2_down")
 
         self.theFMvisFile = ROOT.TFile(theFFDirectory+"FF_corrections_1.root")
         if self.theFMvisFile.IsZombie():
