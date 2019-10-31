@@ -201,7 +201,7 @@ class FFApplicationTool():
             if upOrDown == 'up':
                 ff_w = ff_w*self.get_mt_closure(mt,self.MTClosure_W_unc2_up)
             elif upOrDown == 'down':
-                ff_w = ff-w*self.get_mt_closure(mt,self.MTClosure_W_unc2_down)
+                ff_w = ff_w*self.get_mt_closure(mt,self.MTClosure_W_unc2_down)
         else:
             ff_w = ff_w*self.get_mt_closure(mt,self.MTClosure_W)
         if unc == 'osssclosure_qcd_unc1':
