@@ -12,9 +12,9 @@ def Create_fake_tt(directory):
    #fileW=ROOT.TFile(directory+"/W.root","r") #MC histogram with real leptons
    fileDataSub=ROOT.TFile(directory+"/Fake.root","recreate") #Data without real leptons
    
-   dir_anti=["tt_mvis_anti","tt_met_anti","tt_tau1pt_anti","tt_tau2pt_anti","tt_pth_anti"]
-   dir_iso=["tt_mvis_iso","tt_met_iso","tt_tau1pt_iso","tt_tau2pt_iso","tt_pth_iso"]
-   ncat=5
+   dir_anti=["tt_mvis_anti","tt_met_anti","tt_tau1pt_anti","tt_tau2pt_anti","tt_pth_anti","tt_tau1eta_anti","tt_j1pt_anti"]
+   dir_iso=["tt_mvis_iso","tt_met_iso","tt_tau1pt_iso","tt_tau2pt_iso","tt_pth_iso","tt_tau1eta_iso","tt_j1pt_iso"]
+   ncat=7
    
    for i in range (0,ncat):
       Data=fileData.Get(dir_anti[i]).Get("data_obs")

@@ -12,8 +12,8 @@ def Subtract_prompt_tt(directory):
    #fileW=ROOT.TFile(directory+"/W.root","r") #MC histogram with real leptons
    fileDataSub=ROOT.TFile(directory+"/DataSub.root","recreate") #Data without real leptons
    
-   dir_qcd=["tt_0jet_qcd_anti","tt_0jet_qcd_iso","tt_0SSloose_qcd_anti","tt_0SSloose_qcd_iso","tt_1jet_qcd_anti","tt_1jet_qcd_iso","tt_1SSloose_qcd_anti","tt_1SSloose_qcd_iso"]
-   ncat_qcd=8
+   dir_qcd=["tt_0jet_qcd_anti","tt_0jet_qcd_iso","tt_0SSloose_qcd_anti","tt_0SSloose_qcd_iso","tt_1jet_qcd_anti","tt_1jet_qcd_iso","tt_1SSloose_qcd_anti","tt_1SSloose_qcd_iso","tt_2jet_qcd_anti","tt_2jet_qcd_iso","tt_2SSloose_qcd_anti","tt_2SSloose_qcd_iso"]
+   ncat_qcd=12
    
    if "corr1" in directory:
      dir_qcd=["tt_0jet_qcd_mvis_anti","tt_0jet_qcd_mvis_iso","tt_0SSloose_qcd_mvis_anti","tt_0SSloose_qcd_mvis_iso","tt_0jet_qcd_tau2pt_anti","tt_0jet_qcd_tau2pt_iso","tt_0SSloose_qcd_tau2pt_anti","tt_0SSloose_qcd_tau2pt_iso","tt_0jet_qcd_tau1pt_anti","tt_0jet_qcd_tau1pt_iso","tt_0SSloose_qcd_tau1pt_anti","tt_0SSloose_qcd_tau1pt_iso","tt_0jet_qcd_met_anti","tt_0jet_qcd_met_iso","tt_0SSloose_qcd_met_anti","tt_0SSloose_qcd_met_iso"]

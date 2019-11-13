@@ -74,8 +74,8 @@ def Draw_control_tt(year):
    trans=ROOT.TColor(new_idx, adapt.GetRed(), adapt.GetGreen(),adapt.GetBlue(), "",0.5)
    
    file=ROOT.TFile("control_tt.root","r")
-   categories=["tt_mvis_iso","tt_tau2pt_iso","tt_tau1pt_iso","tt_pth_iso","tt_met_iso"] 
-   ncat=5
+   categories=["tt_mvis_iso","tt_tau2pt_iso","tt_tau1pt_iso","tt_pth_iso","tt_met_iso","tt_j1pt_iso","tt_tau1eta_iso"] 
+   ncat=7
    
    for i in range (0,ncat):
       Data=file.Get(categories[i]).Get("data_obs")

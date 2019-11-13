@@ -62,8 +62,8 @@ double fitFunction(double x, double par0, double par1) {
 }
 
 Double_t fitFunc_Exp3Par(Double_t *x, Double_t *par) {
-    //return par[0] + par[1]*(TMath::Exp(par[2] * (x[0]-par[3])));
-    return par[0] + par[1] *(x[0]-80);
+    return par[0] + par[1]*(TMath::Exp(par[2] * (x[0]-par[3])));
+    //return par[0] + par[1] *(x[0]-80);
 }
 
 Double_t fitFunc_Line2Par(Double_t *x, Double_t *par) {
@@ -97,7 +97,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
 
     TF1 * theFit = new TF1("theFit", fitFunc_Landau, fMin, fMax, nPar);
     TF1 * theFit2 = new TF1("theFit2", fitFunc_Line2Par, fMin, fMax, 2);
-    TF1 * theFit3 = new TF1("theFit3", fitFunc_Exp3Par, fMin, fMax, 2);
+    TF1 * theFit3 = new TF1("theFit3", fitFunc_Exp3Par, fMin, fMax, 4);
 
     theFit->SetParameter(0, 0.15);
     theFit->SetParameter(1, 0.3);
@@ -119,27 +119,49 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     }
 
     if (year==2018 and name.find("1jet")<140){
-      theFit->SetParameter(0, 0.174);
-      theFit->SetParameter(1, 2.0);
-      theFit->SetParameter(2, 10.0);
+      theFit->SetParameter(0, 0.184);
+      theFit->SetParameter(1, -0.10);
+      theFit->SetParameter(2, 1.0);
       theFit->SetParameter(3, 2.2);
     }
 
-    theFit2->SetParameter(0, 0.09);
-    theFit2->SetParameter(1, 0.00001);
+    /*if (year==2018 and name.find("1jet")<140){
+      theFit->SetParameter(0, 0.184);
+      theFit->SetParameter(1, -2.10);
+      theFit->SetParameter(2, 10.0);
+      theFit->SetParameter(3, 2.2);
+    }*/
 
-    theFit3->SetParameter(0, 0.17);
-    theFit3->SetParameter(1, -0.1);
-    //theFit3->SetParameter(2, -1.0);
-    //theFit3->SetParameter(3, 20.0);
+    theFit2->SetParameter(0, 0.20);
+    theFit2->SetParameter(1, -0.00001);
+
+    theFit3->SetParameter(0, 0.16);
+    theFit3->SetParameter(1, 0.10);
+    theFit3->SetParameter(2, -0.1);
+    theFit3->SetParameter(3, 30.0);
+
+    if (year==2016 and name.find("2jet")<140){
+      theFit3->SetParameter(0, 0.124);
+      theFit3->SetParameter(1, 0.16);
+      theFit3->SetParameter(2, -0.08);
+      theFit3->SetParameter(3, 24.0);
+    }
+    if (year==2016 and name.find("1jet")<140){
+      theFit3->SetParameter(0, 0.144);
+      theFit3->SetParameter(1, 0.16);
+      theFit3->SetParameter(2, -0.08);
+      theFit3->SetParameter(3, 24.0);
+    }
 
     float xAxisMax = 500;
     if (type.find("Line2P") < 140)
       TGraph_FR->Fit("theFit2", "R0");
     else if (type.find("exp") < 140)
       TGraph_FR->Fit("theFit3", "R0");
-    else 
+    else{ 
+      //TGraph_FR->Fit("theFit","","", 40,100);
       TGraph_FR->Fit("theFit", "R0");
+    }
 
     TCanvas* canvas = new TCanvas("canvas", "", 800, 800);
     canvas->SetTitle("");
@@ -172,6 +194,23 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
        theFit->Draw("SAME");
        theFit->SetLineColor(2);
     }
+
+    Double_t TauLegParameters[4];
+    theFit->GetParameters(TauLegParameters);
+
+cout<<TauLegParameters[0]<<" "<<theFit->GetParError(0)<<" "<<TauLegParameters[1]<<endl;
+
+//TGraph_FR->Fit("theFit2", "","",40,80);
+//    theFit2->SetLineColor(kViolet+1);
+//    theFit2->Draw("same");
+
+    /*TF1 * theFitup1 = new TF1("theFitup1", fitFunc_Landau, fMin, fMax, 4);
+    theFitup1->SetParameter(0, TauLegParameters[0]+0*theFit->GetParError(0));
+    theFitup1->SetParameter(1, 0*TauLegParameters[1]+0*theFit->GetParError(1));
+    theFitup1->SetParameter(2, TauLegParameters[2]+0*theFit->GetParError(2));
+    theFitup1->SetParameter(3, 1*TauLegParameters[3]+0*theFit->GetParError(3));
+    theFitup1->SetLineColor(kViolet+1);
+    theFitup1->Draw("same");*/
 
     /*// Up and down fits
     Double_t TauLegParameters[2];
@@ -267,10 +306,18 @@ void Fit_FF_tt(int year) {
     Double_t fMax = 1000;
 
     TF1* m11 = M_FR(1, "a", "files_rawFF_tt/DataSub.root", "tt_0jet_qcd_iso", "tt_0jet_qcd_anti", "rawFF_tt_qcd_0jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m12 = M_FR(2, "a", "files_rawFF_tt/DataSub.root", "tt_1jet_qcd_iso", "tt_1jet_qcd_anti", "rawFF_tt_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m12 = M_FR(2, "exp", "files_rawFF_tt/DataSub.root", "tt_1jet_qcd_iso", "tt_1jet_qcd_anti", "rawFF_tt_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m13 = M_FR(3, "exp", "files_rawFF_tt/DataSub.root", "tt_2jet_qcd_iso", "tt_2jet_qcd_anti", "rawFF_tt_qcd_2jet", Fit_Value_tau, fMin, fMax, year);
 
-    TF1* m18 = M_FR(8, "a", "files_rawFF_tt/DataSub.root", "tt_0SSloose_qcd_iso", "tt_0SSloose_qcd_anti", "rawFF_tt_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
-    TF1* m19 = M_FR(9, "a", "files_rawFF_tt/DataSub.root", "tt_1SSloose_qcd_iso", "tt_1SSloose_qcd_anti", "rawFF_tt_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    if (year==2018){
+      TF1* m17 = M_FR(7, "a", "files_rawFF_tt/DataSub.root", "tt_0SSloose_qcd_iso", "tt_0SSloose_qcd_anti", "rawFF_tt_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
+      TF1* m18 = M_FR(8, "a", "files_rawFF_tt/DataSub.root", "tt_1SSloose_qcd_iso", "tt_1SSloose_qcd_anti", "rawFF_tt_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    }
+    else{
+      TF1* m17 = M_FR(7, "exp", "files_rawFF_tt/DataSub.root", "tt_0SSloose_qcd_iso", "tt_0SSloose_qcd_anti", "rawFF_tt_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
+      TF1* m18 = M_FR(8, "exp", "files_rawFF_tt/DataSub.root", "tt_1SSloose_qcd_iso", "tt_1SSloose_qcd_anti", "rawFF_tt_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    }
+    TF1* m19 = M_FR(9, "exp", "files_rawFF_tt/DataSub.root", "tt_2SSloose_qcd_iso", "tt_2SSloose_qcd_anti", "rawFF_tt_qcd_2jetSSloose", Fit_Value_tau, fMin, fMax, year);
 
     
 }
