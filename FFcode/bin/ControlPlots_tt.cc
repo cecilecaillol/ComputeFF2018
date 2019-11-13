@@ -271,6 +271,12 @@ int main(int argc, char** argv) {
    TH1F* h0_met_iso = new TH1F ("h0_met_iso","h0_met_iso",40,0,200); h0_met_iso->Sumw2();
    TH1F* h0_met_anti = new TH1F ("h0_met_anti","h0_met_anti",40,0,200); h0_met_anti->Sumw2();
 
+   TH1F* h0_tau1eta_iso = new TH1F ("h0_tau1eta_iso","h0_tau1eta_iso",21,-2.1,2.1); h0_tau1eta_iso->Sumw2();
+   TH1F* h0_tau1eta_anti = new TH1F ("h0_tau1eta_anti","h0_tau1eta_anti",21,-2.1,2.1); h0_tau1eta_anti->Sumw2();
+
+   TH1F* h0_j1pt_iso = new TH1F ("h0_j1pt_iso","h0_j1pt_iso",20,0,200); h0_j1pt_iso->Sumw2();
+   TH1F* h0_j1pt_anti = new TH1F ("h0_j1pt_anti","h0_j1pt_anti",20,0,200); h0_j1pt_anti->Sumw2();
+
    TH1F* h0_tau2pt_iso = new TH1F ("h0_tau2pt_iso","h0_tau2pt_iso",30,0,150); h0_tau2pt_iso->Sumw2();
    TH1F* h0_tau2pt_anti = new TH1F ("h0_tau2pt_anti","h0_tau2pt_anti",30,0,150); h0_tau2pt_anti->Sumw2();
 
@@ -283,6 +289,7 @@ int main(int argc, char** argv) {
    TFile frawff("uncorrected_fakefactors_tt.root");
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jet");
    TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jet");
+   TF1* ff_qcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jet");
 
    TFile fmvisclosure ("FF_QCDcorrectionOSSS_tt.root");
    TF1* mvisclosure=(TF1*) fmvisclosure.Get("closure_OSSS_mvis_tt_qcd");
@@ -528,7 +535,8 @@ int main(int argc, char** argv) {
 	   float weight2=1.0;
 
            float FF=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
-           if (njets>0) FF=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
+           if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
+           else if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){
@@ -556,6 +564,16 @@ int main(int argc, char** argv) {
                   h0_met_iso->Fill(mymet.Pt(),aweight*weight2);
                if (antiisoRegion && iso2 && q_1*q_2<0)
                   h0_met_anti->Fill(mymet.Pt(),aweight*weight2*FF);
+
+               if (signalRegion && iso2 && q_1*q_2<0)
+                  h0_j1pt_iso->Fill(jpt_1,aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2<0)
+                  h0_j1pt_anti->Fill(jpt_1,aweight*weight2*FF);
+
+               if (signalRegion && iso2 && q_1*q_2<0)
+                  h0_tau1eta_iso->Fill(mytau1.Eta(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2<0)
+                  h0_tau1eta_anti->Fill(mytau1.Eta(),aweight*weight2*FF);
 	    }
            }
 
@@ -582,6 +600,26 @@ int main(int argc, char** argv) {
     d0_met_anti->cd();
     h0_met_anti->SetName(name.c_str());
     h0_met_anti->Write();
+
+    TDirectory *d0_tau1eta_iso =fout->mkdir("tt_tau1eta_iso");
+    d0_tau1eta_iso->cd();
+    h0_tau1eta_iso->SetName(name.c_str());
+    h0_tau1eta_iso->Write();
+
+    TDirectory *d0_tau1eta_anti =fout->mkdir("tt_tau1eta_anti");
+    d0_tau1eta_anti->cd();
+    h0_tau1eta_anti->SetName(name.c_str());
+    h0_tau1eta_anti->Write();
+
+    TDirectory *d0_j1pt_iso =fout->mkdir("tt_j1pt_iso");
+    d0_j1pt_iso->cd();
+    h0_j1pt_iso->SetName(name.c_str());
+    h0_j1pt_iso->Write();
+
+    TDirectory *d0_j1pt_anti =fout->mkdir("tt_j1pt_anti");
+    d0_j1pt_anti->cd();
+    h0_j1pt_anti->SetName(name.c_str());
+    h0_j1pt_anti->Write();
 
     TDirectory *d0_tau2pt_iso =fout->mkdir("tt_tau2pt_iso");
     d0_tau2pt_iso->cd();

@@ -73,8 +73,8 @@ def Draw_closure_tt(year):
    trans=ROOT.TColor(new_idx, adapt.GetRed(), adapt.GetGreen(),adapt.GetBlue(), "",0.5)
    
    
-   categories=["tt_0jet_qcd_mvis_iso","tt_0jet_qcd_mvis_anti","tt_0jet_qcd_tau1pt_iso","tt_0jet_qcd_tau1pt_anti","tt_0jet_qcd_tau2pt_iso","tt_0jet_qcd_tau2pt_anti","tt_0jet_qcd_met_iso","tt_0jet_qcd_met_anti","tt_0SSloose_qcd_mvis_iso","tt_0SSloose_qcd_mvis_anti","tt_0SSloose_qcd_tau1pt_iso","tt_0SSloose_qcd_tau1pt_anti","tt_0SSloose_qcd_tau2pt_iso","tt_0SSloose_qcd_tau2pt_anti","tt_0SSloose_qcd_met_iso","tt_0SSloose_qcd_met_anti"]
-   ncat=16
+   categories=["tt_0jet_qcd_mvis_iso","tt_0jet_qcd_mvis_anti","tt_0jet_qcd_tau1pt_iso","tt_0jet_qcd_tau1pt_anti","tt_0jet_qcd_tau2pt_iso","tt_0jet_qcd_tau2pt_anti","tt_0jet_qcd_met_iso","tt_0jet_qcd_met_anti","tt_0SSloose_qcd_mvis_iso","tt_0SSloose_qcd_mvis_anti","tt_0SSloose_qcd_tau1pt_iso","tt_0SSloose_qcd_tau1pt_anti","tt_0SSloose_qcd_tau2pt_iso","tt_0SSloose_qcd_tau2pt_anti","tt_0SSloose_qcd_met_iso","tt_0SSloose_qcd_met_anti","tt_0jet_qcd_j1pt_iso","tt_0jet_qcd_j1pt_anti","tt_0jet_qcd_tau1eta_iso","tt_0jet_qcd_tau1eta_anti","tt_0jet_qcd_pth_iso","tt_0jet_qcd_pth_anti","tt_0jet_qcd_mjj_iso","tt_0jet_qcd_mjj_anti"]
+   ncat=24
    file=ROOT.TFile("mvisclosure_tt.root","r")
    
    for i in range (0,ncat/2):
@@ -186,8 +186,8 @@ def Draw_closure_tt(year):
       pad2.Draw()
       pad2.cd()
       h1=Data.Clone()
-      h1.SetMaximum(2.0)#FIXME(1.5)
-      h1.SetMinimum(0.0)#FIXME(0.5)
+      h1.SetMaximum(1.4)#FIXME(1.5)
+      h1.SetMinimum(0.6)#FIXME(0.5)
       h1.SetMarkerStyle(20)
       h3=errorBand.Clone()
       hwoE=errorBand.Clone()

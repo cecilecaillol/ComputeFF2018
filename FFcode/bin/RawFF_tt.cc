@@ -276,18 +276,22 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {40,45,50,55,60,70,80,90,100,110,120,150};
+   float bins_mtt0[] = {40,42,44,46,48,50,52,54,56,58,60,65,70,75,80,90,100,110,120,150};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
    TH1F* h1LT_qcd_iso = new TH1F ("h1LT_qcd_iso","h1LT_qcd_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_iso->Sumw2();
+   TH1F* h2LT_qcd_iso = new TH1F ("h2LT_qcd_iso","h2LT_qcd_iso",binnum_mtt0,bins_mtt0); h2LT_qcd_iso->Sumw2();
    TH1F* h0LT_qcd_anti = new TH1F ("h0LT_qcd_anti","h0LT_qcd_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_anti->Sumw2();
    TH1F* h1LT_qcd_anti = new TH1F ("h1LT_qcd_anti","h1LT_qcd_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_anti->Sumw2();
+   TH1F* h2LT_qcd_anti = new TH1F ("h2LT_qcd_anti","h2LT_qcd_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_anti->Sumw2();
 
    TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
    TH1F* h1J_qcd_iso = new TH1F ("h1J_qcd_iso","h1J_qcd_iso",binnum_mtt0,bins_mtt0); h1J_qcd_iso->Sumw2();
+   TH1F* h2J_qcd_iso = new TH1F ("h2J_qcd_iso","h2J_qcd_iso",binnum_mtt0,bins_mtt0); h2J_qcd_iso->Sumw2();
    TH1F* h0J_qcd_anti = new TH1F ("h0J_qcd_anti","h0J_qcd_anti",binnum_mtt0,bins_mtt0); h0J_qcd_anti->Sumw2();
    TH1F* h1J_qcd_anti = new TH1F ("h1J_qcd_anti","h1J_qcd_anti",binnum_mtt0,bins_mtt0); h1J_qcd_anti->Sumw2();
+   TH1F* h2J_qcd_anti = new TH1F ("h2J_qcd_anti","h2J_qcd_anti",binnum_mtt0,bins_mtt0); h2J_qcd_anti->Sumw2();
 
    TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
    TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
@@ -297,6 +301,10 @@ int main(int argc, char** argv) {
    TH1F* h1SSlooseLT_qcd_anti = new TH1F ("h1SSlooseLT_qcd_anti","h1SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h1SSlooseLT_qcd_anti->Sumw2();
    TH1F* h1SSlooseJ_qcd_iso = new TH1F ("h1SSlooseJ_qcd_iso","h1SSlooseJ_qcd_iso",binnum_mtt0,bins_mtt0); h1SSlooseJ_qcd_iso->Sumw2();
    TH1F* h1SSlooseJ_qcd_anti = new TH1F ("h1SSlooseJ_qcd_anti","h1SSlooseJ_qcd_anti",binnum_mtt0,bins_mtt0); h1SSlooseJ_qcd_anti->Sumw2();
+   TH1F* h2SSlooseLT_qcd_iso = new TH1F ("h2SSlooseLT_qcd_iso","h2SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h2SSlooseLT_qcd_iso->Sumw2();
+   TH1F* h2SSlooseLT_qcd_anti = new TH1F ("h2SSlooseLT_qcd_anti","h2SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h2SSlooseLT_qcd_anti->Sumw2();
+   TH1F* h2SSlooseJ_qcd_iso = new TH1F ("h2SSlooseJ_qcd_iso","h2SSlooseJ_qcd_iso",binnum_mtt0,bins_mtt0); h2SSlooseJ_qcd_iso->Sumw2();
+   TH1F* h2SSlooseJ_qcd_anti = new TH1F ("h2SSlooseJ_qcd_anti","h2SSlooseJ_qcd_anti",binnum_mtt0,bins_mtt0); h2SSlooseJ_qcd_anti->Sumw2();
 
    string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
@@ -535,38 +543,54 @@ int main(int argc, char** argv) {
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0LT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso2 && q_1*q_2>0)
+               if (signalRegion && njets==1 && iso2 && q_1*q_2>0)
                   h1LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso2 && q_1*q_2>0)
+               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0)
                   h1LT_qcd_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && iso2 && q_1*q_2>0)
+                  h2LT_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0)
+                  h2LT_qcd_anti->Fill(myvar,aweight*weight2);
 
                if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && !iso2 && q_1*q_2>0)
+               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0)
                   h1SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && !iso2 && q_1*q_2>0)
+               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0)
                   h1SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0)
+                  h2SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0)
+                  h2SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
 	    }
 	   else{
                if (signalRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0J_qcd_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
                   h0J_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && iso2 && q_1*q_2>0)
+               if (signalRegion && njets==1 && iso2 && q_1*q_2>0)
                   h1J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && iso2 && q_1*q_2>0)
+               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0)
                   h1J_qcd_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && iso2 && q_1*q_2>0)
+                  h2J_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0)
+                  h2J_qcd_anti->Fill(myvar,aweight*weight2);
 
                if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>0 && !iso2 && q_1*q_2>0)
+               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0)
                   h1SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>0 && !iso2 && q_1*q_2>0)
+               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0)
                   h1SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0)
+                  h2SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0)
+                  h2SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
 
             }
 
@@ -636,6 +660,33 @@ int main(int argc, char** argv) {
       h1J_qcd_anti->Write();
     }
 
+    TDirectory *d2_qcd_iso =fout->mkdir("tt_2jet_qcd_iso");
+    d2_qcd_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_iso->SetName(name.c_str());
+      h2LT_qcd_iso->Add(h2J_qcd_iso);
+      h2LT_qcd_iso->Write();
+    }
+    else{
+      h2LT_qcd_iso->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_iso->Write();
+      h2J_qcd_iso->SetName(name.c_str()+postfixJ);
+      h2J_qcd_iso->Write();
+    }
+    TDirectory *d2_qcd_anti =fout->mkdir("tt_2jet_qcd_anti");
+    d2_qcd_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_anti->SetName(name.c_str());
+      h2LT_qcd_anti->Add(h2J_qcd_anti);
+      h2LT_qcd_anti->Write();
+    }
+    else{
+      h2LT_qcd_anti->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_anti->Write();
+      h2J_qcd_anti->SetName(name.c_str()+postfixJ);
+      h2J_qcd_anti->Write();
+    }
+
     TDirectory *d0SSloose_qcd_iso =fout->mkdir("tt_0SSloose_qcd_iso");
     d0SSloose_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
@@ -677,7 +728,6 @@ int main(int argc, char** argv) {
       h1SSlooseJ_qcd_iso->SetName(name.c_str()+postfixJ);
       h1SSlooseJ_qcd_iso->Write();
     }
-
     TDirectory *d1SSloose_qcd_anti =fout->mkdir("tt_1SSloose_qcd_anti");
     d1SSloose_qcd_anti->cd();
     if (sample=="data_obs" or sample=="W"){
@@ -690,6 +740,33 @@ int main(int argc, char** argv) {
       h1SSlooseLT_qcd_anti->Write();
       h1SSlooseJ_qcd_anti->SetName(name.c_str()+postfixJ);
       h1SSlooseJ_qcd_anti->Write();
+    }
+
+    TDirectory *d2SSloose_qcd_iso =fout->mkdir("tt_2SSloose_qcd_iso");
+    d2SSloose_qcd_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2SSlooseLT_qcd_iso->SetName(name.c_str());
+      h2SSlooseLT_qcd_iso->Add(h2SSlooseJ_qcd_iso);
+      h2SSlooseLT_qcd_iso->Write();
+    }
+    else{
+      h2SSlooseLT_qcd_iso->SetName(name.c_str()+postfixLT);
+      h2SSlooseLT_qcd_iso->Write();
+      h2SSlooseJ_qcd_iso->SetName(name.c_str()+postfixJ);
+      h2SSlooseJ_qcd_iso->Write();
+    }
+    TDirectory *d2SSloose_qcd_anti =fout->mkdir("tt_2SSloose_qcd_anti");
+    d2SSloose_qcd_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2SSlooseLT_qcd_anti->SetName(name.c_str());
+      h2SSlooseLT_qcd_anti->Add(h2SSlooseJ_qcd_anti);
+      h2SSlooseLT_qcd_anti->Write();
+    }
+    else{
+      h2SSlooseLT_qcd_anti->SetName(name.c_str()+postfixLT);
+      h2SSlooseLT_qcd_anti->Write();
+      h2SSlooseJ_qcd_anti->SetName(name.c_str()+postfixJ);
+      h2SSlooseJ_qcd_anti->Write();
     }
 
     fout->Close();
