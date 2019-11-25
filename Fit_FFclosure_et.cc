@@ -64,7 +64,7 @@ double fitFunction(double x, double par0, double par1) {
 }
 
 Double_t fitFunc_Exp3Par(Double_t *x, Double_t *par) {
-    return par[0] + par[1]* (x[0]-40);
+return par[0] + par[1]*(TMath::Exp(par[2] * (x[0]-50)-par[3]));
 }
 
 Double_t fitFunc_Line2Par(Double_t *x, Double_t *par) {
@@ -99,12 +99,22 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     const int nPar = 2; // number of parameters in the fit
 
     TF1 * theFit = new TF1("theFit", fitFunc_Line2Par, fMin, fMax, nPar);
-    if (name.find("et_w") < 140) theFit = new TF1("theFit", fitFunc_Line3Par, fMin, fMax, 3);
+    if ((name.find("et_w") < 140 or name.find("et_ttmc") < 140 or name.find("et_qcd") < 140) && name.find("et_qcdloose") > 140) theFit = new TF1("theFit", fitFunc_Line3Par, fMin, fMax, 3);
+    if (name.find("t_0jet_qcd") < 140) theFit = new TF1("theFit", fitFunc_Exp3Par, fMin, fMax, 4);
+
 
     theFit->SetParameter(0, 1.0);
     theFit->SetParameter(1, 0.01);
     theFit->SetParameter(2, 0.00001);
     theFit->SetParameter(3, 0.00000001);
+
+     if (name.find("t_0jet_qcd") < 140){
+       theFit->SetParameter(0, 0.85);
+       theFit->SetParameter(1, 0.8);
+       theFit->SetParameter(2, -0.1);
+       theFit->SetParameter(3, -0.3);
+     }
+
 
     float xAxisMax = 500;
     TGraph_FR->Fit("theFit", "R0");
@@ -132,7 +142,7 @@ TF1 *M_FR(int WP, std::string type, std::string files, std::string num, std::str
     theFit->Draw("SAME");
     theFit->SetLineColor(2);
 
-    if (name.find("et_w") > 140) {
+    if (!((name.find("et_w") < 140 or name.find("et_ttmc") < 140 or name.find("et_qcd") < 140) && name.find("et_qcdloose") > 140)) {
     // Up and down fits
     Double_t TauLegParameters[2];
     theFit->GetParameters(TauLegParameters);
@@ -232,12 +242,18 @@ void Fit_FFclosure_et(int year) {
     Double_t fMin = 0;
     Double_t fMax = 1000;
 
-    TF1* m11 = M_FR(1, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_mvis_et_qcd", Fit_Value_tau, fMin, fMax, year);
-    TF1* m12 = M_FR(2, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "closure_mvis_et_qcdloose", Fit_Value_tau, fMin, fMax, year);
-    TF1* m13 = M_FR(3, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "closure_mvis_et_w", Fit_Value_tau, fMin, fMax, year);
-    TF1* m15 = M_FR(5, "Line2Par", "files_corr1FF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "closure_mvis_et_tt", Fit_Value_tau, fMin, fMax, year);
-    TF1* m17 = M_FR(7, "Line3Par", "files_corr1FF_et/WMC.root", "et_0jet_w_iso/WMC", "et_0jet_w_anti/WMC", "closure_mvis_et_wmc", Fit_Value_tau, fMin, fMax, year);
-    TF1* m18 = M_FR(8, "Line2Par", "files_corr1FF_et/TTMC.root", "et_0jet_tt_iso/TTMCJ", "et_0jet_tt_anti/TTMCJ", "closure_mvis_et_ttmc", Fit_Value_tau, fMin, fMax, year);
+    TF1* m11 = M_FR(1, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "closure_mvis_et_qcd", Fit_Value_tau, fMin, fMax, year);
+    TF1* m12 = M_FR(2, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_qcd_mvis_iso", "et_0jet_qcd_mvis_anti", "closure_mvis_et_0jet_qcd", Fit_Value_tau, fMin, fMax, year);
+    TF1* m13 = M_FR(3, "Line3Par", "files_corr1FF_et/DataSub.root", "et_1jet_qcd_mvis_iso", "et_1jet_qcd_mvis_anti", "closure_mvis_et_1jet_qcd", Fit_Value_tau, fMin, fMax, year);
+    TF1* m14 = M_FR(4, "Line3Par", "files_corr1FF_et/DataSub.root", "et_2jet_qcd_mvis_iso", "et_2jet_qcd_mvis_anti", "closure_mvis_et_2jet_qcd", Fit_Value_tau, fMin, fMax, year);
+    TF1* m15 = M_FR(5, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "closure_mvis_et_qcdloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m16 = M_FR(6, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "closure_mvis_et_w", Fit_Value_tau, fMin, fMax, year);
+    TF1* m17 = M_FR(7, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_w_mvis_iso", "et_0jet_w_mvis_anti", "closure_mvis_et_0jet_w", Fit_Value_tau, fMin, fMax, year);
+    TF1* m18 = M_FR(8, "Line3Par", "files_corr1FF_et/DataSub.root", "et_1jet_w_mvis_iso", "et_1jet_w_mvis_anti", "closure_mvis_et_1jet_w", Fit_Value_tau, fMin, fMax, year);
+    TF1* m19 = M_FR(9, "Line3Par", "files_corr1FF_et/DataSub.root", "et_2jet_w_mvis_iso", "et_2jet_w_mvis_anti", "closure_mvis_et_2jet_w", Fit_Value_tau, fMin, fMax, year);
+    TF1* m20 = M_FR(10, "Line3Par", "files_corr1FF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "closure_mvis_et_tt", Fit_Value_tau, fMin, fMax, year);
+    TF1* m21 = M_FR(11, "Line3Par", "files_corr1FF_et/WMC.root", "et_0jet_w_iso/WMC", "et_0jet_w_anti/WMC", "closure_mvis_et_wmc", Fit_Value_tau, fMin, fMax, year);
+    TF1* m22 = M_FR(12, "Line3Par", "files_corr1FF_et/TTMC.root", "et_0jet_tt_iso/TTMCJ", "et_0jet_tt_anti/TTMCJ", "closure_mvis_et_ttmc", Fit_Value_tau, fMin, fMax, year);
 
 }
 

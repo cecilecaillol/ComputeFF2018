@@ -40,33 +40,33 @@ def FFmvisclosure(args):
 
     if args.year == '2018':
         commandParams = [
-            [executable,path+'DataA.root',outputPath+'DataA.root','data_obs','data_obs',args.year],
-            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year],
-            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year],
-            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year],
-            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
-            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
-            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
-            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
-            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
-            [executable,path+'TTToHadronic.root',outputPath+'TTToHadronic.root','TTToHadronic','TT',args.year],
-            [executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2Nu.root',' TTTo2L2Nu','TT',args.year],
-            [executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonic.root','TTToSemiLeptonic','TT',args.year],
-            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
-            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
-            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
-            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
-            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
-            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
-            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],
+            [executable,path+'DataA.root',outputPath+'DataA.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year,'no'],
+            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year,'no'],
+            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year,'no'],
+            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year,'no'],
+            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year,'no'],
+            [executable,path+'TTToHadronic.root',outputPath+'TTToHadronic.root','TTToHadronic','TT',args.year,'no'],
+            [executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2Nu.root',' TTTo2L2Nu','TT',args.year,'no'],
+            [executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonic.root','TTToSemiLeptonic','TT',args.year,'no'],
+            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year,'no'],
+            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year,'no'],
+            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year,'no'],
+            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year,'no'],
+            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year,'no'],
+            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year,'no'],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year,'no'],
         ]
         if args.channel == "et" or args.channel=="mt":
-            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year])
-            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year])
-            commandParams.append([executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC2',args.year])
-            commandParams.append([executable,path+'TTToHadronic.root',outputPath+'TTToHadronicMC.root','TTToHadronic','TTMC',args.year])
-            commandParams.append([executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2NuMC.root',' TTTo2L2Nu','TTMC',args.year])
-            commandParams.append([executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonicMC.root','TTToSemiLeptonic','TTMC',args.year])
+            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year,'no'])
+            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year,'no'])
+            commandParams.append([executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC2',args.year,'no'])
+            commandParams.append([executable,path+'TTToHadronic.root',outputPath+'TTToHadronicMC.root','TTToHadronic','TTMC',args.year,'no'])
+            commandParams.append([executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2NuMC.root',' TTTo2L2Nu','TTMC',args.year,'no'])
+            commandParams.append([executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonicMC.root','TTToSemiLeptonic','TTMC',args.year,'no'])
         haddFiles = {
             "Data.root": [outputPath+"DataA.root",outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root"],
             "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
@@ -83,34 +83,34 @@ def FFmvisclosure(args):
            }
     elif args.year=='2017':
         commandParams = [
-            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year],
-            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year],
-            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year],
-            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year],
-            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year],
-            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
-            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
-            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
-            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
-            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
-            [executable,path+'TTToHadronic.root',outputPath+'TTToHadronic.root','TTToHadronic','TT',args.year],
-            [executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2Nu.root',' TTTo2L2Nu','TT',args.year],
-            [executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonic.root','TTToSemiLeptonic','TT',args.year],
-            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
-            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
-            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
-            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
-            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
-            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
-            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year]
+            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year,'no'],
+            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year,'no'],
+            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year,'no'],
+            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year,'no'],
+            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year,'no'],
+            [executable,path+'TTToHadronic.root',outputPath+'TTToHadronic.root','TTToHadronic','TT',args.year,'no'],
+            [executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2Nu.root',' TTTo2L2Nu','TT',args.year,'no'],
+            [executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonic.root','TTToSemiLeptonic','TT',args.year,'no'],
+            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year,'no'],
+            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year,'no'],
+            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year,'no'],
+            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year,'no'],
+            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year,'no'],
+            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year,'no'],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year,'no']
         ]
         if args.channel == "et" or args.channel=="mt":
-            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year])
-            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year])
-            commandParams.append([executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC2',args.year])
-            commandParams.append([executable,path+'TTToHadronic.root',outputPath+'TTToHadronicMC.root','TTToHadronic','TTMC',args.year])
-            commandParams.append([executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2NuMC.root',' TTTo2L2Nu','TTMC',args.year])
-            commandParams.append([executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonicMC.root','TTToSemiLeptonic','TTMC',args.year])
+            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year,'no'])
+            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year,'no'])
+            commandParams.append([executable,path+'Wall.root',outputPath+'WMC2.root','W','WMC2',args.year,'no'])
+            commandParams.append([executable,path+'TTToHadronic.root',outputPath+'TTToHadronicMC.root','TTToHadronic','TTMC',args.year,'no'])
+            commandParams.append([executable,path+'TTTo2L2Nu.root',outputPath+'TTTo2L2NuMC.root',' TTTo2L2Nu','TTMC',args.year,'no'])
+            commandParams.append([executable,path+'TTToSemiLeptonic.root',outputPath+'TTToSemiLeptonicMC.root','TTToSemiLeptonic','TTMC',args.year,'no'])
         haddFiles = {
             "Data.root": [outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root",outputPath+"DataE.root",outputPath+"DataF.root"],
             "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
@@ -127,32 +127,32 @@ def FFmvisclosure(args):
           }
     elif args.year=='2016':
         commandParams = [
-            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year],
-            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year],
-            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year],
-            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year],
-            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year],
-            [executable,path+'DataG.root',outputPath+'DataG.root','data_obs','data_obs',args.year],
-            [executable,path+'DataH.root',outputPath+'DataH.root','data_obs','data_obs',args.year],
-            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year],
-            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year],
-            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year],
-            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year],
-            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year],
-            [executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year],
-            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year],
-            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year],
-            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year],
-            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year],
-            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year],
-            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year],
-            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year],            
-            [executable,path+'ggH125.root',outputPath+'ggH_htt125.root','ggH_htt125','ggH_htt125',args.year],
+            [executable,path+'DataB.root',outputPath+'DataB.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataC.root',outputPath+'DataC.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataD.root',outputPath+'DataD.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataE.root',outputPath+'DataE.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataF.root',outputPath+'DataF.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataG.root',outputPath+'DataG.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DataH.root',outputPath+'DataH.root','data_obs','data_obs',args.year,'no'],
+            [executable,path+'DY.root',outputPath+'DYincl.root','DY','DY',args.year,'no'],
+            [executable,path+'DY1.root',outputPath+'DY1.root','DY','DY',args.year,'no'],
+            [executable,path+'DY2.root',outputPath+'DY2.root','DY','DY',args.year,'no'],
+            [executable,path+'DY3.root',outputPath+'DY3.root','DY','DY',args.year,'no'],
+            [executable,path+'DY4.root',outputPath+'DY4.root','DY','DY',args.year,'no'],
+            [executable,path+'TT.root',outputPath+'TT.root','TT','TT',args.year,'no'],
+            [executable,path+'WW.root',outputPath+'WW.root','WW','VV',args.year,'no'],
+            [executable,path+'WZ.root',outputPath+'WZ.root','WZ','VV',args.year,'no'],
+            [executable,path+'ZZ.root',outputPath+'ZZ.root','ZZ','VV',args.year,'no'],
+            [executable,path+'ST_t_antitop.root',outputPath+'ST_t_antitop.root','ST_t_antitop','ST',args.year,'no'],
+            [executable,path+'ST_t_top.root',outputPath+'ST_t_top.root','ST_t_top','ST',args.year,'no'],
+            [executable,path+'ST_tW_antitop.root',outputPath+'ST_tW_antitop.root','ST_tW_antitop','ST',args.year,'no'],
+            [executable,path+'ST_tW_top.root',outputPath+'ST_tW_top.root','ST_tW_top','ST',args.year,'no'],            
+            [executable,path+'ggH125.root',outputPath+'ggH_htt125.root','ggH_htt125','ggH_htt125',args.year,'no'],
         ]
 	if args.channel=="mt" or args.channel=="et":
-            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year])
-            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year])
-            commandParams.append([executable,path+'TT.root',outputPath+'TTMC.root','TT','TTMC',args.year])
+            commandParams.append([executable,path+'Wall.root',outputPath+'W.root','W','W',args.year,'no'])
+            commandParams.append([executable,path+'Wall.root',outputPath+'WMC.root','W','WMC',args.year,'no'])
+            commandParams.append([executable,path+'TT.root',outputPath+'TTMC.root','TT','TTMC',args.year,'no'])
         haddFiles = {
             "Data.root": [outputPath+"DataB.root",outputPath+"DataC.root",outputPath+"DataD.root",outputPath+"DataE.root",outputPath+"DataF.root",outputPath+"DataG.root",outputPath+"DataH.root"],
             "DY.root": [outputPath+"DYincl.root",outputPath+"DY1.root",outputPath+"DY2.root",outputPath+"DY3.root",outputPath+"DY4.root"],
@@ -179,7 +179,7 @@ def FFmvisclosure(args):
     
     #this one has to specifically be done here because the file for weighting doesn't even exist until the fits are done.
     if (args.channel=="et" or args.channel=="mt"):
-      os.system(executable+" "+path+"Wall.root"+" "+outputPath+"WMC2.root W WMC2 "+args.year)
+      os.system(executable+" "+path+"Wall.root"+" "+outputPath+"WMC2.root W WMC2 "+args.year+" no")
     
     #make the final mvisclosure file
     finalMvisClosureCommand = "hadd -f mvisclosure_"+args.channel+".root "
