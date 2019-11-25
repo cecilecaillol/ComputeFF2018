@@ -232,18 +232,22 @@ void Fit_FF_et(int year) {
 
     TF1* m11 = M_FR(1, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_qcd_iso", "et_0jet_qcd_anti", "rawFF_et_qcd_0jet", Fit_Value_tau, fMin, fMax, year);
     TF1* m12 = M_FR(2, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_qcd_iso", "et_1jet_qcd_anti", "rawFF_et_qcd_1jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
+    TF1* m13 = M_FR(3, "Line2Par", "files_rawFF_et/DataSub.root", "et_2jet_qcd_iso", "et_2jet_qcd_anti", "rawFF_et_qcd_2jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m14 = M_FR(4, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_w_iso", "et_0jet_w_anti", "rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m15 = M_FR(5, "Line2Par", "files_rawFF_et/DataSub.root", "et_1jet_w_iso", "et_1jet_w_anti", "rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/DataSub.root", "et_2jet_w_iso", "et_2jet_w_anti", "rawFF_et_w_2jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/DataSub.root", "et_0jet_tt_iso", "et_0jet_tt_anti", "rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
 
-    TF1* m16 = M_FR(6, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "mc_rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
-    TF1* m17 = M_FR(7, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "mc_rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/W.root", "et_0jet_w_iso/W", "et_0jet_w_anti/W", "mc_rawFF_et_w_0jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/W.root", "et_1jet_w_iso/W", "et_1jet_w_anti/W", "mc_rawFF_et_w_1jet", Fit_Value_tau, fMin, fMax, year);
+    TF1* m20 = M_FR(10, "Line2Par", "files_rawFF_et/W.root", "et_2jet_w_iso/W", "et_2jet_w_anti/W", "mc_rawFF_et_w_2jet", Fit_Value_tau, fMin, fMax, year);
 
 
-    TF1* m18 = M_FR(8, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "rawFF_et_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
-    TF1* m19 = M_FR(9, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "rawFF_et_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m21 = M_FR(11, "Line2Par", "files_rawFF_et/DataSub.root", "et_0SSloose_qcd_iso", "et_0SSloose_qcd_anti", "rawFF_et_qcd_0jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m22 = M_FR(12, "Line2Par", "files_rawFF_et/DataSub.root", "et_1SSloose_qcd_iso", "et_1SSloose_qcd_anti", "rawFF_et_qcd_1jetSSloose", Fit_Value_tau, fMin, fMax, year);
+    TF1* m23 = M_FR(13, "Line2Par", "files_rawFF_et/DataSub.root", "et_2SSloose_qcd_iso", "et_2SSloose_qcd_anti", "rawFF_et_qcd_2jetSSloose", Fit_Value_tau, fMin, fMax, year);
 
-    TF1* m20 = M_FR(11, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "mc_rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
+    TF1* m24 = M_FR(14, "Line2Par", "files_rawFF_et/TT.root", "et_0jet_tt_iso/TTJ", "et_0jet_tt_anti/TTJ", "mc_rawFF_et_tt", Fit_Value_tau, fMin, fMax, year);
     
 }
 

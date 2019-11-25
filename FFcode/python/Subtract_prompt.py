@@ -13,12 +13,13 @@ def Subtract_prompt(directory,channel):
   fileW=ROOT.TFile(directory+"/W.root","r") #MC histogram with real leptons
   fileDataSub=ROOT.TFile(directory+"/DataSub.root","recreate") #Data without real leptons
 
-  dir_qcd=[channel+"_0jet_qcd_anti",channel+"_0jet_qcd_iso",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_1jet_qcd_anti",channel+"_1jet_qcd_iso",channel+"_1SSloose_qcd_anti",channel+"_1SSloose_qcd_iso"]
-  ncat_qcd=8
+  dir_qcd=[channel+"_0jet_qcd_anti",channel+"_0jet_qcd_iso",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_1jet_qcd_anti",channel+"_1jet_qcd_iso",channel+"_1SSloose_qcd_anti",channel+"_1SSloose_qcd_iso",channel+"_2jet_qcd_anti",channel+"_2jet_qcd_iso",channel+"_2SSloose_qcd_anti",channel+"_2SSloose_qcd_iso"]
+  ncat_qcd=12
 
   if "corr1" in directory:
     print("corr1 subtraction")
-    ncat_qcd=4
+    dir_qcd=[channel+"_0jet_qcd_anti",channel+"_0jet_qcd_iso",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_0jet_qcd_mvis_anti",channel+"_0jet_qcd_mvis_iso",channel+"_1jet_qcd_mvis_anti",channel+"_1jet_qcd_mvis_iso",channel+"_2jet_qcd_mvis_anti",channel+"_2jet_qcd_mvis_iso"]
+    ncat_qcd=10
 
   if "OSSSF" in directory:    
     print("OSSSF subtraction")
@@ -49,10 +50,11 @@ def Subtract_prompt(directory,channel):
     Data.Write()
 
 
-  dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_1jet_w_anti",channel+"_1jet_w_iso"]
-  ncat_w=4
+  dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_1jet_w_anti",channel+"_1jet_w_iso",channel+"_2jet_w_anti",channel+"_2jet_w_iso"]
+  ncat_w=6
   if "corr1" in directory:
-    ncat_w=2
+    dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_0jet_w_mvis_anti",channel+"_0jet_w_mvis_iso",channel+"_1jet_w_mvis_anti",channel+"_1jet_w_mvis_iso",channel+"_2jet_w_mvis_anti",channel+"_2jet_w_mvis_iso"]
+    ncat_w=8
   if "OSSSF" in directory:
     ncat_w=0
 

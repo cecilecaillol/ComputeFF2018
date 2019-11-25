@@ -376,6 +376,7 @@ int main(int argc, char** argv) {
    TFile frawff("uncorrected_fakefactors_et.root");
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_et_qcd_0jetSSloose");
    TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_et_qcd_1jetSSloose");
+   TF1* ff_qcd_2jet=(TF1*) frawff.Get("rawFF_et_qcd_2jetSSloose");
 
    TFile fmvisclosure ("FF_corrections_1.root");
    TF1* mvisclosure_qcdloose=(TF1*) fmvisclosure.Get("closure_mvis_et_qcdloose");
@@ -634,7 +635,8 @@ int main(int argc, char** argv) {
 	   //if (myvar>300) myvar=299;
 
 	  float ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_0jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
-	  if (njets>0) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  if (njets==1) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_1jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+          else if (njets>1) ff_qcd=get_raw_FF(mytau.Pt(),ff_qcd_2jet)*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
 
            if (!is_includedInEmbedded){
 

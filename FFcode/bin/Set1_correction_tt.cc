@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
     std::string sample = *(argv + 3);
     std::string name = *(argv + 4);
     std::string year = *(argv + 5);
+    std::string apply_corrections = *(argv + 6);
 
     TFile *f_Double = new TFile(input.c_str());
     cout<<"XXXXXXXXXXXXX "<<input.c_str()<<" XXXXXXXXXXXX"<<endl;
@@ -280,6 +281,32 @@ int main(int argc, char** argv) {
    float bins_mtttau1pt0[] = {40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200};
    int  binnum_mtttau1pt0 = sizeof(bins_mtttau1pt0)/sizeof(Float_t) - 1;
 
+   float bins_mttcat0jet0[] = {0,1000};
+   int  binnum_mttcat0jet0 = sizeof(bins_mttcat0jet0)/sizeof(Float_t) - 1;
+   float bins_mttcat0jet1[] = {50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,2000};
+   int  binnum_mttcat0jet1 = sizeof(bins_mttcat0jet1)/sizeof(Float_t) - 1;
+
+   float bins_mttcatboosted10[] = {0,60,120,200,10000};
+   int  binnum_mttcatboosted10 = sizeof(bins_mttcatboosted10)/sizeof(Float_t) - 1;
+   float bins_mttcatboosted11[] = {50,70,90,110,130,150,170,190,2000};
+   int  binnum_mttcatboosted11 = sizeof(bins_mttcatboosted11)/sizeof(Float_t) - 1;
+
+   float bins_mttcatboosted20[] = {0,60,120,200,10000};
+   int  binnum_mttcatboosted20 = sizeof(bins_mttcatboosted20)/sizeof(Float_t) - 1;
+   float bins_mttcatboosted21[] = {50,70,90,110,130,150,170,190,2000};
+   int  binnum_mttcatboosted21 = sizeof(bins_mttcatboosted21)/sizeof(Float_t) - 1;
+
+   float bins_mttcatvbflow0[] = {0,350,700,1200,10000};
+   int  binnum_mttcatvbflow0 = sizeof(bins_mttcatvbflow0)/sizeof(Float_t) - 1;
+   float bins_mttcatvbflow1[] = {50,70,90,110,130,150,170,190,2000};
+   int  binnum_mttcatvbflow1 = sizeof(bins_mttcatvbflow1)/sizeof(Float_t) - 1;
+
+   float bins_mttcatvbfhigh0[] = {0,350,700,1200,10000};
+   int  binnum_mttcatvbfhigh0 = sizeof(bins_mttcatvbfhigh0)/sizeof(Float_t) - 1;
+   float bins_mttcatvbfhigh1[] = {50,70,90,110,130,150,170,190,2000};
+   int  binnum_mttcatvbfhigh1 = sizeof(bins_mttcatvbfhigh1)/sizeof(Float_t) - 1;
+
+
    float bins_mttmet0[] = {0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200};
    int  binnum_mttmet0 = sizeof(bins_mttmet0)/sizeof(Float_t) - 1;
 
@@ -312,6 +339,31 @@ int main(int argc, char** argv) {
    TH1F* h0J_qcd_tau1pt_anti = new TH1F ("h0J_qcd_tau1pt_anti","h0J_qcd_tau1pt_anti",binnum_mtttau1pt0,bins_mtttau1pt0); h0J_qcd_tau1pt_anti->Sumw2();
    TH1F* h0SSlooseJ_qcd_tau1pt_iso = new TH1F ("h0SSlooseJ_qcd_tau1pt_iso","h0SSlooseJ_qcd_tau1pt_iso",binnum_mtttau1pt0,bins_mtttau1pt0); h0SSlooseJ_qcd_tau1pt_iso->Sumw2();
    TH1F* h0SSlooseJ_qcd_tau1pt_anti = new TH1F ("h0SSlooseJ_qcd_tau1pt_anti","h0SSlooseJ_qcd_tau1pt_anti",binnum_mtttau1pt0,bins_mtttau1pt0); h0SSlooseJ_qcd_tau1pt_anti->Sumw2();
+
+   TH2F* h0LT_qcd_cat0jet_iso = new TH2F ("h0LT_qcd_cat0jet_iso","h0LT_qcd_cat0jet_iso",binnum_mttcat0jet0,bins_mttcat0jet0,binnum_mttcat0jet1,bins_mttcat0jet1); h0LT_qcd_cat0jet_iso->Sumw2();
+   TH2F* h0LT_qcd_cat0jet_anti = new TH2F ("h0LT_qcd_cat0jet_anti","h0LT_qcd_cat0jet_anti",binnum_mttcat0jet0,bins_mttcat0jet0,binnum_mttcat0jet1,bins_mttcat0jet1); h0LT_qcd_cat0jet_anti->Sumw2();
+   TH2F* h0J_qcd_cat0jet_iso = new TH2F ("h0J_qcd_cat0jet_iso","h0J_qcd_cat0jet_iso",binnum_mttcat0jet0,bins_mttcat0jet0,binnum_mttcat0jet1,bins_mttcat0jet1); h0J_qcd_cat0jet_iso->Sumw2();
+   TH2F* h0J_qcd_cat0jet_anti = new TH2F ("h0J_qcd_cat0jet_anti","h0J_qcd_cat0jet_anti",binnum_mttcat0jet0,bins_mttcat0jet0,binnum_mttcat0jet1,bins_mttcat0jet1); h0J_qcd_cat0jet_anti->Sumw2();
+
+   TH2F* h0LT_qcd_catboosted1_iso = new TH2F ("h0LT_qcd_catboosted1_iso","h0LT_qcd_catboosted1_iso",binnum_mttcatboosted10,bins_mttcatboosted10,binnum_mttcatboosted11,bins_mttcatboosted11); h0LT_qcd_catboosted1_iso->Sumw2();
+   TH2F* h0LT_qcd_catboosted1_anti = new TH2F ("h0LT_qcd_catboosted1_anti","h0LT_qcd_catboosted1_anti",binnum_mttcatboosted10,bins_mttcatboosted10,binnum_mttcatboosted11,bins_mttcatboosted11); h0LT_qcd_catboosted1_anti->Sumw2();
+   TH2F* h0J_qcd_catboosted1_iso = new TH2F ("h0J_qcd_catboosted1_iso","h0J_qcd_catboosted1_iso",binnum_mttcatboosted10,bins_mttcatboosted10,binnum_mttcatboosted11,bins_mttcatboosted11); h0J_qcd_catboosted1_iso->Sumw2();
+   TH2F* h0J_qcd_catboosted1_anti = new TH2F ("h0J_qcd_catboosted1_anti","h0J_qcd_catboosted1_anti",binnum_mttcatboosted10,bins_mttcatboosted10,binnum_mttcatboosted11,bins_mttcatboosted11); h0J_qcd_catboosted1_anti->Sumw2();
+
+   TH2F* h0LT_qcd_catboosted2_iso = new TH2F ("h0LT_qcd_catboosted2_iso","h0LT_qcd_catboosted2_iso",binnum_mttcatboosted20,bins_mttcatboosted20,binnum_mttcatboosted21,bins_mttcatboosted21); h0LT_qcd_catboosted2_iso->Sumw2();
+   TH2F* h0LT_qcd_catboosted2_anti = new TH2F ("h0LT_qcd_catboosted2_anti","h0LT_qcd_catboosted2_anti",binnum_mttcatboosted20,bins_mttcatboosted20,binnum_mttcatboosted21,bins_mttcatboosted21); h0LT_qcd_catboosted2_anti->Sumw2();
+   TH2F* h0J_qcd_catboosted2_iso = new TH2F ("h0J_qcd_catboosted2_iso","h0J_qcd_catboosted2_iso",binnum_mttcatboosted20,bins_mttcatboosted20,binnum_mttcatboosted21,bins_mttcatboosted21); h0J_qcd_catboosted2_iso->Sumw2();
+   TH2F* h0J_qcd_catboosted2_anti = new TH2F ("h0J_qcd_catboosted2_anti","h0J_qcd_catboosted2_anti",binnum_mttcatboosted20,bins_mttcatboosted20,binnum_mttcatboosted21,bins_mttcatboosted21); h0J_qcd_catboosted2_anti->Sumw2();
+
+   TH2F* h0LT_qcd_catvbflow_iso = new TH2F ("h0LT_qcd_catvbflow_iso","h0LT_qcd_catvbflow_iso",binnum_mttcatvbflow0,bins_mttcatvbflow0,binnum_mttcatvbflow1,bins_mttcatvbflow1); h0LT_qcd_catvbflow_iso->Sumw2();
+   TH2F* h0LT_qcd_catvbflow_anti = new TH2F ("h0LT_qcd_catvbflow_anti","h0LT_qcd_catvbflow_anti",binnum_mttcatvbflow0,bins_mttcatvbflow0,binnum_mttcatvbflow1,bins_mttcatvbflow1); h0LT_qcd_catvbflow_anti->Sumw2();
+   TH2F* h0J_qcd_catvbflow_iso = new TH2F ("h0J_qcd_catvbflow_iso","h0J_qcd_catvbflow_iso",binnum_mttcatvbflow0,bins_mttcatvbflow0,binnum_mttcatvbflow1,bins_mttcatvbflow1); h0J_qcd_catvbflow_iso->Sumw2();
+   TH2F* h0J_qcd_catvbflow_anti = new TH2F ("h0J_qcd_catvbflow_anti","h0J_qcd_catvbflow_anti",binnum_mttcatvbflow0,bins_mttcatvbflow0,binnum_mttcatvbflow1,bins_mttcatvbflow1); h0J_qcd_catvbflow_anti->Sumw2();
+
+   TH2F* h0LT_qcd_catvbfhigh_iso = new TH2F ("h0LT_qcd_catvbfhigh_iso","h0LT_qcd_catvbfhigh_iso",binnum_mttcatvbfhigh0,bins_mttcatvbfhigh0,binnum_mttcatvbfhigh1,bins_mttcatvbfhigh1); h0LT_qcd_catvbfhigh_iso->Sumw2();
+   TH2F* h0LT_qcd_catvbfhigh_anti = new TH2F ("h0LT_qcd_catvbfhigh_anti","h0LT_qcd_catvbfhigh_anti",binnum_mttcatvbfhigh0,bins_mttcatvbfhigh0,binnum_mttcatvbfhigh1,bins_mttcatvbfhigh1); h0LT_qcd_catvbfhigh_anti->Sumw2();
+   TH2F* h0J_qcd_catvbfhigh_iso = new TH2F ("h0J_qcd_catvbfhigh_iso","h0J_qcd_catvbfhigh_iso",binnum_mttcatvbfhigh0,bins_mttcatvbfhigh0,binnum_mttcatvbfhigh1,bins_mttcatvbfhigh1); h0J_qcd_catvbfhigh_iso->Sumw2();
+   TH2F* h0J_qcd_catvbfhigh_anti = new TH2F ("h0J_qcd_catvbfhigh_anti","h0J_qcd_catvbfhigh_anti",binnum_mttcatvbfhigh0,bins_mttcatvbfhigh0,binnum_mttcatvbfhigh1,bins_mttcatvbfhigh1); h0J_qcd_catvbfhigh_anti->Sumw2();
 
    TH1F* h0LT_qcd_tau2pt_iso = new TH1F ("h0LT_qcd_tau2pt_iso","h0LT_qcd_tau2pt_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_iso->Sumw2();
    TH1F* h0LT_qcd_tau2pt_anti = new TH1F ("h0LT_qcd_tau2pt_anti","h0LT_qcd_tau2pt_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_anti->Sumw2();
@@ -425,6 +477,9 @@ int main(int argc, char** argv) {
    TF1* ff_looseSSqcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jetSSloose");
    TF1* ff_looseSSqcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jetSSloose");
    TF1* ff_looseSSqcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jetSSloose");
+
+   TFile ftau2closure ("FF_corrections_1.root");
+   TF1* tau2closure=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd");
 
    TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","ditau", "2018", "tight", "MVAv2");
    if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2017", "loose", "MVAv2");
@@ -612,6 +667,12 @@ int main(int argc, char** argv) {
           if (njets==1) ff_looseSSqcd=get_raw_FF(mytau1.Pt(),ff_looseSSqcd_1jet);
 	  else if (njets>1) ff_looseSSqcd=get_raw_FF(mytau1.Pt(),ff_looseSSqcd_2jet);
 
+	  if (apply_corrections=="yes"){
+             ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
+             if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
+             else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
+	   }
+
            if (!is_includedInEmbedded){
 
 	     if (isL or isT){
@@ -682,6 +743,31 @@ int main(int argc, char** argv) {
                if (antiisoRegion && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_tau1pt_anti->Fill(mytau1.Pt(),aweight*weight2*ff_looseSSqcd);
 
+               if (njets==0 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_cat0jet_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (njets==0 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_cat0jet_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (njets==1 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catboosted1_iso->Fill((mytau1+mytau2+mymet).Pt(),(mytau1+mytau2).M(),aweight*weight2);
+               if (njets==1 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catboosted1_anti->Fill((mytau1+mytau2+mymet).Pt(),(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (njets>1 && ((mytau1+mytau2+mymet).Pt()<100 or fabs(jeta_1-jeta_2)<2.5) && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catboosted2_iso->Fill((mytau1+mytau2+mymet).Pt(),(mytau1+mytau2).M(),aweight*weight2);
+               if (njets>1 && ((mytau1+mytau2+mymet).Pt()<100 or fabs(jeta_1-jeta_2)<2.5) && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catboosted2_anti->Fill((mytau1+mytau2+mymet).Pt(),(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (njets>1 && fabs(jeta_1-jeta_2)>2.5 && (mytau1+mytau2+mymet).Pt()>100 && (mytau1+mytau2+mymet).Pt()<200 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catvbflow_iso->Fill(mjj,(mytau1+mytau2).M(),aweight*weight2);
+               if (njets>1 && fabs(jeta_1-jeta_2)>2.5 && (mytau1+mytau2+mymet).Pt()>100 && (mytau1+mytau2+mymet).Pt()<200 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catvbflow_anti->Fill(mjj,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (njets>1 && fabs(jeta_1-jeta_2)>2.5 && (mytau1+mytau2+mymet).Pt()>100 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catvbfhigh_iso->Fill(mjj,(mytau1+mytau2).M(),aweight*weight2);
+               if (njets>1 && fabs(jeta_1-jeta_2)>2.5 && (mytau1+mytau2+mymet).Pt()>100 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_catvbfhigh_anti->Fill(mjj,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
                if (signalRegion && iso2 && q_1*q_2>0)
                   h0LT_qcd_tau2pt_iso->Fill(mytau2.Pt(),aweight*weight2);
                if (antiisoRegion && iso2 && q_1*q_2>0)
@@ -709,6 +795,31 @@ int main(int argc, char** argv) {
                   h0SSlooseJ_qcd_tau1pt_iso->Fill(mytau1.Pt(),aweight*weight2);
                if (antiisoRegion && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_tau1pt_anti->Fill(mytau1.Pt(),aweight*weight2*ff_looseSSqcd);
+
+               if (signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_cat0jet_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_cat0jet_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catboosted1_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catboosted1_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catboosted2_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catboosted2_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catvbflow_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catvbflow_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
+
+               if (signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catvbfhigh_iso->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2);
+               if (antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_catvbfhigh_anti->Fill(1.0,(mytau1+mytau2).M(),aweight*weight2*ff_qcd);
 
                if (signalRegion && iso2 && q_1*q_2>0)
                   h0J_qcd_met_iso->Fill(mymet.Pt(),aweight*weight2);
@@ -803,6 +914,142 @@ int main(int argc, char** argv) {
       h0J_qcd_tau1pt_anti->SetName(name.c_str()+postfixJ);
       h0J_qcd_tau1pt_anti->Write();
     }
+
+    TDirectory *d0_qcd_cat0jet_iso =fout->mkdir("tt_0jet_qcd_cat0jet_iso");
+    d0_qcd_cat0jet_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_cat0jet_iso->SetName(name.c_str());
+      h0LT_qcd_cat0jet_iso->Add(h0J_qcd_cat0jet_iso);
+      h0LT_qcd_cat0jet_iso->Write();
+    }
+    else{
+      h0LT_qcd_cat0jet_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_cat0jet_iso->Write();
+      h0J_qcd_cat0jet_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_cat0jet_iso->Write();
+    }
+    TDirectory *d0_qcd_cat0jet_anti =fout->mkdir("tt_0jet_qcd_cat0jet_anti");
+    d0_qcd_cat0jet_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_cat0jet_anti->SetName(name.c_str());
+      h0LT_qcd_cat0jet_anti->Add(h0J_qcd_cat0jet_anti);
+      h0LT_qcd_cat0jet_anti->Write();
+    }
+    else{
+      h0LT_qcd_cat0jet_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_cat0jet_anti->Write();
+      h0J_qcd_cat0jet_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_cat0jet_anti->Write();
+    }
+
+    TDirectory *d0_qcd_catboosted2_iso =fout->mkdir("tt_0jet_qcd_catboosted2_iso");
+    d0_qcd_catboosted2_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catboosted2_iso->SetName(name.c_str());
+      h0LT_qcd_catboosted2_iso->Add(h0J_qcd_catboosted2_iso);
+      h0LT_qcd_catboosted2_iso->Write();
+    }
+    else{
+      h0LT_qcd_catboosted2_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catboosted2_iso->Write();
+      h0J_qcd_catboosted2_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catboosted2_iso->Write();
+    }
+    TDirectory *d0_qcd_catboosted2_anti =fout->mkdir("tt_0jet_qcd_catboosted2_anti");
+    d0_qcd_catboosted2_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catboosted2_anti->SetName(name.c_str());
+      h0LT_qcd_catboosted2_anti->Add(h0J_qcd_catboosted2_anti);
+      h0LT_qcd_catboosted2_anti->Write();
+    }
+    else{
+      h0LT_qcd_catboosted2_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catboosted2_anti->Write();
+      h0J_qcd_catboosted2_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catboosted2_anti->Write();
+    }
+
+    TDirectory *d0_qcd_catboosted1_iso =fout->mkdir("tt_0jet_qcd_catboosted1_iso");
+    d0_qcd_catboosted1_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catboosted1_iso->SetName(name.c_str());
+      h0LT_qcd_catboosted1_iso->Add(h0J_qcd_catboosted1_iso);
+      h0LT_qcd_catboosted1_iso->Write();
+    }
+    else{
+      h0LT_qcd_catboosted1_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catboosted1_iso->Write();
+      h0J_qcd_catboosted1_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catboosted1_iso->Write();
+    }
+    TDirectory *d0_qcd_catboosted1_anti =fout->mkdir("tt_0jet_qcd_catboosted1_anti");
+    d0_qcd_catboosted1_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catboosted1_anti->SetName(name.c_str());
+      h0LT_qcd_catboosted1_anti->Add(h0J_qcd_catboosted1_anti);
+      h0LT_qcd_catboosted1_anti->Write();
+    }
+    else{
+      h0LT_qcd_catboosted1_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catboosted1_anti->Write();
+      h0J_qcd_catboosted1_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catboosted1_anti->Write();
+    }
+
+    TDirectory *d0_qcd_catvbflow_iso =fout->mkdir("tt_0jet_qcd_catvbflow_iso");
+    d0_qcd_catvbflow_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catvbflow_iso->SetName(name.c_str());
+      h0LT_qcd_catvbflow_iso->Add(h0J_qcd_catvbflow_iso);
+      h0LT_qcd_catvbflow_iso->Write();
+    }
+    else{
+      h0LT_qcd_catvbflow_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catvbflow_iso->Write();
+      h0J_qcd_catvbflow_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catvbflow_iso->Write();
+    }
+    TDirectory *d0_qcd_catvbflow_anti =fout->mkdir("tt_0jet_qcd_catvbflow_anti");
+    d0_qcd_catvbflow_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catvbflow_anti->SetName(name.c_str());
+      h0LT_qcd_catvbflow_anti->Add(h0J_qcd_catvbflow_anti);
+      h0LT_qcd_catvbflow_anti->Write();
+    }
+    else{
+      h0LT_qcd_catvbflow_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catvbflow_anti->Write();
+      h0J_qcd_catvbflow_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catvbflow_anti->Write();
+    }
+
+    TDirectory *d0_qcd_catvbfhigh_iso =fout->mkdir("tt_0jet_qcd_catvbfhigh_iso");
+    d0_qcd_catvbfhigh_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catvbfhigh_iso->SetName(name.c_str());
+      h0LT_qcd_catvbfhigh_iso->Add(h0J_qcd_catvbfhigh_iso);
+      h0LT_qcd_catvbfhigh_iso->Write();
+    }
+    else{
+      h0LT_qcd_catvbfhigh_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catvbfhigh_iso->Write();
+      h0J_qcd_catvbfhigh_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catvbfhigh_iso->Write();
+    }
+    TDirectory *d0_qcd_catvbfhigh_anti =fout->mkdir("tt_0jet_qcd_catvbfhigh_anti");
+    d0_qcd_catvbfhigh_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_catvbfhigh_anti->SetName(name.c_str());
+      h0LT_qcd_catvbfhigh_anti->Add(h0J_qcd_catvbfhigh_anti);
+      h0LT_qcd_catvbfhigh_anti->Write();
+    }
+    else{
+      h0LT_qcd_catvbfhigh_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_catvbfhigh_anti->Write();
+      h0J_qcd_catvbfhigh_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_catvbfhigh_anti->Write();
+    }
+
 
     TDirectory *d0_qcd_tau2pt_iso =fout->mkdir("tt_0jet_qcd_tau2pt_iso");
     d0_qcd_tau2pt_iso->cd();
