@@ -19,6 +19,12 @@ class FFApplicationTool():
         self.ff_qcd_1jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc2_up")
         self.ff_qcd_1jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc2_down")
 
+        self.ff_qcd_2jet = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet")
+        self.ff_qcd_2jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc1_up")
+        self.ff_qcd_2jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc1_down")
+        self.ff_qcd_2jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc2_up")
+        self.ff_qcd_2jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc2_down")
+
         self.ff_w_0jet = self.theRawFile.Get("rawFF_"+channel+"_w_0jet")
         self.ff_w_0jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_unc1_up")
         self.ff_w_0jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_unc1_down")
@@ -31,30 +37,32 @@ class FFApplicationTool():
         self.ff_w_1jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc2_up")
         self.ff_w_1jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc2_down")
 
+        self.ff_w_2jet = self.theRawFile.Get("rawFF_"+channel+"_w_2jet")
+        self.ff_w_2jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc1_up")
+        self.ff_w_2jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc1_down")
+        self.ff_w_2jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc2_up")
+        self.ff_w_2jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc2_down")
+
         self.ff_tt_0jet = self.theRawFile.Get("mc_rawFF_"+channel+"_tt")
-        self.ff_tt_0jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_tt_unc1_up")
-        self.ff_tt_0jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_tt_unc1_down")
-        self.ff_tt_0jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_tt_unc2_up")
-        self.ff_tt_0jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_tt_unc2_down")
+        self.ff_tt_0jet_unc1_up = self.theRawFile.Get("mc_rawFF_"+channel+"_tt_unc1_up")
+        self.ff_tt_0jet_unc1_down = self.theRawFile.Get("mc_rawFF_"+channel+"_tt_unc1_down")
+        self.ff_tt_0jet_unc2_up = self.theRawFile.Get("mc_rawFF_"+channel+"_tt_unc2_up")
+        self.ff_tt_0jet_unc2_down = self.theRawFile.Get("mc_rawFF_"+channel+"_tt_unc2_down")
 
         self.theFMvisFile = ROOT.TFile(theFFDirectory+"FF_corrections_1.root")
         if self.theFMvisFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
         
-        self.mVisClosure_QCD = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd")
-        self.mVisClosure_QCD_unc1_up = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd_unc1_up")
-        self.mVisClosure_QCD_unc1_down = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd_unc1_down")
-        self.mVisClosure_QCD_unc2_up = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd_unc2_up")
-        self.mVisClosure_QCD_unc2_down = self.theFMvisFile.Get("closure_mvis_"+channel+"_qcd_unc2_down")
-        
-        self.mVisClosure_W = self.theFMvisFile.Get("closure_mvis_"+channel+"_w")
+        #
+        self.mVisClosure_QCD_0jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_0jet_qcd")
+        self.mVisClosure_QCD_1jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_1jet_qcd")
+        self.mVisClosure_QCD_2jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_2jet_qcd")
+        self.mVisClosure_W_0jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_0jet_w")
+        self.mVisClosure_W_1jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_1jet_w")
+        self.mVisClosure_W_2jet = self.theFMvisFile.Get("closure_mvis_"+channel+"_2jet_w")
+        self.mVisClosure_TT = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")        
 
-        self.mVisClosure_TT = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc")
-        self.mVisClosure_TT_unc1_up = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc_unc1_up")
-        self.mVisClosure_TT_unc1_down = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc_unc1_down")
-        self.mVisClosure_TT_unc2_up = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc_unc2_up")
-        self.mVisClosure_TT_unc2_down = self.theFMvisFile.Get("closure_mvis_"+channel+"_ttmc_unc2_down")
-
+        #MT and OSSS closure
         self.theFOSSSClosureFile = ROOT.TFile(theFFDirectory+"FF_QCDcorrectionOSSS.root")
         if self.theFOSSSClosureFile.IsZombie():
             raise RuntimeError("Problem loading the files!")
@@ -123,7 +131,7 @@ class FFApplicationTool():
                     ff_w=self.get_raw_FF(pt,self.ff_w_0jet_unc2_up)
                 elif upOrDown == 'down':
                     ff_w = self.get_raw_FF(pt,self.ff_w_0jet_unc2_down)
-        else:
+        elif(njets==1):
             ff_qcd=self.get_raw_FF(pt,self.ff_qcd_1jet)
             if unc == 'ff_qcd_1jet_unc1':
                 if upOrDown == 'up':
@@ -146,6 +154,30 @@ class FFApplicationTool():
                     ff_w=self.get_raw_FF(pt,self.ff_w_1jet_unc2_up)
                 elif upOrDown == 'down':
                     ff_w = self.get_raw_FF(pt,self.ff_w_1jet_unc2_down)
+        else:
+            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_2jet)
+            if unc == 'ff_qcd_2jet_unc1':
+                if upOrDown == 'up':
+                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc1_up)
+                elif upOrDown == 'down':
+                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc1_down)
+            elif unc == 'ff_qcd_2jet_unc2':
+                if upOrDown == 'up':
+                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc2_up)
+                elif upOrDown == 'down':
+                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc2_down)
+            ff_w=self.get_raw_FF(pt,self.ff_w_2jet)
+            if unc == 'ff_w_2jet_unc1':
+                if upOrDown == 'up':
+                    ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc1_up)
+                elif upOrDown == 'down':
+                    ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc1_down)
+            elif unc == 'ff_w_2jet_unc2':
+                if upOrDown == 'up':
+                    ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc2_up)
+                elif upOrDown == 'down':
+                    ff_w = self.get_raw_FF(pt,self.ff_w_2jet_unc2_down)
+
         ff_tt=self.get_raw_FF(pt,self.ff_tt_0jet)
         if unc == 'ff_tt_0jet_unc1':
             if upOrDown == 'up':
@@ -159,37 +191,63 @@ class FFApplicationTool():
                 ff_tt=self.get_raw_FF(pt,self.ff_tt_0jet_unc2_down)
 
         #mvis closure
-        if unc == 'mvisclosure_qcd_unc1':
-            if upOrDown == 'up':
-                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_unc1_up)
-            elif upOrDown == 'down':
-                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_unc1_down)
-        elif unc == 'mvisclosure_qcd_unc2':
-            if upOrDown == 'up':
-                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_unc2_up)
-            elif upOrDown == 'down':
-                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_unc2_down)
+        if njets == 0:
+            if unc == 'mvisclosure_qcd_0jet':
+                if upOrDown == 'up':
+                    ff_qcd = ff_qcd*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_QCD_0jet)-1))
+                elif upOrDown == 'down':
+                    ff_qcd = ff_qcd
+            else:
+                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_0jet)
+                
+            if unc == 'mvisclosurce_w_0jet':
+                if upOrDown == 'up':
+                    ff_w = ff_w*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_W_0jet)-1))
+                elif upOrDown == 'down':
+                    ff_w = ff_w
+            else:
+                ff_w = self.get_mvis_closure(mvis,self.mVisClosure_W_0jet)
+        elif njets == 1:
+            if unc == 'mvisclosure_qcd_0jet':
+                if upOrDown == 'up':
+                    ff_qcd = ff_qcd*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_QCD_1jet)-1))
+                elif upOrDown == 'down':
+                    ff_qcd = ff_qcd
+            else:
+                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_1jet)
+                
+            if unc == 'mvisclosurce_w_0jet':
+                if upOrDown == 'up':
+                    ff_w = ff_w*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_W_1jet)-1))
+                elif upOrDown == 'down':
+                    ff_w = ff_w
+            else:
+                ff_w = self.get_mvis_closure(mvis,self.mVisClosure_W_1jet)
+
         else:
-            ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD)
-        if unc == 'mvisclosure_w_unc1':
+            if unc == 'mvisclosure_qcd_0jet':
+                if upOrDown == 'up':
+                    ff_qcd = ff_qcd*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_QCD_2jet)-1))
+                elif upOrDown == 'down':
+                    ff_qcd = ff_qcd
+            else:
+                ff_qcd = ff_qcd*self.get_mvis_closure(mvis,self.mVisClosure_QCD_2jet)
+                
+            if unc == 'mvisclosurce_w_0jet':
+                if upOrDown == 'up':
+                    ff_w = ff_w*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_W_2jet)-1))
+                elif upOrDown == 'down':
+                    ff_w = ff_w
+            else:
+                ff_w = self.get_mvis_closure(mvis,self.mVisClosure_W_2jet)
+
+        if unc == 'mvisclosure_tt':
             if upOrDown == 'up':
-                ff_w = ff_w*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_W)-1))
+                ff_tt = ff_tt*(1+2*(self.get_mvis_closure(mvis,self.mVisClosure_TT)-1))
             elif upOrDown == 'down':
-                ff_w = ff_w
+                ff_tt = ff_tt
         else:
-            ff_w = ff_w*self.get_mvis_closure(mvis,self.mVisClosure_W)
-        if unc == 'mvisclosure_tt_unc1':
-            if upOrDown == 'up':
-                ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT_unc1_up)
-            elif upOrDown == 'down':
-                ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT_unc1_down)
-        elif unc == 'mvisclosure_tt_unc2':
-            if upOrDown == 'up':
-                ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT_unc2_up)
-            elif upOrDown == 'down':
-                ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT_unc2_down)
-        else:
-            ff_tt = ff_tt*self.get_mvis_closure(mvis,self.mVisClosure_TT)
+            ff_tt = self.get_mvis_closure(mvis,self.mVisClosure_TT)
         
         #MT and OSSS corrections
         if unc == 'mtclosure_w_unc1':
