@@ -82,15 +82,15 @@ class FFApplicationTool():
     def get_raw_FF(self,pt,fct):
         ff=1.0
         ff=fct.Eval(pt)    
-        #if(pt>80):
-        #    ff=fct.Eval(80)
+        if(pt>100):
+            ff=fct.Eval(80)
         return ff
 
     def get_mvis_closure(self,mvis,fct):
         corr = 1.0
         corr = fct.Eval(mvis)
-        if(mvis>350):
-            corr=fct.Eval(350)
+        if(mvis>250):
+            corr=fct.Eval(250)
         #if (mvis<50):
         #    corr=fct.Eval(50)
         return corr
