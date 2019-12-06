@@ -83,7 +83,7 @@ class FFApplicationTool():
         ff=1.0
         ff=fct.Eval(pt)    
         if(pt>100):
-            ff=fct.Eval(80)
+            ff=fct.Eval(100)
         return ff
 
     def get_mvis_closure(self,mvis,fct):
