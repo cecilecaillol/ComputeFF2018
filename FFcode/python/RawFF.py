@@ -3,6 +3,7 @@
 import argparse
 import os
 import ComputeFF2018.FFcode.Subtract_prompt as Subtract_prompt
+import ComputeFF2018.FFcode.Make_2Dmaps as Make_2Dmaps
 import ComputeFF2018.FFcode.Subtract_prompt_tt as Subtract_prompt_tt
 
 def RawFF(args):
@@ -11,7 +12,7 @@ def RawFF(args):
         if args.channel == "mt":
             path = '/data/ccaillol/smhmt2016_svfitted_12oct/'
         if args.channel == "et":
-            path = '/data/ccaillol/smhet2016_svfitted_12oct/'
+            path = '/data/ccaillol/smhet2016_svfitted_20nov/'
         if args.channel == "tt":
             path = '/data/ccaillol/smhtt2016_12oct/'
     elif args.year == "2017":
@@ -147,6 +148,7 @@ def RawFF(args):
     #do our subtractions, and our fitting.
     if args.channel=="et" or args.channel=="mt":
        Subtract_prompt.Subtract_prompt(outputPath,args.channel)
+       Make_2Dmaps.Make_2Dmaps(outputPath,args.channel)
     elif args.channel=="tt":
        Subtract_prompt_tt.Subtract_prompt_tt(outputPath)
     os.system("root -l -b -q \'Fit_FF_"+args.channel+".cc("+args.year+")\'")

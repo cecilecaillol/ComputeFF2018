@@ -32,11 +32,13 @@ if args.channel=="tt":
   if not os.path.isdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_control_"+args.channel):
     os.mkdir(os.environ['CMSSW_BASE']+"/src/ComputeFF2018/files_control_"+args.channel)
 
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/plots_"+args.channel+"_"+args.year+"/*.pdf")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/plots_"+args.channel+"_"+args.year+"/*.png")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corrOSSSFF_"+args.channel+"/*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_rawFF_"+args.channel+"/*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/files_corr1FF_"+args.channel+"/*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/FF_corrections_1.root")
-os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/FF_QCDcorrectionOSSS.root")
+os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/FF_QCDcorrectionOSSS*.root")
 os.system("rm "+os.environ["CMSSW_BASE"]+"/src/ComputeFF2018/uncorrected_fakefactors_"+args.channel+".root")
 
 if args.channel=="tt":

@@ -265,7 +265,7 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
+   float bins_mtt0[] = {0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350,400};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();
@@ -329,9 +329,6 @@ int main(int argc, char** argv) {
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jetSSloose");
    TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jetSSloose");
    TF1* ff_qcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jetSSloose");
-
-   TFile fmvisclosure ("FF_corrections_tt.root");
-   TF1* mvisclosure_qcdloose=(TF1*) fmvisclosure.Get("closure_mvis_tt_qcdloose");
 
    TFile ftau2closure ("FF_corrections_1.root");
    TF1* tau2closure=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcdloose");
@@ -436,6 +433,7 @@ int main(int argc, char** argv) {
                else if (numGenJets==2) weight=0.921125;
                else if (numGenJets==3) weight=1.6508;
                else if (numGenJets==4) weight=0.21935;
+	       weight=weight*0.85;
            }
         }
         else if (year=="2016"){
@@ -452,6 +450,7 @@ int main(int argc, char** argv) {
                else if (numGenJets==2) weight=0.49308;
                else if (numGenJets==3) weight=0.50555;
                else if (numGenJets==4) weight=0.41466;
+	       weight=weight*1.35;
            }
         }
 
@@ -515,9 +514,9 @@ int main(int argc, char** argv) {
 	   float weight2=1.0;
 	   float myvar=(mytau1+mytau2).M();
 
-	  float ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet);//*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
-	  if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet);//*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
-	  else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet);
+	  float ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure(mytau2.Pt(),tau2closure);//*get_mvis_closure((myele+mytau).M(),mvisclosure_qcdloose);
+	  else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
 
            if (!is_includedInEmbedded){
 

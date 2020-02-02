@@ -355,7 +355,8 @@ int main(int argc, char** argv) {
 
    int nbhist=1;
 
-   float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
+   //float bins_mtt0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
+   float bins_mtt0[] = {0,60,80,100,120,140,160,180,200,250,350};
    int  binnum_mtt0 = sizeof(bins_mtt0)/sizeof(Float_t) - 1;
 
    TH1F* h0LT_qcd_iso = new TH1F ("h0LT_qcd_iso","h0LT_qcd_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_iso->Sumw2();

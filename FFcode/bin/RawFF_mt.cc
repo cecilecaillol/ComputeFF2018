@@ -361,6 +361,10 @@ int main(int argc, char** argv) {
   TH1F* h2LT_w_anti = new TH1F ("h2LT_w_anti","h2LT_w_anti",binnum_mtt0,bins_mtt0); h2LT_w_anti->Sumw2();
   TH1F* h0LT_tt_iso = new TH1F ("h0LT_tt_iso","h0LT_tt_iso",binnum_mtt0,bins_mtt0); h0LT_tt_iso->Sumw2();
   TH1F* h0LT_tt_anti = new TH1F ("h0LT_tt_anti","h0LT_tt_anti",binnum_mtt0,bins_mtt0); h0LT_tt_anti->Sumw2();
+  TH1F* h1LT_tt_iso = new TH1F ("h1LT_tt_iso","h1LT_tt_iso",binnum_mtt0,bins_mtt0); h1LT_tt_iso->Sumw2();
+  TH1F* h1LT_tt_anti = new TH1F ("h1LT_tt_anti","h1LT_tt_anti",binnum_mtt0,bins_mtt0); h1LT_tt_anti->Sumw2();
+  TH1F* h2LT_tt_iso = new TH1F ("h2LT_tt_iso","h2LT_tt_iso",binnum_mtt0,bins_mtt0); h2LT_tt_iso->Sumw2();
+  TH1F* h2LT_tt_anti = new TH1F ("h2LT_tt_anti","h2LT_tt_anti",binnum_mtt0,bins_mtt0); h2LT_tt_anti->Sumw2();
 
   TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
   TH1F* h1J_qcd_iso = new TH1F ("h1J_qcd_iso","h1J_qcd_iso",binnum_mtt0,bins_mtt0); h1J_qcd_iso->Sumw2();
@@ -376,6 +380,10 @@ int main(int argc, char** argv) {
   TH1F* h2J_w_anti = new TH1F ("h2J_w_anti","h2J_w_anti",binnum_mtt0,bins_mtt0); h2J_w_anti->Sumw2();
   TH1F* h0J_tt_iso = new TH1F ("h0J_tt_iso","h0J_tt_iso",binnum_mtt0,bins_mtt0); h0J_tt_iso->Sumw2();
   TH1F* h0J_tt_anti = new TH1F ("h0J_tt_anti","h0J_tt_anti",binnum_mtt0,bins_mtt0); h0J_tt_anti->Sumw2();
+  TH1F* h1J_tt_iso = new TH1F ("h1J_tt_iso","h1J_tt_iso",binnum_mtt0,bins_mtt0); h1J_tt_iso->Sumw2();
+  TH1F* h1J_tt_anti = new TH1F ("h1J_tt_anti","h1J_tt_anti",binnum_mtt0,bins_mtt0); h1J_tt_anti->Sumw2();
+  TH1F* h2J_tt_iso = new TH1F ("h2J_tt_iso","h2J_tt_iso",binnum_mtt0,bins_mtt0); h2J_tt_iso->Sumw2();
+  TH1F* h2J_tt_anti = new TH1F ("h2J_tt_anti","h2J_tt_anti",binnum_mtt0,bins_mtt0); h2J_tt_anti->Sumw2();
 
   TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
   TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
@@ -496,8 +504,8 @@ int main(int argc, char** argv) {
 
         bool trigger24=(passMu24 && pt_1>25 && matchMu24_1 && filterMu24_1);
 	bool trigger27=(passMu27 && pt_1>25 && matchMu27_1 && filterMu27_1);
-	bool trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 32 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20Tau27_1 && filterMu20Tau27_2);
-	bool trigger2027HPS=(passMu20HPSTau27 && matchMu20HPSTau27_1 && matchMu20HPSTau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 32 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20HPSTau27_1 && filterMu20HPSTau27_2);
+	bool trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 30 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20Tau27_1 && filterMu20Tau27_2);
+	bool trigger2027HPS=(passMu20HPSTau27 && matchMu20HPSTau27_1 && matchMu20HPSTau27_2 && pt_1 > 21 && pt_1 < 25 && pt_2 > 30 && fabs(eta_1) < 2.1 && fabs(eta_2) < 2.1 && filterMu20HPSTau27_1 && filterMu20HPSTau27_2);
 	bool trigger22 = false;
 	bool trigger19 = false;
 
@@ -510,7 +518,7 @@ int main(int argc, char** argv) {
 	    trigger24=(pt_1 > 25.0 && passMu24 && matchMu24_1 && filterMu24_1);
 	    trigger27=(pt_1 > 25.0 && passMu27 && matchMu27_1 && filterMu27_1);
 	    trigger2027=(passMu20Tau27 && matchMu20Tau27_1 && matchMu20Tau27_2 && 
-			 filterMu20Tau27_1 && filterMu20Tau27_2 && pt_1 > 21.0 && pt_2 > 32.0
+			 filterMu20Tau27_1 && filterMu20Tau27_2 && pt_1 > 21.0 && pt_2 > 30.0
 			 && pt_1 < 25.0 && fabs(eta_1) < 2.1 && fabs(eta_2)<2.1);
 	    if(!trigger24 && !trigger27 && !trigger2027) continue;
 	  }
@@ -749,6 +757,14 @@ if (trigger19 && signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==
                   h0LT_tt_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
                   h0LT_tt_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets<2 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h1LT_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets<2 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h1LT_tt_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h2LT_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h2LT_tt_anti->Fill(myvar,aweight*weight2);
 	    }
 	   else{
                if (signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==0 && mt<50 && q_1*q_2>0)
@@ -794,6 +810,14 @@ if (trigger19 && signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==
                   h0J_tt_iso->Fill(myvar,aweight*weight2);
                if (antiisoRegion && njets>=0 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
                   h0J_tt_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets<2 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h1J_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets<2 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h1J_tt_anti->Fill(myvar,aweight*weight2);
+               if (signalRegion && njets>1 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h2J_tt_iso->Fill(myvar,aweight*weight2);
+               if (antiisoRegion && njets>1 && iso_1<0.15 && nbtag>0 && mt<50 && q_1*q_2<0)
+                  h2J_tt_anti->Fill(myvar,aweight*weight2);
             }
 
            }
@@ -1080,6 +1104,60 @@ if (trigger19 && signalRegion && njets==0 && iso_1>0.02 && iso_1<0.15 && nbtag==
       h0J_tt_anti->Write();
     }
 
+    TDirectory *d1_tt_iso =fout->mkdir("mt_1jet_tt_iso");
+    d1_tt_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_tt_iso->SetName(name.c_str());
+      h1LT_tt_iso->Add(h1J_tt_iso);
+      h1LT_tt_iso->Write();
+    }
+    else{
+      h1LT_tt_iso->SetName(name.c_str()+postfixLT);
+      h1LT_tt_iso->Write();
+      h1J_tt_iso->SetName(name.c_str()+postfixJ);
+      h1J_tt_iso->Write();
+    }
+    TDirectory *d1_tt_anti =fout->mkdir("mt_1jet_tt_anti");
+    d1_tt_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_tt_anti->SetName(name.c_str());
+      h1LT_tt_anti->Add(h1J_tt_anti);
+      h1LT_tt_anti->Write();
+    }
+    else{
+      h1LT_tt_anti->SetName(name.c_str()+postfixLT);
+      h1LT_tt_anti->Write();
+      h1J_tt_anti->SetName(name.c_str()+postfixJ);
+      h1J_tt_anti->Write();
+    }
+
+    TDirectory *d2_tt_iso =fout->mkdir("mt_2jet_tt_iso");
+    d2_tt_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_tt_iso->SetName(name.c_str());
+      h2LT_tt_iso->Add(h2J_tt_iso);
+      h2LT_tt_iso->Write();
+    }
+    else{
+      h2LT_tt_iso->SetName(name.c_str()+postfixLT);
+      h2LT_tt_iso->Write();
+      h2J_tt_iso->SetName(name.c_str()+postfixJ);
+      h2J_tt_iso->Write();
+    }
+
+    TDirectory *d2_tt_anti =fout->mkdir("mt_2jet_tt_anti");
+    d2_tt_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_tt_anti->SetName(name.c_str());
+      h2LT_tt_anti->Add(h2J_tt_anti);
+      h2LT_tt_anti->Write();
+    }
+    else{
+      h2LT_tt_anti->SetName(name.c_str()+postfixLT);
+      h2LT_tt_anti->Write();
+      h2J_tt_anti->SetName(name.c_str()+postfixJ);
+      h2J_tt_anti->Write();
+    }
 
     fout->Close();
     delete wmc;

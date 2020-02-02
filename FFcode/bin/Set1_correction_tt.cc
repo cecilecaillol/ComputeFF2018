@@ -275,7 +275,7 @@ int main(int argc, char** argv) {
    float bins_mttmvis0[] = {0,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,250,300,350};
    int  binnum_mttmvis0 = sizeof(bins_mttmvis0)/sizeof(Float_t) - 1;
 
-   float bins_mtttau2pt0[] = {40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200};
+   float bins_mtttau2pt0[] = {40,42,44,46,48,50,52,54,56,58,60,65,70,75,80,90,100,110,120,150,180,210};
    int  binnum_mtttau2pt0 = sizeof(bins_mtttau2pt0)/sizeof(Float_t) - 1;
 
    float bins_mtttau1pt0[] = {40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200};
@@ -310,7 +310,7 @@ int main(int argc, char** argv) {
    float bins_mttmet0[] = {0,10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200};
    int  binnum_mttmet0 = sizeof(bins_mttmet0)/sizeof(Float_t) - 1;
 
-   float bins_mtttau1eta0[] = {-2.1,-1.9,-1.7,-1.5,-1.3,-1.1,-0.9,-0.7,-0.5,-0.3,-0.1,0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1};
+   float bins_mtttau1eta0[] = {0,0.15,0.30,0.45,0.6,0.75,0.9,1.05,1.20,1.35,1.50,1.65,1.80,1.95,2.10};
    int  binnum_mtttau1eta0 = sizeof(bins_mtttau1eta0)/sizeof(Float_t) - 1;
 
    float bins_mttj1pt0[] = {30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200};
@@ -373,6 +373,21 @@ int main(int argc, char** argv) {
    TH1F* h0J_qcd_tau2pt_anti = new TH1F ("h0J_qcd_tau2pt_anti","h0J_qcd_tau2pt_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_anti->Sumw2();
    TH1F* h0SSlooseJ_qcd_tau2pt_iso = new TH1F ("h0SSlooseJ_qcd_tau2pt_iso","h0SSlooseJ_qcd_tau2pt_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0SSlooseJ_qcd_tau2pt_iso->Sumw2();
    TH1F* h0SSlooseJ_qcd_tau2pt_anti = new TH1F ("h0SSlooseJ_qcd_tau2pt_anti","h0SSlooseJ_qcd_tau2pt_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0SSlooseJ_qcd_tau2pt_anti->Sumw2();
+
+   TH1F* h0LT_qcd_tau2pt_0jet_iso = new TH1F ("h0LT_qcd_tau2pt_0jet_iso","h0LT_qcd_tau2pt_0jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_0jet_iso->Sumw2();
+   TH1F* h0LT_qcd_tau2pt_0jet_anti = new TH1F ("h0LT_qcd_tau2pt_0jet_anti","h0LT_qcd_tau2pt_0jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_0jet_anti->Sumw2();
+   TH1F* h0J_qcd_tau2pt_0jet_iso = new TH1F ("h0J_qcd_tau2pt_0jet_iso","h0J_qcd_tau2pt_0jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_0jet_iso->Sumw2();
+   TH1F* h0J_qcd_tau2pt_0jet_anti = new TH1F ("h0J_qcd_tau2pt_0jet_anti","h0J_qcd_tau2pt_0jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_0jet_anti->Sumw2();
+
+   TH1F* h0LT_qcd_tau2pt_1jet_iso = new TH1F ("h0LT_qcd_tau2pt_1jet_iso","h0LT_qcd_tau2pt_1jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_1jet_iso->Sumw2();
+   TH1F* h0LT_qcd_tau2pt_1jet_anti = new TH1F ("h0LT_qcd_tau2pt_1jet_anti","h0LT_qcd_tau2pt_1jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_1jet_anti->Sumw2();
+   TH1F* h0J_qcd_tau2pt_1jet_iso = new TH1F ("h0J_qcd_tau2pt_1jet_iso","h0J_qcd_tau2pt_1jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_1jet_iso->Sumw2();
+   TH1F* h0J_qcd_tau2pt_1jet_anti = new TH1F ("h0J_qcd_tau2pt_1jet_anti","h0J_qcd_tau2pt_1jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_1jet_anti->Sumw2();
+
+   TH1F* h0LT_qcd_tau2pt_2jet_iso = new TH1F ("h0LT_qcd_tau2pt_2jet_iso","h0LT_qcd_tau2pt_2jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_2jet_iso->Sumw2();
+   TH1F* h0LT_qcd_tau2pt_2jet_anti = new TH1F ("h0LT_qcd_tau2pt_2jet_anti","h0LT_qcd_tau2pt_2jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0LT_qcd_tau2pt_2jet_anti->Sumw2();
+   TH1F* h0J_qcd_tau2pt_2jet_iso = new TH1F ("h0J_qcd_tau2pt_2jet_iso","h0J_qcd_tau2pt_2jet_iso",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_2jet_iso->Sumw2();
+   TH1F* h0J_qcd_tau2pt_2jet_anti = new TH1F ("h0J_qcd_tau2pt_2jet_anti","h0J_qcd_tau2pt_2jet_anti",binnum_mtttau2pt0,bins_mtttau2pt0); h0J_qcd_tau2pt_2jet_anti->Sumw2();
 
    TH1F* h0LT_qcd_met_iso = new TH1F ("h0LT_qcd_met_iso","h0LT_qcd_met_iso",binnum_mttmet0,bins_mttmet0); h0LT_qcd_met_iso->Sumw2();
    TH1F* h0LT_qcd_met_anti = new TH1F ("h0LT_qcd_met_anti","h0LT_qcd_met_anti",binnum_mttmet0,bins_mttmet0); h0LT_qcd_met_anti->Sumw2();
@@ -474,12 +489,28 @@ int main(int argc, char** argv) {
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jet");
    TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jet");
    TF1* ff_qcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jet");
+   TF1* ff_qcd_dm0_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_0jet");
+   TF1* ff_qcd_dm0_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_1jet");
+   TF1* ff_qcd_dm0_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_2jet");
+   TF1* ff_qcd_dm1_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_0jet");
+   TF1* ff_qcd_dm1_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_1jet");
+   TF1* ff_qcd_dm1_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_2jet");
+   TF1* ff_qcd_dm10_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_0jet");
+   TF1* ff_qcd_dm10_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_1jet");
+   TF1* ff_qcd_dm10_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_2jet");
+   TF1* ff_qcd_dm11_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_0jet");
+   TF1* ff_qcd_dm11_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_1jet");
+   TF1* ff_qcd_dm11_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_2jet");
    TF1* ff_looseSSqcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jetSSloose");
    TF1* ff_looseSSqcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jetSSloose");
    TF1* ff_looseSSqcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jetSSloose");
 
    TFile ftau2closure ("FF_corrections_1.root");
    TF1* tau2closure=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd");
+   TF1* tau1etaclosure=(TF1*) ftau2closure.Get("closure_tau1eta_tt_qcd");
+   TF1* tau2closure_0jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_0jet");
+   TF1* tau2closure_1jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_1jet");
+   TF1* tau2closure_2jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_2jet");
 
    TauTriggerSFs2017* etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2018.root","ditau", "2018", "tight", "MVAv2");
    if (year=="2017") etsf=new TauTriggerSFs2017(string(std::getenv("CMSSW_BASE"))+"/src/TauAnalysisTools/TauTriggerSFs/data/tauTriggerEfficiencies2017.root","ditau", "2017", "loose", "MVAv2");
@@ -663,14 +694,39 @@ int main(int argc, char** argv) {
 	  float ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet);
 	  if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet);
 	  else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet);
+	  /*if (mydm1==0){
+            ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_0jet);
+            if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_1jet);
+            else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_2jet);
+	  }
+          if (mydm1==1){
+            ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_0jet);
+            if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_1jet);
+            else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_2jet);
+          }
+          if (mydm1==10){
+            ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_0jet);
+            if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_1jet);
+            else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_2jet);
+          }
+          if (mydm1==11){
+            ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_0jet);
+            if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_1jet);
+            else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_2jet);
+          }*/
           float ff_looseSSqcd=get_raw_FF(mytau1.Pt(),ff_looseSSqcd_0jet);
           if (njets==1) ff_looseSSqcd=get_raw_FF(mytau1.Pt(),ff_looseSSqcd_1jet);
 	  else if (njets>1) ff_looseSSqcd=get_raw_FF(mytau1.Pt(),ff_looseSSqcd_2jet);
 
 	  if (apply_corrections=="yes"){
-             ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
-             if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
-             else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure(mytau2.Pt(),tau2closure);
+             float mytau1eta=fabs(mytau1.Eta());
+             //if (mytau1eta<0.2) mytau1eta=0.2;
+             ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure(mytau2.Pt(),tau2closure_0jet);
+             if (njets==1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure(mytau2.Pt(),tau2closure_1jet);
+             else if (njets>1) ff_qcd=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure(mytau2.Pt(),tau2closure_2jet);
+	     /*if (njets==0) ff_qcd=ff_qcd*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             else if (njets==1) ff_qcd=ff_qcd*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             else if (njets>1) ff_qcd=ff_qcd*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);*/
 	   }
 
            if (!is_includedInEmbedded){
@@ -726,13 +782,13 @@ int main(int argc, char** argv) {
 	       }
 
                if (signalRegion && iso2 && q_1*q_2>0)
-                  h0LT_qcd_tau1eta_iso->Fill(mytau1.Eta(),aweight*weight2);
+                  h0LT_qcd_tau1eta_iso->Fill(fabs(mytau1.Eta()),aweight*weight2);
                if (antiisoRegion && iso2 && q_1*q_2>0)
-                  h0LT_qcd_tau1eta_anti->Fill(mytau1.Eta(),aweight*weight2*ff_qcd);
+                  h0LT_qcd_tau1eta_anti->Fill(fabs(mytau1.Eta()),aweight*weight2*ff_qcd);
                if (signalRegion && !iso2 && q_1*q_2>0)
-                  h0SSlooseLT_qcd_tau1eta_iso->Fill(mytau1.Eta(),aweight*weight2);
+                  h0SSlooseLT_qcd_tau1eta_iso->Fill(fabs(mytau1.Eta()),aweight*weight2);
                if (antiisoRegion && !iso2 && q_1*q_2>0)
-                  h0SSlooseLT_qcd_tau1eta_anti->Fill(mytau1.Eta(),aweight*weight2*ff_looseSSqcd);
+                  h0SSlooseLT_qcd_tau1eta_anti->Fill(fabs(mytau1.Eta()),aweight*weight2*ff_looseSSqcd);
 
                if (signalRegion && iso2 && q_1*q_2>0)
                   h0LT_qcd_tau1pt_iso->Fill(mytau1.Pt(),aweight*weight2);
@@ -776,6 +832,21 @@ int main(int argc, char** argv) {
                   h0SSlooseLT_qcd_tau2pt_iso->Fill(mytau2.Pt(),aweight*weight2);
                if (antiisoRegion && !iso2 && q_1*q_2>0)
                   h0SSlooseLT_qcd_tau2pt_anti->Fill(mytau2.Pt(),aweight*weight2*ff_looseSSqcd);
+
+               if (njets==0 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_0jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets==0 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_0jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
+
+               if (njets==1 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_1jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets==1 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_1jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
+
+               if (njets>1 && signalRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_2jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets>1 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0LT_qcd_tau2pt_2jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
 	    }
 	   else{
                if (signalRegion && iso2 && q_1*q_2>0)
@@ -786,6 +857,21 @@ int main(int argc, char** argv) {
                   h0SSlooseJ_qcd_tau2pt_iso->Fill(mytau2.Pt(),aweight*weight2);
                if (antiisoRegion && !iso2 && q_1*q_2>0)
                   h0SSlooseJ_qcd_tau2pt_anti->Fill(mytau2.Pt(),aweight*weight2*ff_looseSSqcd);
+
+               if (njets==0 && signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_0jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets==0 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_0jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
+
+               if (njets==1 && signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_1jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets==1 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_1jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
+
+               if (njets>1 && signalRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_2jet_iso->Fill(mytau2.Pt(),aweight*weight2);
+               if (njets>1 && antiisoRegion && iso2 && q_1*q_2>0)
+                  h0J_qcd_tau2pt_2jet_anti->Fill(mytau2.Pt(),aweight*weight2*ff_qcd);
 
                if (signalRegion && iso2 && q_1*q_2>0)
                   h0J_qcd_tau1pt_iso->Fill(mytau1.Pt(),aweight*weight2);
@@ -851,13 +937,13 @@ int main(int argc, char** argv) {
                   h0SSlooseJ_qcd_pth_anti->Fill((mytau1+mytau2+mymet).Pt(),aweight*weight2*ff_looseSSqcd);
 
                if (signalRegion && iso2 && q_1*q_2>0)
-                  h0J_qcd_tau1eta_iso->Fill(mytau1.Eta(),aweight*weight2);
+                  h0J_qcd_tau1eta_iso->Fill(fabs(mytau1.Eta()),aweight*weight2);
                if (antiisoRegion && iso2 && q_1*q_2>0)
-                  h0J_qcd_tau1eta_anti->Fill(mytau1.Eta(),aweight*weight2*ff_qcd);
+                  h0J_qcd_tau1eta_anti->Fill(fabs(mytau1.Eta()),aweight*weight2*ff_qcd);
                if (signalRegion && !iso2 && q_1*q_2>0)
-                  h0SSlooseJ_qcd_tau1eta_iso->Fill(mytau1.Eta(),aweight*weight2);
+                  h0SSlooseJ_qcd_tau1eta_iso->Fill(fabs(mytau1.Eta()),aweight*weight2);
                if (antiisoRegion && !iso2 && q_1*q_2>0)
-                  h0SSlooseJ_qcd_tau1eta_anti->Fill(mytau1.Eta(),aweight*weight2*ff_looseSSqcd);
+                  h0SSlooseJ_qcd_tau1eta_anti->Fill(fabs(mytau1.Eta()),aweight*weight2*ff_looseSSqcd);
 
 	       if (njets>=1){
                if (signalRegion && iso2 && q_1*q_2>0)
@@ -1076,6 +1162,87 @@ int main(int argc, char** argv) {
       h0LT_qcd_tau2pt_anti->Write();
       h0J_qcd_tau2pt_anti->SetName(name.c_str()+postfixJ);
       h0J_qcd_tau2pt_anti->Write();
+    }
+
+    TDirectory *d0_qcd_tau2pt_0jet_iso =fout->mkdir("tt_0jet_qcd_tau2pt_0jet_iso");
+    d0_qcd_tau2pt_0jet_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_0jet_iso->SetName(name.c_str());
+      h0LT_qcd_tau2pt_0jet_iso->Add(h0J_qcd_tau2pt_0jet_iso);
+      h0LT_qcd_tau2pt_0jet_iso->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_0jet_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_0jet_iso->Write();
+      h0J_qcd_tau2pt_0jet_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_0jet_iso->Write();
+    }
+    TDirectory *d0_qcd_tau2pt_0jet_anti =fout->mkdir("tt_0jet_qcd_tau2pt_0jet_anti");
+    d0_qcd_tau2pt_0jet_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_0jet_anti->SetName(name.c_str());
+      h0LT_qcd_tau2pt_0jet_anti->Add(h0J_qcd_tau2pt_0jet_anti);
+      h0LT_qcd_tau2pt_0jet_anti->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_0jet_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_0jet_anti->Write();
+      h0J_qcd_tau2pt_0jet_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_0jet_anti->Write();
+    }
+
+    TDirectory *d0_qcd_tau2pt_1jet_iso =fout->mkdir("tt_0jet_qcd_tau2pt_1jet_iso");
+    d0_qcd_tau2pt_1jet_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_1jet_iso->SetName(name.c_str());
+      h0LT_qcd_tau2pt_1jet_iso->Add(h0J_qcd_tau2pt_1jet_iso);
+      h0LT_qcd_tau2pt_1jet_iso->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_1jet_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_1jet_iso->Write();
+      h0J_qcd_tau2pt_1jet_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_1jet_iso->Write();
+    }
+    TDirectory *d0_qcd_tau2pt_1jet_anti =fout->mkdir("tt_0jet_qcd_tau2pt_1jet_anti");
+    d0_qcd_tau2pt_1jet_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_1jet_anti->SetName(name.c_str());
+      h0LT_qcd_tau2pt_1jet_anti->Add(h0J_qcd_tau2pt_1jet_anti);
+      h0LT_qcd_tau2pt_1jet_anti->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_1jet_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_1jet_anti->Write();
+      h0J_qcd_tau2pt_1jet_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_1jet_anti->Write();
+    }
+
+    TDirectory *d0_qcd_tau2pt_2jet_iso =fout->mkdir("tt_0jet_qcd_tau2pt_2jet_iso");
+    d0_qcd_tau2pt_2jet_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_2jet_iso->SetName(name.c_str());
+      h0LT_qcd_tau2pt_2jet_iso->Add(h0J_qcd_tau2pt_2jet_iso);
+      h0LT_qcd_tau2pt_2jet_iso->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_2jet_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_2jet_iso->Write();
+      h0J_qcd_tau2pt_2jet_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_2jet_iso->Write();
+    }
+    TDirectory *d0_qcd_tau2pt_2jet_anti =fout->mkdir("tt_0jet_qcd_tau2pt_2jet_anti");
+    d0_qcd_tau2pt_2jet_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_tau2pt_2jet_anti->SetName(name.c_str());
+      h0LT_qcd_tau2pt_2jet_anti->Add(h0J_qcd_tau2pt_2jet_anti);
+      h0LT_qcd_tau2pt_2jet_anti->Write();
+    }
+    else{
+      h0LT_qcd_tau2pt_2jet_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_tau2pt_2jet_anti->Write();
+      h0J_qcd_tau2pt_2jet_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_tau2pt_2jet_anti->Write();
     }
 
     TDirectory *d0_qcd_met_iso =fout->mkdir("tt_0jet_qcd_met_iso");

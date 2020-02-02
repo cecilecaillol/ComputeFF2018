@@ -73,13 +73,20 @@ def Draw_closure_et(year,corrections,channel):
    trans=ROOT.TColor(new_idx, adapt.GetRed(), adapt.GetGreen(),adapt.GetBlue(), "",0.5)
    
    
-   categories=[channel+"_0jet_qcd_cat0jetlow_iso",channel+"_0jet_qcd_cat0jetlow_anti",channel+"_0jet_qcd_cat0jethigh_iso",channel+"_0jet_qcd_cat0jethigh_anti",channel+"_0jet_qcd_catboosted1_iso",channel+"_0jet_qcd_catboosted1_anti",channel+"_0jet_qcd_catboosted2_iso",channel+"_0jet_qcd_catboosted2_anti",channel+"_0jet_qcd_catvbflow_iso",channel+"_0jet_qcd_catvbflow_anti",channel+"_0jet_qcd_catvbfhigh_iso",channel+"_0jet_qcd_catvbfhigh_anti",channel+"_0jet_w_cat0jetlow_iso",channel+"_0jet_w_cat0jetlow_anti",channel+"_0jet_w_cat0jethigh_iso",channel+"_0jet_w_cat0jethigh_anti",channel+"_0jet_w_catboosted1_iso",channel+"_0jet_w_catboosted1_anti",channel+"_0jet_w_catboosted2_iso",channel+"_0jet_w_catboosted2_anti",channel+"_0jet_w_catvbflow_iso",channel+"_0jet_w_catvbflow_anti",channel+"_0jet_w_catvbfhigh_iso",channel+"_0jet_w_catvbfhigh_anti",channel+"_0jet_qcd_iso",channel+"_0jet_qcd_anti",channel+"_0jet_w_iso",channel+"_0jet_w_anti",channel+"_0jet_qcd_taupt_iso",channel+"_0jet_qcd_taupt_anti",channel+"_0jet_w_taupt_iso",channel+"_0jet_w_taupt_anti",channel+"_0jet_qcd_mjj_iso",channel+"_0jet_qcd_mjj_anti",channel+"_0jet_w_mjj_iso",channel+"_0jet_w_mjj_anti",channel+"_0jet_qcd_pth_iso",channel+"_0jet_qcd_pth_anti",channel+"_0jet_w_pth_iso",channel+"_0jet_w_pth_anti"]
-   ncat=40
+   categories=[channel+"_0jet_qcd_cat0jetlow_iso",channel+"_0jet_qcd_cat0jetlow_anti",channel+"_0jet_qcd_cat0jethigh_iso",channel+"_0jet_qcd_cat0jethigh_anti",channel+"_0jet_qcd_catboosted1_iso",channel+"_0jet_qcd_catboosted1_anti",channel+"_0jet_qcd_catboosted2_iso",channel+"_0jet_qcd_catboosted2_anti",channel+"_0jet_qcd_catvbflow_iso",channel+"_0jet_qcd_catvbflow_anti",channel+"_0jet_qcd_catvbfhigh_iso",channel+"_0jet_qcd_catvbfhigh_anti",channel+"_0jet_w_cat0jetlow_iso",channel+"_0jet_w_cat0jetlow_anti",channel+"_0jet_w_cat0jethigh_iso",channel+"_0jet_w_cat0jethigh_anti",channel+"_0jet_w_catboosted1_iso",channel+"_0jet_w_catboosted1_anti",channel+"_0jet_w_catboosted2_iso",channel+"_0jet_w_catboosted2_anti",channel+"_0jet_w_catvbflow_iso",channel+"_0jet_w_catvbflow_anti",channel+"_0jet_w_catvbfhigh_iso",channel+"_0jet_w_catvbfhigh_anti",channel+"_0jet_qcd_iso",channel+"_0jet_qcd_anti",channel+"_0jet_w_iso",channel+"_0jet_w_anti",channel+"_0jet_qcd_taupt_iso",channel+"_0jet_qcd_taupt_anti",channel+"_0jet_w_taupt_iso",channel+"_0jet_w_taupt_anti",channel+"_0jet_qcd_lpt_iso",channel+"_0jet_qcd_lpt_anti",channel+"_0jet_w_lpt_iso",channel+"_0jet_w_lpt_anti",channel+"_0jet_qcd_met_iso",channel+"_0jet_qcd_met_anti",channel+"_0jet_w_met_iso",channel+"_0jet_w_met_anti",channel+"_0jet_qcd_mjj_iso",channel+"_0jet_qcd_mjj_anti",channel+"_0jet_w_mjj_iso",channel+"_0jet_w_mjj_anti",channel+"_0jet_qcd_pth_iso",channel+"_0jet_qcd_pth_anti",channel+"_0jet_w_pth_iso",channel+"_0jet_w_pth_anti",channel+"_0jet_qcd_dr_iso",channel+"_0jet_qcd_dr_anti",channel+"_0jet_w_dr_iso",channel+"_0jet_w_dr_anti",channel+"_0jet_tt_iso",channel+"_0jet_tt_anti",channel+"_0jet_tt_pth_iso",channel+"_0jet_tt_pth_anti",channel+"_0jet_tt_mjj_iso",channel+"_0jet_tt_mjj_anti",channel+"_0jet_tt_lpt_iso",channel+"_0jet_tt_lpt_anti",channel+"_0jet_qcd_cat_iso",channel+"_0jet_qcd_cat_anti",channel+"_0jet_w_cat_iso",channel+"_0jet_w_cat_anti",channel+"_0jet_tt_cat_iso",channel+"_0jet_tt_cat_anti"]
+   ncat=66
    file=ROOT.TFile("mvisclosure_"+channel+".root","r")
+   fileTTMC=ROOT.TFile("mvisclosure_"+channel+"_TTMC.root","r")
    if corrections=="after":
      file=ROOT.TFile("mvisclosure_"+channel+"_afterCorrections.root","r")
+     fileTTMC=ROOT.TFile("mvisclosure_"+channel+"_TTMC_afterCorrections.root","r")
    
    for i in range (0,ncat/2):
+    if "_tt_" in categories[2*i]:
+       Data=fileTTMC.Get(categories[2*i]).Get("TTMCJ")
+       DataA=fileTTMC.Get(categories[2*i+1]).Get("TTMCJ")
+
+    if "_tt" not in categories[2*i]:
       Data1=file.Get(categories[2*i]).Get("data_obs")
       TT1=file.Get(categories[2*i]).Get("TTLT")
       VV1=file.Get(categories[2*i]).Get("VVLT")
@@ -221,6 +228,7 @@ def Draw_closure_et(year,corrections,channel):
            DY.SetBinError(j,(DY.GetBinError(j)*DY.GetBinError(j)+0.10*0.10*DY.GetBinContent(j)*DY.GetBinContent(j))**0.5)
          Data.Add(DY,-1.0)
 
+
       if "_w_" in categories[2*i]:
          Data.Add(VV,-1)
          Data.Add(VVJ,-1)
@@ -240,156 +248,174 @@ def Draw_closure_et(year,corrections,channel):
            DYA.SetBinError(j,(DYA.GetBinError(j)*DYA.GetBinError(j)+0.10*0.10*DYA.GetBinContent(j)*DYA.GetBinContent(j))**0.5)
          DataA.Add(DYA,-1.0)
    
-      Data.GetXaxis().SetTitle("")
-      Data.GetXaxis().SetTitleSize(0)
-      Data.GetXaxis().SetNdivisions(505)
-      Data.GetYaxis().SetLabelFont(42)
-      Data.GetYaxis().SetLabelOffset(0.01)
-      Data.GetYaxis().SetLabelSize(0.06)
-      Data.GetYaxis().SetTitleSize(0.075)
-      Data.GetYaxis().SetTitleOffset(1.18)
-      Data.SetTitle("")
-      Data.GetYaxis().SetTitle("Events/bin")
+    Data.GetXaxis().SetTitle("")
+    Data.GetXaxis().SetTitleSize(0)
+    Data.GetXaxis().SetNdivisions(505)
+    Data.GetYaxis().SetLabelFont(42)
+    Data.GetYaxis().SetLabelOffset(0.01)
+    Data.GetYaxis().SetLabelSize(0.06)
+    Data.GetYaxis().SetTitleSize(0.075)
+    Data.GetYaxis().SetTitleOffset(1.18)
+    Data.SetTitle("")
+    Data.GetYaxis().SetTitle("Events/bin")
    
-      DataA.SetFillColor(ROOT.TColor.GetColor("#12cadd"))
-      DataA.SetLineColor(1)
+    DataA.SetFillColor(ROOT.TColor.GetColor("#12cadd"))
+    DataA.SetLineColor(1)
    
-      Data.SetMarkerStyle(20)
-      Data.SetMarkerSize(1)
-      Data.SetLineColor(1)
-      Data.SetLineWidth(2)
+    Data.SetMarkerStyle(20)
+    Data.SetMarkerSize(1)
+    Data.SetLineColor(1)
+    Data.SetLineWidth(2)
    
-      errorBand = DataA.Clone()
-      errorBand.SetMarkerSize(0)
-      errorBand.SetFillColor(new_idx)
-      errorBand.SetFillStyle(3001)
-      errorBand.SetLineWidth(1)
+    errorBand = DataA.Clone()
+    errorBand.SetMarkerSize(0)
+    errorBand.SetFillColor(new_idx)
+    errorBand.SetFillStyle(3001)
+    errorBand.SetLineWidth(1)
    
-      pad1 = ROOT.TPad("pad1","pad1",0,0.35,1,1)
-      pad1.Draw()
-      pad1.cd()
-      pad1.SetFillColor(0)
-      pad1.SetBorderMode(0)
-      pad1.SetBorderSize(10)
-      pad1.SetTickx(1)
-      pad1.SetTicky(1)
-      pad1.SetLeftMargin(0.18)
-      pad1.SetRightMargin(0.05)
-      pad1.SetTopMargin(0.122)
-      pad1.SetBottomMargin(0.026)
-      pad1.SetFrameFillStyle(0)
-      pad1.SetFrameLineStyle(0)
-      pad1.SetFrameLineWidth(3)
-      pad1.SetFrameBorderMode(0)
-      pad1.SetFrameBorderSize(10)
+    pad1 = ROOT.TPad("pad1","pad1",0,0.35,1,1)
+    pad1.Draw()
+    pad1.cd()
+    pad1.SetFillColor(0)
+    pad1.SetBorderMode(0)
+    pad1.SetBorderSize(10)
+    pad1.SetTickx(1)
+    pad1.SetTicky(1)
+    pad1.SetLeftMargin(0.18)
+    pad1.SetRightMargin(0.05)
+    pad1.SetTopMargin(0.122)
+    pad1.SetBottomMargin(0.026)
+    pad1.SetFrameFillStyle(0)
+    pad1.SetFrameLineStyle(0)
+    pad1.SetFrameLineWidth(3)
+    pad1.SetFrameBorderMode(0)
+    pad1.SetFrameBorderSize(10)
    
-      Data.GetXaxis().SetLabelSize(0)
-      Data.SetMaximum(max(Data.GetMaximum()*1.5,errorBand.GetMaximum()*1.5))
-      Data.SetMinimum(0.0)
-      Data.Draw("e0")
-      DataA.Draw("histsame")
-      errorBand.Draw("e2same")
-      Data.Draw("e0same")
+    Data.GetXaxis().SetLabelSize(0)
+    Data.SetMaximum(max(Data.GetMaximum()*1.5,errorBand.GetMaximum()*1.5))
+    Data.SetMinimum(0.0)
+    Data.Draw("e0")
+    DataA.Draw("histsame")
+    errorBand.Draw("e2same")
+    Data.Draw("e0same")
 
-      categ2  = ROOT.TPaveText(0.65, 0.6+0.013, 0.93, 0.6+0.155, "NDC")
-      categ2.SetBorderSize(   0 )
-      categ2.SetFillStyle(    0 )
-      categ2.SetTextAlign(   12 )
-      categ2.SetTextSize ( 0.05 )
-      categ2.SetTextColor(    1 )
-      categ2.SetTextFont (   42 )
-      categ2.AddText("KS prob. = %.5f" %(Data.KolmogorovTest(DataA)))
-      categ2.Draw("same")
+    categ2  = ROOT.TPaveText(0.65, 0.6+0.013, 0.93, 0.6+0.155, "NDC")
+    categ2.SetBorderSize(   0 )
+    categ2.SetFillStyle(    0 )
+    categ2.SetTextAlign(   12 )
+    categ2.SetTextSize ( 0.05 )
+    categ2.SetTextColor(    1 )
+    categ2.SetTextFont (   42 )
+    categ2.AddText("KS prob. = %.5f" %(Data.KolmogorovTest(DataA)))
+    categ2.Draw("same")
 
-      categ3  = ROOT.TPaveText(0.65, 0.5+0.013, 0.93, 0.5+0.12, "NDC")
-      categ3.SetBorderSize(   0 )
-      categ3.SetFillStyle(    0 )
-      categ3.SetTextAlign(   12 )
-      categ3.SetTextSize ( 0.05 )
-      categ3.SetTextColor(    1 )
-      categ3.SetTextFont (   42 )
-      categ3.AddText("Observed: %.1f" %(Data.Integral()))
-      categ3.AddText("Predicted: %.1f" %(DataA.Integral()))
-      print Data.Integral(),DataA.Integral()
-      categ3.Draw("same")
+    categ3  = ROOT.TPaveText(0.65, 0.5+0.013, 0.93, 0.5+0.12, "NDC")
+    categ3.SetBorderSize(   0 )
+    categ3.SetFillStyle(    0 )
+    categ3.SetTextAlign(   12 )
+    categ3.SetTextSize ( 0.05 )
+    categ3.SetTextColor(    1 )
+    categ3.SetTextFont (   42 )
+    categ3.AddText("Observed: %.1f" %(Data.Integral()))
+    categ3.AddText("Predicted: %.1f" %(DataA.Integral()))
+    print Data.Integral(),DataA.Integral()
+    categ3.Draw("same")
 
    
-      legende=make_legend()
-      legende.AddEntry(Data,"Observed","elp")
-      legende.AddEntry(DataA,"Predicted","f")
-      legende.AddEntry(errorBand,"Stat. unc.","f")
-      legende.Draw()
+    legende=make_legend()
+    legende.AddEntry(Data,"Observed","elp")
+    legende.AddEntry(DataA,"Predicted","f")
+    legende.AddEntry(errorBand,"Stat. unc.","f")
+    legende.Draw()
    
-      l1=add_lumi(year)
-      l1.Draw("same")
-      l2=add_CMS()
-      l2.Draw("same")
-      l3=add_Preliminary()
+    l1=add_lumi(year)
+    l1.Draw("same")
+    l2=add_CMS()
+    l2.Draw("same")
+    l3=add_Preliminary()
     
-      pad1.RedrawAxis()
+    pad1.RedrawAxis()
    
-      c.cd()
-      pad2 = ROOT.TPad("pad2","pad2",0,0,1,0.35);
-      pad2.SetTopMargin(0.05);
-      pad2.SetBottomMargin(0.35);
-      pad2.SetLeftMargin(0.18);
-      pad2.SetRightMargin(0.05);
-      pad2.SetTickx(1)
-      pad2.SetTicky(1)
-      pad2.SetFrameLineWidth(3)
-      pad2.SetGridx()
-      pad2.SetGridy()
-      pad2.Draw()
-      pad2.cd()
-      h1=Data.Clone()
-      h1.SetMaximum(1.5)#FIXME(1.5)
-      h1.SetMinimum(0.5)#FIXME(0.5)
-      h1.SetMarkerStyle(20)
-      h3=errorBand.Clone()
-      hwoE=errorBand.Clone()
-      for iii in range (1,hwoE.GetSize()-2):
-        hwoE.SetBinError(iii,0)
-      h3.Sumw2()
-      h1.Sumw2()
-      h1.SetStats(0)
-      h1.Divide(hwoE)
-      h3.Divide(hwoE)
-      h1.GetXaxis().SetTitle("Bin number")
-      if i==12 or i==13: 
-        h1.GetXaxis().SetTitle("m_{vis} (GeV)")
-      if i==14 or i==15:
-        h1.GetXaxis().SetTitle("#tau_{h} p_{T} (GeV)")
-      if i==16 or i==17:
-        h1.GetXaxis().SetTitle("m_{jj} (GeV)")
-      if i==18 or i==19:
-        h1.GetXaxis().SetTitle("Higgs p_{T} (GeV)")
+    c.cd()
+    pad2 = ROOT.TPad("pad2","pad2",0,0,1,0.35);
+    pad2.SetTopMargin(0.05);
+    pad2.SetBottomMargin(0.35);
+    pad2.SetLeftMargin(0.18);
+    pad2.SetRightMargin(0.05);
+    pad2.SetTickx(1)
+    pad2.SetTicky(1)
+    pad2.SetFrameLineWidth(3)
+    pad2.SetGridx()
+    pad2.SetGridy()
+    pad2.Draw()
+    pad2.cd()
+    h1=Data.Clone()
+    h1.SetMaximum(1.5)#FIXME(1.5)
+    h1.SetMinimum(0.5)#FIXME(0.5)
+    if i>28:
+      h1.SetMaximum(1.2)#FIXME(1.5)
+      h1.SetMinimum(0.8)#FIXME(0.5)
 
-      h1.GetXaxis().SetLabelSize(0.08)
-      h1.GetYaxis().SetLabelSize(0.08)
-      h1.GetYaxis().SetTitle("Obs./Exp.")
-      h1.GetXaxis().SetNdivisions(505)
-      h1.GetYaxis().SetNdivisions(5)
+    h1.SetMarkerStyle(20)
+    h3=errorBand.Clone()
+    hwoE=errorBand.Clone()
+    for iii in range (1,hwoE.GetSize()):
+      hwoE.SetBinError(iii,0)
+    h3.Sumw2()
+    h1.Sumw2()
+    h1.SetStats(0)
+    h1.Divide(hwoE)
+    h3.Divide(hwoE)
+    h1.GetXaxis().SetTitle("Bin number")
+    if i==12 or i==13: 
+      h1.GetXaxis().SetTitle("m_{vis} (GeV)")
+    if i==14 or i==15:
+      h1.GetXaxis().SetTitle("#tau_{h} p_{T} (GeV)")
+    if i==16 or i==17:
+      h1.GetXaxis().SetTitle("e/#mu p_{T} (GeV)")
+    if i==18 or i==19:
+      h1.GetXaxis().SetTitle("MET (GeV)")
+    if i==20 or i==21:
+      h1.GetXaxis().SetTitle("m_{jj} (GeV)")
+    if i==22 or i==23:
+      h1.GetXaxis().SetTitle("Higgs p_{T} (GeV)")
+    if i==24 or i==25:
+      h1.GetXaxis().SetTitle("#DeltaR(e/#mu, #tau_{h})")
+    if i==26:
+      h1.GetXaxis().SetTitle("m_{vis} (GeV)")
+    if i==27:
+      h1.GetXaxis().SetTitle("Higgs p_{T} (GeV)")
+    if i==28:
+      h1.GetXaxis().SetTitle("m_{jj} (GeV)")
+    if i>28:
+      h1.GetXaxis().SetTitle("Category number")
+
+    h1.GetXaxis().SetLabelSize(0.08)
+    h1.GetYaxis().SetLabelSize(0.08)
+    h1.GetYaxis().SetTitle("Obs./Exp.")
+    h1.GetXaxis().SetNdivisions(505)
+    h1.GetYaxis().SetNdivisions(5)
    
-      h1.GetXaxis().SetTitleSize(0.15)
-      h1.GetYaxis().SetTitleSize(0.15)
-      h1.GetYaxis().SetTitleOffset(0.56)
-      h1.GetXaxis().SetTitleOffset(1.04)
-      h1.GetXaxis().SetLabelSize(0.11)
-      h1.GetYaxis().SetLabelSize(0.11)
-      h1.GetXaxis().SetTitleFont(42)
-      h1.GetYaxis().SetTitleFont(42)
+    h1.GetXaxis().SetTitleSize(0.15)
+    h1.GetYaxis().SetTitleSize(0.15)
+    h1.GetYaxis().SetTitleOffset(0.56)
+    h1.GetXaxis().SetTitleOffset(1.04)
+    h1.GetXaxis().SetLabelSize(0.11)
+    h1.GetYaxis().SetLabelSize(0.11)
+    h1.GetXaxis().SetTitleFont(42)
+    h1.GetYaxis().SetTitleFont(42)
    
-      h1.Draw("e0p")
-      h3.Draw("e2same")
+    h1.Draw("e0p")
+    h3.Draw("e2same")
    
-      c.cd()
-      pad1.Draw()
+    c.cd()
+    pad1.Draw()
    
-      ROOT.gPad.RedrawAxis()
+    ROOT.gPad.RedrawAxis()
    
-      c.Modified()
-      if corrections=="after":
-         c.SaveAs("closure_compa_"+categories[2*i]+"_afterCorrections.pdf")
-      else:
-         c.SaveAs("closure_compa_"+categories[2*i]+".pdf")
+    c.Modified()
+    if corrections=="after":
+       c.SaveAs("closure_compa_"+categories[2*i]+"_afterCorrections.pdf")
+    else:
+       c.SaveAs("closure_compa_"+categories[2*i]+".pdf")
    

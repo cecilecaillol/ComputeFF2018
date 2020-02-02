@@ -285,6 +285,30 @@ int main(int argc, char** argv) {
    TH1F* h0LT_qcd_anti = new TH1F ("h0LT_qcd_anti","h0LT_qcd_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_anti->Sumw2();
    TH1F* h1LT_qcd_anti = new TH1F ("h1LT_qcd_anti","h1LT_qcd_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_anti->Sumw2();
    TH1F* h2LT_qcd_anti = new TH1F ("h2LT_qcd_anti","h2LT_qcd_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_anti->Sumw2();
+   TH1F* h0LT_qcd_dm0_iso = new TH1F ("h0LT_qcd_dm0_iso","h0LT_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_dm0_iso->Sumw2();
+   TH1F* h1LT_qcd_dm0_iso = new TH1F ("h1LT_qcd_dm0_iso","h1LT_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_dm0_iso->Sumw2();
+   TH1F* h2LT_qcd_dm0_iso = new TH1F ("h2LT_qcd_dm0_iso","h2LT_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h2LT_qcd_dm0_iso->Sumw2();
+   TH1F* h0LT_qcd_dm0_anti = new TH1F ("h0LT_qcd_dm0_anti","h0LT_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_dm0_anti->Sumw2();
+   TH1F* h1LT_qcd_dm0_anti = new TH1F ("h1LT_qcd_dm0_anti","h1LT_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_dm0_anti->Sumw2();
+   TH1F* h2LT_qcd_dm0_anti = new TH1F ("h2LT_qcd_dm0_anti","h2LT_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_dm0_anti->Sumw2();
+   TH1F* h0LT_qcd_dm1_iso = new TH1F ("h0LT_qcd_dm1_iso","h0LT_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_dm1_iso->Sumw2();
+   TH1F* h1LT_qcd_dm1_iso = new TH1F ("h1LT_qcd_dm1_iso","h1LT_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_dm1_iso->Sumw2();
+   TH1F* h2LT_qcd_dm1_iso = new TH1F ("h2LT_qcd_dm1_iso","h2LT_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h2LT_qcd_dm1_iso->Sumw2();
+   TH1F* h0LT_qcd_dm1_anti = new TH1F ("h0LT_qcd_dm1_anti","h0LT_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_dm1_anti->Sumw2();
+   TH1F* h1LT_qcd_dm1_anti = new TH1F ("h1LT_qcd_dm1_anti","h1LT_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_dm1_anti->Sumw2();
+   TH1F* h2LT_qcd_dm1_anti = new TH1F ("h2LT_qcd_dm1_anti","h2LT_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_dm1_anti->Sumw2();
+   TH1F* h0LT_qcd_dm10_iso = new TH1F ("h0LT_qcd_dm10_iso","h0LT_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_dm10_iso->Sumw2();
+   TH1F* h1LT_qcd_dm10_iso = new TH1F ("h1LT_qcd_dm10_iso","h1LT_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_dm10_iso->Sumw2();
+   TH1F* h2LT_qcd_dm10_iso = new TH1F ("h2LT_qcd_dm10_iso","h2LT_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h2LT_qcd_dm10_iso->Sumw2();
+   TH1F* h0LT_qcd_dm10_anti = new TH1F ("h0LT_qcd_dm10_anti","h0LT_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_dm10_anti->Sumw2();
+   TH1F* h1LT_qcd_dm10_anti = new TH1F ("h1LT_qcd_dm10_anti","h1LT_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_dm10_anti->Sumw2();
+   TH1F* h2LT_qcd_dm10_anti = new TH1F ("h2LT_qcd_dm10_anti","h2LT_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_dm10_anti->Sumw2();
+   TH1F* h0LT_qcd_dm11_iso = new TH1F ("h0LT_qcd_dm11_iso","h0LT_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h0LT_qcd_dm11_iso->Sumw2();
+   TH1F* h1LT_qcd_dm11_iso = new TH1F ("h1LT_qcd_dm11_iso","h1LT_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h1LT_qcd_dm11_iso->Sumw2();
+   TH1F* h2LT_qcd_dm11_iso = new TH1F ("h2LT_qcd_dm11_iso","h2LT_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h2LT_qcd_dm11_iso->Sumw2();
+   TH1F* h0LT_qcd_dm11_anti = new TH1F ("h0LT_qcd_dm11_anti","h0LT_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h0LT_qcd_dm11_anti->Sumw2();
+   TH1F* h1LT_qcd_dm11_anti = new TH1F ("h1LT_qcd_dm11_anti","h1LT_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h1LT_qcd_dm11_anti->Sumw2();
+   TH1F* h2LT_qcd_dm11_anti = new TH1F ("h2LT_qcd_dm11_anti","h2LT_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h2LT_qcd_dm11_anti->Sumw2();
 
    TH1F* h0J_qcd_iso = new TH1F ("h0J_qcd_iso","h0J_qcd_iso",binnum_mtt0,bins_mtt0); h0J_qcd_iso->Sumw2();
    TH1F* h1J_qcd_iso = new TH1F ("h1J_qcd_iso","h1J_qcd_iso",binnum_mtt0,bins_mtt0); h1J_qcd_iso->Sumw2();
@@ -292,6 +316,30 @@ int main(int argc, char** argv) {
    TH1F* h0J_qcd_anti = new TH1F ("h0J_qcd_anti","h0J_qcd_anti",binnum_mtt0,bins_mtt0); h0J_qcd_anti->Sumw2();
    TH1F* h1J_qcd_anti = new TH1F ("h1J_qcd_anti","h1J_qcd_anti",binnum_mtt0,bins_mtt0); h1J_qcd_anti->Sumw2();
    TH1F* h2J_qcd_anti = new TH1F ("h2J_qcd_anti","h2J_qcd_anti",binnum_mtt0,bins_mtt0); h2J_qcd_anti->Sumw2();
+   TH1F* h0J_qcd_dm0_iso = new TH1F ("h0J_qcd_dm0_iso","h0J_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h0J_qcd_dm0_iso->Sumw2();
+   TH1F* h1J_qcd_dm0_iso = new TH1F ("h1J_qcd_dm0_iso","h1J_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h1J_qcd_dm0_iso->Sumw2();
+   TH1F* h2J_qcd_dm0_iso = new TH1F ("h2J_qcd_dm0_iso","h2J_qcd_dm0_iso",binnum_mtt0,bins_mtt0); h2J_qcd_dm0_iso->Sumw2();
+   TH1F* h0J_qcd_dm0_anti = new TH1F ("h0J_qcd_dm0_anti","h0J_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h0J_qcd_dm0_anti->Sumw2();
+   TH1F* h1J_qcd_dm0_anti = new TH1F ("h1J_qcd_dm0_anti","h1J_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h1J_qcd_dm0_anti->Sumw2();
+   TH1F* h2J_qcd_dm0_anti = new TH1F ("h2J_qcd_dm0_anti","h2J_qcd_dm0_anti",binnum_mtt0,bins_mtt0); h2J_qcd_dm0_anti->Sumw2();
+   TH1F* h0J_qcd_dm1_iso = new TH1F ("h0J_qcd_dm1_iso","h0J_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h0J_qcd_dm1_iso->Sumw2();
+   TH1F* h1J_qcd_dm1_iso = new TH1F ("h1J_qcd_dm1_iso","h1J_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h1J_qcd_dm1_iso->Sumw2();
+   TH1F* h2J_qcd_dm1_iso = new TH1F ("h2J_qcd_dm1_iso","h2J_qcd_dm1_iso",binnum_mtt0,bins_mtt0); h2J_qcd_dm1_iso->Sumw2();
+   TH1F* h0J_qcd_dm1_anti = new TH1F ("h0J_qcd_dm1_anti","h0J_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h0J_qcd_dm1_anti->Sumw2();
+   TH1F* h1J_qcd_dm1_anti = new TH1F ("h1J_qcd_dm1_anti","h1J_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h1J_qcd_dm1_anti->Sumw2();
+   TH1F* h2J_qcd_dm1_anti = new TH1F ("h2J_qcd_dm1_anti","h2J_qcd_dm1_anti",binnum_mtt0,bins_mtt0); h2J_qcd_dm1_anti->Sumw2();
+   TH1F* h0J_qcd_dm10_iso = new TH1F ("h0J_qcd_dm10_iso","h0J_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h0J_qcd_dm10_iso->Sumw2();
+   TH1F* h1J_qcd_dm10_iso = new TH1F ("h1J_qcd_dm10_iso","h1J_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h1J_qcd_dm10_iso->Sumw2();
+   TH1F* h2J_qcd_dm10_iso = new TH1F ("h2J_qcd_dm10_iso","h2J_qcd_dm10_iso",binnum_mtt0,bins_mtt0); h2J_qcd_dm10_iso->Sumw2();
+   TH1F* h0J_qcd_dm10_anti = new TH1F ("h0J_qcd_dm10_anti","h0J_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h0J_qcd_dm10_anti->Sumw2();
+   TH1F* h1J_qcd_dm10_anti = new TH1F ("h1J_qcd_dm10_anti","h1J_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h1J_qcd_dm10_anti->Sumw2();
+   TH1F* h2J_qcd_dm10_anti = new TH1F ("h2J_qcd_dm10_anti","h2J_qcd_dm10_anti",binnum_mtt0,bins_mtt0); h2J_qcd_dm10_anti->Sumw2();
+   TH1F* h0J_qcd_dm11_iso = new TH1F ("h0J_qcd_dm11_iso","h0J_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h0J_qcd_dm11_iso->Sumw2();
+   TH1F* h1J_qcd_dm11_iso = new TH1F ("h1J_qcd_dm11_iso","h1J_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h1J_qcd_dm11_iso->Sumw2();
+   TH1F* h2J_qcd_dm11_iso = new TH1F ("h2J_qcd_dm11_iso","h2J_qcd_dm11_iso",binnum_mtt0,bins_mtt0); h2J_qcd_dm11_iso->Sumw2();
+   TH1F* h0J_qcd_dm11_anti = new TH1F ("h0J_qcd_dm11_anti","h0J_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h0J_qcd_dm11_anti->Sumw2();
+   TH1F* h1J_qcd_dm11_anti = new TH1F ("h1J_qcd_dm11_anti","h1J_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h1J_qcd_dm11_anti->Sumw2();
+   TH1F* h2J_qcd_dm11_anti = new TH1F ("h2J_qcd_dm11_anti","h2J_qcd_dm11_anti",binnum_mtt0,bins_mtt0); h2J_qcd_dm11_anti->Sumw2();
 
    TH1F* h0SSlooseLT_qcd_iso = new TH1F ("h0SSlooseLT_qcd_iso","h0SSlooseLT_qcd_iso",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_iso->Sumw2();
    TH1F* h0SSlooseLT_qcd_anti = new TH1F ("h0SSlooseLT_qcd_anti","h0SSlooseLT_qcd_anti",binnum_mtt0,bins_mtt0); h0SSlooseLT_qcd_anti->Sumw2();
@@ -539,58 +587,130 @@ int main(int argc, char** argv) {
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){
-	       if (signalRegion && njets==0 && iso2 && q_1*q_2>0)
+	       if (signalRegion && njets==0 && iso2 && q_1*q_2>0){
 		  h0LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h0LT_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h0LT_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h0LT_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h0LT_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0){
                   h0LT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets==1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h0LT_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h0LT_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h0LT_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h0LT_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
+               if (signalRegion && njets==1 && iso2 && q_1*q_2>0){
                   h1LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h1LT_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h1LT_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h1LT_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h1LT_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0){
                   h1LT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h1LT_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h1LT_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h1LT_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h1LT_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
+               if (signalRegion && njets>1 && iso2 && q_1*q_2>0){
                   h2LT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h2LT_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h2LT_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h2LT_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h2LT_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0){
                   h2LT_qcd_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==0) h2LT_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h2LT_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h2LT_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h2LT_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
 
-               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
+               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0){
                   h0SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0){
                   h0SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0)
+	       }
+               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0){
                   h1SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0){
                   h1SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0)
+	       }
+               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0){
                   h2SSlooseLT_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0){
                   h2SSlooseLT_qcd_anti->Fill(myvar,aweight*weight2);
+	       }
 	    }
 	   else{
-               if (signalRegion && njets==0 && iso2 && q_1*q_2>0)
+               if (signalRegion && njets==0 && iso2 && q_1*q_2>0){
                   h0J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h0J_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h0J_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h0J_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h0J_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets==0 && iso2 && q_1*q_2>0){
                   h0J_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets==1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h0J_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h0J_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h0J_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h0J_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
+               if (signalRegion && njets==1 && iso2 && q_1*q_2>0){
                   h1J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h1J_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h1J_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h1J_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h1J_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets==1 && iso2 && q_1*q_2>0){
                   h1J_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h1J_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h1J_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h1J_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h1J_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
+               if (signalRegion && njets>1 && iso2 && q_1*q_2>0){
                   h2J_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0)
+                  if (mydm1==0) h2J_qcd_dm0_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h2J_qcd_dm1_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h2J_qcd_dm10_iso->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h2J_qcd_dm11_iso->Fill(myvar,aweight*weight2);
+	       }
+               if (antiisoRegion && njets>1 && iso2 && q_1*q_2>0){
                   h2J_qcd_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==0) h2J_qcd_dm0_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==1) h2J_qcd_dm1_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==10) h2J_qcd_dm10_anti->Fill(myvar,aweight*weight2);
+                  if (mydm1==11) h2J_qcd_dm11_anti->Fill(myvar,aweight*weight2);
+	       }
 
-               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0)
+               if (signalRegion && njets==0 && !iso2 && q_1*q_2>0){
                   h0SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets==0 && !iso2 && q_1*q_2>0){
                   h0SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0)
+	       }
+               if (signalRegion && njets==1 && !iso2 && q_1*q_2>0){
                   h1SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets==1 && !iso2 && q_1*q_2>0){
                   h1SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
-               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0)
+	       }
+               if (signalRegion && njets>1 && !iso2 && q_1*q_2>0){
                   h2SSlooseJ_qcd_iso->Fill(myvar,aweight*weight2);
-               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0)
+	       }
+               if (antiisoRegion && njets>1 && !iso2 && q_1*q_2>0){
                   h2SSlooseJ_qcd_anti->Fill(myvar,aweight*weight2);
+	       }
 
             }
 
@@ -632,6 +752,119 @@ int main(int argc, char** argv) {
       h0J_qcd_anti->Write();
     }
 
+    TDirectory *d0_qcd_dm0_iso =fout->mkdir("tt_0jet_qcd_dm0_iso");
+    d0_qcd_dm0_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm0_iso->SetName(name.c_str());
+      h0LT_qcd_dm0_iso->Add(h0J_qcd_dm0_iso);
+      h0LT_qcd_dm0_iso->Write();
+    }
+    else{
+      h0LT_qcd_dm0_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm0_iso->Write();
+      h0J_qcd_dm0_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm0_iso->Write();
+    }
+
+    TDirectory *d0_qcd_dm0_anti =fout->mkdir("tt_0jet_qcd_dm0_anti");
+    d0_qcd_dm0_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm0_anti->SetName(name.c_str());
+      h0LT_qcd_dm0_anti->Add(h0J_qcd_dm0_anti);
+      h0LT_qcd_dm0_anti->Write();
+    }
+    else{
+      h0LT_qcd_dm0_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm0_anti->Write();
+      h0J_qcd_dm0_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm0_anti->Write();
+    }
+
+    TDirectory *d0_qcd_dm1_iso =fout->mkdir("tt_0jet_qcd_dm1_iso");
+    d0_qcd_dm1_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm1_iso->SetName(name.c_str());
+      h0LT_qcd_dm1_iso->Add(h0J_qcd_dm1_iso);
+      h0LT_qcd_dm1_iso->Write();
+    }
+    else{
+      h0LT_qcd_dm1_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm1_iso->Write();
+      h0J_qcd_dm1_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm1_iso->Write();
+    }
+
+    TDirectory *d0_qcd_dm1_anti =fout->mkdir("tt_0jet_qcd_dm1_anti");
+    d0_qcd_dm1_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm1_anti->SetName(name.c_str());
+      h0LT_qcd_dm1_anti->Add(h0J_qcd_dm1_anti);
+      h0LT_qcd_dm1_anti->Write();
+    }
+    else{
+      h0LT_qcd_dm1_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm1_anti->Write();
+      h0J_qcd_dm1_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm1_anti->Write();
+    }
+
+    TDirectory *d0_qcd_dm10_iso =fout->mkdir("tt_0jet_qcd_dm10_iso");
+    d0_qcd_dm10_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm10_iso->SetName(name.c_str());
+      h0LT_qcd_dm10_iso->Add(h0J_qcd_dm10_iso);
+      h0LT_qcd_dm10_iso->Write();
+    }
+    else{
+      h0LT_qcd_dm10_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm10_iso->Write();
+      h0J_qcd_dm10_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm10_iso->Write();
+    }
+
+    TDirectory *d0_qcd_dm10_anti =fout->mkdir("tt_0jet_qcd_dm10_anti");
+    d0_qcd_dm10_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm10_anti->SetName(name.c_str());
+      h0LT_qcd_dm10_anti->Add(h0J_qcd_dm10_anti);
+      h0LT_qcd_dm10_anti->Write();
+    }
+    else{
+      h0LT_qcd_dm10_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm10_anti->Write();
+      h0J_qcd_dm10_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm10_anti->Write();
+    }
+
+    TDirectory *d0_qcd_dm11_iso =fout->mkdir("tt_0jet_qcd_dm11_iso");
+    d0_qcd_dm11_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm11_iso->SetName(name.c_str());
+      h0LT_qcd_dm11_iso->Add(h0J_qcd_dm11_iso);
+      h0LT_qcd_dm11_iso->Write();
+    }
+    else{
+      h0LT_qcd_dm11_iso->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm11_iso->Write();
+      h0J_qcd_dm11_iso->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm11_iso->Write();
+    }
+
+    TDirectory *d0_qcd_dm11_anti =fout->mkdir("tt_0jet_qcd_dm11_anti");
+    d0_qcd_dm11_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h0LT_qcd_dm11_anti->SetName(name.c_str());
+      h0LT_qcd_dm11_anti->Add(h0J_qcd_dm11_anti);
+      h0LT_qcd_dm11_anti->Write();
+    }
+    else{
+      h0LT_qcd_dm11_anti->SetName(name.c_str()+postfixLT);
+      h0LT_qcd_dm11_anti->Write();
+      h0J_qcd_dm11_anti->SetName(name.c_str()+postfixJ);
+      h0J_qcd_dm11_anti->Write();
+    }
+
+
     TDirectory *d1_qcd_iso =fout->mkdir("tt_1jet_qcd_iso");
     d1_qcd_iso->cd();
     if (sample=="data_obs" or sample=="W"){
@@ -645,7 +878,6 @@ int main(int argc, char** argv) {
       h1J_qcd_iso->SetName(name.c_str()+postfixJ);
       h1J_qcd_iso->Write();
     }
-
     TDirectory *d1_qcd_anti =fout->mkdir("tt_1jet_qcd_anti");
     d1_qcd_anti->cd();
     if (sample=="data_obs" or sample=="W"){
@@ -658,6 +890,114 @@ int main(int argc, char** argv) {
       h1LT_qcd_anti->Write();
       h1J_qcd_anti->SetName(name.c_str()+postfixJ);
       h1J_qcd_anti->Write();
+    }
+
+    TDirectory *d1_qcd_dm0_iso =fout->mkdir("tt_1jet_qcd_dm0_iso");
+    d1_qcd_dm0_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm0_iso->SetName(name.c_str());
+      h1LT_qcd_dm0_iso->Add(h1J_qcd_dm0_iso);
+      h1LT_qcd_dm0_iso->Write();
+    }
+    else{
+      h1LT_qcd_dm0_iso->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm0_iso->Write();
+      h1J_qcd_dm0_iso->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm0_iso->Write();
+    }
+    TDirectory *d1_qcd_dm0_anti =fout->mkdir("tt_1jet_qcd_dm0_anti");
+    d1_qcd_dm0_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm0_anti->SetName(name.c_str());
+      h1LT_qcd_dm0_anti->Add(h1J_qcd_dm0_anti);
+      h1LT_qcd_dm0_anti->Write();
+    }
+    else{
+      h1LT_qcd_dm0_anti->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm0_anti->Write();
+      h1J_qcd_dm0_anti->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm0_anti->Write();
+    }
+
+    TDirectory *d1_qcd_dm1_iso =fout->mkdir("tt_1jet_qcd_dm1_iso");
+    d1_qcd_dm1_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm1_iso->SetName(name.c_str());
+      h1LT_qcd_dm1_iso->Add(h1J_qcd_dm1_iso);
+      h1LT_qcd_dm1_iso->Write();
+    }
+    else{
+      h1LT_qcd_dm1_iso->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm1_iso->Write();
+      h1J_qcd_dm1_iso->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm1_iso->Write();
+    }
+    TDirectory *d1_qcd_dm1_anti =fout->mkdir("tt_1jet_qcd_dm1_anti");
+    d1_qcd_dm1_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm1_anti->SetName(name.c_str());
+      h1LT_qcd_dm1_anti->Add(h1J_qcd_dm1_anti);
+      h1LT_qcd_dm1_anti->Write();
+    }
+    else{
+      h1LT_qcd_dm1_anti->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm1_anti->Write();
+      h1J_qcd_dm1_anti->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm1_anti->Write();
+    }
+
+    TDirectory *d1_qcd_dm10_iso =fout->mkdir("tt_1jet_qcd_dm10_iso");
+    d1_qcd_dm10_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm10_iso->SetName(name.c_str());
+      h1LT_qcd_dm10_iso->Add(h1J_qcd_dm10_iso);
+      h1LT_qcd_dm10_iso->Write();
+    }
+    else{
+      h1LT_qcd_dm10_iso->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm10_iso->Write();
+      h1J_qcd_dm10_iso->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm10_iso->Write();
+    }
+    TDirectory *d1_qcd_dm10_anti =fout->mkdir("tt_1jet_qcd_dm10_anti");
+    d1_qcd_dm10_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm10_anti->SetName(name.c_str());
+      h1LT_qcd_dm10_anti->Add(h1J_qcd_dm10_anti);
+      h1LT_qcd_dm10_anti->Write();
+    }
+    else{
+      h1LT_qcd_dm10_anti->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm10_anti->Write();
+      h1J_qcd_dm10_anti->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm10_anti->Write();
+    }
+
+    TDirectory *d1_qcd_dm11_iso =fout->mkdir("tt_1jet_qcd_dm11_iso");
+    d1_qcd_dm11_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm11_iso->SetName(name.c_str());
+      h1LT_qcd_dm11_iso->Add(h1J_qcd_dm11_iso);
+      h1LT_qcd_dm11_iso->Write();
+    }
+    else{
+      h1LT_qcd_dm11_iso->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm11_iso->Write();
+      h1J_qcd_dm11_iso->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm11_iso->Write();
+    }
+    TDirectory *d1_qcd_dm11_anti =fout->mkdir("tt_1jet_qcd_dm11_anti");
+    d1_qcd_dm11_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h1LT_qcd_dm11_anti->SetName(name.c_str());
+      h1LT_qcd_dm11_anti->Add(h1J_qcd_dm11_anti);
+      h1LT_qcd_dm11_anti->Write();
+    }
+    else{
+      h1LT_qcd_dm11_anti->SetName(name.c_str()+postfixLT);
+      h1LT_qcd_dm11_anti->Write();
+      h1J_qcd_dm11_anti->SetName(name.c_str()+postfixJ);
+      h1J_qcd_dm11_anti->Write();
     }
 
     TDirectory *d2_qcd_iso =fout->mkdir("tt_2jet_qcd_iso");
@@ -686,6 +1026,118 @@ int main(int argc, char** argv) {
       h2J_qcd_anti->SetName(name.c_str()+postfixJ);
       h2J_qcd_anti->Write();
     }
+
+    TDirectory *d2_qcd_dm0_iso =fout->mkdir("tt_2jet_qcd_dm0_iso");
+    d2_qcd_dm0_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm0_iso->SetName(name.c_str());
+      h2LT_qcd_dm0_iso->Add(h2J_qcd_dm0_iso);
+      h2LT_qcd_dm0_iso->Write();
+    }
+    else{
+      h2LT_qcd_dm0_iso->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm0_iso->Write();
+      h2J_qcd_dm0_iso->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm0_iso->Write();
+    }
+    TDirectory *d2_qcd_dm0_anti =fout->mkdir("tt_2jet_qcd_dm0_anti");
+    d2_qcd_dm0_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm0_anti->SetName(name.c_str());
+      h2LT_qcd_dm0_anti->Add(h2J_qcd_dm0_anti);
+      h2LT_qcd_dm0_anti->Write();
+    }
+    else{
+      h2LT_qcd_dm0_anti->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm0_anti->Write();
+      h2J_qcd_dm0_anti->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm0_anti->Write();
+    }
+
+    TDirectory *d2_qcd_dm1_iso =fout->mkdir("tt_2jet_qcd_dm1_iso");
+    d2_qcd_dm1_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm1_iso->SetName(name.c_str());
+      h2LT_qcd_dm1_iso->Add(h2J_qcd_dm1_iso);
+      h2LT_qcd_dm1_iso->Write();
+    }
+    else{
+      h2LT_qcd_dm1_iso->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm1_iso->Write();
+      h2J_qcd_dm1_iso->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm1_iso->Write();
+    }
+    TDirectory *d2_qcd_dm1_anti =fout->mkdir("tt_2jet_qcd_dm1_anti");
+    d2_qcd_dm1_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm1_anti->SetName(name.c_str());
+      h2LT_qcd_dm1_anti->Add(h2J_qcd_dm1_anti);
+      h2LT_qcd_dm1_anti->Write();
+    }
+    else{
+      h2LT_qcd_dm1_anti->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm1_anti->Write();
+      h2J_qcd_dm1_anti->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm1_anti->Write();
+    }
+
+
+    TDirectory *d2_qcd_dm10_iso =fout->mkdir("tt_2jet_qcd_dm10_iso");
+    d2_qcd_dm10_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm10_iso->SetName(name.c_str());
+      h2LT_qcd_dm10_iso->Add(h2J_qcd_dm10_iso);
+      h2LT_qcd_dm10_iso->Write();
+    }
+    else{
+      h2LT_qcd_dm10_iso->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm10_iso->Write();
+      h2J_qcd_dm10_iso->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm10_iso->Write();
+    }
+    TDirectory *d2_qcd_dm10_anti =fout->mkdir("tt_2jet_qcd_dm10_anti");
+    d2_qcd_dm10_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm10_anti->SetName(name.c_str());
+      h2LT_qcd_dm10_anti->Add(h2J_qcd_dm10_anti);
+      h2LT_qcd_dm10_anti->Write();
+    }
+    else{
+      h2LT_qcd_dm10_anti->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm10_anti->Write();
+      h2J_qcd_dm10_anti->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm10_anti->Write();
+    }
+
+
+    TDirectory *d2_qcd_dm11_iso =fout->mkdir("tt_2jet_qcd_dm11_iso");
+    d2_qcd_dm11_iso->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm11_iso->SetName(name.c_str());
+      h2LT_qcd_dm11_iso->Add(h2J_qcd_dm11_iso);
+      h2LT_qcd_dm11_iso->Write();
+    }
+    else{
+      h2LT_qcd_dm11_iso->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm11_iso->Write();
+      h2J_qcd_dm11_iso->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm11_iso->Write();
+    }
+    TDirectory *d2_qcd_dm11_anti =fout->mkdir("tt_2jet_qcd_dm11_anti");
+    d2_qcd_dm11_anti->cd();
+    if (sample=="data_obs" or sample=="W"){
+      h2LT_qcd_dm11_anti->SetName(name.c_str());
+      h2LT_qcd_dm11_anti->Add(h2J_qcd_dm11_anti);
+      h2LT_qcd_dm11_anti->Write();
+    }
+    else{
+      h2LT_qcd_dm11_anti->SetName(name.c_str()+postfixLT);
+      h2LT_qcd_dm11_anti->Write();
+      h2J_qcd_dm11_anti->SetName(name.c_str()+postfixJ);
+      h2J_qcd_dm11_anti->Write();
+    }
+
+
 
     TDirectory *d0SSloose_qcd_iso =fout->mkdir("tt_0SSloose_qcd_iso");
     d0SSloose_qcd_iso->cd();

@@ -290,12 +290,29 @@ int main(int argc, char** argv) {
    TF1* ff_qcd_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_0jet");
    TF1* ff_qcd_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_1jet");
    TF1* ff_qcd_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_2jet");
+   TF1* ff_qcd_dm0_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_0jet");
+   TF1* ff_qcd_dm0_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_1jet");
+   TF1* ff_qcd_dm0_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm0_2jet");
+   TF1* ff_qcd_dm1_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_0jet");
+   TF1* ff_qcd_dm1_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_1jet");
+   TF1* ff_qcd_dm1_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm1_2jet");
+   TF1* ff_qcd_dm10_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_0jet");
+   TF1* ff_qcd_dm10_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_1jet");
+   TF1* ff_qcd_dm10_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm10_2jet");
+   TF1* ff_qcd_dm11_0jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_0jet");
+   TF1* ff_qcd_dm11_1jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_1jet");
+   TF1* ff_qcd_dm11_2jet=(TF1*) frawff.Get("rawFF_tt_qcd_dm11_2jet");
 
    TFile fmvisclosure ("FF_QCDcorrectionOSSS_tt.root");
    TF1* mvisclosure=(TF1*) fmvisclosure.Get("closure_OSSS_mvis_tt_qcd");
+   TF1* mvisclosure_linear=(TF1*) fmvisclosure.Get("closure_OSSS_mvis_tt_qcd_linear");
 
    TFile ftau2closure ("FF_corrections_1.root");
    TF1* tau2closure=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd");
+   TF1* tau1etaclosure=(TF1*) ftau2closure.Get("closure_tau1eta_tt_qcd");
+   TF1* tau2closure_0jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_0jet");
+   TF1* tau2closure_1jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_1jet");
+   TF1* tau2closure_2jet=(TF1*) ftau2closure.Get("closure_tau2pt_tt_qcd_2jet");
 
    string datapath = string(std::getenv("CMSSW_BASE"))+"/src/ComputeFF2018/FFcode/data/";
 
@@ -454,6 +471,7 @@ int main(int argc, char** argv) {
                else if (numGenJets==2) weight=0.921125;
                else if (numGenJets==3) weight=1.6508;
                else if (numGenJets==4) weight=0.21935;
+	       weight=weight*0.85;
            }
         }
         else if (year=="2016"){
@@ -470,6 +488,7 @@ int main(int argc, char** argv) {
                else if (numGenJets==2) weight=0.49308;
                else if (numGenJets==3) weight=0.50555;
                else if (numGenJets==4) weight=0.41466;
+	       weight=weight*1.35;
            }
         }
 
@@ -534,9 +553,34 @@ int main(int argc, char** argv) {
 	//************************* Fill histograms **********************
 	   float weight2=1.0;
 
-           float FF=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
-           if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
-           else if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure);
+	   float osss=get_mvis_closure((mytau1+mytau2).M(),mvisclosure_linear);
+ 	   if ((mytau1+mytau2).M()<90) osss=get_mvis_closure((mytau1+mytau2).M(),mvisclosure);
+           float FF=get_raw_FF(mytau1.Pt(),ff_qcd_0jet)*osss*get_mvis_closure(mytau2.Pt(),tau2closure_0jet);
+           if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_1jet)*osss*get_mvis_closure(mytau2.Pt(),tau2closure_1jet);
+           else if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_2jet)*osss*get_mvis_closure(mytau2.Pt(),tau2closure_2jet);
+	  /*float FF=1.0;
+	  float mytau1eta=fabs(mytau1.Eta());
+	  //if (mytau1eta<0.2) mytau1eta=0.2;
+	  if (mydm1==0){
+	     if (njets==0) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm0_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+	  }
+          if (mydm1==1){
+             if (njets==0) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm1_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+          }
+          if (mydm1==10){
+             if (njets==0) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm10_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+          }
+          if (mydm1==11){
+             if (njets==0) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_0jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets==1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_1jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+             if (njets>1) FF=get_raw_FF(mytau1.Pt(),ff_qcd_dm11_2jet)*get_mvis_closure((mytau1+mytau2).M(),mvisclosure)*get_mvis_closure(mytau2.Pt(),tau2closure)*get_mvis_closure(mytau1eta,tau1etaclosure);
+          }*/
 
            if (!is_includedInEmbedded){
 	     if (isL or isT){

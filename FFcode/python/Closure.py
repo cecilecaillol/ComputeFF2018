@@ -180,6 +180,8 @@ def Closure(args):
     finalMvisClosureCommand+=outputPath+"TT.root "
     finalMvisClosureCommand+=outputPath+"VV.root "
     os.system(finalMvisClosureCommand)
+    finalMvisClosureCommand = "cp "+outputPath+"TTMC.root mvisclosure_"+args.channel+"_TTMC_afterCorrections.root "
+    os.system(finalMvisClosureCommand)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser(description="Master fake factor making script")

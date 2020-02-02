@@ -18,8 +18,8 @@ def Subtract_prompt(directory,channel):
 
   if "corr1" in directory:
     print("corr1 subtraction")
-    dir_qcd=[channel+"_0jet_qcd_anti",channel+"_0jet_qcd_iso",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_0jet_qcd_mvis_anti",channel+"_0jet_qcd_mvis_iso",channel+"_1jet_qcd_mvis_anti",channel+"_1jet_qcd_mvis_iso",channel+"_2jet_qcd_mvis_anti",channel+"_2jet_qcd_mvis_iso"]
-    ncat_qcd=10
+    dir_qcd=[channel+"_0jet_qcd_anti",channel+"_0jet_qcd_iso",channel+"_0SSloose_qcd_anti",channel+"_0SSloose_qcd_iso",channel+"_0jet_qcd_mvis_anti",channel+"_0jet_qcd_mvis_iso",channel+"_1jet_qcd_mvis_anti",channel+"_1jet_qcd_mvis_iso",channel+"_2jet_qcd_mvis_anti",channel+"_2jet_qcd_mvis_iso",channel+"_0jet_qcd_lpt_anti",channel+"_0jet_qcd_lpt_iso"]
+    ncat_qcd=12
 
   if "OSSSF" in directory:    
     print("OSSSF subtraction")
@@ -53,8 +53,8 @@ def Subtract_prompt(directory,channel):
   dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_1jet_w_anti",channel+"_1jet_w_iso",channel+"_2jet_w_anti",channel+"_2jet_w_iso"]
   ncat_w=6
   if "corr1" in directory:
-    dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_0jet_w_mvis_anti",channel+"_0jet_w_mvis_iso",channel+"_1jet_w_mvis_anti",channel+"_1jet_w_mvis_iso",channel+"_2jet_w_mvis_anti",channel+"_2jet_w_mvis_iso"]
-    ncat_w=8
+    dir_w=[channel+"_0jet_w_anti",channel+"_0jet_w_iso",channel+"_0jet_w_mvis_anti",channel+"_0jet_w_mvis_iso",channel+"_1jet_w_mvis_anti",channel+"_1jet_w_mvis_iso",channel+"_2jet_w_mvis_anti",channel+"_2jet_w_mvis_iso",channel+"_0jet_w_lpt_anti",channel+"_0jet_w_lpt_iso"]
+    ncat_w=10
   if "OSSSF" in directory:
     ncat_w=0
 
@@ -77,10 +77,14 @@ def Subtract_prompt(directory,channel):
       fileDataSub.cd()
     Data.Write()
 
-  dir_tt=[channel+"_0jet_tt_anti",channel+"_0jet_tt_iso"]
-  ncat_tt=2
+  dir_tt=[channel+"_0jet_tt_anti",channel+"_0jet_tt_iso",channel+"_0jet_tt_lpt_anti",channel+"_0jet_tt_lpt_iso",channel+"_1jet_tt_anti",channel+"_1jet_tt_iso",channel+"_2jet_tt_anti",channel+"_2jet_tt_iso"]
+  ncat_tt=6
   if "OSSSF" in directory:
     ncat_tt=0
+  if "corr1" in directory:
+    ncat_tt=4
+  if "raw" in directory:
+    ncat_tt=2
   for i in range (0,ncat_tt):
     Data=fileData.Get(dir_tt[i]).Get("data_obs")
     Data.Add(fileVV.Get(dir_tt[i]).Get("VVLT"),-1.0)
