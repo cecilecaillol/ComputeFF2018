@@ -247,8 +247,7 @@ class FFApplicationTool():
             ff_w = ff_w*self.get_MET_closure(met,self.metClosure_W_0jet)
         
         #lpt closures
-        if (xtrg):
-            print("xtrg lpt closure!")
+        if (xtrg):            
             if unc == 'lptclosure_xtrg_qcd':
                 if pt > 30 and pt <= 40:
                     if upOrDown == "up":
