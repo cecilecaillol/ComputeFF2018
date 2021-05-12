@@ -15,17 +15,59 @@ class FFApplicationTool():
         self.ff_qcd_0jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_unc2_up")
         self.ff_qcd_0jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_unc2_down")
 
+        #barrel
+        self.ff_qcd_0jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_barrel")
+        self.ff_qcd_0jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_barrel_unc1_up")
+        self.ff_qcd_0jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_barrel_unc1_down")
+        self.ff_qcd_0jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_barrel_unc2_up")
+        self.ff_qcd_0jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_qcd_0jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_endcaps")
+        self.ff_qcd_0jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_endcaps_unc1_up")
+        self.ff_qcd_0jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_endcaps_unc1_down")
+        self.ff_qcd_0jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_endcaps_unc2_up")
+        self.ff_qcd_0jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_0jet_endcaps_unc2_down")
+
         self.ff_qcd_1jet = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet")
         self.ff_qcd_1jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc1_up")
         self.ff_qcd_1jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc1_down")
         self.ff_qcd_1jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc2_up")
         self.ff_qcd_1jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_unc2_down")
 
+        #barrel
+        self.ff_qcd_1jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_barrel")
+        self.ff_qcd_1jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_barrel_unc1_up")
+        self.ff_qcd_1jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_barrel_unc1_down")
+        self.ff_qcd_1jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_barrel_unc2_up")
+        self.ff_qcd_1jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_qcd_1jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_endcaps")
+        self.ff_qcd_1jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_endcaps_unc1_up")
+        self.ff_qcd_1jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_endcaps_unc1_down")
+        self.ff_qcd_1jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_endcaps_unc2_up")
+        self.ff_qcd_1jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_1jet_endcaps_unc2_down")
+
         self.ff_qcd_2jet = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet")
         self.ff_qcd_2jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc1_up")
         self.ff_qcd_2jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc1_down")
         self.ff_qcd_2jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc2_up")
         self.ff_qcd_2jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_unc2_down")
+ 
+        #barrel
+        self.ff_qcd_2jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_barrel")
+        self.ff_qcd_2jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_barrel_unc1_up")
+        self.ff_qcd_2jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_barrel_unc1_down")
+        self.ff_qcd_2jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_barrel_unc2_up")
+        self.ff_qcd_2jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_qcd_2jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_endcaps")
+        self.ff_qcd_2jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_endcaps_unc1_up")
+        self.ff_qcd_2jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_endcaps_unc1_down")
+        self.ff_qcd_2jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_endcaps_unc2_up")
+        self.ff_qcd_2jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_qcd_2jet_endcaps_unc2_down")
 
         self.ff_w_0jet = self.theRawFile.Get("rawFF_"+channel+"_w_0jet")
         self.ff_w_0jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_unc1_up")
@@ -33,11 +75,39 @@ class FFApplicationTool():
         self.ff_w_0jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_unc2_up")
         self.ff_w_0jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_unc2_down")
 
+        #barrel
+        self.ff_w_0jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_barrel")
+        self.ff_w_0jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_barrel_unc1_up")
+        self.ff_w_0jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_barrel_unc1_down")
+        self.ff_w_0jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_barrel_unc2_up")
+        self.ff_w_0jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_w_0jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_endcaps")
+        self.ff_w_0jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_endcaps_unc1_up")
+        self.ff_w_0jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_endcaps_unc1_down")
+        self.ff_w_0jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_endcaps_unc2_up")
+        self.ff_w_0jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_0jet_endcaps_unc2_down")
+
         self.ff_w_1jet = self.theRawFile.Get("rawFF_"+channel+"_w_1jet")
         self.ff_w_1jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc1_up")
         self.ff_w_1jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc1_down")
         self.ff_w_1jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc2_up")
         self.ff_w_1jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_unc2_down")
+
+        #barrel
+        self.ff_w_1jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_barrel")
+        self.ff_w_1jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_barrel_unc1_up")
+        self.ff_w_1jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_barrel_unc1_down")
+        self.ff_w_1jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_barrel_unc2_up")
+        self.ff_w_1jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_w_1jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_endcaps")
+        self.ff_w_1jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_endcaps_unc1_up")
+        self.ff_w_1jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_endcaps_unc1_down")
+        self.ff_w_1jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_endcaps_unc2_up")
+        self.ff_w_1jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_1jet_endcaps_unc2_down")
         
         self.ff_w_2jet = self.theRawFile.Get("rawFF_"+channel+"_w_2jet")
         self.ff_w_2jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc1_up")
@@ -45,11 +115,39 @@ class FFApplicationTool():
         self.ff_w_2jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc2_up")
         self.ff_w_2jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_unc2_down")
 
+        #barrel
+        self.ff_w_2jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_barrel")
+        self.ff_w_2jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_barrel_unc1_up")
+        self.ff_w_2jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_barrel_unc1_down")
+        self.ff_w_2jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_barrel_unc2_up")
+        self.ff_w_2jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_w_2jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_endcaps")
+        self.ff_w_2jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_endcaps_unc1_up")
+        self.ff_w_2jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_endcaps_unc1_down")
+        self.ff_w_2jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_endcaps_unc2_up")
+        self.ff_w_2jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_2jet_endcaps_unc2_down")
+
         self.ff_w_3jet = self.theRawFile.Get("rawFF_"+channel+"_w_3jet")
         self.ff_w_3jet_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_unc1_up")
         self.ff_w_3jet_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_unc1_down")
         self.ff_w_3jet_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_unc2_up")
         self.ff_w_3jet_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_unc2_down")
+
+        #barrel
+        self.ff_w_3jet_barrel = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_barrel")
+        self.ff_w_3jet_barrel_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_barrel_unc1_up")
+        self.ff_w_3jet_barrel_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_barrel_unc1_down")
+        self.ff_w_3jet_barrel_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_barrel_unc2_up")
+        self.ff_w_3jet_barrel_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_barrel_unc2_down")
+
+        #endcap
+        self.ff_w_3jet_endcaps = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_endcaps")
+        self.ff_w_3jet_endcaps_unc1_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_endcaps_unc1_up")
+        self.ff_w_3jet_endcaps_unc1_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_endcaps_unc1_down")
+        self.ff_w_3jet_endcaps_unc2_up = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_endcaps_unc2_up")
+        self.ff_w_3jet_endcaps_unc2_down = self.theRawFile.Get("rawFF_"+channel+"_w_3jet_endcaps_unc2_down")
 
         self.ff_tt_0jet = self.theRawFile.Get("mc_rawFF_"+channel+"_tt")
         self.ff_tt_0jet_unc1_up = self.theRawFile.Get("mc_rawFF_"+channel+"_tt_unc1_up")
@@ -220,7 +318,7 @@ class FFApplicationTool():
         corr = fct.Eval(pth)
         return corr
 
-    def get_ff(self, pt, mt, mvis, lpt, dr, met, njets, j1pt, pth, xtrg, frac_tt, frac_qcd, frac_w, unc='',upOrDown=''):
+    def get_ff(self, pt, eta, mt, mvis, lpt, dr, met, njets, j1pt, pth, xtrg, frac_tt, frac_qcd, frac_w, unc='',upOrDown=''):
         
         #print('Uncertainty: '+unc)
         #print('upOrDown: '+upOrDown)
@@ -232,89 +330,176 @@ class FFApplicationTool():
     
         #Raw ff
         if(njets==0):
-            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_0jet)
-            if unc == 'ff_qcd_0jet_unc1':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_unc1_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_unc1_down)
-            elif unc == 'ff_qcd_0jet_unc2':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_unc2_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_unc2_down)
-            ff_w=self.get_raw_FF(pt,self.ff_w_0jet)
-            if unc == 'ff_w_0jet_unc1':
-                if upOrDown == 'up':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_0jet_unc1_up)
-                elif upOrDown == 'down':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_0jet_unc1_down)
-            elif unc == 'ff_w_0jet_unc2':                
-                if upOrDown == 'up':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_0jet_unc2_up)
-                elif upOrDown == 'down':
-                    ff_w = self.get_raw_FF(pt,self.ff_w_0jet_unc2_down)                    
-        elif(njets==1):
-            #print("raw njets 1 function called")
-            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_1jet)
-            if unc == 'ff_qcd_1jet_unc1':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_unc1_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_unc1_down)
-            elif unc == 'ff_qcd_1jet_unc2':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_unc2_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_unc2_down)
-            ff_w=self.get_raw_FF(pt,self.ff_w_1jet)
-            if unc == 'ff_w_1jet_unc1':
-                if upOrDown == 'up':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_1jet_unc1_up)
-                elif upOrDown == 'down':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_1jet_unc1_down)
-            elif unc == 'ff_w_1jet_unc2':
-                if upOrDown == 'up':
-                    ff_w=self.get_raw_FF(pt,self.ff_w_1jet_unc2_up)
-                elif upOrDown == 'down':
-                    ff_w = self.get_raw_FF(pt,self.ff_w_1jet_unc2_down)
-        else:
-            ff_qcd=self.get_raw_FF(pt,self.ff_qcd_2jet)
-            if unc == 'ff_qcd_2jet_unc1':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc1_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc1_down)
-            elif unc == 'ff_qcd_2jet_unc2':
-                if upOrDown == 'up':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc2_up)
-                elif upOrDown == 'down':
-                    ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_unc2_down)
-            if njets == 2:
-                ff_w=self.get_raw_FF(pt,self.ff_w_2jet)
-                if unc == 'ff_w_2jet_unc1':
+            if abs(eta) < 1.4:
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_0jet_barrel)
+                if unc == 'ff_qcd_0jet_barrel_unc1':
                     if upOrDown == 'up':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc1_up)
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_barrel_unc1_up)
                     elif upOrDown == 'down':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc1_down)
-                elif unc == 'ff_w_2jet_unc2':                
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_barrel_unc1_down)
+                elif unc == 'ff_qcd_0jet_barrel_unc2':
                     if upOrDown == 'up':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_2jet_unc2_up)
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_barrel_unc2_up)
                     elif upOrDown == 'down':
-                        ff_w = self.get_raw_FF(pt,self.ff_w_2jet_unc2_down)
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_barrel_unc2_down)
+                ff_w=self.get_raw_FF(pt,self.ff_w_0jet_barrel)
+                if unc == 'ff_w_0jet_barrel_unc1':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_barrel_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_barrel_unc1_down)
+                elif unc == 'ff_w_0jet_barrel_unc2':                
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_barrel_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_w = self.get_raw_FF(pt,self.ff_w_0jet_barrel_unc2_down)                    
             else:
-                ff_w=self.get_raw_FF(pt,self.ff_w_3jet)
-                if unc == 'ff_w_3jet_unc1':
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_0jet_endcaps)
+                if unc == 'ff_qcd_0jet_endcaps_unc1':
                     if upOrDown == 'up':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_3jet_unc1_up)
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_endcaps_unc1_up)
                     elif upOrDown == 'down':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_3jet_unc1_down)
-                elif unc == 'ff_w_3jet_unc2':                
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_endcaps_unc1_down)
+                elif unc == 'ff_qcd_0jet_endcaps_unc2':
                     if upOrDown == 'up':
-                        ff_w=self.get_raw_FF(pt,self.ff_w_3jet_unc2_up)
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_endcaps_unc2_up)
                     elif upOrDown == 'down':
-                        ff_w = self.get_raw_FF(pt,self.ff_w_3jet_unc2_down)
-
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_0jet_endcaps_unc2_down)
+                ff_w=self.get_raw_FF(pt,self.ff_w_0jet_endcaps)
+                if unc == 'ff_w_0jet_endcaps_unc1':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_endcaps_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_endcaps_unc1_down)
+                elif unc == 'ff_w_0jet_endcaps_unc2':                
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_0jet_endcaps_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_w = self.get_raw_FF(pt,self.ff_w_0jet_endcaps_unc2_down)                    
+        elif(njets==1):
+            if abs(eta) < 1.4:
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_1jet_barrel)
+                if unc == 'ff_qcd_1jet_barrel_unc1':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_barrel_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_barrel_unc1_down)
+                elif unc == 'ff_qcd_1jet_barrel_unc2':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_barrel_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_barrel_unc2_down)
+                ff_w=self.get_raw_FF(pt,self.ff_w_1jet_barrel)
+                if unc == 'ff_w_1jet_barrel_unc1':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_barrel_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_barrel_unc1_down)
+                elif unc == 'ff_w_1jet_unc2':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_barrel_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_w = self.get_raw_FF(pt,self.ff_w_1jet_barrel_unc2_down)
+            else:
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_1jet_endcaps)
+                if unc == 'ff_qcd_1jet_endcaps_unc1':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_endcaps_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_endcaps_unc1_down)
+                elif unc == 'ff_qcd_1jet_endcaps_unc2':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_endcaps_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_1jet_endcaps_unc2_down)
+                ff_w=self.get_raw_FF(pt,self.ff_w_1jet_endcaps)
+                if unc == 'ff_w_1jet_endcaps_unc1':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_endcaps_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_endcaps_unc1_down)
+                elif unc == 'ff_w_1jet_unc2':
+                    if upOrDown == 'up':
+                        ff_w=self.get_raw_FF(pt,self.ff_w_1jet_endcaps_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_w = self.get_raw_FF(pt,self.ff_w_1jet_endcaps_unc2_down)
+                
+        else:
+            if abs(eta) < 1.4:
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_2jet_barrel)
+                if unc == 'ff_qcd_2jet_barrel_unc1':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_barrel_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_barrel_unc1_down)
+                elif unc == 'ff_qcd_2jet_barrel_unc2':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_barrel_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_barrel_unc2_down)
+            else:
+                ff_qcd=self.get_raw_FF(pt,self.ff_qcd_2jet_endcaps)
+                if unc == 'ff_qcd_2jet_endcaps_unc1':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_endcaps_unc1_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_endcaps_unc1_down)
+                elif unc == 'ff_qcd_2jet_endcaps_unc2':
+                    if upOrDown == 'up':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_endcaps_unc2_up)
+                    elif upOrDown == 'down':
+                        ff_qcd = self.get_raw_FF(pt,self.ff_qcd_2jet_endcaps_unc2_down)
+            if njets == 2:
+                if abs(eta) < 1.4:
+                    ff_w=self.get_raw_FF(pt,self.ff_w_2jet_barrel)
+                    if unc == 'ff_w_2jet_barrel_unc1':
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_barrel_unc1_up)
+                        elif upOrDown == 'down':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_barrel_unc1_down)
+                    elif unc == 'ff_w_2jet_barrel_unc2':                
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_barrel_unc2_up)
+                        elif upOrDown == 'down':
+                            ff_w = self.get_raw_FF(pt,self.ff_w_2jet_barrel_unc2_down)
+                else:
+                    ff_w=self.get_raw_FF(pt,self.ff_w_2jet_endcaps)
+                    if unc == 'ff_w_2jet_endcaps_unc1':
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_endcaps_unc1_up)
+                        elif upOrDown == 'down':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_endcaps_unc1_down)
+                    elif unc == 'ff_w_2jet_endcaps_unc2':                
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_2jet_endcaps_unc2_up)
+                        elif upOrDown == 'down':
+                            ff_w = self.get_raw_FF(pt,self.ff_w_2jet_endcaps_unc2_down)
+                    
+            else:
+                if abs(eta) < 1.4:
+                    ff_w=self.get_raw_FF(pt,self.ff_w_3jet_barrel)
+                    if unc == 'ff_w_3jet_barrel_unc1':
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_barrel_unc1_up)
+                        elif upOrDown == 'down':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_barrel_unc1_down)
+                    elif unc == 'ff_w_3jet_barrel_unc2':                
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_barrel_unc2_up)
+                        elif upOrDown == 'down':
+                            ff_w = self.get_raw_FF(pt,self.ff_w_3jet_barrel_unc2_down)
+                else:
+                    ff_w=self.get_raw_FF(pt,self.ff_w_3jet_endcaps)
+                    if unc == 'ff_w_3jet_endcaps_unc1':
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_endcaps_unc1_up)
+                        elif upOrDown == 'down':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_endcaps_unc1_down)
+                    elif unc == 'ff_w_3jet_endcaps_unc2':                
+                        if upOrDown == 'up':
+                            ff_w=self.get_raw_FF(pt,self.ff_w_3jet_endcaps_unc2_up)
+                        elif upOrDown == 'down':
+                            ff_w = self.get_raw_FF(pt,self.ff_w_3jet_endcaps_unc2_down)
         ff_tt=self.get_raw_FF(pt,self.ff_tt_0jet)
         if unc == 'ff_tt_0jet_unc1':
             if upOrDown == 'up':
@@ -661,7 +846,7 @@ class FFApplicationTool():
             ff_w = ff_w*self.get_PTH_closure(pth,self.PTHClosure_W)
         """        
         if (njets == 0):
-            if unc == 'njets_pth_ljpt_closure':
+            if unc == 'njets0_pth_closure':
                 if upOrDown == 'up':
                     ff_w = ff_w * (2*self.get_mt_pth_closure(pth, self.NJets0_MT)-1.0)
                 elif upOrDown == 'down':
@@ -670,7 +855,7 @@ class FFApplicationTool():
                 ff_w = ff_w*self.get_mt_pth_closure(pth, self.NJets0_MT)
         else:
             if pth < 45:
-                if unc == 'njets_pth_ljpt_closure':
+                if unc == 'njets_pth0to45_ljpt_closure':
                     if upOrDown == 'up':
                         ff_w = ff_w * (2*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_LT_45)-1.0)
                     elif upOrDown == 'down':
@@ -678,7 +863,7 @@ class FFApplicationTool():
                 else:
                     ff_w = ff_w*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_LT_45)
             elif pth > 45 and pth < 80:
-                if unc == 'njets_pth_ljpt_closure':
+                if unc == 'njets_pth45to80_ljpt_closure':
                     if upOrDown == 'up':
                         ff_w = ff_w * (2*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_45_80)-1.0)
                     elif upOrDown == 'down':
@@ -686,7 +871,7 @@ class FFApplicationTool():
                 else:
                     ff_w = ff_w*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_45_80)
             elif pth > 80 and pth < 120:
-                if unc == 'njets_pth_ljpt_closure':
+                if unc == 'njets_pth80to120_ljpt_closure':
                     if upOrDown == 'up':
                         ff_w = ff_w * (2*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_80_120)-1.0)
                     elif upOrDown == 'down':
@@ -694,7 +879,7 @@ class FFApplicationTool():
                 else:
                     ff_w = ff_w*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_80_120)
             elif pth > 120 and pth < 200:
-                if unc == 'njets_pth_ljpt_closure':
+                if unc == 'njets_pth120to200_ljpt_closure':
                     if upOrDown == 'up':
                         ff_w = ff_w * (2*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_120_200)-1.0)
                     elif upOrDown == 'down':
@@ -702,7 +887,7 @@ class FFApplicationTool():
                 else:
                     ff_w = ff_w*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_120_200)
             elif pth > 200:
-                if unc == 'njets_pth_ljpt_closure':
+                if unc == 'njets_pthgt200_ljpt_closure':
                     if upOrDown == 'up':
                         ff_w = ff_w * (2*self.get_mt_pth_ljpt_closure(j1pt, self.NJetsGT0_MT_LJPT_GT_200)-1.0)
                     elif upOrDown == 'down':
